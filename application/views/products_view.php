@@ -84,12 +84,12 @@
 $(document).ready(function(){
     var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboItemTypes; var _selectedProductType; var _isTaxExempt=0;
     
-    $(document).ready(function(){
+    /*$(document).ready(function(){
         $('#modal_filter').modal('show');
         showList(false);
-    });
+    });*/
 
-    var getProduct=function(){
+    var initializeControls=function() {
         dt=$('#tbl_products').DataTable({
             "fnInitComplete": function (oSettings, json) {
                 $.unblockUI();
@@ -97,16 +97,7 @@ $(document).ready(function(){
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
             "pageLength":15,
-            "ajax": {
-            "url": "Products/transaction/getproduct",
-            "type": "POST",
-            "bDestroy": true,
-            "data": function ( d ) {
-                    return $.extend( {}, d, {
-                        "refproduct_id": _selectedProductType//id of product type
-                        });
-                }
-            },
+            "ajax" : "Products/transaction/list",
             "columns": [
                 {
                     "targets": [0],
@@ -117,21 +108,20 @@ $(document).ready(function(){
                 },
                 { targets:[1],data: "product_code" },
                 { targets:[2],data: "product_desc" },
-                { targets:[3],data: "product_type" },
-                { targets:[4],data: "category_name" },
+                { targets:[3],data: "category_name" },
                 {
-                    targets:[5],data: "on_hand",
+                    targets:[4],data: "on_hand",
                     render: function (data, type, full, meta) {
                         if(data=="na"){
-                            return data;
+                            return parseFloat(data);
                         }else{
-                            return accounting.formatNumber(data,2);
+                            return parseFloat(data);
                         }
 
                     }
                 },
                 {
-                    targets:[6],
+                    targets:[5],
                     render: function (data, type, full, meta){
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"   data-toggle="tooltip" data-placement="top" title="Edit" style="margin-left:-5px;"><i class="fa fa-pencil"></i> </button>';
                         var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info"  data-toggle="tooltip" data-placement="top" title="Move to trash" style="margin-right:-5px;"><i class="fa fa-trash-o"></i> </button>';
@@ -146,19 +136,22 @@ $(document).ready(function(){
                      },
             "rowCallback":function( row, data, index ){
 
-                $(row).find('td').eq(5).attr({
-                    "align": "left"
+                $(row).find('td').eq(4).attr({
+                    "align": "right"
                 });
             }
 
 
         });
-    
+
         $('.numeric').autoNumeric('init',{mDec:4});
 
         $('#mobile_no').keypress(validateNumber);
 
         $('#landline').keypress(validateNumber);
+    }();
+    
+        
 
         // NEW PRODUCT CATEGORY
         $("#product_category").on("change", function () {        
@@ -234,7 +227,7 @@ $(document).ready(function(){
 
         });
         // END HERE
-};
+
     
 
 
@@ -719,9 +712,9 @@ $(document).ready(function(){
         '<tr>' +
         '<td>Unit of Measurement : </td><td>'+ d.unit_name+'</td>' +
         '</tr>' +
-        '<tr>' +
+        /*'<tr>' +
         '<td>Pack Size : </td><td>'+ d.size+'</td>' +
-        '</tr>' +
+        '</tr>' +*/
         '<tr>' +
         '<td>Vat Exempt : </td><td>'+ d.is_tax_exempt+'</td>' +
         '</tr>' +
@@ -977,7 +970,6 @@ $(document).ready(function(){
                                                         <th></th>
                                                         <th>PLU</th>
                                                         <th>Product Description</th>
-                                                        <th>Product Type</th>
                                                         <th>Category</th>
                                                         <th>On Hand</th>
                                                         <th><center>Action</center></th>
@@ -1316,20 +1308,20 @@ $(document).ready(function(){
                                         </div>
 
 
-                                        <div class="form-group" style="margin-bottom:0px;">
+                                        <!-- <div class="form-group" style="margin-bottom:0px;">
                                                     <label class="">Product Type * :</label>
                                                     <select name="refproduct_id" id="product_type_modal" class="form-control" data-error-msg="Product type is required." required>
                                                         <option value="">Please Select...</option>
                                                         <option value="prodtype">[ Create Product Type ]</option>
                                                         <?php
-                                                        foreach($refproduct as $row)
+                                                        //foreach($refproduct as $row)
                                                         {
-                                                            echo '<option value="'.$row->refproduct_id.'">'.$row->product_type.'</option>';
+                                                            //echo '<option value="'.$row->refproduct_id.'">'.$row->product_type.'</option>';
                                                         }
                                                         ?>
                                                     </select>
 
-                                        </div>
+                                        </div> -->
 
 
                                         <div class="form-group" style="margin-bottom:0px;">
@@ -1412,10 +1404,10 @@ $(document).ready(function(){
                                         </div>
 
 
-                                        <div class="form-group" style="margin-bottom:0px;">
+                                        <!-- <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Pack Size :</label>
                                             <input type="text" name="size" class="form-control">
-                                        </div>
+                                        </div> -->
 
 
 
@@ -1465,7 +1457,12 @@ $(document).ready(function(){
                                             </div>
                                         </div>
 
+                                    </div>
 
+
+
+
+                                    <div class="col-lg-4">
 
                                         <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Public Price :</label>
@@ -1479,19 +1476,8 @@ $(document).ready(function(){
 
 
 
-
-
-                                    </div>
-
-
-
-
-                                    <div class="col-lg-4">
-
-
-
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class="">Purchase Cost 1 (Luzon Area):</label>
+                                            <label class="">Purchase Cost :</label>
                                             <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-toggle-off"></i>
@@ -1501,7 +1487,7 @@ $(document).ready(function(){
 
                                         </div>
 
-                                        <div class="form-group" style="margin-bottom:0px;">
+                                        <!-- <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Purchase Cost 2 (Viz-Min Area):</label>
                                             <div class="input-group">
                                                     <span class="input-group-addon">
@@ -1510,10 +1496,10 @@ $(document).ready(function(){
                                                 <input type="text" name="purchase_cost_2" class="form-control numeric">
                                             </div>
 
-                                        </div>
+                                        </div> -->
 
 
-                                        <div class="form-group">
+                                        <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Warning Quantity :</label>
                                             <div class="input-group">
                                                     <span class="input-group-addon">

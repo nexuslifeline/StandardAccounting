@@ -78,12 +78,12 @@
     $(document).ready(function(){
         var dt; var _txnMode; var _selectedID; var _selectRowObj; var _selectedBranch;
 
-        $(document).ready(function(){
+        /*$(document).ready(function(){
             $('#modal_filter').modal('show');
             showList(false);
-        })
+        })*/
 
-        var getCustomer=function(){
+        var initializeControls=function() {
             dt=$('#tbl_customers').DataTable({
                 "fnInitComplete": function (oSettings, json) {
                     $.unblockUI();
@@ -91,16 +91,7 @@
                 "dom": '<"toolbar">frtip',
                 "bLengthChange":false,
                 "pageLength":15,
-                "ajax": {
-                "url": "Customers/transaction/getcustomer",
-                "type": "POST",
-                "bDestroy": true,
-                "data": function ( d ) {
-                    return $.extend( {}, d, {
-                        "department_id": _selectedBranch//id of Branch
-                        });
-                    }
-                },
+                "ajax" : "Customers/transaction/list",
                 "columns": [
                     {
                         "targets": [0],
@@ -142,7 +133,7 @@
             $('#credit_limit').keypress(validateNumber);
 
             //$('#contact_no').keypress(validateNumber);
-     };
+     }();
 
 
 
@@ -902,49 +893,6 @@
                                     <div class="col-md-8">
                                         <div class="col-md-12">
                                             <div class="col-md-4" id="label">
-                                                 <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Branch :</label>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-bank"></i>
-                                                    </span>
-                                                    <select name="department_id" id="branch" class="form-control" data-error-msg="Branch is required." required>
-                                                        <option value="">Please Select...</option>  
-                                                        <?php
-                                                            foreach($departments as $row) {
-                                                                echo '<option value="'.$row->department_id.'">'.$row->department_name.'</option>';
-                                                            }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="col-md-4" id="label">
-                                                 <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Classification :</label>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-users"></i>
-                                                    </span>
-                                                    <select name="refcustomertype_id" id="refcustomertype_id" class="form-control" data-error-msg="Classification is required." required>
-                                                        <option value="">Please Select...</option>
-                                                        <option value="0">None</option>
-                                                        <?php
-                                                            foreach($refcustomertype as $row) {
-                                                                echo '<option value="'.$row->refcustomertype_id.'">'.$row->customer_type.'</option>';
-                                                            }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="col-md-4" id="label">
                                                  <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Customer Name :</label>
                                             </div>
                                             <div class="form-group">
@@ -985,7 +933,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12">
+                                        <!-- <div class="col-md-12">
                                             <div class="col-md-4" id="label">
                                                  <label class="control-label boldlabel" style="text-align:right;"> Term :</label>
                                             </div>
@@ -997,9 +945,9 @@
                                                     <input type="text" name="term" id="term" class="form-control" placeholder="Term in days">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
 
-                                        <div class="col-md-12">
+                                        <!-- <div class="col-md-12">
                                             <div class="col-md-4" id="label">
                                                  <label class="control-label boldlabel" style="text-align:right;"> Credit Limit :</label>
                                             </div>
@@ -1011,7 +959,7 @@
                                                     <input type="text" name="credit_limit" id="credit_limit" class="form-control" placeholder="Credit Limit">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     
                                         <div class="col-md-12">
                                             <div class="col-md-4" id="label">

@@ -390,20 +390,7 @@
 </div>
 
 <div class="row ">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><br />
-
-
-
-        <label style="font-family: Tahoma;">Please select product type first :</label>
-        <div style="padding: 0%;">
-            <select name="producttype" id="cbo_prodType" data-error-msg="Product Type is required." required>
-                <?php foreach($refproducts as $refproduct){ ?>
-                    <option value="<?php echo $refproduct->refproduct_id; ?>"><?php echo $refproduct->product_type; ?></option>
-                <?php } ?>
-            </select>
-        </div>
-
-        <br />
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><br>
 
 
         <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
@@ -416,19 +403,17 @@
                 <table id="tbl_items" class="custom-design table-striped " cellspacing="0" width="100%" style="font-font:tahoma;">
                 <thead class="">
                 <tr>
-                    <th width="10%">Qty</th>
-                    <th width="7%">UM</th>
+                    <th width="20%">Qty</th>
+                    <th width="10%">UM</th>
                     <th width="20%">Item</th>
-                    <th width="10%" style="text-align: right;">Unit Price</th>
+                    <th width="20%" style="text-align: right;">Unit Price</th>
                     <th style="text-align: right; display: none;">Discount</th>
                     <th style="display: none;">T.D</th> <!-- total discount -->
                     <th style="display:none;">Tax %</th>
-                    <th width="10%" style="text-align: right;">Total</th>
+                    <th width="10%" colspan="3" style="text-align: right;"">Total</th>
                     <th style="display: none;">V.I</th> <!-- vat input -->
                     <th style="display: none;">N.V</th> <!-- net of vat -->
                     <td style="display: none;">Item ID</td><!-- product id -->
-                    <th width="10%"><center>Expiration Date</center></th>
-                    <th width="13%"><center>Batch #</center></th>
                     <td><center><strong>Action</strong></center></td>
                 </tr>
                 </thead>
@@ -1068,8 +1053,6 @@ $(document).ready(function(){
                 dr_line_total_price : total,
                 dr_non_tax_amount: net_vat,
                 dr_tax_amount: vat_input,
-                exp_date:exp_date,
-                batch_no:""
             }));
 
 
@@ -1318,8 +1301,6 @@ $(document).ready(function(){
                             dr_line_total_price : value.po_line_total,
                             dr_non_tax_amount: value.non_tax_amount,
                             dr_tax_amount:value.tax_amount,
-                            exp_date: exp_date,
-                            batch_no:""
                         }));
 
                         //sum up all footer details
@@ -1463,8 +1444,6 @@ $(document).ready(function(){
                             dr_line_total_price : value.dr_line_total_price,
                             dr_non_tax_amount: value.dr_non_tax_amount,
                             dr_tax_amount:value.dr_tax_amount,
-                            exp_date : value.expiration,
-                            batch_no : value.batch_no
                         }));
 
 
