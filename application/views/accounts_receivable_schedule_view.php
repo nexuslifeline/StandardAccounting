@@ -137,8 +137,8 @@
                                         <div class="panel-group panel-default" id="accordionA">
 
 
-                                            <div class="panel panel-default" style="border-radius: 6px;border: 1px solid lightgrey;min-height: 670px;">
-                                                <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Accounts Receivable Entries</b></div></a>
+                                            <div class="panel panel-default" style="border-radius: 6px;min-height: 670px;">
+                                                <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Accounts Receivable Entries</b></div></a>
                                                 <div id="collapseTwo" class="collapse in">
                                                     <div class="panel-body">
                                                         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
