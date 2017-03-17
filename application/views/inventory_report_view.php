@@ -66,7 +66,6 @@
                                 </div>
                                 <div class="modal-body">
 
-
                                     <div class="row">
                                         <div class="col-sm-12">
                                             Branch : <br />
@@ -77,9 +76,7 @@
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                    </div>
-
-                                    <br />
+                                    </div><br />
 
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -89,10 +86,7 @@
                                                 <option value="2">List</option>
                                             </select>
                                         </div>
-                                    </div>
-
-                                    <br />
-
+                                    </div><br />
 
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -108,13 +102,6 @@
                                             </div>
                                         </div>
                                     </div><br />
-
-
-
-
-
-
-
 
                                 </div>
                                 <div class="modal-footer">
@@ -163,15 +150,8 @@
             $('#modal_inventory').modal('show');
 
             $('#btn_print').click(function(){
-
-                //if($('#cbo_report').val()==1){
-                    window.open('Templates/layout/inventory?type=preview&date='+$('#dt_date_filter').val()+'&format='+$('#cbo_report').val());
-                //}else{
-                   // window.open('Templates/layout/inventory?type=preview&date='+$('#dt_date_filter').val()+'$format='+$('#cbo_report').val());
-                //}
-
+                window.open('Templates/layout/inventory?type=preview&date='+$('#dt_date_filter').val()+'&format='+$('#cbo_report').val());
             });
-
 
         }();
 
@@ -189,7 +169,6 @@
                 allowClear: false
             });
 
-
             $('.date-picker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -205,6 +184,7 @@
         _cboDepartments.select2('val',1);
 
     });
+
 </script>
 </html>
 

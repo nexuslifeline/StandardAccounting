@@ -163,11 +163,10 @@
 
 
 
-    <div class="panel panel-default" style="border-top: 3px solid #2196f3;">
-
-        <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Payment History</b></div></a>
-
-
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Payment History</b>
+        </div>
         <div class="panel-body table-responsive">
 
             <table id="tbl_payments" class="custom-design table-striped" cellspacing="0" width="100%">
@@ -443,7 +442,7 @@
         <div class="modal-content"><!---content--->
             <div class="modal-header">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title"><span id="modal_mode"> </span>Confirmation</h4>
+                <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirmation</h4>
 
             </div>
 

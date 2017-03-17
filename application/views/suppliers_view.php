@@ -547,11 +547,10 @@ $(document).ready(function(){
                                 <div class="col-md-12">
 
                                     <div id="div_supplier_list">
-                                        <div class="panel panel-default"  style="border-top: 3px solid #2196f3;">
-
-                                            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Suppliers</b></div></a>
-
-
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Suppliers</b>
+                                            </div>
                                             <div class="panel-body table-responsive">
 
                                                 <table id="tbl_suppliers" class="custom-design table-striped" cellspacing="0" width="100%">
@@ -586,7 +585,7 @@ $(document).ready(function(){
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                            <h4 class="modal-title"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                            <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
                         </div>
                         <div class="modal-body">
                             <p id="modal-body-message">Are you sure ?</p>

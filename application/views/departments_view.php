@@ -87,9 +87,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div id="div_department_list">
-                                        <div class="panel panel-default" style="border-top: 3px solid #2196f3;">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Branches</b>
+                                            </div>
                                             <div class="panel-body table-responsive">
-                                                <h2 style="margin-top: 0;">Branches</h2>
                                                 <table id="tbl_departments" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                     <thead class="table-erp">
                                                     <tr>
@@ -120,7 +122,7 @@
                     <div class="modal-content"><!---content--->
                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                            <h4 class="modal-title"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                            <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
                         </div>
 
                         <div class="modal-body">

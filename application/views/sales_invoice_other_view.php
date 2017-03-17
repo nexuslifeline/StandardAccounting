@@ -184,7 +184,7 @@
 
                     <ol class="breadcrumb"  style="margin-bottom: 0;">
                         <li><a href="Dashboard">Dashboard</a></li>
-                        <li><a href="Sales_invoice_other">Other Sales Invoice</a></li>
+                        <li><a href="Sales_invoice">Sales Invoice</a></li>
                     </ol>
 
 
@@ -196,7 +196,7 @@
                                 <div id="div_sales_invoice_list">
 
                                     <div class="panel panel-default" style="border: 3px solid #2980b9;min-height: 650px;">
-                                        <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Other Sales Invoice</b></div></a>
+                                        <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Sales Invoice</b></div></a>
 
                                         <div class="panel-body table-responsive">
                                             <table id="tbl_sales_invoice" class="custom-design table-striped" cellspacing="0" width="100%" style="">
@@ -727,7 +727,7 @@
                 "dom": '<"toolbar">frtip',
                 "bLengthChange":false,
                 "pageLength":15,
-                "ajax" : "Sales_invoice_other/transaction/list",
+                "ajax" : "Sales_invoice/transaction/list",
                 "columns": [
                     {
                         "targets": [0],
@@ -1259,7 +1259,7 @@
 
 
                 $.ajax({
-                    url : 'Sales_invoice_other/transaction/items/'+data.sales_invoice_id,
+                    url : 'Sales_invoice/transaction/items/'+data.sales_invoice_id,
                     type : "GET",
                     cache : false,
                     dataType : 'json',
@@ -1530,7 +1530,7 @@
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Sales_invoice_other/transaction/create",
+                "url":"Sales_invoice/transaction/create",
                 "data":_data,
                 "beforeSend": showSpinningProgress($('#btn_save'))
             });
@@ -1550,7 +1550,7 @@
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Sales_invoice_other/transaction/update",
+                "url":"Sales_invoice/transaction/update",
                 "data":_data,
                 "beforeSend": showSpinningProgress($('#btn_save'))
             });
@@ -1560,7 +1560,7 @@
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Sales_invoice_other/transaction/delete",
+                "url":"Sales_invoice/transaction/delete",
                 "data":{sales_invoice_id : _selectedID}
             });
         };

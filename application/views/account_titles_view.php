@@ -111,12 +111,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="div_chart_list">
-                            <div class="panel panel-default" style="border-top: 3px solid #2196f3;">
-
-                                <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Chart of Accounts</b></div></a>
-
-
-
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Chart of Accounts</b>
+                                </div>
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-4">
                                         <div class="zTreeDemoBackground" style="margin:3% 0% 3% 3%;">

@@ -197,20 +197,14 @@
 <div class="col-md-12">
 
 
-    <?php if(count($invoice_counter)==0){ //this means, the user is not yet configured to provide invoice number ?>
-        <div class="alert alert-dismissable alert-danger">
-            <i class="ti ti-close"></i>&nbsp; <strong>Ooopss!</strong> Looks like your account is not yet configured to provide invoice number. Please call system administrator for assistance. <br />
-            <i class="ti ti-settings"></i>&nbsp; Or configure your invoice number range by going to ->Settings -> General Configuration ->Invoice Number Tab
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        </div>
-    <?php } ?>
+    
 
 <div id="div_sales_invoice_list">
 
-    <div class="panel panel-default" style="border: 3px solid #00a546;min-height: 650px;border-radius:6px;">
-        <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Sales Invoice</b></div></a>
-
-
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Sales Invoice</b>
+        </div>
         <div class="panel-body table-responsive">
 
             <table id="tbl_sales_invoice" class="custom-design table-striped" cellspacing="0" width="100%" style="">
@@ -334,16 +328,6 @@
                             Address :<br>
                             <input class="form-control" id="txt_address" type="text" name="address" placeholder="Customer Address">
                         </div>
-
-                        <div class="col-sm-2 col-sm-offset-2">
-                            Term in Days : <br />
-                            <div class="input-group">
-                                <input type="number" id="txt_terms" name="terms" class="form-control" value="" placeholder="Term in Days">
-                                 <span class="input-group-addon">
-                                     <i class="fa fa-calendar"></i>
-                                </span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -352,37 +336,6 @@
 
 
         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
-
-
-            <div class="row">
-                <div class="col-lg-9">
-                    <label style="font-family: Tahoma;">Please select product type first :</label>
-                    <div style="padding: 0%;">
-                        <select name="producttype" id="cbo_prodType" data-error-msg="Product Type is required." required>
-                            <?php foreach($refproducts as $refproduct){ ?>
-                                <option value="<?php echo $refproduct->refproduct_id; ?>"><?php echo $refproduct->product_type; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <label style="font-family: Tahoma;">Please select Default Lookup Price :</label>
-                    <div style="padding: 0%;">
-                        <select name="lookup_price" id="cboLookupPrice">
-                            <option value="1">SRP (Recommended)</option>
-                            <option value="2">Distributor Price</option>
-                            <option value="3">Dealer Price</option>
-                            <option value="4">Public Price</option>
-                            <option value="5">Discounted Price</option>
-                            <option value="6">Purchase Cost</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <br />
 
             <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
             <div id="custom-templates">
@@ -472,7 +425,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <label control-label><strong>Remarks :</strong></label>
                         <div class="col-lg-12" style="padding: 0%;">
-                            <textarea name="remarks" class="form-control" placeholder="Remarks"></textarea>
+                            <textarea name="remarks" id="remarks" class="form-control" placeholder="Remarks"></textarea>
                         </div>
                     </div>
 
@@ -567,7 +520,7 @@
         <div class="modal-content"><!---content--->
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
 
             </div>
 
@@ -882,8 +835,7 @@
 
 
 $(document).ready(function(){
-    var _lookUpPrice;
-    var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboDepartments; var _cboCustomers; var dt_so, _productType, _cboSalesperson;
+    var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboDepartments; var _cboCustomers; var dt_so;
     var oTableItems={
         qty : 'td:eq(0)',
         unit_price : 'td:eq(3)',
@@ -910,8 +862,6 @@ $(document).ready(function(){
         dt=$('#tbl_sales_invoice').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
-            "order": [[ 1, "asc" ]],
-            "pageLength":15,
             "ajax" : "Sales_invoice/transaction/list",
             "columns": [
                 {
@@ -930,10 +880,10 @@ $(document).ready(function(){
                 {
                     targets:[7],
                     render: function (data, type, full, meta){
-                        var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:0px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
+                        var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                         var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
 
-                        return '<center> '+btn_edit+"&nbsp;"+btn_trash+' </center>';
+                        return '<center>'+btn_edit+"&nbsp;"+btn_trash+'</center>';
                     }
                 }
             ]
@@ -970,23 +920,16 @@ $(document).ready(function(){
 
         });
 
+        $('.numeric').autoNumeric('init');
+
+        $('#contact_no').keypress(validateNumber);
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-primary" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="New Sales Invoice" >'+
-                '<i class="fa fa-plus-circle"></i> New Sales Invoice</button>';
+            var _btnNew='<button class="btn btn-green" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Record Sales Invoice" >'+
+                '<i class="fa fa-file"></i> Record Sales Invoice</button>';
             $("div.toolbar").html(_btnNew);
         }();
 
-
-        _productType = $('#cbo_prodType').select2({
-            placeholder: "Please select Product Type",
-            allowClear: false
-        });
-
-        _lookUpPrice = $('#cboLookupPrice').select2({
-            allowClear: false
-        });
-        _lookUpPrice.select2('val',1);
 
         _cboDepartments=$("#cbo_departments").select2({
             placeholder: "Please select branch.",
@@ -1005,10 +948,7 @@ $(document).ready(function(){
 
         _cboSalesperson.select2('val',null);
         _cboDepartments.select2('val', null);
-        _productType.select2('val',null);
         _cboCustomers.select2('val',null);
-
-
 
         $('.date-picker').datepicker({
             todayBtn: "linked",
@@ -1019,81 +959,48 @@ $(document).ready(function(){
 
         });
 
+        var raw_data=<?php echo json_encode($products); ?>;
+
+
         var products = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace(''),
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                cache: false,
-                url: 'Sales_invoice/transaction/current-items/',
-
-                replace: function(url, uriEncodedQuery) {
-                    var prod_type=$('#cbo_prodType').select2('val');
-                    return url + '?type='+prod_type+'&description='+uriEncodedQuery;
-                }
-            }
-        });
-
-        $('#custom-templates .typeahead').keypress(function(event){
-            if (event.keyCode == 13) {
-                $('.tt-suggestion:first').click();
-            }
+            local : raw_data
         });
 
         var _objTypeHead=$('#custom-templates .typeahead');
 
-        _objTypeHead.typeahead({minLength:1,hint:true}, {
+        _objTypeHead.typeahead(null, {
             name: 'products',
-            display: 'product_code',
-            limit : 10000,
-                source: products,
+            display: 'description',
+            source: products,
             templates: {
                 header: [
-                    '<table width="100%"><tr><td width=7%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description 1</b></td><td width="7%" align="left"><b>Batch #</b></td><td width="7%" align="left"><b>Expiration</b></td><td width="7%" style="text-align: right;padding-right:1%;"><b>On hand</b></td><td width="7%" align="right" style="padding-right: 2%;"><b>SRP</b></td><td width="7%" align="right" style="padding-right: 0%;"><b>Dealer</b></td><td width="7%" align="right" style="padding-right: 0%;"><b>Distributor</b></td><td width="7%" align="right" style="padding-right: 0%;"><b>Discounted</b></td><td width="7%" align="right" style="padding-right: 0%;"><b>Public</b></td><td width="7%" align="right" style="padding-right: 1%;"><b>Cost</b></td></tr></table>'
+                    '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="20%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
                 ].join('\n'),
 
-                suggestion: Handlebars.compile('<table width="100%"><tr><td width="7%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="7%" align="left">{{batch_no}}</td><td width="7%" align="left">{{exp_date}}</td><td width="7%" style="padding-right:1%;" align="right">{{on_hand_per_batch}}</td><td width="7%" align="right" style="padding-right: 2%;">{{srp}}</td><td width="7%" align="right" style="padding-right: 0%;">{{srp_dealer}}</td><td width="7%" align="right" style="padding-right: 0%;">{{srp_distributor}}</td><td width="7%" align="right" style="padding-right: 0%;">{{srp_discounted}}</td><td width="7%" align="right" style="padding-right: 0%;">{{srp_public}}</td><td width="7%" align="right" style="padding-right: 1%;">{{srp_cost}}</td></tr></table>')
+                suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="20%" align="right" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
 
             }
         }).on('keyup', this, function (event) {
-            if (_objTypeHead.typeahead('val') == '')
+            if (_objTypeHead.typeahead('val') == '') {
                 return false;
+            }
             if (event.keyCode == 13) {
-                //$('.tt-suggestion:first').click();
+                $('.tt-suggestion:first').click();
                 _objTypeHead.typeahead('close');
                 _objTypeHead.typeahead('val','');
             }
         }).bind('typeahead:select', function(ev, suggestion) {
 
-
-            //var tax_rate=<?php echo $tax_percentage; ?>;
-
-            var tax_rate=suggestion.tax_rate; // tax rate is based the tax type set to selected product
-            var total=0;
-
-            var _defLookUp=_lookUpPrice.select2('val');
-            if(_defLookUp=="2"){
-                total=getFloat(suggestion.distributor_price);
-            }else if(_defLookUp=="3"){
-                total=getFloat(suggestion.dealer_price);
-            }
-            else if(_defLookUp=="4"){
-                total=getFloat(suggestion.public_price);
-            }
-            else if(_defLookUp=="5"){
-                total=getFloat(suggestion.discounted_price);
-            }
-            else if(_defLookUp=="6"){
-                total=getFloat(suggestion.purchase_cost);
-            }else{
-                total=getFloat(suggestion.sale_price);
-            }
+            //console.log(suggestion);
 
 
+            var tax_rate=0;
 
+            var total=getFloat(suggestion.sale_price);
             var net_vat=0;
             var vat_input=0;
-
-            var rowCount = $('#tbl_items .row-item').length + 1;
 
             if(suggestion.is_tax_exempt=="0"){ //not tax excempt
                 net_vat=total/(1+(getFloat(tax_rate)/100));
@@ -1104,37 +1011,28 @@ $(document).ready(function(){
                 vat_input=0;
             }
 
-            if (true) {
-                $('#tbl_items > tbody').append(newRowItem({
-                    inv_qty : "1",
-                    product_code : suggestion.product_code,
-                    unit_id : suggestion.unit_id,
-                    unit_name : suggestion.unit_name,
-                    product_id: suggestion.product_id,
-                    product_desc : suggestion.product_desc,
-                    inv_line_total_discount : "0.00",
-                    tax_exempt : false,
-                    inv_tax_rate : tax_rate,
-                    inv_price : total, /**total is the same as price because the Quantity 1**/
-                    inv_discount : "0.00",
-                    tax_type_id : null,
-                    inv_line_total_price : total,
-                    inv_non_tax_amount: net_vat,
-                    inv_tax_amount:vat_input,
-                    batch_no:suggestion.batch_no,
-                    exp_date:suggestion.exp_date,
-                    max_qty:suggestion.on_hand_per_batch,
-                    cost_upon_invoice:suggestion.purchase_cost
 
-                }));
-            } else {
-                showNotification({
-                    title: "<b style='color:white;display: inline;'>Max Item!</b>",
-                    stat : "error",
-                    msg : "Sorry, maximum item is 5. "
-                });
-                return false;
-            }
+            $('#tbl_items > tbody').prepend(newRowItem({
+                inv_qty : "1",
+                product_code : suggestion.product_code,
+                unit_id : suggestion.unit_id,
+                unit_name : suggestion.unit_name,
+                product_id: suggestion.product_id,
+                product_desc : suggestion.product_desc,
+                inv_line_total_discount : "0.00",
+                tax_exempt : false,
+                inv_tax_rate : tax_rate,
+                inv_price : suggestion.sale_price,
+                inv_discount : "0.00",
+                tax_type_id : null,
+                inv_line_total_price : total,
+                inv_non_tax_amount: net_vat,
+                inv_tax_amount:vat_input
+            }));
+
+
+
+
 
             reInitializeNumeric();
             reComputeTotal();
@@ -1171,7 +1069,7 @@ $(document).ready(function(){
                 $.ajax({
                     "dataType":"html",
                     "type":"POST",
-                    "url":"Templates/layout/sales-invoice/"+ d.sales_invoice_id+"?type=fullview&category=1"
+                    "url":"Templates/layout/sales-invoice/"+ d.sales_invoice_id+"?type=fullview"
                 }).done(function(response){
                     $("#sales_invoice").html(response);
                     $("#modal_sales_invoice").modal('show');
@@ -1179,14 +1077,12 @@ $(document).ready(function(){
         
         } );
 
-
-
         $('#link_browse').click(function(){
             $('#btn_receive_so').click();
         });
 
 
-        _cboCustomers.on('change',function(e){
+        /*_cboCustomers.on('change',function(e){
             var i=$(this).select2('val');
             var obj_customers=$('#cbo_customers').find('option[value="' + i + '"]');
             $('#txt_address').val(obj_customers.data('address'));
@@ -1202,10 +1098,10 @@ $(document).ready(function(){
             var nextDate = moment(dd, 'MM/DD/YYYY').add('days', term_days).format('MM/DD/YYYY');
             $('input[name="date_due"]').val(nextDate);
 
-        });
+        });*/
 
 
-        $('#txt_terms').on('keyup',function(){
+        /*$('#txt_terms').on('keyup',function(){
            var term_days=$(this).val();
             var d=$('input[name="date_invoice"]').val();
             var dd= moment(d);
@@ -1219,10 +1115,7 @@ $(document).ready(function(){
             var dd= moment(d);
             var nextDate = moment(dd, 'MM/DD/YYYY').add('days', term_days).format('MM/DD/YYYY');
             $('input[name="date_due"]').val(nextDate);
-        });
-
-
-
+        });*/
 
         $('#tbl_so_list tbody').on( 'click', 'tr td.details-control', function () {
             var tr = $(this).closest('tr');
@@ -1278,12 +1171,15 @@ $(document).ready(function(){
 
         //loads modal to create new department
         _cboDepartments.on("select2:select", function (e) {
+
             var i=$(this).select2('val');
-            if(i==0){ //new department
+
+            if(i==0){ //new departmet
                 clearFields($('#modal_new_department').find('form'));
                 _cboDepartments.select2('val',null)
                 $('#modal_new_department').modal('show');
             }
+
         });
 
         _cboCustomers.on("select2:select", function (e) {
@@ -1358,6 +1254,25 @@ $(document).ready(function(){
 
         });
 
+        //create new customer
+        $('#btn_create_customer').click(function(){
+            var btn=$(this);
+
+            if(validateRequiredFields($('#frm_customer'))){
+                var data=$('#frm_customer').serializeArray();
+                createCustomer().done(function(response){
+                    showNotification(response);
+                    $('#modal_new_customer').modal('hide');
+                    var _customer=response.row_added[0];
+                    $('#cbo_customers').append('<option value="'+_customer.customer_id+'" selected>'+_customer.customer_name+'</option>');
+                    $('#cbo_customers').select2('val',_customer.customer_id);
+                    clearFields($('#modal_new_customer').find('form'));
+                }).always(function(){
+                    showSpinningProgress(btn);
+                });
+            }
+        });
+
 
         $('#btn_receive_so').click(function(){
             $('#tbl_so_list tbody').html('<tr><td colspan="7"><center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center></td></tr>');
@@ -1365,70 +1280,22 @@ $(document).ready(function(){
             $('#modal_so_list').modal('show');
         });
 
-        //create new customer
-        $('#btn_create_customer').click(function(){
-            var btn=$(this);
-
-            if(validateRequiredFields($('#frm_customer_new'))){
-                var data=$('#frm_customer_new').serializeArray();
-
-                $.ajax({
-                    "dataType":"json",
-                    "type":"POST",
-                    "url":"Customers/transaction/create",
-                    "data":data,
-                    "beforeSend" : function(){
-                        showSpinningProgress(btn);
-                    }
-                }).done(function(response){
-                    showNotification(response);
-                    $('#modal_new_customer').modal('hide');
-
-                    var _customer=response.row_added[0];
-                    $('#cbo_customers').append('<option value="'+_customer.customer_id+'" selected>'+_customer.customer_name+'</option>');
-                    $('#cbo_customers').select2('val',_customer.customer_id);
-
-                }).always(function(){
-                    showSpinningProgress(btn);
-                });
-            }
-        });
-
         $('#btn_new').click(function(){
             _txnMode="new";
 
             clearFields($('#div_sales_invoice_fields'));
-            $('#span_invoice_no').html('<img src="assets/img/loader/facebook.gif">');
+            $('#span_invoice_no').html('INV-XXXX');
             showList(false);
 
             $('#cbo_customers').select2('val', null);
             $('#cbo_departments').select2('val', null);
             $('#cbo_salesperson').select2('val',null);
 
-            $('#cbo_prodType').select2('val', 3);
-            $('#cboLookupPrice').select2('val', 1);
+            /*$('#cbo_prodType').select2('val', 3);
+            $('#cboLookupPrice').select2('val', 1);*/
             reComputeTotal(); //this is to make sure, display summary are recomputed as 0
 
-            $.ajax({
-                "dataType":"json",
-                "type":"POST",
-                "url":"Sales_invoice/transaction/current-invoice-no"
-            }).done(function(response){
-                if(response.stat=="error"){
-                    $('#span_invoice_no').html('<span style="color:red;font-family:tahoma;">Please set invoice number.</span>');
-                    showNotification(response);
-                }else{
-                    $('#span_invoice_no').html(response.invoice_no);
-                    $('#span_invoice_no').attr('contenteditable',false);
-                }
-
-            });
-
-
         });
-
-
-
 
         $('#tbl_so_list > tbody').on('click','button[name="accept_so"]',function(){
             _selectRowObj=$(this).closest('tr');
@@ -1512,36 +1379,30 @@ $(document).ready(function(){
 
 
         $('#tbl_sales_invoice tbody').on('click','button[name="edit_info"]',function(){
-
+            ///alert("ddd");
             _txnMode="edit";
-
+            $('.sales_invoice_title').html('Edit Sales Invoice');
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.sales_invoice_id;
 
-
-
             $('#span_invoice_no').html(data.sales_inv_no);
-            $('#span_invoice_no').attr('contenteditable',true);
 
-            $('input').each(function(){
+            $('input,textarea').each(function(){
                 var _elem=$(this);
                 $.each(data,function(name,value){
                     if(_elem.attr('name')==name&&_elem.attr('type')!='password'){
                         _elem.val(value);
                     }
+
                 });
+
+
             });
 
-            $('#cbo_prodType').select2('val', 3); //always set all product type as default filter
             $('#cbo_departments').select2('val',data.department_id);
             $('#cbo_customers').select2('val',data.customer_id);
             $('#cbo_salesperson').select2('val',data.salesperson_id);
-            $('textarea[name="remarks"]').val(data.remarks);
-            //$('input[name="so_no"]').val(data.so_no);
-            $('#txt_terms').val(data.terms);
-            $('#cboLookupPrice').select2('val', 1);
-
 
             $.ajax({
                 url : 'Sales_invoice/transaction/items/'+data.sales_invoice_id,
@@ -1559,7 +1420,7 @@ $(document).ready(function(){
 
                     $.each(rows,function(i,value){
 
-                        $('#tbl_items > tbody').append(newRowItem({
+                        $('#tbl_items > tbody').prepend(newRowItem({
                             inv_qty : value.inv_qty,
                             product_code : value.product_code,
                             unit_id : value.unit_id,
@@ -1574,15 +1435,10 @@ $(document).ready(function(){
                             tax_type_id : null,
                             inv_line_total_price : value.inv_line_total_price,
                             inv_non_tax_amount: value.inv_non_tax_amount,
-                            inv_tax_amount:value.inv_tax_amount,
-                            batch_no:value.batch_no,
-                            exp_date:value.exp_date,
-                            orig_so_price:value.orig_so_price,
-                            cost_upon_invoice:value.cost_upon_invoice
+                            inv_tax_amount:value.inv_tax_amount
                         }));
                     });
 
-                    reInitializeNumeric();
                     reComputeTotal();
                 }
             });
@@ -1599,34 +1455,21 @@ $(document).ready(function(){
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.sales_invoice_id;
 
+            alert(_selectedID);
+
             $('#modal_confirmation').modal('show');
         });
 
 
 
         //track every changes on numeric fields
-        $('#tbl_items tbody').on('keyup','input.numeric,input.number',function(){
+        $('#tbl_items tbody').on('keyup','input.numeric',function(){
             var row=$(this).closest('tr');
 
             var price=parseFloat(accounting.unformat(row.find(oTableItems.unit_price).find('input.numeric').val()));
             var discount=parseFloat(accounting.unformat(row.find(oTableItems.discount).find('input.numeric').val()));
-            var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.number').val()));
+            var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.numeric').val()));
             var tax_rate=parseFloat(accounting.unformat(row.find(oTableItems.tax).find('input.numeric').val()))/100;
-
-
-            /*var max_qty=parseFloat(accounting.unformat(row.find('input[name="max_qty[]"]').val()));
-            if(_txnMode=="new"){ //for new mode only
-                if($(this).closest('td').index()==0){ //qty textbox if true
-                    if (row.find('input[name="max_qty[]"]').val() != 'undefined') {
-                        if (max_qty < qty) {
-                            showNotification({ title: "<h4 style='color:white;'>Insufficient!</h4>", stat: "error", msg: "Sorry this product is insufficient. <br /> Maximum quantity of this product is " + max_qty + "!" });
-                            $(this).val(max_qty);
-                        }
-                    }
-                }
-            }*/
-
-
 
             if(discount>price){
                 showNotification({title:"Invalid",stat:"error",msg:"Discount must not greater than unit price."});
@@ -1641,7 +1484,7 @@ $(document).ready(function(){
             var net_vat=line_total/(1+tax_rate);
             var vat_input=line_total-net_vat;
 
-            $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(line_total,4)); // line total amount
+            $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(line_total,2)); // line total amount
             $(oTableItems.total_line_discount,row).find('input.numeric').val(line_total_discount); //line total discount
             $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
             $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
@@ -1651,12 +1494,6 @@ $(document).ready(function(){
 
 
         });
-
-
-
-
-
-
 
         $('#btn_yes').click(function(){
             //var d=dt.row(_selectRowObj).data();
@@ -1673,99 +1510,61 @@ $(document).ready(function(){
             //}
         });
 
-
-
-
-
-        $('input[name="file_upload[]"]').change(function(event){
-            var _files=event.target.files;
-
-            $('#div_img_user').hide();
-            $('#div_img_loader').show();
-
-
-            var data=new FormData();
-            $.each(_files,function(key,value){
-                data.append(key,value);
-            });
-
-            //console.log(_files);
-
-            $.ajax({
-                url : 'Users/transaction/upload',
-                type : "POST",
-                data : data,
-                cache : false,
-                dataType : 'json',
-                processData : false,
-                contentType : false,
-                success : function(response){
-                    //console.log(response);
-                    //alert(response.path);
-                    $('#div_img_loader').hide();
-                    $('#div_img_user').show();
-                    $('img[name="img_user"]').attr('src',response.path);
-
-                }
-            });
-
-        });
-
         $('#btn_cancel').click(function(){
             //$('#modal_so_list').modal('hide');
             showList(true);
-            $('cbo_prodType').select2('val',null);
         });
 
 
 
         $('#btn_save').click(function(){
 
-            var _parObj=$('#div_sales_invoice_fields');
-            if(validateRequiredFields($('#frm_sales_invoice'))){
-                if(_txnMode=="new"){
-                    createSalesInvoice().done(function(response){
-                        showNotification(response);
-                        if(response.stat=="success"){
-                            dt.row.add(response.row_added[0]).draw();
-                            clearFields(_parObj);
-                            showList(true);
-                        }
+                if(validateRequiredFields($('#frm_sales_invoice'))){
+                    if(_txnMode=="new"){
+                        createSalesInvoice().done(function(response){
+                            showNotification(response);
+                            if(response.stat=="success"){
+                                dt.row.add(response.row_added[0]).draw();
+                                clearFields($('#frm_sales_invoice'));
+                                showList(true);
 
-                        if (response.current_row_index != undefined) {
-                            var rowObj=$('#tbl_items > tbody tr:eq('+response.current_row_index+')');
-                            rowHighlight(rowObj);
-                        }
+                            }
 
-                    }).always(function(){
-                        //$('#btn_save').removeClass('disabled');
-                        showSpinningProgress($('#btn_save'));
-                    });
-                }else{
-                    updateSalesInvoice().done(function(response){
-                        showNotification(response);
+                            if (response.current_row_index != undefined) {
+                                var rowObj=$('#tbl_items > tbody tr:eq('+response.current_row_index+')');
+                                rowHighlight(rowObj);
+                            }
 
-                        if(response.stat=="success"){
-                            dt.row(_selectRowObj).data(response.row_updated[0]).draw(false);
-                            clearFields(_parObj);
-                            showList(true);
-                        }
 
-                        if (response.current_row_index != undefined) {
-                            var rowObj=$('#tbl_items > tbody tr:eq('+response.current_row_index+')');
-                            rowHighlight(rowObj);
-                        }
+                        }).always(function(){
+                            showSpinningProgress($('#btn_save'));
+                        });
+                    }else{
+                        updateSalesInvoice().done(function(response){
+                            showNotification(response);
 
-                    }).always(function(){
-                        //$('#btn_save').removeClass('disabled');
-                        showSpinningProgress($('#btn_save'));
-                    });
+                            if(response.stat=="success"){
+                                dt.row(_selectRowObj).data(response.row_updated[0]).draw(false);
+                                clearFields($('#frm_sales_invoice'));
+                                showList(true);
+
+                            }
+
+                            if (response.current_row_index != undefined) {
+                                var rowObj=$('#tbl_items > tbody tr:eq('+response.current_row_index+')');
+                                rowHighlight(rowObj);
+                            }
+
+
+                        }).always(function(){
+                            showSpinningProgress($('#btn_save'));
+                        });
+                    }
+                    //$('#cbo_prodType').select2('val',null);
+
                 }
-                //$('#cbo_prodType').select2('val',null);
 
-            }
-
-        });
+            });
 
 
 
@@ -1774,27 +1573,57 @@ $(document).ready(function(){
             reComputeTotal();
         });
 
+        $('#btn_browse').click(function(event){
+            event.preventDefault();
+            $('input[name="file_upload[]"]').click();
+        });
+
+        $('input[name="file_upload[]"]').change(function(event){
+            var _files=event.target.files;
+            /*$('#div_img_product').hide();
+            $('#div_img_loader').show();*/
+            var data=new FormData();
+            $.each(_files,function(key,value){
+                data.append(key,value);
+            });
+            console.log(_files);
+            $.ajax({
+                url : 'Customers/transaction/upload',
+                type : "POST",
+                data : data,
+                cache : false,
+                dataType : 'json',
+                processData : false,
+                contentType : false,
+                success : function(response){
+                    $('img[name="img_user"]').attr('src',response.path);
+                }
+            });
+        });
+
+        $('#btn_remove_photo').click(function(event){
+            event.preventDefault();
+            $('img[name="img_user"]').attr('src','assets/img/anonymous-icon.png');
+        });
+
 
     })();
 
 
     var validateRequiredFields=function(f){
         var stat=true;
-        var rowObj=$('#tbl_items > tbody tr');
-        rowHighlight(rowObj,false);
-
         $('div.form-group').removeClass('has-error');
         $('input[required],textarea[required],select[required]',f).each(function(){
-
-            if($(this).is('select')){
-                if($(this).select2('val')==0||$(this).select2('val')==null){
+                if($(this).is('select')){
+                if($(this).val()==0){
                     showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
                     $(this).closest('div.form-group').addClass('has-error');
                     $(this).focus();
                     stat=false;
                     return false;
                 }
-            }else{
+            
+                }else{
                 if($(this).val()==""){
                     showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
                     $(this).closest('div.form-group').addClass('has-error');
@@ -1803,14 +1632,22 @@ $(document).ready(function(){
                     return false;
                 }
             }
-
-
-
         });
-
         return stat;
     };
 
+    var createCustomer=function(){
+        var _data=$('#frm_customer').serializeArray();
+        _data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
+
+        return $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"Customers/transaction/create",
+            "data":_data,
+            "beforeSend": showSpinningProgress($('#btn_create_customer'))
+        });
+    };
 
     var createSalesInvoice=function(){
         var _data=$('#frm_sales_invoice,#frm_items').serializeArray();
@@ -1836,7 +1673,7 @@ $(document).ready(function(){
         var _data=$('#frm_sales_invoice,#frm_items').serializeArray();
 
         var tbl_summary=$('#tbl_sales_invoice_summary');
-        _data.push({name : "sales_inv_no", value : $('#span_invoice_no').text()});
+
         _data.push({name : "remarks", value : $('textarea[name="remarks"]').val()});
         _data.push({name : "summary_discount", value : tbl_summary.find(oTableDetails.discount).text()});
         _data.push({name : "summary_before_discount", value :tbl_summary.find(oTableDetails.before_tax).text()});
@@ -1875,7 +1712,7 @@ $(document).ready(function(){
     var showNotification=function(obj){
         PNotify.removeAll(); //remove all notifications
         new PNotify({
-            title:  '<h4 style="color:white;">'+obj.title+'</h4>',
+            title:  obj.title,
             text:  obj.msg,
             type:  obj.stat
         });
@@ -1885,18 +1722,19 @@ $(document).ready(function(){
         $('#modal_so_list').modal('hide');
     });
 
-
-
     var showSpinningProgress=function(e){
-        $(e).toggleClass('disabled');
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
     };
 
     var clearFields=function(f){
-        $('input:not(.date-picker),textarea',f).val('');
+        $('input,textarea,select,input:not(.date-picker)',f).val('');
+        $('#remarks').val('');
         $(f).find('input:first').focus();
-        $('#tbl_items > tbody',f).html('');
-        $('#cbo_prodType').select2('val', 3);
+        $('#tbl_items > tbody').html('');
+        $('#cbo_departments').select2('val', null);
+        $('#cbo_customers').select2('val', null);
+        $('#cbo_salesperson').select2('val', null);
+        $('#img_user').attr('src','assets/img/anonymous-icon.png');
     };
 
 
@@ -1907,30 +1745,40 @@ $(document).ready(function(){
 
     };
 
+    function validateNumber(event) {
+        var key = window.event ? event.keyCode : event.which;
+
+        if (event.keyCode === 8 || event.keyCode === 46
+            || event.keyCode === 37 || event.keyCode === 39) {
+            return true;
+        }
+        else if ( key < 48 || key > 57 ) {
+            return false;
+        }
+        else return true;
+    };
+
 
     var getFloat=function(f){
         return parseFloat(accounting.unformat(f));
     };
 
     var newRowItem=function(d){
-        return '<tr class="row-item">'+
-        '<td width="10%"><input name="inv_qty[]" type="text" class="number form-control" value="'+ d.inv_qty+'"></td>'+
+
+
+        return '<tr>'+
+        '<td width="10%"><input name="inv_qty[]" type="text" class="numeric form-control" value="'+ d.inv_qty+'"></td>'+
         '<td width="5%">'+ d.unit_name+'</td>'+
-        '<td width="10%">'+d.product_desc+'</td>'+
-        '<td width="11%"><input name="inv_price[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(d.inv_price,4)+'" style="text-align:right;"></td>'+
-        '<td width="11%" style="display:none;"><input name="inv_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_discount,4)+'" style="text-align:right;"></td>'+
-        '<td style="display: none;" width="11%"><input name="inv_line_total_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_line_total_discount,4)+'" readonly></td>'+
-        '<td width="11%" style="display:none;"><input name="inv_tax_rate[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_tax_rate,4)+'"></td>'+
-        '<td width="11%" align="right"><input name="inv_line_total_price[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_line_total_price,4)+'" readonly></td>'+
+        '<td width="30%">'+d.product_desc+'</td>'+
+        '<td width="11%"><input name="inv_price[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(d.inv_price,2)+'" style="text-align:right;"></td>'+
+        '<td width="11%" style="display:none;"><input name="inv_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_discount,2)+'" style="text-align:right;"></td>'+
+        '<td style="display: none;" width="11%"><input name="inv_line_total_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_line_total_discount,2)+'" readonly></td>'+
+        '<td width="11%" style="display:none;"><input name="inv_tax_rate[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_tax_rate,2)+'"></td>'+
+        '<td width="11%" align="right"><input name="inv_line_total_price[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_line_total_price,2)+'" readonly></td>'+
         '<td style="display: none;"><input name="inv_tax_amount[]" type="text" class="numeric form-control" value="'+ d.inv_tax_amount+'" readonly></td>'+
         '<td style="display: none;"><input name="inv_non_tax_amount[]" type="text" class="numeric form-control" value="'+ d.inv_non_tax_amount+'" readonly></td>'+
-        '<td style="display: none;"><input name="product_id[]" type="text" class="form-control" value="'+ d.product_id+'" readonly></td>'+
-        '<td style="display: none;"><input name="batch_no[]" type="text" class="form-control" value="'+ d.batch_no+'" readonly></td>'+
-        '<td style="display:none;"><input name="max_qty[]" type="text" class="form-control" value="' + d.max_qty + '" readonly></td>' +
-        '<td style="display:none;"><input name="exp_date[]" type="text" class="form-control" value="'+ d.exp_date+'" readonly></td>'+
-            '<td style="display:none;"><input name="orig_so_price[]" type="text" class="form-control" value="'+ d.orig_so_price+'" readonly></td>'+
-            '<td style="display:none;"><input name="cost_upon_invoice[]" type="text" class="form-control" value="'+ d.cost_upon_invoice+'" readonly></td>'+
-            '<td align="center"><button type="button" name="remove_item" class="btn btn-red"><i class="fa fa-trash"></i></button></td>'+
+        '<td style="display: none;"><input name="product_id[]" type="text" class="numeric form-control" value="'+ d.product_id+'" readonly></td>'+
+        '<td align="center"><button type="button" name="remove_item" class="btn btn-red"><i class="fa fa-trash"></i></button></td>'+
         '</tr>';
     };
 
@@ -1950,16 +1798,17 @@ $(document).ready(function(){
             after_tax+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
         });
 
-        var tbl_summary=$('#tbl_sales_invoice_summary');
-        tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,4));
-        tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,4));
-        tbl_summary.find(oTableDetails.inv_tax_amount).html(accounting.formatNumber(inv_tax_amount,4));
-        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
+        /*var tbl_summary=$('#tbl_sales_invoice_summary');
+        tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,2));
+        tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,2));
+        tbl_summary.find(oTableDetails.inv_tax_amount).html(accounting.formatNumber(inv_tax_amount,2));
+        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,2)+'</b>');*/
 
         $('#td_before_tax').html(accounting.formatNumber(before_tax,4));
         $('#td_after_tax').html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
         $('#td_discount').html(accounting.formatNumber(discounts,4));
         $('#td_tax').html(accounting.formatNumber(inv_tax_amount,4));
+
     };
 
 
@@ -1975,29 +1824,10 @@ $(document).ready(function(){
 
 
     var reInitializeNumeric=function(){
-        $('.numeric').autoNumeric('init',{mDec:4});
-        $('.number').autoNumeric('init', {mDec:0});
+        $('.numeric').autoNumeric('init');
     };
 
 
-    var rowHighlight=function(rowObj,b=true){
-        if(b){
-            $('td:eq(0) input',rowObj).css({
-                "color": "red",
-                "border-color": "red",
-                "font-weight": "bolder"
-            });
-
-
-        }else{
-            $('td:eq(0) input',rowObj).css({
-                "color": "black",
-                "border-color": "lightgray",
-                "font-weight": "normal"
-            });
-        }
-
-    };
 
 
 

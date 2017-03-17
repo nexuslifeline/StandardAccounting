@@ -240,7 +240,8 @@ class Account_payables extends CORE_Controller
                 array('customers','customers.customer_id=journal_info.customer_id','left'),
                 array('suppliers','suppliers.supplier_id=journal_info.supplier_id','left'),
                 array('user_accounts','user_accounts.user_id=journal_info.created_by_user','left')
-            )
+            ),
+            'journal_info.journal_id DESC'
         );
     }
 

@@ -237,7 +237,8 @@ class Accounts_receivable extends CORE_Controller
             array(
                 array('customers','customers.customer_id=journal_info.customer_id','left'),
                 array('user_accounts','user_accounts.user_id=journal_info.created_by_user','left')
-            )
+            ),
+            'journal_info.journal_id DESC'
         );
     }
 

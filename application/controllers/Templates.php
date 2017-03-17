@@ -1683,24 +1683,21 @@ class Templates extends CORE_Controller {
                 $format=$this->input->get('format',TRUE);
 
                 if($type=='preview') {
-                    $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
+                   
 
                     if($format==2){
                         $data['date']=$date;
                         $data['products']=$m_products->get_all_items_inventory(date('Y-m-d',strtotime($date)));
-                        $content=$this->load->view('template/batch_inventory_report',$data,TRUE); //load the template
+                        $this->load->view('template/batch_inventory_report',$data); //load the template
                     }else{
                         $data['date']=$date;
 
                         $data['prod_types']=$this->Refproduct_model->get_list('refproduct_id=1 OR refproduct_id=2');
                         $data['products']=$m_products->get_all_items_inventory(date('Y-m-d',strtotime($date)));
-                        $content=$this->load->view('template/batch_inventory_per_type_report',$data,TRUE); //load the template
+                        $this->load->view('template/batch_inventory_per_type_report',$data); //load the template
                     }
 
-                    $pdf->setFooter('{PAGENO}');
-                    $pdf->WriteHTML($content);
-                    //download it.
-                    $pdf->Output();
+                    
                 }
 
                 break;
@@ -1807,14 +1804,15 @@ class Templates extends CORE_Controller {
                 $data['subsidiary_info']=$journal_info[0];
                 $data['supplier_subsidiary']=$m_journal_info->get_supplier_subsidiary($supplier_Id,$account_Id,$start_Date,$end_Date);
 
-                if ($type == 'preview' || $type == null) {
+                
+                /*if ($type == 'preview' || $type == null) {
                     $pdf = $this->m_pdf->load("A4-L");
                     $content=$this->load->view('template/supplier_subsidiary_report',$data,TRUE);
                 }
 
                 $pdf->setFooter('{PAGENO}');
                 $pdf->WriteHTML($content);
-                $pdf->Output();
+                $pdf->Output();*/
                 break;
 
             case 'account-subsidiary' :

@@ -160,10 +160,11 @@
 
                                         <div class="panel-group panel-default" id="accordionA">
 
-                                            <div id="div_tests" class="panel panel-default" style="border: 3px solid #2196f3;border-radius: 5px;">
-
+                                            <div id="div_tests" class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Check Layout</b>
+                                                </div>
                                                 <div class="panel-body" style="min-height: 400px;">
-                                                    <b><i class="fa fa-bars"></i> Check Layout</b><hr />
                                                     <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
                                                         <table id="tbl_check_layouts" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                             <thead class="table-erp">

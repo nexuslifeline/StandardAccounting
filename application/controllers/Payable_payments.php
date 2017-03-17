@@ -58,8 +58,7 @@ class Payable_payments extends CORE_Controller
                                 'payable_payments.receipt_no'=>$receipt_no,
                                 'payable_payments.is_active'=>TRUE,
                                 'payable_payments.is_deleted'=>FALSE
-                            ),
-                            'payable_payments.payment_id'
+                            )
                         )
                     )>0
                 ) {
@@ -198,7 +197,8 @@ class Payable_payments extends CORE_Controller
                 array('suppliers','suppliers.supplier_id=payable_payments.supplier_id','left'),
                 array('user_accounts','user_accounts.user_id=payable_payments.created_by_user','left'),
                 array('payment_methods','payment_methods.payment_method_id=payable_payments.payment_method_id','left')
-            )
+            ),
+            'payable_payments.payment_id DESC'
 
         );
     }

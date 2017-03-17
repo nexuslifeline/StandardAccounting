@@ -24,6 +24,11 @@
 
     <style>
 
+        html {
+            zoom: 0.8;
+            zoom: 80%;
+        }
+
         .toolbar{
             float: left;
         }
@@ -84,11 +89,13 @@
                                 <div class="col-md-12">
 
                                     <div id="div_unit_list">
-                                        <div class="panel panel-default" style="border-top: 3px solid #2196f3;">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Account Classification</b>
+                                            </div>
                                             <div class="panel-body table-responsive">
-                                                <h2 style="margin-top: 0;">Account Classification</h2>
                                                 <table id="tbl_account_class" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                                    <thead class="table-erp">
+                                                    <thead class="">
                                                     <tr>
                                                         <th>Account Class</th>
                                                         <th>Description</th>
@@ -277,7 +284,7 @@ $(document).ready(function(){
 
         var createToolBarButton=function(){
             var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New unit" >'+
-                '<i class="fa fa-file"></i> New Account Classification</button>';
+                '<i class="fa fa-plus"></i> New Account Classification</button>';
             $("div.toolbar").html(_btnNew);
         }();
     }();

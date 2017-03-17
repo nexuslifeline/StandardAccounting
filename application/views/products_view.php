@@ -957,12 +957,11 @@ $(document).ready(function(){
                                 <div class="col-md-12">
 
                                     <div id="div_product_list">
-                                        <div class="panel panel-default" style="border-top: 3px solid #2196f3;">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Products</b>
+                                            </div>
                                             <div class="panel-body table-responsive">
-                                                <button class="btn btn-default btn-back" id="btn_backtofilter" title="Go back to filter">
-                                                    <span class="fa fa-arrow-left" style="color: #9E9E9E;"></span>
-                                                </button>
-                                                <h2 style="margin-top: 0px !important;margin-bottom: 0px !important;">Products</h2><hr>
                                                 <button class="btn btn-primary" id="btn_new" style="float: left; text-transform: capitalize;font-family: Tahoma, Georgia, Serif;margin-bottom: 0px !important;" data-toggle="modal" data-target="" data-placement="left" title="Create New product" ><i class="fa fa-plus-circle"></i> Create New Product</button>
                                                 <table id="tbl_products" class="custom-design table-striped" cellspacing="0" width="100%">
                                                     <thead class="">
@@ -997,7 +996,7 @@ $(document).ready(function(){
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                            <h4 class="modal-title"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                            <h4 class="modal-title"  style="color:white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
                         </div>
 
                         <div class="modal-body">

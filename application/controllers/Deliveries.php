@@ -81,9 +81,8 @@ class Deliveries extends CORE_Controller
             case 'list':  //this returns JSON of Purchase Order to be rendered on Datatable
 
                 $response['data']=$this->response_rows(
-                    'delivery_invoice.is_active=TRUE AND delivery_invoice.is_deleted=FALSE'.($id_filter==null?'':' AND delivery_invoice.dr_invoice_id='.$id_filter)
-                    ,
-                    'delivery_invoice.dr_invoice_id'
+                    'delivery_invoice.is_active=TRUE AND delivery_invoice.is_deleted=FALSE'.($id_filter==null?'':' AND delivery_invoice.dr_invoice_id='.$id_filter),
+                    'delivery_invoice.dr_invoice_id DESC'
                 );
                 echo json_encode($response);
                 break;
@@ -191,14 +190,14 @@ class Deliveries extends CORE_Controller
                     $m_dr_items->exp_date=date('Y-m-d', strtotime($exp_date[$i]));
                     $m_dr_items->batch_no=$batch_code[$i];
 
-                    if($exp_date[$i]==null||$exp_date[$i]==""){
+                    /*if($exp_date[$i]==null||$exp_date[$i]==""){
                         $response['title'] = 'Invalid Expiration!';
                         $response['stat'] = 'error';
                         $response['msg'] = 'Expiration date is required.';
                         $response['current_row_index'] = $i;
 
                         die(json_encode($response));
-                    }
+                    }*/
 
 
 
@@ -312,15 +311,6 @@ class Deliveries extends CORE_Controller
                     $m_dr_items->exp_date=date('Y-m-d', strtotime($exp_date[$i]));
                     $m_dr_items->batch_no=$batch_code[$i];
 
-                    if($exp_date[$i]==null||$exp_date[$i]==""){
-                        $response['title'] = 'Invalid Expiration!';
-                        $response['stat'] = 'error';
-                        $response['msg'] = 'Expiration date is required.';
-                        $response['current_row_index'] = $i;
-
-                        die(json_encode($response));
-                    }
-
                     //$m_dr_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
 
                     //unit id retrieval is change, because of TRIGGER restriction
@@ -411,7 +401,8 @@ class Deliveries extends CORE_Controller
 
                     array(
                         array('suppliers','suppliers.supplier_id=delivery_invoice.supplier_id','left')
-                    )
+                    ),
+                    'delivery_invoice.dr_invoice_id DESC'
 
 
 

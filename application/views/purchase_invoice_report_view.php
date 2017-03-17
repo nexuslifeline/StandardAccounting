@@ -86,7 +86,7 @@
                                     <div id="div_payable_list">
 
                                         <div class="panel-group panel-default" id="accordionA">
-                                            <div class="panel panel-default" style="border-radius: 6px;border: 1px solid lightgrey;min-height: 670px;">
+                                            <div class="panel panel-default">
                                                 <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Purchase Invoice Report</b></div></a>
                                                 <div id="collapseTwo" class="collapse in">
                                                     <div class="panel-body">

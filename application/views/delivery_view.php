@@ -203,8 +203,9 @@
 
 <div id="div_delivery_list">
     <div class="panel panel-default">
-        <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Purchase Invoice</b></div></a>
-
+        <div class="panel-heading">
+            <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Purchase Invoice</b>
+        </div>
         <div class="panel-body table-responsive">
 
             <table id="tbl_delivery_invoice" class="custom-design table-striped" cellspacing="0" width="100%">
@@ -446,7 +447,7 @@
         <div class="row">
             <div class="col-md-12">
                 Remarks :<br />
-                <textarea name="remarks" class="form-control" placeholder="Remarks"></textarea><br />
+                <textarea name="remarks" id="remarks" class="form-control" placeholder="Remarks"></textarea><br />
             </div>
         </div>
 
@@ -514,7 +515,7 @@
         <div class="modal-content"><!---content--->
             <div class="modal-header">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
             </div>
             <div class="modal-body">
                 <p id="modal-body-message">Are you sure ?</p>
@@ -537,7 +538,7 @@
             </div>
 
             <div class="modal-body">
-                <table id="tbl_po_list" class="custom-design table-striped" cellspacing="0" width="100%">
+                <table id="tbl_po_list" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
                         <th></th>
@@ -801,11 +802,7 @@
 
 
 $(document).ready(function(){
-    var dt; var dt_po; var _txnMode; var _selectedID; var _selectRowObj; var _cboSuppliers; var _cboTaxType;
-    var _productType; var _cboDepartments; var _defCostType;
-
-
-    _defCostType=1; //Luzon Area Purchase Cost is default, this will change when branch is specified
+    var dt; var dt_po; var _txnMode; var _selectedID; var _selectRowObj; var _cboSuppliers; var _cboTaxType; var _cboDepartments;
 
     var oTableItems={
         qty : 'td:eq(0)',
@@ -853,20 +850,13 @@ $(document).ready(function(){
                         return '<center>'+btn_accept+'</center>';
                     }
                 }
+
             ]
-        });
-
-
-
-        _productType = $('#cbo_prodType').select2({
-            placeholder: "Please select Product Type",
-            allowClear: false
         });
 
         dt=$('#tbl_delivery_invoice').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
-            "pageLength":15,
             "ajax" : "Deliveries/transaction/list",
             "columns": [
                 {
@@ -896,8 +886,8 @@ $(document).ready(function(){
 
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Purchase Invoice" >'+
-                '<i class="fa fa-plus-circle"></i> New Purchase Invoice</button>';
+            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Record Purchase Invoice" >'+
+                '<i class="fa fa-file"></i> Record Purchase Invoice</button>';
 
             $("div.toolbar").html(_btnNew);
         }();
@@ -917,9 +907,7 @@ $(document).ready(function(){
 
         $('.numeric').autoNumeric('init');
 
-        $('#mobile_no').keypress(validateNumber);
-
-        $('#landline').keypress(validateNumber);
+        $('#contact_no').keypress(validateNumber);
 
         _cboSuppliers=$("#cbo_suppliers").select2({
             placeholder: "Please select supplier.",
@@ -939,7 +927,6 @@ $(document).ready(function(){
             dropdownParent: "#modal_new_supplier"
         });
 
-
         _cboDepartments=$("#cbo_departments").select2({
             placeholder: "Please select branch.",
             allowClear: true
@@ -948,30 +935,14 @@ $(document).ready(function(){
         _cboDepartments.select2('val',null);
 
 
+        var raw_data=<?php echo json_encode($products); ?>;
 
-        $('#custom-templates .typeahead').keypress(function(event){
-            if (event.keyCode == 13) {
-                $('.tt-suggestion:first').click();
-            }
-        });
 
         var products = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace(''),
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                cache: false,
-                url: 'Purchases/transaction/product-lookup/',
-
-                replace: function(url, uriEncodedQuery) {
-                    //var prod_type=$('#cbo_prodType').select2('val');
-                    var sid=$('#cbo_suppliers').select2('val');
-                    var prod_type=$('#cbo_prodType').select2('val');
-
-                    return url + '?type='+prod_type+'&sid='+sid+'&description='+uriEncodedQuery;
-                }
-            }
+            local : raw_data
         });
-
 
         var _objTypeHead=$('#custom-templates .typeahead');
 
@@ -979,44 +950,29 @@ $(document).ready(function(){
             name: 'products',
             display: 'description',
             source: products,
-            limit : 10000,
             templates: {
                 header: [
-                    '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>On hand</b><td width="10%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
+                    '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="20%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
                 ].join('\n'),
 
-                suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="10%" align="right" style="padding-right: 2%;">{{on_hand}}</td><td width="10%" align="right" style="padding-right: 2%;">{{cost}}</td></tr></table>')
+                suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="20%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
 
             }
         }).on('keyup', this, function (event) {
-            if (_objTypeHead.typeahead('val') == '')
-                return false;
             if (event.keyCode == 13) {
+
+                $('.tt-suggestion:first').click();
                 _objTypeHead.typeahead('close');
                 _objTypeHead.typeahead('val','');
             }
         }).bind('typeahead:select', function(ev, suggestion) {
+            //if(_objTypeHead.typeahead('val')==''){ return false; }
+            //console.log(suggestion);
 
+            var tax_id=$('#cbo_tax_type').select2('val');
+            var tax_rate=parseFloat($('#cbo_tax_type').find('option[value="'+tax_id+'"]').data('tax-rate'));
 
-            //var tax_id=$('#cbo_tax_type').select2('val');
-            //var tax_rate=parseFloat($('#cbo_tax_type').find('option[value="'+tax_id+'"]').data('tax-rate'));
-
-            var tax_rate=suggestion.tax_rate;
-            //choose what purchase cost to be use
-            var purchase_cost=0.00;
-            if(_defCostType==2){ //Viz-Min Area purchase cost
-                purchase_cost=suggestion.purchase_cost_2;
-                //Notify the User that Purchase Cost will be based on Viz-Min Area
-                showNotification({
-                    title:"Information!",
-                    stat:"info",
-                    msg:"Purchase cost will be based on Viz-Min Area Purchase Cost!"
-                });
-            }else{ //Luzon Area Purchase Cost
-                purchase_cost=suggestion.purchase_cost;
-            }
-
-            var total=getFloat(purchase_cost);
+            var total=getFloat(suggestion.purchase_cost);
             var net_vat=0;
             var vat_input=0;
 
@@ -1028,16 +984,14 @@ $(document).ready(function(){
                 net_vat=total;
                 vat_input=0;
 
-                //if(tax_id!="1"){ //if supplier is taxable, notify the user that this item is tax excempt
-                    //showNotification({title:"Tax Excempt!",stat:"info",msg:"This item is tax excempt."});
-                //}
+                if(tax_id!="1"){ //if supplier is taxable, notify the user that this item is tax excempt
+                    showNotification({title:"Tax Excempt!",stat:"info",msg:"This item is tax excempt."});
+                }
 
             }
 
-            var exp_date = <?php echo json_encode(date("m/d/Y")); ?>;
 
-
-            $('#tbl_items > tbody').append(newRowItem({
+            $('#tbl_items > tbody').prepend(newRowItem({
                 dr_qty : "1",
                 product_code : suggestion.product_code,
                 unit_id : suggestion.unit_id,
@@ -1047,12 +1001,12 @@ $(document).ready(function(){
                 dr_line_total_discount : "0.00",
                 tax_exempt : false,
                 dr_tax_rate : tax_rate,
-                dr_price : purchase_cost,
+                dr_price : suggestion.purchase_cost,
                 dr_discount : "0.00",
                 tax_type_id : null,
                 dr_line_total_price : total,
                 dr_non_tax_amount: net_vat,
-                dr_tax_amount: vat_input,
+                dr_tax_amount:vat_input
             }));
 
 
@@ -1061,11 +1015,9 @@ $(document).ready(function(){
 
             reInitializeNumeric();
             reComputeTotal();
-            reInitializeExpireDate();
+
             //alert("dd")
         });
-
-
 
         _cboDepartments.on("select2:select", function (e) {
 
@@ -1075,7 +1027,6 @@ $(document).ready(function(){
 
 
         });
-
 
         $('div.tt-menu').on('click','table.tt-suggestion',function(){
             _objTypeHead.typeahead('val','');
@@ -1112,6 +1063,7 @@ $(document).ready(function(){
             }
             else {
                 tr.addClass( 'details' );
+                //console.log(row.data());
                 var d=row.data();
 
                 $.ajax({
@@ -1214,16 +1166,8 @@ $(document).ready(function(){
             _txnMode="new";
             //$('.toggle-fullscreen').click();
             clearFields($('#frm_deliveries'));
-            _cboSuppliers.select2('val',null);
-            _cboTaxType.select2('val',null);
             showList(false);
         });
-
-        $('#btn_browse').click(function(event){
-            event.preventDefault();
-            $('input[name="file_upload[]"]').click();
-        });
-
 
         $('#btn_receive_po').click(function(){
             $('#tbl_po_list tbody').html('<tr><td colspan="7"><center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center></td></tr>');
@@ -1301,6 +1245,8 @@ $(document).ready(function(){
                             dr_line_total_price : value.po_line_total,
                             dr_non_tax_amount: value.non_tax_amount,
                             dr_tax_amount:value.tax_amount,
+                            exp_date: exp_date,
+                            batch_no:""
                         }));
 
                         //sum up all footer details
@@ -1390,6 +1336,7 @@ $(document).ready(function(){
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.dr_invoice_id;
 
+            $('#span_invoice_no').html(data.dr_invoice_no);
 
             $('textarea[name="remarks"]').val(data.remarks);
             $('#cbo_suppliers').select2('val',data.supplier_id);
@@ -1444,14 +1391,16 @@ $(document).ready(function(){
                             dr_line_total_price : value.dr_line_total_price,
                             dr_non_tax_amount: value.dr_non_tax_amount,
                             dr_tax_amount:value.dr_tax_amount,
+                            exp_date : value.expiration,
+                            batch_no : value.batch_no
                         }));
 
-
+                        reComputeTotal();
                         //sum up all footer details
-                        total_discount+=getFloat(value.dr_line_total_discount);
+                        /*total_discount+=getFloat(value.dr_line_total_discount);
                         total_tax_amount+=getFloat(value.tax_amount);
                         total_non_tax_amount+=getFloat(value.non_tax_amount);
-                        gross_amount+=getFloat(value.dr_line_total_price);
+                        gross_amount+=getFloat(value.dr_line_total_price);*/
 
 
                     });
@@ -1459,11 +1408,12 @@ $(document).ready(function(){
                     reInitializeNumeric();
                     reInitializeExpireDate();
                     //write summary details
-                    var tbl_summary=$('#tbl_delivery_summary');
+                    /*var tbl_summary=$('#tbl_delivery_summary');
                     tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(total_discount,4));
                     tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(total_non_tax_amount,4));
                     tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(total_tax_amount,4));
-                    tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(gross_amount,4)+'</b>');
+                    tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(gross_amount,4)+'</b>');*/
+
                     reComputeTotal();
 
                 }
@@ -1484,12 +1434,12 @@ $(document).ready(function(){
         });
 
 
-        $('#tbl_items tbody').on('keyup','input.numeric,input.number',function(){
+        $('#tbl_items tbody').on('keyup','input.numeric',function(){
             var row=$(this).closest('tr');
 
             var price=parseFloat(accounting.unformat(row.find(oTableItems.unit_price).find('input.numeric').val()));
             var discount=parseFloat(accounting.unformat(row.find(oTableItems.discount).find('input.numeric').val()));
-            var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.number').val()));
+            var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.numeric').val()));
             var tax_rate=parseFloat(accounting.unformat(row.find(oTableItems.tax).find('input.numeric').val()))/100;
 
             if(discount>price){
@@ -1503,11 +1453,12 @@ $(document).ready(function(){
             var net_vat=line_total/(1+tax_rate);
             var vat_input=line_total-net_vat;
 
-            $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(line_total,4)); // line total amount
+            $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(line_total,2)); // line total amount
             $(oTableItems.total_line_discount,row).find('input.numeric').val(line_total_discount); //line total discount
             $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
             $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
 
+            //console.log(net_vat);
             reComputeTotal();
 
 
@@ -1536,10 +1487,13 @@ $(document).ready(function(){
             $('#div_img_user').hide();
             $('#div_img_loader').show();
 
+
             var data=new FormData();
             $.each(_files,function(key,value){
                 data.append(key,value);
             });
+
+            //console.log(_files);
 
             $.ajax({
                 url : 'Users/transaction/upload',
@@ -1550,6 +1504,8 @@ $(document).ready(function(){
                 processData : false,
                 contentType : false,
                 success : function(response){
+                    //console.log(response);
+                    //alert(response.path);
                     $('#div_img_loader').hide();
                     $('#div_img_user').show();
                     $('img[name="img_user"]').attr('src',response.path);
@@ -1566,38 +1522,23 @@ $(document).ready(function(){
 
 
         $('#btn_save').click(function(){
-            
+            //alert('save');
             if(validateRequiredFields($('#frm_deliveries'))){
                 if(_txnMode=="new"){
                     createDeliverInvoice().done(function(response){
                         showNotification(response);
-                        if(response.stat=="success") {
-                            dt.row.add(response.row_added[0]).draw();
-                            clearFields($('#frm_deliveries'));
-                            showList(true);
-                        }
-
-                        if (response.current_row_index != undefined) {
-                            var rowObj=$('#tbl_items > tbody tr:eq('+response.current_row_index+')');
-                            rowHighlight(rowObj);
-                        }
-
+                        dt.row.add(response.row_added[0]).draw();
+                        clearFields($('#frm_deliveries'));
+                        showList(true);
                     }).always(function(){
                         showSpinningProgress($('#btn_save'));
                     });
                 }else{
                     updatePurchaseOrder().done(function(response){
                         showNotification(response);
-                        if(response.stat=="success") {
-                            dt.row(_selectRowObj).data(response.row_updated[0]).draw(false);
-                            clearFields($('#frm_deliveries'));
-                            showList(true);
-                        }
-
-                        if (response.current_row_index != undefined) {
-                            var rowObj=$('#tbl_items > tbody tr:eq('+response.current_row_index+')');
-                            rowHighlight(rowObj);
-                        }
+                        dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                        clearFields($('#frm_deliveries'));
+                        showList(true);
                     }).always(function(){
                         showSpinningProgress($('#btn_save'));
                     });
@@ -1652,10 +1593,9 @@ $(document).ready(function(){
 
     })();
 
+
     var validateRequiredFields=function(f){
         var stat=true;
-        var rowObj=$('#tbl_items > tbody tr');
-        rowHighlight(rowObj,false);
 
         $('div.form-group').removeClass('has-error');
         $('input[required],textarea[required],select[required]',f).each(function(){
@@ -1677,6 +1617,9 @@ $(document).ready(function(){
                     return false;
                 }
             }
+
+
+
         });
 
         return stat;
@@ -1698,6 +1641,7 @@ $(document).ready(function(){
         var _data=$('#frm_deliveries,#frm_items').serializeArray();
 
         var tbl_summary=$('#tbl_delivery_summary');
+
         _data.push({name : "remarks", value : $('textarea[name="remarks"]').val()});
         _data.push({name : "summary_discount", value : tbl_summary.find(oTableDetails.discount).text()});
         _data.push({name : "summary_before_discount", value :tbl_summary.find(oTableDetails.before_tax).text()});
@@ -1717,6 +1661,7 @@ $(document).ready(function(){
         var _data=$('#frm_deliveries,#frm_items').serializeArray();
 
         var tbl_summary=$('#tbl_delivery_summary');
+
         _data.push({name : "remarks", value : $('textarea[name="remarks"]').val()});
         _data.push({name : "summary_discount", value : tbl_summary.find(oTableDetails.discount).text()});
         _data.push({name : "summary_before_discount", value :tbl_summary.find(oTableDetails.before_tax).text()});
@@ -1764,15 +1709,19 @@ $(document).ready(function(){
 
 
     var showSpinningProgress=function(e){
-        $(e).toggleClass('disabled');
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
     };
 
     var clearFields=function(f){
-        $('input:not(.date-picker),textarea',f).val('');
+        $('input,textarea,select,input:not(.date-picker)',f).val('');
+        $('#remarks').val('');
         $(f).find('input:first').focus();
         $('#tbl_items > tbody').html('');
+        $('#cbo_departments').select2('val', null);
+        $('#cbo_suppliers').select2('val', null);
+        $('#img_user').attr('src','assets/img/anonymous-icon.png');
     };
+
 
 
     function format ( d ) {
@@ -1801,21 +1750,20 @@ $(document).ready(function(){
 
     var newRowItem=function(d){
 
+
         return '<tr>'+
-        '<td width="10%"><input name="dr_qty[]" type="text" class="number form-control" value="'+ d.dr_qty+'"></td>'+
-        '<td width="5%">'+ (d.unit_name==null ? 'none' : d.unit_name) +'</td>'+
-        '<td width="30%">'+ d.product_desc +'</td>'+
-        '<td width="11%"><input name="dr_price[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(d.dr_price,4)+'" style="text-align:right;"></td>'+
-        '<td width="11%" style="display:none;"><input name="dr_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.dr_discount,4)+'" style="text-align:right;"></td>'+
-        '<td style="display: none;" width="11%"><input name="dr_line_total_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.dr_line_total_discount,4)+'" readonly></td>'+
-        '<td width="11%" style="display:none;"><input name="dr_tax_rate[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.dr_tax_rate,4)+'"></td>'+
-        '<td width="11%" align="right"><input name="dr_line_total_price[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.dr_line_total_price,4)+'" readonly></td>'+
+        '<td width="10%"><input name="dr_qty[]" type="text" class="numeric form-control" value="'+ d.dr_qty+'"></td>'+
+        '<td width="5%">'+ d.unit_name+'</td>'+
+        '<td width="30%">'+d.product_desc+'</td>'+
+        '<td width="11%"><input name="dr_price[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(d.dr_price,2)+'" style="text-align:right;"></td>'+
+        '<td width="11%" style="display:none;"><input name="dr_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.dr_discount,2)+'" style="text-align:right;"></td>'+
+        '<td style="display: none;" width="11%"><input name="dr_line_total_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.dr_line_total_discount,2)+'" readonly></td>'+
+        '<td width="11%" style="display:none;"><input name="dr_tax_rate[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.dr_tax_rate,2)+'"></td>'+
+        '<td colspan="3" width="11%" align="right"><input name="dr_line_total_price[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.dr_line_total_price,2)+'" readonly></td>'+
         '<td style="display: none;"><input name="dr_tax_amount[]" type="text" class="numeric form-control" value="'+ d.dr_tax_amount+'" readonly></td>'+
         '<td style="display: none;"><input name="dr_non_tax_amount[]" type="text" class="numeric form-control" value="'+ d.dr_non_tax_amount+'" readonly></td>'+
-        '<td style="display: none;"><input name="product_id[]" type="text" class="form-control" value="'+ d.product_id +'" readonly></td>'+
-        '<td><input type="text" name="exp_date[]" class="date-expire form-control" placeholder="mm/dd/yyyy" data-error-msg="Expiration Date is required!" value="'+ (d.exp_date == undefined ? '' : d.exp_date) +'" required></td>' +
-            '<td><input name="batch_code[]" type="text" class="form-control" value="'+d.batch_no+'"></td>'+
-            '<td align="center"><button type="button" name="remove_item" class="btn btn-red"><i class="fa fa-trash"></i></button></td>'+
+        '<td style="display: none;"><input name="product_id[]" type="text" class="numeric form-control" value="'+ d.product_id+'" readonly></td>'+
+        '<td align="center"><button type="button" name="remove_item" class="btn btn-red"><i class="fa fa-trash"></i></button></td>'+
         '</tr>';
     };
 
@@ -1823,7 +1771,6 @@ $(document).ready(function(){
 
     var reComputeTotal=function(){
         var rows=$('#tbl_items > tbody tr');
-        var tbl_summary=$('#tbl_delivery_summary');
 
         var discounts=0; var before_tax=0; var after_tax=0; var tax_amount=0;
 
@@ -1833,23 +1780,21 @@ $(document).ready(function(){
             tax_amount+=parseFloat(accounting.unformat($(oTableItems.vat_input,$(this)).find('input.numeric').val()));
             after_tax+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
         });
-
-        tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,4));
-        tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,4));
-        tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(tax_amount,4));
-        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
-
-        $('#td_before_tax').html(accounting.formatNumber(before_tax,4));
-        $('#td_after_tax').html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
+        
         $('#td_discount').html(accounting.formatNumber(discounts,4));
+        $('#td_before_tax').html(accounting.formatNumber(before_tax,4));
         $('#td_tax').html(accounting.formatNumber(tax_amount,4));
+        $('#td_after_tax').html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
 
     };
+
+
 
     var reInitializeNumeric=function(){
-        $('.numeric').autoNumeric('init',{mDec:4});
-        $('.number').autoNumeric('init', {mDec:0});
+        $('.numeric').autoNumeric('init');
     };
+
+
 
     var resetSummary=function(){
         var tbl_summary=$('#tbl_delivery_summary');
@@ -1858,36 +1803,6 @@ $(document).ready(function(){
         tbl_summary.find(oTableDetails.tax_amount).html('0.00');
         tbl_summary.find(oTableDetails.after_tax).html('<b>0.00</b>');
     };
-
-    var reInitializeExpireDate=function(){
-        $('.date-expire').datepicker({
-            format: 'mm/dd/yyyy',
-            autoclose: true
-        });
-
-    };
-
-
-    var rowHighlight=function(rowObj,b=true){
-
-        if(b){
-            $('input.date-expire',rowObj).css({
-                "color": "red",
-                "border-color": "red",
-                "font-weight": "bolder"
-            });
-
-        }else{
-            $('input.date-expire',rowObj).css({
-                "color": "black",
-                "border-color": "lightgray",
-                "font-weight": "normal"
-            });
-        }
-
-    };
-
-
 
 
 

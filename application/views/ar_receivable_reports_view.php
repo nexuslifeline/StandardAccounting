@@ -26,6 +26,12 @@
 
     <style>
 
+        html{
+            zoom: 0.8;
+            zoom: 80%;
+        }
+
+
         .toolbar{
             float: left;
         }
@@ -87,7 +93,7 @@
                                     <div id="div_department_list">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
-                                                <span style="color: white">Account Receivable Reports</span>
+                                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Account Receivable Reports</b>
                                             </div>
                                             <div class="panel-body table-responsive">
 												<div class="col-md-4">

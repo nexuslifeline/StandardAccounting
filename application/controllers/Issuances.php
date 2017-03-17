@@ -161,7 +161,7 @@ class Issuances extends CORE_Controller
 
                     $on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
 
-                    if ($this->get_numeric_value($issue_qty[$i]) > $this->get_numeric_value($on_hand)) {
+                    /*if ($this->get_numeric_value($issue_qty[$i]) > $this->get_numeric_value($on_hand)) {
                         $prod_description=$unit_id[0]->product_desc;
 
                         $response['title'] = 'Insufficient!';
@@ -169,7 +169,7 @@ class Issuances extends CORE_Controller
                         $response['msg'] = 'The item <b><u>'.$prod_description.'</u></b> is insufficient. Please make sure Quantiy is not greater than <b><u>'.number_format($on_hand,2).'</u></b>. <br /><br /> Item : <b>'.$prod_description.'</b><br /> Batch # : <b>'.$batch_no[$i].'</b><br />Expiration : <b>'.$exp_date[$i].'</b><br />On Hand : <b>'.number_format($on_hand,2).'</b><br />';
                         $response['current_row_index'] = $i;
                         die(json_encode($response));
-                    }
+                    }*/
 
                     //$m_issue_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
                     $m_issue_items->save();
@@ -263,16 +263,6 @@ class Issuances extends CORE_Controller
 
                     $on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
                     
-                    if ($this->get_numeric_value($issue_qty[$i]) > $this->get_numeric_value($on_hand)) {
-                        $prod_description=$unit_id[0]->product_desc;
-
-                        $response['title'] = 'Insufficient!';
-                        $response['stat'] = 'error';
-                        $response['msg'] = 'The item <b><u>'.$prod_description.'</u></b> is insufficient. Please make sure Quantiy is not greater than <b><u>'.number_format($on_hand,2).'</u></b>. <br /><br /> Item : <b>'.$prod_description.'</b><br /> Batch # : <b>'.$batch_no[$i].'</b><br />Expiration : <b>'.$exp_date[$i].'</b><br />On Hand : <b>'.number_format($on_hand,2).'</b><br />';
-                        $response['current_row_index'] = $i;
-                        die(json_encode($response));
-                    }
-
                     //$m_issue_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
                     $m_issue_items->save();
                 }
@@ -342,7 +332,8 @@ class Issuances extends CORE_Controller
             array(
                 array('departments','departments.department_id=issuance_info.issued_department_id','left'),
                 array('customers','customers.customer_id=issuance_info.issued_to_person','left')
-            )
+            ),
+            'issuance_info.issuance_id DESC'
         );
     }
 
