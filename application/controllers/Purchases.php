@@ -138,7 +138,7 @@ class Purchases extends CORE_Controller
                         ),
 
                         //order by
-                        'purchase_order.purchase_order_id',
+                        'purchase_order.purchase_order_id DESC',
                         //group by
                         'purchase_order.purchase_order_id'
                     );
@@ -165,7 +165,8 @@ class Purchases extends CORE_Controller
                             array('tax_types','tax_types.tax_type_id=purchase_order.tax_type_id','left'),
                             array('approval_status','approval_status.approval_id=purchase_order.approval_id','left'),
                             array('order_status','order_status.order_status_id=purchase_order.order_status_id','left')
-                        )
+                        ),
+                        'purchase_order.purchase_order_id DESC'
 
                     );
                     echo json_encode($response);
@@ -463,7 +464,8 @@ class Purchases extends CORE_Controller
                 array('tax_types','tax_types.tax_type_id=purchase_order.tax_type_id','left'),
                 array('approval_status','approval_status.approval_id=purchase_order.approval_id','left'),
                 array('order_status','order_status.order_status_id=purchase_order.order_status_id','left')
-            )
+            ),
+            'purchase_order.purchase_order_id DESC'
         );
     }
 }

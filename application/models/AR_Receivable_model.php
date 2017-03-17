@@ -32,7 +32,9 @@ class AR_Receivable_model extends CORE_Model {
                 GROUP BY rpl.sales_invoice_id
                 )As pay
 
-                ON unp.sales_invoice_id=pay.sales_invoice_id";
+                ON unp.sales_invoice_id=pay.sales_invoice_id
+                ORDER BY unp.sales_invoice_id DESC
+                ";
         return $this->db->query($sql)->result();
     }
 		//NO FILTER ~ JBPV
@@ -59,7 +61,9 @@ class AR_Receivable_model extends CORE_Model {
                 GROUP BY rpl.sales_invoice_id
                 )As pay
 
-                ON unp.sales_invoice_id=pay.sales_invoice_id";
+                ON unp.sales_invoice_id=pay.sales_invoice_id
+                ORDER BY unp.sales_invoice_id DESC
+                ";
         return $this->db->query($sql)->result();
 	}
 }

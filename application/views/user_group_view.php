@@ -26,6 +26,10 @@
 
 
     <style>
+        html {
+            zoom: 0.8;
+            zoom: 80%;
+        }
         .toolbar{
             float: left;
         }
@@ -119,9 +123,11 @@
 <div class="col-md-12">
 
 <div id="div_user_group_list">
-    <div class="panel panel-default"  style="border-top: 3px solid #2196f3;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; User Group</b>
+        </div>
         <div class="panel-body table-responsive">
-            <h2>User Group</h2>
             <table id="tbl_user_group_list" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead class="table-erp">
                 <tr>

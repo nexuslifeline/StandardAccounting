@@ -248,7 +248,8 @@ class Account_titles extends CORE_Controller
                 array('account_classes','account_classes.account_class_id=account_titles.account_class_id','left'),
                 array('account_types','account_types.account_type_id=account_classes.account_type_id','left'),
                 array('account_titles as parent','parent.account_id=account_titles.parent_account_id','left')
-            )
+            ),
+            'account_titles.account_id DESC'
         );
     }
 

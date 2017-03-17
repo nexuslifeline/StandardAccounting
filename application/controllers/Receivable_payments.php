@@ -215,7 +215,8 @@ class receivable_payments extends CORE_Controller
                 array('customers','customers.customer_id=receivable_payments.customer_id','left'),
                 array('user_accounts','user_accounts.user_id=receivable_payments.created_by_user','left'),
                 array('payment_methods','payment_methods.payment_method_id=receivable_payments.payment_method_id','left')
-            )
+            ),
+            'receivable_payments.payment_id DESC'
 
         );
     }

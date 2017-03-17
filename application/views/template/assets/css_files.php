@@ -41,4 +41,15 @@
         background-color: #4f9f63;
     }
 
+    .panel {
+        border: none;
+        -webkit-box-shadow: 0px 0px 12px -1px rgba(156,151,156,1);
+        -moz-box-shadow: 0px 0px 12px -1px rgba(156,151,156,1);
+        box-shadow: 0px 0px 12px -1px rgba(156,151,156,1);
+    }
+
+    .panel.panel-default .panel-heading {
+        border-color: transparent;
+    }
+
 </style>

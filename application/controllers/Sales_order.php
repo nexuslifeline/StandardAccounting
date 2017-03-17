@@ -89,7 +89,8 @@ class Sales_order extends CORE_Controller
                         array('customers','customers.customer_id=sales_order.customer_id','left'),
                         array('departments','departments.department_id=sales_order.department_id','left'),
                         array('order_status','order_status.order_status_id=sales_order.order_status_id','left')
-                    )
+                    ),
+                    'sales_order.sales_order_id DESC'
 
                 );
                 echo json_encode($response);
@@ -362,7 +363,8 @@ class Sales_order extends CORE_Controller
                 array('departments','departments.department_id=sales_order.department_id','left'),
                 array('customers','customers.customer_id=sales_order.customer_id','left'),
                 array('order_status','order_status.order_status_id=sales_order.order_status_id','left')
-            )
+            ),
+            'sales_order.sales_order_id DESC'
 
 
         );

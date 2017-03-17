@@ -147,8 +147,9 @@ echo $_side_bar_navigation;
 
 <div id="div_user_list">
     <div class="panel panel-default">
-        <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Issuance</b></div></a>
-
+        <div class="panel-heading">
+            <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Issuance</b>
+        </div>
         <div class="panel-body table-responsive">
 
             <table id="tbl_issuances" class="custom-design table-striped" cellspacing="0" width="100%">
@@ -259,16 +260,6 @@ echo $_side_bar_navigation;
         <div class="row">
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label" style="font-family: Tahoma;">Please select product type first :</label>
-                    <div class="col-lg-12" style="padding: 0%;">
-                        <select name="producttype" id="cbo_prodType" data-error-msg="Product Type is required." required>
-                            <?php foreach($refproducts as $refproduct){ ?>
-                            <option value="<?php echo $refproduct->refproduct_id; ?>"><?php echo $refproduct->product_type; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <br />
                     <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
                     <div id="custom-templates">
@@ -343,7 +334,7 @@ echo $_side_bar_navigation;
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <label control-label><strong>Remarks :</strong></label>
                             <div class="col-lg-12" style="padding: 0%;">
-                                <textarea name="remarks" class="form-control" placeholder="Remarks"></textarea>
+                                <textarea name="remarks" id="remarks" class="form-control" placeholder="Remarks"></textarea>
                             </div>
                         </div>
                     </div>
@@ -443,7 +434,7 @@ echo $_side_bar_navigation;
         <div class="modal-content"><!---content--->
             <div class="modal-header">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                <h4 class="modal-title" style="color: white;><span id="modal_mode"> </span>Confirm Deletion</h4>
 
             </div>
 
@@ -614,11 +605,14 @@ $(document).ready(function(){
         total : 'td:eq(7)',
         vat_input : 'td:eq(8)',
         net_vat : 'td:eq(9)'
+
     };
 
     $('#tbl_si_list > tbody').on('click','button[name="accept_si"]',function(){
             _selectRowObj=$(this).closest('tr');
             var data=dt_si.row(_selectRowObj).data();
+
+            //alert(d.sales_order_id);
 
             $('input,textarea').each(function(){
                 var _elem=$(this);
@@ -626,12 +620,16 @@ $(document).ready(function(){
                     if(_elem.attr('name')==name&&_elem.attr('type')!='password'){
                         _elem.val(value);
                     }
+
                 });
 
                 $('input[name="issued_to_person"]').val(data.customer_name);
                 $('#cbo_departments').select2('val',data.department_id);
                 $('#cbo_customers').select2('val',data.customer_id);
+
             });
+
+
 
             $.ajax({
                 url : 'Sales_invoice/transaction/list/'+data.sales_invoice_id,
@@ -646,6 +644,8 @@ $(document).ready(function(){
                 success : function(response){
                     var rows=response.data;
                     $('#tbl_items > tbody').html('');
+
+
 
                     $.each(rows,function(i,value){
                         $('#tbl_items > tbody').prepend(newRowItem({
@@ -686,31 +686,31 @@ $(document).ready(function(){
         after_tax : 'tr:eq(3) > td:eq(1)'
     };
 
-    dt_si = $('#tbl_si_list').DataTable({
-            "bLengthChange" : false,
-            "ajax" : "Sales_invoice/transaction/list",
-            "columns" : [
-            {
-                "targets" : [0],
-                "class":     "details-control",
-                "orderable" : true,
-                "data" : null,
-                "defaultContent" : ""
-            },
-            { targets:[1], data: "sales_inv_no" },
-            { targets:[2], data: "date_invoice" },
-            { targets:[3], data: "customer_name"},
-            { targets:[4], data: "department_name"},
-            { targets:[5], data: "remarks"},
-            { 
-                targets:[6], 
-                render: function (data, type, full, meta){
-                    var btn_accept='<button class="btn btn-success btn-sm" name="accept_si"  style="margin-left:-15px;text-transform: none;" data-toggle="tooltip" data-placement="top" title="Create Sales Invoice on SO"><i class="fa fa-check"></i> Accept SI</button>';
-                    return '<center>'+btn_accept+'</center>';
-                }
+dt_si = $('#tbl_si_list').DataTable({
+        "bLengthChange" : false,
+        "ajax" : "Sales_invoice/transaction/list",
+        "columns" : [
+        {
+            "targets" : [0],
+            "class":     "details-control",
+            "orderable" : true,
+            "data" : null,
+            "defaultContent" : ""
+        },
+        { targets:[1], data: "sales_inv_no" },
+        { targets:[2], data: "date_invoice" },
+        { targets:[3], data: "customer_name"},
+        { targets:[4], data: "department_name"},
+        { targets:[5], data: "remarks"},
+        { 
+            targets:[6], 
+            render: function (data, type, full, meta){
+                var btn_accept='<button class="btn btn-success btn-sm" name="accept_si"  style="margin-left:-15px;text-transform: none;" data-toggle="tooltip" data-placement="top" title="Create Sales Invoice on SO"><i class="fa fa-check"></i> Accept SI</button>';
+                return '<center>'+btn_accept+'</center>';
             }
-        ]
-    });
+        }
+    ]
+});
 
     var initializeControls=function(){
 
@@ -744,32 +744,26 @@ $(document).ready(function(){
         });
 
         $('#btn_receive_si').click(function(){
+
             $('#modal_si_list').modal('show');
         });
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Issuance" >'+
-                '<i class="fa fa-plus-circle"></i> New Issuance</button>';
+            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Record item to issue" >'+
+                '<i class="fa fa-file"></i> Record item to issue</button>';
             $("div.toolbar").html(_btnNew);
         }();
-
-
-        _productType = $('#cbo_prodType').select2({
-            placeholder: "Please select Product Type",
-            allowClear: false
-        });
 
         _cboCustomers = $("#cbo_customers").select2({
             placeholder: "Please select customer.",
             allowClear: true
         });
 
-        _cboDepartments = $("#cbo_departments").select2({
+        _cboDepartments=$("#cbo_departments").select2({
             placeholder: "Issue item to Branch.",
             allowClear: true
         });
 
-        _cboCustomers.select2('val',null);
         _cboDepartments.select2('val',null);
 
         $('.date-picker').datepicker({
@@ -778,55 +772,47 @@ $(document).ready(function(){
             forceParse: false,
             calendarWeeks: true,
             autoclose: true
+
         });
 
 
+        var raw_data=<?php echo json_encode($products); ?>;
+
 
         var products = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace(''),
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                cache: false,
-                url: 'Sales_invoice/transaction/current-items/',
-
-                replace: function(url, uriEncodedQuery) {
-                    var prod_type=$('#cbo_prodType').select2('val');
-                    return url + '?type='+prod_type+'&description='+uriEncodedQuery;
-                }
-            }
+            local : raw_data
         });
 
         var _objTypeHead=$('#custom-templates .typeahead');
 
-        _objTypeHead.typeahead({minLength:1,hint:true}, {
+        _objTypeHead.typeahead(null, {
             name: 'products',
-            display: 'product_code',
-            limit : 10000,
+            display: 'description',
             source: products,
             templates: {
                 header: [
-                    '<table width="100%"><tr><td width=10%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="15%" align="left"><b>Batch #</b></td><td width="15%" align="left"><b>Expiration</b></td><td width="15%" style="padding-right: 2%;text-align: right"><b>On hand</b></td><td width="15%" align="right" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
+                    '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="20%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
                 ].join('\n'),
 
-                suggestion: Handlebars.compile('<table width="100%"><tr><td width="10%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="15%" align="left">{{batch_no}}</td><td width="15%" align="left">{{exp_date}}</td><td width="15%" align="right">{{on_hand_per_batch}}</td><td width="15%" align="right" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
+                suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="20%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
 
             }
         }).on('keyup', this, function (event) {
-            if (_objTypeHead.typeahead('val') == '')
-                return false;
             if (event.keyCode == 13) {
                 $('.tt-suggestion:first').click();
                 _objTypeHead.typeahead('close');
                 _objTypeHead.typeahead('val','');
             }
         }).bind('typeahead:select', function(ev, suggestion) {
-            _objTypeHead.typeahead('val','');
-            
-            //var tax_rate=0;
 
-            var tax_rate=suggestion.tax_rate; // tax rate is based the tax type set to selected product
+            //console.log(suggestion);
 
-            var total=getFloat(suggestion.sale_price);
+
+            var tax_rate=0;
+
+            var total=getFloat(suggestion.purchase_cost);
             var net_vat=0;
             var vat_input=0;
 
@@ -837,7 +823,11 @@ $(document).ready(function(){
                 tax_rate=0;
                 net_vat=total;
                 vat_input=0;
+
+
+
             }
+
 
             $('#tbl_items > tbody').prepend(newRowItem({
                 issue_qty : "1",
@@ -849,19 +839,22 @@ $(document).ready(function(){
                 issue_line_total_discount : "0.00",
                 tax_exempt : false,
                 issue_tax_rate : tax_rate,
-                issue_price : suggestion.sale_price,
+                issue_price : suggestion.purchase_cost,
                 issue_discount : "0.00",
                 tax_type_id : null,
                 issue_line_total_price : total,
-                issue_non_tax_amount : net_vat,
-                issue_tax_amount : vat_input,
-                batch_no : suggestion.batch_no,
-                exp_date : suggestion.exp_date,
-                max_qty : suggestion.on_hand_per_batch
+                issue_non_tax_amount: net_vat,
+                issue_tax_amount:vat_input
             }));
+
+
+
+
 
             reInitializeNumeric();
             reComputeTotal();
+
+            //alert("dd")
         });
 
         $('div.tt-menu').on('click','table.tt-suggestion',function(){
@@ -876,7 +869,7 @@ $(document).ready(function(){
 
 
     }();
- 
+
     _cboCustomers.on("change", function (e) {
         var i=$(this).select2('val');
         var obj_customers=$('#cbo_customers').find('option[value="' + i + '"]');
@@ -896,12 +889,10 @@ $(document).ready(function(){
             var tr = $(this).closest('tr');
             var row = dt.row( tr );
             var d=row.data();
-
-            _issuance_filter_id = d.issuance_id;
                 $.ajax({
                     "dataType":"html",
                     "type":"POST",
-                    "url":"Template_Issuance/layout/issuancesmall/"+ d.issuance_id + "?type=fullview"
+                    "url":"Templates/layout/issuance/"+ d.issuance_id+"?type=fullview"
                 }).done(function(response){
                     $("#item_issuance").html(response);
                     $("#modal_item_issuance").modal('show');
@@ -953,8 +944,8 @@ $(document).ready(function(){
                 $('#modal_new_department').modal('show');
                 clearFields($('#modal_new_department').find('form'));
             }
-        });
 
+        });
 
 
         //create new department
@@ -1019,6 +1010,7 @@ $(document).ready(function(){
             clearFields($('#frm_issuances'));
             _cboCustomers.select2('val',null);
             showList(false);
+            reComputeTotal();
         });
 
         $('#btn_browse').click(function(event){
@@ -1026,10 +1018,15 @@ $(document).ready(function(){
             $('input[name="file_upload[]"]').click();
         });
 
+
         $('#btn_remove_photo').click(function(event){
             event.preventDefault();
             $('img[name="img_user"]').attr('src','assets/img/anonymous-icon.png');
         });
+
+
+
+
 
         $('#tbl_issuances tbody').on('click','button[name="edit_info"]',function(){
             ///alert("ddd");
@@ -1039,6 +1036,8 @@ $(document).ready(function(){
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.issuance_id;
 
+
+
             $('input,textarea').each(function(){
                 var _elem=$(this);
                 $.each(data,function(name,value){
@@ -1047,6 +1046,8 @@ $(document).ready(function(){
                     }
 
                 });
+
+
             });
 
             $('#cbo_departments').select2('val',data.department_id);
@@ -1054,7 +1055,7 @@ $(document).ready(function(){
             $('textarea[name="remarks"]').val(data.remarks);
 
             $.ajax({
-                url : 'Issuances/transaction/items/' + data.issuance_id,
+                url : 'Issuances/transaction/items/'+data.issuance_id,
                 type : "GET",
                 cache : false,
                 dataType : 'json',
@@ -1084,9 +1085,7 @@ $(document).ready(function(){
                             tax_type_id : null,
                             issue_line_total_price : value.issue_line_total_price,
                             issue_non_tax_amount: value.issue_non_tax_amount,
-                            issue_tax_amount:value.issue_tax_amount,
-                            batch_no:value.batch_no,
-                            exp_date:value.exp_date
+                            issue_tax_amount:value.issue_tax_amount
                         }));
                     });
 
@@ -1119,7 +1118,6 @@ $(document).ready(function(){
             var discount=parseFloat(accounting.unformat(row.find(oTableItems.discount).find('input.numeric').val()));
             var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.numeric').val()));
             var tax_rate=parseFloat(accounting.unformat(row.find(oTableItems.tax).find('input.numeric').val()))/100;
-            //var max_qty=parseFloat(accounting.unformat(row.find('input[name="max_qty[]"]').val()));
 
             if(discount>price){
                 showNotification({title:"Invalid",stat:"error",msg:"Discount must not greater than unit price."});
@@ -1127,7 +1125,6 @@ $(document).ready(function(){
                 //$(this).trigger('keyup');
                 //return;
             }
-
 
             var discounted_price=price-discount;
             var line_total_discount=discount*qty;
@@ -1209,24 +1206,7 @@ $(document).ready(function(){
             showList(true);
         });
 
-        var rowHighlight=function(rowObj,b=true){
-            if(b){
-                $('td:eq(0) input',rowObj).css({
-                    "color": "red",
-                    "border-color": "red",
-                    "font-weight": "bolder"
-                });
 
-
-            }else{
-                $('td:eq(0) input',rowObj).css({
-                    "color": "black",
-                    "border-color": "lightgray",
-                    "font-weight": "normal"
-                });
-            }
-
-        };
 
         $('#btn_save').click(function(){
 
@@ -1234,34 +1214,18 @@ $(document).ready(function(){
                 if(_txnMode=="new"){
                     createIssuance().done(function(response){
                         showNotification(response);
-                        if(response.stat=="success"){
-                            dt.row.add(response.row_added[0]).draw();
-                            clearFields($('#frm_issuances'));
-                            showList(true);
-                        }
-
-                        if (response.current_row_index != undefined) {
-                            var rowObj=$('#tbl_items > tbody tr:eq('+response.current_row_index+')');
-                            rowHighlight(rowObj);
-                        }
-
+                        dt.row.add(response.row_added[0]).draw();
+                        clearFields($('#frm_issuances'));
+                        showList(true);
                     }).always(function(){
                         showSpinningProgress($('#btn_save'));
                     });
                 }else{
                     updateIssuances().done(function(response){
                         showNotification(response);
-                        if(response.stat=="success"){
-                            dt.row(_selectRowObj).data(response.row_updated[0]).draw();
-                            clearFields($('#frm_issuances'));
-                            showList(true);
-                        }
-
-                        if (response.current_row_index != undefined) {
-                            var rowObj=$('#tbl_items > tbody tr:eq('+response.current_row_index+')');
-                            rowHighlight(rowObj);
-                        }
-
+                        dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                        clearFields($('#frm_issuances'));
+                        showList(true);
                     }).always(function(){
                         showSpinningProgress($('#btn_save'));
                     });
@@ -1276,58 +1240,6 @@ $(document).ready(function(){
         $('#tbl_items > tbody').on('click','button[name="remove_item"]',function(){
             $(this).closest('tr').remove();
             reComputeTotal();
-        });
-
-
-        $("#typeofissuancefilter").change(function(){
-        issuancefilter = $('#typeofissuancefilter').val();
-        /*alert(_issuance_filter_id);*/
-        if(issuancefilter=="small"){
-            var type="issuancesmall";
-        }
-        else{
-            var type="issuancelivestock";
-        }
-
-
-        $.ajax({
-        "dataType":"html",
-        "type":"POST",
-        "url":"Template_Issuance/layout/"+type+"/"+_issuance_filter_id+"?type=fullview",
-        beforeSend : function(){
-                    $('#item_issuance').html("<center><img src='assets/img/loader/preloaderimg.gif'><h3>Loading...</h3></center>");
-                },
-            }).done(function(response){
-                $('#item_issuance').html(response);
-            });
-            //alert(_selectedID);
-            //$('#modal_personnel_list').modal('toggle');
-        });
-
-        $("#print_issuance").click(function(){
-        issuancefilter = $('#typeofissuancefilter').val();
-        /*alert(_issuance_filter_id);*/
-        if(issuancefilter=="small"){
-            var type="issuancesmall";
-        }
-        else{
-            var type="issuancelivestock";
-        }
-                window.open('Template_Issuance/layout/'+type+'/'+_issuance_filter_id+'?type=preview', '_blank');
-            //alert(_selectedID);
-        });
-
-        $("#download_issuance").click(function(){
-        issuancefilter = $('#typeofissuancefilter').val();
-        /*alert(_issuance_filter_id);*/
-        if(issuancefilter=="small"){
-            var type="issuancesmall";
-        }
-        else{
-            var type="issuancelivestock";
-        }
-                window.location = "Template_Issuance/layout/"+type+"/"+_issuance_filter_id+"?type=pdf";
-            //alert(_selectedID);
         });
 
 
@@ -1438,16 +1350,16 @@ $(document).ready(function(){
 
 
     var showSpinningProgress=function(e){
-        $(e).toggleClass('disabled');
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
     };
 
     var clearFields=function(f){
-        $('input:not(.date-picker),textarea',f).val('');
+        $('input,textarea,select,input:not(.date-picker)',f).val('');
+        $('#remarks').val('');
         $(f).find('input:first').focus();
         $('#tbl_items > tbody').html('');
         $('#cbo_departments').select2('val', null);
-        $('#cbo_prodType').select2('val', 3);
+        $('#td_before_tax, #td_after_tax, #td_discount, #td_tax').val('');
     };
 
 
@@ -1477,10 +1389,7 @@ $(document).ready(function(){
         '<td width="11%" align="right"><input name="issue_line_total_price[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.issue_line_total_price,2)+'" readonly></td>'+
         '<td style="display: none;"><input name="issue_tax_amount[]" type="text" class="numeric form-control" value="'+ d.issue_tax_amount+'" readonly></td>'+
         '<td style="display: none;"><input name="issue_non_tax_amount[]" type="text" class="numeric form-control" value="'+ d.issue_non_tax_amount+'" readonly></td>'+
-        '<td style="display: none;"><input name="product_id[]" type="text" class="form-control" value="'+ d.product_id+'" readonly></td>'+
-         '<td style="display: none;"><input name="batch_no[]" type="text" class="form-control" value="'+ d.batch_no+'" readonly></td>'+
-            '<td style="display: none;"><input name="max_qty[]" type="text" class="form-control" value="'+ d.max_qty+'" readonly></td>'+
-            '<td style="display: none;"><input name="exp_date[]" type="text" class="numeric form-control" value="'+ d.exp_date+'" readonly></td>'+
+        '<td style="display: none;"><input name="product_id[]" type="text" class="numeric form-control" value="'+ d.product_id+'" readonly></td>'+
         '<td align="center"><button type="button" name="remove_item" class="btn btn-red"><i class="fa fa-trash"></i></button></td>'+
         '</tr>';
     };
@@ -1501,18 +1410,10 @@ $(document).ready(function(){
             after_tax+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
         });
 
-        var tbl_summary=$('#tbl_issuance_summary');
-        tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,2));
-        tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,2));
-        tbl_summary.find(oTableDetails.issue_tax_amount).html(accounting.formatNumber(issue_tax_amount,2));
-        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,2)+'</b>');
-
-
-        $('#td_before_tax').html(accounting.formatNumber(before_tax,2));
-        $('#td_after_tax').html(accounting.formatNumber(after_tax,2));
-        $('#td_discount').html(accounting.formatNumber(discounts,2));
-        $('#td_tax').html(accounting.formatNumber(issue_tax_amount,2));
-
+        $('#td_before_tax').html(accounting.formatNumber(before_tax,4));
+        $('#td_after_tax').html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
+        $('#td_discount').html(accounting.formatNumber(discounts,4));
+        $('#td_tax').html(accounting.formatNumber(issue_tax_amount,4));
     };
 
 

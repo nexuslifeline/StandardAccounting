@@ -170,14 +170,14 @@ class Adjustments extends CORE_Controller
                     $m_adjustment_items->exp_date=date('Y-m-d', strtotime($exp_date[$i]));
                     $m_adjustment_items->batch_no=$batch_no[$i];
 
-                    if($exp_date[$i]==null||$exp_date[$i]==""){
+                    /*if($exp_date[$i]==null||$exp_date[$i]==""){
                         $response['title'] = 'Invalid Expiration!';
                         $response['stat'] = 'error';
                         $response['msg'] = 'Expiration date is required.';
                         $response['current_row_index'] = $i;
 
                         die(json_encode($response));
-                    }
+                    }*/
 
                     //$m_adjustment_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
 
@@ -264,15 +264,6 @@ class Adjustments extends CORE_Controller
                     $m_adjustment_items->exp_date=date('Y-m-d', strtotime($exp_date[$i]));
                     $m_adjustment_items->batch_no=$batch_no[$i];
 
-                    if($exp_date[$i]==null||$exp_date[$i]==""){
-                        $response['title'] = 'Invalid Expiration!';
-                        $response['stat'] = 'error';
-                        $response['msg'] = 'Expiration date is required.';
-                        $response['current_row_index'] = $i;
-
-                        die(json_encode($response));
-                    }
-
                     //$m_adjustment_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
 
                     $unit_id=$m_products->get_list(array('product_id'=>$prod_id[$i]));
@@ -346,7 +337,8 @@ class Adjustments extends CORE_Controller
             ),
             array(
                 array('departments','departments.department_id=adjustment_info.department_id','left')
-            )
+            ),
+            'adjustment_info.adjustment_id DESC'
         );
     }
 

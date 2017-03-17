@@ -131,7 +131,7 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#accounts_integration_setting" data-toggle="tab" style="font-family: tahoma;"><i class="fa fa-gear"></i> Accounts</a></li>
                 <li class=""><a href="#account_year_setting" data-toggle="tab" style="font-family: tahoma;"><i class="fa fa-calendar"></i> Accounting Period</a></li>
-                <li class=""><a href="#invoice_counter_setting" data-toggle="tab" style="font-family: tahoma;"><i class="fa fa-code"></i> Invoice Number</a></li>
+                <!-- <li class=""><a href="#invoice_counter_setting" data-toggle="tab" style="font-family: tahoma;"><i class="fa fa-code"></i> Invoice Number</a></li> -->
 
             </ul>
             <div class="tab-content">

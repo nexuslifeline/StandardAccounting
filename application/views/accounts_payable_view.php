@@ -166,10 +166,10 @@
 
                     <div class="panel-group panel-default" id="accordionA">
 
-                        <div class="panel panel-default" style="border-radius: 6px;border: 1px solid lightgrey;">
+                        <div class="panel panel-default">
                             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo">
-                                <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;">
-                                    <b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Accounts Payable (Pending)</b>
+                                <div class="panel-heading">
+                                    <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Accounts Payable (Pending)</b>
                                 </div>
                             </a>
                             <div id="" class="">
@@ -195,7 +195,7 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-default" style="border-radius: 6px;border: 1px solid lightgrey;">
+                        <div class="panel panel-default" style="border: 3px solid #00a546;border-radius:6px;">
                             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne">
                                 <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;">
                                     <b style="font-size: 12pt;color:white;"><i class="fa fa-bars"></i> Accounts Payable Journal</b>

@@ -662,12 +662,11 @@
                                 <div class="col-md-12">
 
                                     <div id="div_customer_list">
-                                        <div class="panel panel-default" style="border-top: 3px solid #2196f3;">                                  
-                                            <div class="panel-body table-responsive"> 
-                                              <button class="btn btn-default btn-back" id="btn_backtofilter" title="Go back to filter">
-                                                <span class="fa fa-arrow-left" style="color: #9E9E9E;"></span>
-                                              </button>                                                                                                                                                                    
-                                              <h2 style="margin-top: 0px !important;">Customers</h2><hr>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Customers</b>
+                                            </div>                                  
+                                            <div class="panel-body table-responsive">
                                                 <button class="btn btn-green" id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;margin-bottom: 0px !important; float: left;" data-toggle="modal" data-target="" data-placement="left" title=" New product" ><i class="fa fa-plus-circle"></i>  New Customer</button>
                                                 <table id="tbl_customers" class="custom-design table-striped" cellspacing="0" width="100%">
                                                     <thead class="">

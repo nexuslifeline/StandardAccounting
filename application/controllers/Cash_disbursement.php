@@ -271,7 +271,8 @@ class Cash_disbursement extends CORE_Controller
                 array('departments','departments.department_id=journal_info.department_id','left'),
                 array('user_accounts','user_accounts.user_id=journal_info.created_by_user','left'),
                 array('payment_methods','payment_methods.payment_method_id=journal_info.payment_method_id','left')
-            )
+            ),
+            'journal_info.journal_id DESC'
         );
     }
 

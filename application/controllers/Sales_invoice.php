@@ -119,7 +119,7 @@ class Sales_invoice extends CORE_Controller
             case 'list':  //this returns JSON of Issuance to be rendered on Datatable
                 $m_invoice=$this->Sales_invoice_model;
                 $response['data']=$this->response_rows(
-                    'sales_invoice.is_active=TRUE AND sales_invoice.is_deleted=FALSE AND sales_invoice.inv_type=1'.($id_filter==null?'':' AND sales_invoice.sales_invoice_id='.$id_filter)
+                    'sales_invoice.is_active=TRUE AND sales_invoice.is_deleted=FALSE'.($id_filter==null?'':' AND sales_invoice.sales_invoice_id='.$id_filter)
                 );
                 echo json_encode($response);
                 break;
@@ -153,136 +153,126 @@ class Sales_invoice extends CORE_Controller
             
             case 'create':
                 $m_invoice=$this->Sales_invoice_model;
-                $m_counter=$this->Invoice_counter_model;
+                $m_customers=$this->Customers_model;
+
+                /*if(count($m_invoice->get_list(array('sales_inv_no'=>$this->input->post('sales_inv_no',TRUE))))>0){
+                    $response['title'] = 'Invalid!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'Slip No. already exists.';
+
+                    echo json_encode($response);
+                    exit;
+                }*/
 
 
-                $user_id=$this->session->user_id;
-                $invoice_no=$this->get_current_invoice_no($user_id);
 
-                //validate if all required fields are supplied, and duplication
-                if($this->validate_record($invoice_no)){
-                            //get sales order id base on SO number
-                            $m_so=$this->Sales_order_model;
-                            $arr_so_info=$m_so->get_list(
-                                array('sales_order.so_no'=>$this->input->post('so_no',TRUE)),
-                                'sales_order.sales_order_id'
-                            );
-                            $sales_order_id=(count($arr_so_info)>0?$arr_so_info[0]->sales_order_id:0);
+                //get sales order id base on SO number
+                $m_so=$this->Sales_order_model;
+                $arr_so_info=$m_so->get_list(
+                    array('sales_order.so_no'=>$this->input->post('so_no',TRUE)),
+                    'sales_order.sales_order_id'
+                );
+                $sales_order_id=(count($arr_so_info)>0?$arr_so_info[0]->sales_order_id:0);
 
 
-                            $m_invoice->begin();
+                $m_invoice->begin();
 
-                            //treat NOW() as function and not string
-                            $m_invoice->set('date_created','NOW()'); //treat NOW() as function and not string
-                            $m_invoice->sales_inv_no=$invoice_no;
-                            $m_invoice->department_id=$this->input->post('department',TRUE);
-                            $m_invoice->customer_id=$this->input->post('customer',TRUE);
-                            $m_invoice->salesperson_id=$this->input->post('salesperson_id',TRUE);
-                            $m_invoice->sales_order_id=$sales_order_id;
-                            $m_invoice->remarks=$this->input->post('remarks',TRUE);
-                            $m_invoice->terms=$this->input->post('terms',TRUE);
-                            $m_invoice->date_due=date('Y-m-d',strtotime($this->input->post('date_due',TRUE)));
-                            $m_invoice->date_invoice=date('Y-m-d',strtotime($this->input->post('date_invoice',TRUE)));
-                            $m_invoice->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
-                            $m_invoice->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
-                            $m_invoice->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
-                            $m_invoice->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
-                            $m_invoice->inv_type=1;
-                            $m_invoice->address=$this->input->post('address',TRUE);
-                            $m_invoice->posted_by_user=$this->session->user_id;
-                            $m_invoice->save();
+                //treat NOW() as function and not string
+                $m_invoice->set('date_created','NOW()'); //treat NOW() as function and not string
 
-                            $sales_invoice_id=$m_invoice->last_insert_id();
+                $m_invoice->customer_id=$this->input->post('customer',TRUE);
+                $m_invoice->salesperson_id=$this->input->post('salesperson_id',TRUE);
+                $m_invoice->department_id=$this->input->post('department',TRUE);
+                $m_invoice->issue_to_department=$this->input->post('issue_to_department',TRUE);
+                $m_invoice->address=$this->input->post('address',TRUE);
+                $m_invoice->sales_order_id=$sales_order_id;
+                $m_invoice->remarks=$this->input->post('remarks',TRUE);
+                $m_invoice->date_due=date('Y-m-d',strtotime($this->input->post('date_due',TRUE)));
+                $m_invoice->date_invoice=date('Y-m-d',strtotime($this->input->post('date_invoice',TRUE)));
+                $m_invoice->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
+                $m_invoice->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
+                //$m_invoice->inv_type=2;
+                $m_invoice->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
+                $m_invoice->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
+                $m_invoice->posted_by_user=$this->session->user_id;
+                $m_invoice->save();
 
-                            $m_invoice_items=$this->Sales_invoice_item_model;
+                $sales_invoice_id=$m_invoice->last_insert_id();
 
-                            $prod_id=$this->input->post('product_id',TRUE);
-                            $inv_qty=$this->input->post('inv_qty',TRUE);
-                            $inv_price=$this->input->post('inv_price',TRUE);
-                            $inv_discount=$this->input->post('inv_discount',TRUE);
-                            $inv_line_total_discount=$this->input->post('inv_line_total_discount',TRUE);
-                            $inv_tax_rate=$this->input->post('inv_tax_rate',TRUE);
-                            $inv_line_total_price=$this->input->post('inv_line_total_price',TRUE);
-                            $inv_tax_amount=$this->input->post('inv_tax_amount',TRUE);
-                            $inv_non_tax_amount=$this->input->post('inv_non_tax_amount',TRUE);
-                            $batch_no=$this->input->post('batch_no',TRUE);
-                            $exp_date=$this->input->post('exp_date',TRUE);
-                            $orig_so_price=$this->input->post('orig_so_price',TRUE);
-                            $cost_upon_invoice=$this->input->post('cost_upon_invoice',TRUE);
+                $m_invoice_items=$this->Sales_invoice_item_model;
 
-                            $m_products=$this->Products_model;
+                $prod_id=$this->input->post('product_id',TRUE);
+                $inv_qty=$this->input->post('inv_qty',TRUE);
+                $inv_price=$this->input->post('inv_price',TRUE);
+                $inv_discount=$this->input->post('inv_discount',TRUE);
+                $inv_line_total_discount=$this->input->post('inv_line_total_discount',TRUE);
+                $inv_tax_rate=$this->input->post('inv_tax_rate',TRUE);
+                $inv_line_total_price=$this->input->post('inv_line_total_price',TRUE);
+                $inv_tax_amount=$this->input->post('inv_tax_amount',TRUE);
+                $inv_non_tax_amount=$this->input->post('inv_non_tax_amount',TRUE);
+                $dr_invoice_id=$this->input->post('dr_invoice_id',TRUE);
+                $exp_date=$this->input->post('exp_date',TRUE);
+                $batch_no=$this->input->post('batch_no',TRUE);
+                $cost_upon_invoice=$this->input->post('cost_upon_invoice',TRUE);
 
-                            for($i=0;$i<count($prod_id);$i++){
+                $m_products=$this->Products_model;
 
-                                $m_invoice_items->sales_invoice_id=$sales_invoice_id;
-                                $m_invoice_items->product_id=$this->get_numeric_value($prod_id[$i]);
-                                $m_invoice_items->inv_qty=$this->get_numeric_value($inv_qty[$i]);
-                                $m_invoice_items->inv_price=$this->get_numeric_value($inv_price[$i]);
-                                $m_invoice_items->inv_discount=$this->get_numeric_value($inv_discount[$i]);
-                                $m_invoice_items->inv_line_total_discount=$this->get_numeric_value($inv_line_total_discount[$i]);
-                                $m_invoice_items->inv_tax_rate=$this->get_numeric_value($inv_tax_rate[$i]);
-                                $m_invoice_items->inv_line_total_price=$this->get_numeric_value($inv_line_total_price[$i]);
-                                $m_invoice_items->inv_tax_amount=$this->get_numeric_value($inv_tax_amount[$i]);
-                                $m_invoice_items->inv_non_tax_amount=$this->get_numeric_value($inv_non_tax_amount[$i]);
-                                $m_invoice_items->batch_no=$batch_no[$i];
-                                $m_invoice_items->exp_date=date('Y-m-d', strtotime($exp_date[$i]));
-                                $m_invoice_items->orig_so_price=$this->get_numeric_value($orig_so_price[$i]);
-                                $m_invoice_items->cost_upon_invoice=$this->get_numeric_value($cost_upon_invoice[$i]);
+                for($i=0;$i<count($prod_id);$i++){
 
-                                //unit id retrieval is change, because of TRIGGER restriction
-                                $unit_id=$m_products->get_list(array('product_id'=>$prod_id[$i]));
-                                $m_invoice_items->unit_id=$unit_id[0]->unit_id;
+                    $m_invoice_items->sales_invoice_id=$sales_invoice_id;
+                    $m_invoice_items->product_id=$this->get_numeric_value($prod_id[$i]);
+                    $m_invoice_items->inv_qty=$this->get_numeric_value($inv_qty[$i]);
+                    $m_invoice_items->inv_price=$this->get_numeric_value($inv_price[$i]);
+                    $m_invoice_items->inv_discount=$this->get_numeric_value($inv_discount[$i]);
+                    $m_invoice_items->inv_line_total_discount=$this->get_numeric_value($inv_line_total_discount[$i]);
+                    $m_invoice_items->inv_tax_rate=$this->get_numeric_value($inv_tax_rate[$i]);
+                    $m_invoice_items->inv_line_total_price=$this->get_numeric_value($inv_line_total_price[$i]);
+                    $m_invoice_items->inv_tax_amount=$this->get_numeric_value($inv_tax_amount[$i]);
+                    $m_invoice_items->inv_non_tax_amount=$this->get_numeric_value($inv_non_tax_amount[$i]);
+                    //$m_invoice_items->dr_invoice_id=$dr_invoice_id[$i];
+                    $m_invoice_items->exp_date=date('Y-m-d', strtotime($exp_date[$i]));
+                    $m_invoice_items->batch_no=$batch_no[$i];
+                    $m_invoice_items->cost_upon_invoice=$this->get_numeric_value($cost_upon_invoice[$i]);
 
-                                //$m_invoice_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
+                    //unit id retrieval is change, because of TRIGGER restriction
+                    $unit_id=$m_products->get_list(array('product_id'=>$prod_id[$i]));
+                    $m_invoice_items->unit_id=$unit_id[0]->unit_id;
 
-                                $on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
+                    $on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
 
-                                if ($this->get_numeric_value($inv_qty[$i]) > $this->get_numeric_value($on_hand)) {
-                                    $prod_description=$unit_id[0]->product_desc;
+                    $m_invoice_items->save();
+                }
 
-                                    $response['title'] = 'Insufficient!';
-                                    $response['stat'] = 'error';
-                                    $response['msg'] = 'The item <b><u>'.$prod_description.'</u></b> is insufficient. Please make sure Quantiy is not greater than <b><u>'.number_format($on_hand,2).'</u></b>. <br /><br /> Item : <b>'.$prod_description.'</b><br /> Batch # : <b>'.$batch_no[$i].'</b><br />Expiration : <b>'.$exp_date[$i].'</b><br />On Hand : <b>'.number_format($on_hand,2).'</b><br />';
-                                    $response['current_row_index'] = $i;
-                                    die(json_encode($response));
-                                }
-
-                                $m_invoice_items->save();
-                            }
-
-                            //update invoice number base on formatted last insert id
-                            /**$m_invoice->sales_inv_no='INV-'.date('Ymd').'-'.$sales_invoice_id;
-                            $m_invoice->modify($sales_invoice_id);**/
+                //update invoice number base on formatted last insert id
+                $m_invoice->sales_inv_no='INV-'.date('Ymd').'-'.$sales_invoice_id;
+                $m_invoice->modify($sales_invoice_id);
 
 
-                            //update last invoice use
-                            $m_counter->last_invoice=$invoice_no;
-                            $m_counter->modify(array('user_id'=>$user_id));
+                //update status of so
+                $m_so->order_status_id=$this->get_so_status($sales_order_id);
+                $m_so->modify($sales_order_id);
+
+                //******************************************************************************************
+                // IMPORTANT!!!
+                //update receivable amount field of customer table
+                //$m_customers=$this->Customers_model;
+                //$m_customers->recalculate_customer_receivable($this->input->post('customer',TRUE));
+                //******************************************************************************************
 
 
-                            //update status of so
-                            $m_so->order_status_id=$this->get_so_status($sales_order_id);
-                            $m_so->modify($sales_order_id);
+                $m_invoice->commit();
 
-                            //******************************************************************************************
-                            // IMPORTANT!!!
-                            //update receivable amount field of customer table
-                            $m_customers=$this->Customers_model;
-                            $m_customers->recalculate_customer_receivable($this->input->post('customer',TRUE));
-                            //******************************************************************************************
 
-                            $m_invoice->commit();
 
-                            if($m_invoice->status()===TRUE){
-                                $response['title'] = 'Success!';
-                                $response['stat'] = 'success';
-                                $response['msg'] = 'Sales invoice successfully created.';
-                                $response['row_added']=$this->response_rows($sales_invoice_id);
+                if($m_invoice->status()===TRUE){
+                    $response['title'] = 'Success!';
+                    $response['stat'] = 'success';
+                    $response['msg'] = 'Sales invoice successfully created.';
+                    $response['row_added']=$this->response_rows($sales_invoice_id);
 
-                                echo json_encode($response);
-                            }
+                    echo json_encode($response);
+                }
 
-                } //end of validation
 
                 break;
 
@@ -307,9 +297,10 @@ class Sales_invoice extends CORE_Controller
                     $m_invoice->begin();
 
                     $m_invoice->sales_inv_no=$sales_inv_no;
+                    $m_invoice->customer_id=$this->input->post('customer',TRUE);
                     $m_invoice->department_id=$this->input->post('department',TRUE);
                     $m_invoice->remarks=$this->input->post('remarks',TRUE);
-                    $m_invoice->terms=$this->input->post('terms',TRUE);
+                    //$m_invoice->terms=$this->input->post('terms',TRUE);
                     $m_invoice->customer_id=$this->input->post('customer',TRUE);
                     $m_invoice->salesperson_id=$this->input->post('salesperson_id',TRUE);
                     $m_invoice->sales_order_id=$sales_order_id;
@@ -368,16 +359,6 @@ class Sales_invoice extends CORE_Controller
                         //$m_invoice_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
 
                         $on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
-
-                        if ($this->get_numeric_value($inv_qty[$i]) > $this->get_numeric_value($on_hand)) {
-                            $prod_description=$unit_id[0]->product_desc;
-
-                            $response['title'] = 'Insufficient!';
-                            $response['stat'] = 'error';
-                            $response['msg'] = 'The item <b><u>'.$prod_description.'</u></b> is insufficient. Please make sure Quantiy is not greater than <b><u>'.number_format($on_hand,2).'</u></b>. <br /><br /> Item : <b>'.$prod_description.'</b><br /> Batch # : <b>'.$batch_no[$i].'</b><br />Expiration : <b>'.$exp_date[$i].'</b><br />On Hand : <b>'.number_format($on_hand,2).'</b><br />';
-                            $response['current_row_index'] = $i;
-                            die(json_encode($response));
-                        }
 
                         $m_invoice_items->save();
                     }
@@ -460,7 +441,8 @@ class Sales_invoice extends CORE_Controller
 
                     array(
                         array('customers','customers.customer_id=sales_invoice.customer_id','left')
-                    )
+                    ),
+                    'Sales_invoice.sales_invoice_id DESC'
                 );
 
 
@@ -489,7 +471,6 @@ class Sales_invoice extends CORE_Controller
                 'sales_invoice.sales_inv_no',
                 'sales_invoice.remarks',
                 'sales_invoice.date_created',
-                'sales_invoice.terms',
                 'sales_invoice.customer_id',
                 'sales_invoice.inv_type',
                 'DATE_FORMAT(sales_invoice.date_invoice,"%m/%d/%Y") as date_invoice',
@@ -505,7 +486,8 @@ class Sales_invoice extends CORE_Controller
                 array('departments','departments.department_id=sales_invoice.department_id','left'),
                 array('customers','customers.customer_id=sales_invoice.customer_id','left'),
                 array('sales_order','sales_order.sales_order_id=sales_invoice.sales_order_id','left')
-            )
+            ),
+            'sales_invoice.sales_invoice_id DESC'
         );
     }
 
@@ -529,7 +511,7 @@ class Sales_invoice extends CORE_Controller
     }
 
 
-    function validate_record($invoice_no){
+    /*function validate_record($invoice_no){
         $m_invoice=$this->Sales_invoice_model;
 
         if(count($m_invoice->get_list(array('sales_inv_no'=>$invoice_no)))>0){
@@ -626,7 +608,7 @@ class Sales_invoice extends CORE_Controller
 
 
 
-    }
+    }*/
 
 
 //***************************************************************************************

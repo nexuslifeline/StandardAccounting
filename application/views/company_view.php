@@ -26,6 +26,11 @@
 
 
     <style>
+        html {
+          zoom: 0.8;
+          zoom: 80%;
+        }
+
         .toolbar{
             float: left;
         }
@@ -120,14 +125,15 @@
 
 
                                     <div id="div_company_fields">
-                                        <div class="panel panel-default" style="border-top: 3px solid #2196f3;">
+                                        <div class="panel panel-default">
                                             <!-- <div class="panel-heading">
                                                 <h2>Company Information</h2>
                                                 <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div>
                                             </div>
- -->
+ -->                                        <div class="panel-heading">
+                                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Company Information</b>
+                                            </div>
                                             <div class="panel-body">
-                                              <h2>Company Information</h2>
 
                                                <form id="frm_company" role="form" class="form-horizontal row-border">
 

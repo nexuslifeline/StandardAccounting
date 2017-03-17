@@ -20,6 +20,12 @@
 
     </style>
 
+    <script type="text/javascript">
+        (function(){
+            window.print();
+        })();
+    </script>
+
 
 </head>
 

@@ -159,9 +159,11 @@
 
                                 <div id="div_payment_list">
 
-                                    <div class="panel panel-default" style="border: 3px solid #2196f3;border-radius: 5px;">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Collection Entry</b>
+                                        </div>
                                         <div class="panel-body table-responsive">
-                                            <h2>Collection Entry</h2>
                                             <table id="tbl_payments" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                 <thead class="table-erp">
                                                 <tr>
@@ -451,7 +453,7 @@
             <div class="modal-content"><!---content--->
                 <div class="modal-header">
                     <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                    <h4 class="modal-title"><span id="modal_mode"> </span>Confirmation</h4>
+                    <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirmation</h4>
 
                 </div>
 
@@ -710,7 +712,6 @@
 
             _cboCustomers.on("select2:select", function (e) {
                 var customer_id=$(this).select2('val');
-
 
                 $.ajax({
                     "dataType":"html",

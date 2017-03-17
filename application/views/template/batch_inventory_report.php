@@ -36,6 +36,24 @@
         }
     </style>
 
+    <!-- <script>
+        $(document).ready(function(){
+            window.print();
+        });
+
+        window.onload = function () {
+    window.print();
+}
+    </script> -->
+
+    <script type="text/javascript">
+        (function(){
+            window.print();
+        })();
+    </script>
+
+
+
 
 </head>
 
