@@ -121,10 +121,11 @@
     <div class="panel-group panel-default" id="accordionA">
 
 
-        <div class="panel panel-default" style="min-height: 650px;border-radius:6px;">
-            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading"><h2 style="font-family:tahoma;">General Journal</h2></div></a>
-            <div id="collapseOne" class="collapse in">
-                <div class="panel-body" style="min-height: 400px;">
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; General Journal </b>
+                </div>
+                <div class="panel-body table-responsive">
                     <table id="tbl_accounts_receivable" class="custom-design table-striped" cellspacing="0" width="100%">
                         <thead class="">
                         <tr>

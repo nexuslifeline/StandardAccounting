@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 
 <html lang="en">
 
@@ -89,14 +89,14 @@
                                     <div id="div_department_list">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
-                                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Branches</b>
+                                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Department</b>
                                             </div>
                                             <div class="panel-body table-responsive">
                                                 <table id="tbl_departments" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                     <thead class="table-erp">
                                                     <tr>
-                                                        <th>Branch Name</th>
-                                                        <th>Branch Description</th>
+                                                        <th>Department Name</th>
+                                                        <th>Department Description</th>
                                                         <th>Delivery Address</th>
                                                         <th><center>Action</center></th>
                                                     </tr>
@@ -148,8 +148,8 @@
                                 <div class="row" style="margin: 1%;">
                                     <div class="col-lg-12">
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class="">Branch name * :</label>
-                                            <textarea name="department_name" class="form-control" data-error-msg="Branch name is required!" placeholder="Branch name" required></textarea>
+                                            <label class="">Department Name * :</label>
+                                            <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
 
                                         </div>
                                     </div>
@@ -159,12 +159,12 @@
                                 <div class="row" style="margin: 1%;">
                                     <div class="col-lg-12">
                                         <div class="form-group" style="margin-bottom:0px;">
-                                                <label class="">Description :</label>
-                                                <textarea name="department_desc" class="form-control" placeholder="Description"></textarea>
+                                                <label class="">Department Description :</label>
+                                                <textarea name="department_desc" class="form-control" placeholder="Department Description"></textarea>
 
                                         </div>
                                     </div>
-                                </div>
+                                </div><!-- 
 
                                 <div class="row" style="margin: 1%;">
                                     <div class="col-lg-12">
@@ -188,7 +188,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div><br /><br />
+                                </div><br /><br /> -->
 
 
 
@@ -253,8 +253,8 @@ $(document).ready(function(){
         });
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Branch" >'+
-                '<i class="fa fa-plus-circle"></i> New Branch</button>';
+            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Department" >'+
+                '<i class="fa fa-plus-circle"></i> New Department</button>';
             $("div.toolbar").html(_btnNew);
         }();
     }();
