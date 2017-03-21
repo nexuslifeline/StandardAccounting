@@ -190,7 +190,7 @@
 
     <div class="panel-group panel-default" id="accordionA">
 
-        <div class="panel panel-default" style="border: 3px solid #00a546;border-radius:6px;">
+        <div class="panel panel-default" style="border-radius:6px;">
             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="font-size: 12pt;color:white;"><i class="fa fa-bars"></i> Review Collection (Pending)</b></div></a>
             <div id="collapseTwo" class="collapse in">
                 <div class="panel-body">
@@ -219,7 +219,7 @@
             </div>
         </div>
 
-        <div class="panel panel-default" style="border: 3px solid #00a546;border-radius:6px;">
+        <div class="panel panel-default" style="border-radius:6px;">
             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="font-family:tahoma;font-size: 12pt;color:white;"><i class="fa fa-bars"></i> Cash Receipt Journal (History)</b></div></a>
             <div id="collapseOne" class="collapse in">
                 <div class="panel-body" style="min-height: 400px;">

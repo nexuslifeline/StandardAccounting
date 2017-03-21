@@ -223,7 +223,7 @@
             </div>
         </div>
 
-        <div class="panel panel-default" style="border: 3px solid #00a546;border-radius:6px;">
+        <div class="panel panel-default" style="border-radius:6px;">
             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne">
                 <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;">
                     <b style="font-size: 11pt;color:white;"><i class="fa fa-bars"></i> Sales / AR Journal</b>
