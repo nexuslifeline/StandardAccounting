@@ -56,8 +56,9 @@ class Rights_link_model extends CORE_Model{
                                           (39,'9','9-8','Account Subsidiary'),
                                           (40,'9','9-7','Supplier Subsidiary'),
                                           (41,'9','9-5','AP Schedule'),
-                                          (42,'8','8-4','Purchase Invoice Report')
-
+                                          (42,'8','8-4','Purchase Invoice Report'),
+                                          (43,'4','4-4','Locations Management'),
+                                          (44,'10','10-1','Fixed Asset Management')
                                           ON DUPLICATE KEY UPDATE
 
                                           rights_links.parent_code=VALUES(rights_links.parent_code),

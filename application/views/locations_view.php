@@ -24,6 +24,15 @@
 
     <style>
 
+        html {
+            zoom: 0.8;
+            zoom: 80%;
+        }
+
+        .page-content > .breadcrumb {
+            margin-bottom: 1px!important; 
+        }
+
         .toolbar{
             float: left;
         }
@@ -85,12 +94,15 @@
 
                                     <div id="div_location_list">
                                         <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Locations Management</b>
+                                            </div>
                                             <div class="panel-body table-responsive">
                                                 <table id="tbl_locations" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                     <thead>
                                                     <tr>
                                                         <th>Location Name</th>
-                                                        <th><center>Action</center></th>
+                                                        <th width="7%"><center>Action</center></th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -102,7 +114,7 @@
                                         </div>
                                     </div>
 
-                                    <div id="div_location_fields" style="display: none;">
+                                    <div id="div_location_fields" class="col-xs-12 col-md-5 col-md-offset-3" style="display: none;">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h2>location Information</h2>
@@ -112,12 +124,14 @@
                                             <div class="panel-body">
                                                 <form id="frm_location" role="form" class="form-horizontal row-border">
                                                     <div class="form-group">
-                                                        <label class="col-md-2 col-md-offset-2 control-label">* Location Name :</label>
-                                                        <div class="col-md-4">
+                                                        <div style="padding-left: 10px;">
+                                                            <strong>* Location Name :</strong>
+                                                        </div>
+                                                        <div class="col-md-12">
                                                             <div class="input-group">
-                                                                                    <span class="input-group-addon">
-                                                                                        <i class="fa fa-users"></i>
-                                                                                    </span>
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-users"></i>
+                                                                </span>
                                                                 <input type="text" name="location_name" class="form-control" placeholder="Location Name" data-error-msg="Location name is required!" required>
                                                             </div>
                                                         </div>
@@ -205,10 +219,10 @@ $(document).ready(function(){
                 {
                     targets:[1],
                     render: function (data, type, full, meta){
-                        var btn_edit='<button class="btn btn-default btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
-                        var btn_trash='<button class="btn btn-default btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
+                        var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
+                        var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
 
-                        return '<center>'+btn_edit+btn_trash+'</center>';
+                        return '<center>'+btn_edit+'&nbsp;'+btn_trash+'</center>';
                     }
                 }
             ]
@@ -248,6 +262,7 @@ $(document).ready(function(){
 
         $('#btn_new').click(function(){
             _txnMode="new";
+            clearFields('#frm_location');
             showList(false);
         });
 
@@ -322,7 +337,7 @@ $(document).ready(function(){
                         showNotification(response);
                         dt.row.add(response.row_added[0]).draw();
                         clearFields();
-
+                        showList(true);
                     }).always(function(){
                         showSpinningProgress($('#btn_save'));
                     });
