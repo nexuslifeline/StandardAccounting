@@ -203,8 +203,13 @@
 
 <div id="div_payment_fields" style="display: none;">
 
-    <div class="row custom_frame" style="border: 3px solid #2196f3;padding:1%;border-radius:5px;">
+    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;">
 
+        <div class="panel-body">
+        <div>
+
+        <div class="row ">
+            <div class="container-fluid">
         <form id="frm_payments" role="form" class="form-horizontal">
             <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                 <div class="row">
@@ -373,6 +378,7 @@
 
         </form>
 
+
         <br />
         <div class="row" style="margin: 3px;">
             Remarks :<br />
@@ -411,7 +417,10 @@
                 </div>
             </div>
 
-
+        </div>
+        </div>
+        </div>
+        </div>
     </div>
 
 
