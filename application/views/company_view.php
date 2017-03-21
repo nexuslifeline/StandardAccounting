@@ -228,6 +228,30 @@
                                                    </div>
 
                                                    <div class="form-group">
+                                                       <label class="col-md-2 col-md-offset-1 control-label"> <strong>RDO # :</strong></label>
+                                                       <div class="col-md-7">
+                                                           <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-code"></i>
+                                                                </span>
+                                                               <input type="text" name="rdo_no" class="form-control" value="<?php echo $company->rdo_no; ?>" placeholder="RDO #" data-error-msg="RDO # to is required!">
+                                                           </div>
+                                                       </div>
+                                                   </div>
+
+                                                   <div class="form-group">
+                                                       <label class="col-md-2 col-md-offset-1 control-label"> <strong> Nature of Business :</strong></label>
+                                                       <div class="col-md-7">
+                                                           <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-building"></i>
+                                                                </span>
+                                                               <input type="text" name="nature_of_business" class="form-control" value="<?php echo $company->nature_of_business; ?>" placeholder="Nature of Business" data-error-msg="Nature of Business to is required!">
+                                                           </div>
+                                                       </div>
+                                                   </div>
+
+                                                   <div class="form-group">
                                                        <label class="col-md-2 col-md-offset-1 control-label"><strong>Logo :</strong></label>
                                                        <div class="col-md-5">
                                                            <div class="input-group">

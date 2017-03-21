@@ -20,6 +20,19 @@
         width: 100%;
     }
 
+    .form-control {
+        border: 1px solid #aaa!important;
+    }
+
+    select:focus,
+    textarea:focus,
+    .form-control:focus{
+        border-color: #03a9f4!important;
+        -webkit-box-shadow: 0px 0px 22px 2px #03a9f4!important;
+        -moz-box-shadow: 0px 0px 22px 2px #03a9f4!important;
+        box-shadow: 0px 0px 22px 2px #03a9f4!important;
+    }
+
     table.custom-design > tbody > tr > td{
         border:1px solid #acb8b1;
         padding: 7px;
