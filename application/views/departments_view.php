@@ -97,7 +97,6 @@
                                                     <tr>
                                                         <th>Department Name</th>
                                                         <th>Department Description</th>
-                                                        <th>Delivery Address</th>
                                                         <th><center>Action</center></th>
                                                     </tr>
                                                     </thead>
@@ -239,9 +238,8 @@ $(document).ready(function(){
             "columns": [
                 { targets:[0],data: "department_name" },
                 { targets:[1],data: "department_desc" },
-                { targets:[2],data: "delivery_address" },
                 {
-                    targets:[3],
+                    targets:[2],
                     render: function (data, type, full, meta){
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                         var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';

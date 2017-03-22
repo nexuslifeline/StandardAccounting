@@ -104,6 +104,7 @@
                                                 <table id="tbl_fixed_management" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>
+                                                        <th></th>
                                                         <th>Asset Code</th>
                                                         <th>Description</th>
                                                         <th>Location</th>
@@ -126,109 +127,108 @@
                                                 <b class="panel-title" style="color: white; font-size: 12pt;"></b>
                                             </div>
                                             <div class="panel-body">
-                                                <h4 style="margin-top: 0;margin-bottom: 5px;"><b>Asset # : <span id="span_asset_no"><?php echo date('Y'); ?>-XXXX</span></b></h4><hr>
-                                                <div>
-                                                    <div class="row">
-                                                        <div class="container-fluid">
-                                                            <div id="frm_fixed_asset">
-                                                                <div class="col-xs-12 col-md-4">
-                                                                   Asset Code : <br>
-                                                                   <div class="input-group">
-                                                                       <span class="input-group-addon">
-                                                                             <i class="fa fa-code"></i>
-                                                                        </span>
-                                                                       <input class="form-control" type="text" name="asset_code">
-                                                                   </div>
-                                                                        Asset Description : <br>
-                                                                   <div class="input-group">
-                                                                       <span class="input-group-addon">
-                                                                             <i class="fa fa-file-text-o"></i>
-                                                                        </span>
-                                                                       <input class="form-control" type="text" name="asset_description">
-                                                                   </div>
-                                                                    Serial No. : <br>
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon">
-                                                                             <i class="fa fa-code"></i>
-                                                                        </span>
-                                                                        <input class="form-control" type="text" name="serial_no">
-                                                                   </div>
-                                                                   Acquisition Cost : <br>
-                                                                   <div class="input-group">
-                                                                        <span class="input-group-addon">
-                                                                             <i class="fa fa-credit-card"></i>
-                                                                        </span>
-                                                                        <input class="form-control" type="text" name="acquisition_cost">
-                                                                   </div>
-                                                                </div>
-                                                                <div class="col-xs-12 col-md-4">
-                                                                    Salvage Value : <br>
-                                                                    <div class="input-group">
-                                                                    <span class="input-group-addon">
-                                                                             <i class="fa fa-credit-card"></i>
-                                                                        </span>
-                                                                   <input class="form-control" type="text" name="salvage_value">
-                                                                   </div>
-                                                                       Acquisition Date : <br>
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon">
-                                                                             <i class="fa fa-calendar"></i>
-                                                                        </span>
-                                                                       <input class="date-picker form-control " value="<?php echo date("m/d/Y"); ?>" type="text" name="date_acquired">
+                                                <!-- <h4 style="margin-top: 0;margin-bottom: 5px;"><b>Asset # : <span id="span_asset_no"><?php echo date('Y'); ?>-XXXX</span></b></h4><hr> -->
+
+                                                <form id="frm_fixed_asset">
+                                                        <div class="row">
+                                                            <div class="container-fluid">
+                                                                    <div class="col-xs-12 col-md-4">
+                                                                       Asset Code : <br>
+                                                                       <div class="input-group">
+                                                                           <span class="input-group-addon">
+                                                                                 <i class="fa fa-code"></i>
+                                                                            </span>
+                                                                           <input class="form-control" type="text" name="asset_code">
+                                                                       </div>
+                                                                            Asset Description : <br>
+                                                                       <div class="input-group">
+                                                                           <span class="input-group-addon">
+                                                                                 <i class="fa fa-file-text-o"></i>
+                                                                            </span>
+                                                                           <input class="form-control" type="text" name="asset_description">
+                                                                       </div>
+                                                                        Serial No. : <br>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">
+                                                                                 <i class="fa fa-code"></i>
+                                                                            </span>
+                                                                            <input class="form-control" type="text" name="serial_no">
+                                                                       </div>
+                                                                       Acquisition Cost : <br>
+                                                                       <div class="input-group">
+                                                                            <span class="input-group-addon">
+                                                                                 <i class="fa fa-credit-card"></i>
+                                                                            </span>
+                                                                            <input id="txtAcquisitionCost" class="form-control numeric" type="text" name="acquisition_cost">
+                                                                       </div>
                                                                     </div>
-                                                                    Location : <br>
-                                                                   <select id="cbo_location" name="location_id" class="form-control">
-                                                                        <option value="0">[ Add New Location ]</option>
-                                                                        <?php foreach($locations as $location) { ?>
-                                                                            <option value="<?php echo $location->location_id; ?>"><?php echo $location->location_name; ?></option>
-                                                                        <?php } ?>
-                                                                   </select><br>
-                                                                   Category : <br>
-                                                                   <select id="cbo_category" name="category_id" class="form-control">
-                                                                        <option value="0">[ Add New Category ]</option>
-                                                                        <?php foreach($categories as $category) { ?>
-                                                                            <option value="<?php echo $category->category_id; ?>"><?php echo $category->category_name; ?></option>
-                                                                        <?php } ?>
-                                                                   </select>
-                                                                </div>
-                                                                <div class="col-xs-12 col-md-4">
-                                                                    Life <i>(in Years)</i> : <br>
-                                                                    <div class="input-group">
+                                                                    <div class="col-xs-12 col-md-4">
+                                                                        Salvage Value : <br>
+                                                                        <div class="input-group">
                                                                         <span class="input-group-addon">
-                                                                             <i class="fa fa-line-chart"></i>
-                                                                        </span>
-                                                                       <input class="form-control" type="text" name="life_years">
+                                                                                 <i class="fa fa-credit-card"></i>
+                                                                            </span>
+                                                                       <input id="txtSalvageValue" class="form-control numeric" type="text" name="salvage_value">
+                                                                       </div>
+                                                                           Acquisition Date : <br>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">
+                                                                                 <i class="fa fa-calendar"></i>
+                                                                            </span>
+                                                                           <input class="date-picker form-control " value="<?php echo date("m/d/Y"); ?>" type="text" name="date_acquired">
+                                                                        </div>
+                                                                        Location : <br>
+                                                                       <select id="cbo_location" name="location_id" class="form-control">
+                                                                            <option value="0">[ Add New Location ]</option>
+                                                                            <?php foreach($locations as $location) { ?>
+                                                                                <option value="<?php echo $location->location_id; ?>"><?php echo $location->location_name; ?></option>
+                                                                            <?php } ?>
+                                                                       </select><br>
+                                                                       Category : <br>
+                                                                       <select id="cbo_category" name="category_id" class="form-control">
+                                                                            <option value="0">[ Add New Category ]</option>
+                                                                            <?php foreach($categories as $category) { ?>
+                                                                                <option value="<?php echo $category->category_id; ?>"><?php echo $category->category_name; ?></option>
+                                                                            <?php } ?>
+                                                                       </select>
                                                                     </div>
-                                                                    Asset / Property Status : <br>
-                                                                   <select id="cbo_asset_status" name="asset_status_id" class="form-control">
-                                                                        <?php foreach($asset_properties as $asset_property) { ?>
-                                                                            <option value="<?php echo $asset_property->asset_status_id; ?>"><?php echo $asset_property->asset_property_status; ?></option>
-                                                                        <?php } ?>
-                                                                   </select>
-                                                                   Department : <br>
-                                                                   <select id="cbo_department" name="asset_status_id" class="form-control">
-                                                                        <option value="0">[ Create New Department ]</option>
-                                                                        <?php foreach($departments as $department) { ?>
-                                                                            <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
-                                                                        <?php } ?>
-                                                                   </select>
+                                                                    <div class="col-xs-12 col-md-4">
+                                                                        Life <i>(in Years)</i> : <br>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">
+                                                                                 <i class="fa fa-line-chart"></i>
+                                                                            </span>
+                                                                           <input class="form-control" type="text" name="life_years">
+                                                                        </div>
+                                                                        Asset / Property Status : <br>
+                                                                       <select id="cbo_asset_status" name="asset_status_id" class="form-control">
+                                                                            <?php foreach($asset_properties as $asset_property) { ?>
+                                                                                <option value="<?php echo $asset_property->asset_status_id; ?>"><?php echo $asset_property->asset_property_status; ?></option>
+                                                                            <?php } ?>
+                                                                       </select>
+                                                                       Department : <br>
+                                                                       <select id="cbo_department" name="department_id" class="form-control">
+                                                                            <option value="0">[ Create New Department ]</option>
+                                                                            <?php foreach($departments as $department) { ?>
+                                                                                <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
+                                                                            <?php } ?>
+                                                                       </select>
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="row">
+                                                            <div class="container-fluid">
+                                                                <div style="padding: 0 1% 0 1%;">
+                                                                    Notes
+                                                                    <textarea class="form-control" name="remarks"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="row">
-                                                        <div class="container-fluid">
-                                                            <div style="padding: 0 1% 0 1%;">
-                                                                Notes
-                                                                <textarea class="form-control" name="remarks"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    </form>
                                             </div>
                                             <div class="panel-footer">
-                                                <button class="btn btn-primary">Save Changes</button>
+                                                <button id="btn_save" class="btn btn-primary">Save Changes</button>
                                                 <button id="btn_cancel_assets" class="btn btn-default">Cancel</button>
                                             </div>
                                         </div>
@@ -243,10 +243,10 @@
 
             <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-sm">
-                    <div class="modal-content"><!---content--->
+                    <div class="modal-content"><!---content-->
                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                            <h4 class="modal-title"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                            <h4 class="modal-title" style="color: white"><span id="modal_mode"> </span>Confirm Deletion</h4>
                         </div>
 
                         <div class="modal-body">
@@ -257,16 +257,55 @@
                             <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
                             <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal">No</button>
                         </div>
-                    </div><!---content---->
+                    </div><!---content-->
                 </div>
             </div><!---modal-->
+
+            <div id="modal_new_department" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background: #2ecc71">
+                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+                             <h2 id="department_title" class="modal-title" style="color:white;">New Department</h2>
+                        </div>
+                        <div class="modal-body">
+                            <form id="frm_department" role="form" class="form-horizontal">
+                                <div class="row" style="margin: 1%;">
+                                    <div class="col-lg-12">
+                                        <div class="form-group" style="margin-bottom:0px;">
+                                            <label class="">Department Name * :</label>
+                                            <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" style="margin: 1%;">
+                                    <div class="col-lg-12">
+                                        <div class="form-group" style="margin-bottom:0px;">
+                                                <label class="">Department Description :</label>
+                                                <textarea name="department_desc" class="form-control" placeholder="Department Description"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btn_save_department" class="btn btn-primary">Save</button>
+                            <button id="btn_cancel_department" class="btn btn-default">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div id="modal_new_category" class="modal fade" tabindex="-1" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header" style="background-color:#2ecc71;">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                                <h4 id="category_title" style="color: #ecf0f1;"><span id="">New Category</span></h4>
+                                <h2 id="department_title" class="modal-title" style="color:white;">New Category</h2>
                             </div>
                             <div class="modal-body">
                                 <div class="row">
@@ -307,7 +346,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                                    <h4 style="color: #ecf0f1;"><span id="">New Location</span></h4>
+                                    <h2 id="department_title" class="modal-title" style="color:white;">New Location</h2>
                                 </div>
 
                                 <div class="modal-body">
@@ -338,71 +377,7 @@
                     </div>
                 </div>
 
-            <div id="modal_new_department" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background: #2ecc71">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                            <h4 id="category_title" style="color: #ecf0f1;"><span id="">New Department</span></h4>
-                        </div>
-                        <div class="modal-body">
-                            <form id="frm_department" role="form" class="form-horizontal">
-                                <div class="row" style="margin: 1%;">
-                                    <div class="col-lg-12">
-                                        <div class="form-group" style="margin-bottom:0px;">
-                                            <label class="">Branch name * :</label>
-                                            <textarea name="department_name" class="form-control" data-error-msg="Branch name is required!" placeholder="Branch name" required></textarea>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row" style="margin: 1%;">
-                                    <div class="col-lg-12">
-                                        <div class="form-group" style="margin-bottom:0px;">
-                                                <label class="">Description :</label>
-                                                <textarea name="department_desc" class="form-control" placeholder="Description"></textarea>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row" style="margin: 1%;">
-                                    <div class="col-lg-12">
-                                        <div class="form-group" style="margin-bottom:0px;">
-                                            <label class="">Delivery Address :</label>
-                                            <textarea name="delivery_address" class="form-control" placeholder="Delivery Address"></textarea>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="row" style="margin: 1%;">
-                                    <div class="col-lg-12">
-                                        <div class="form-group" style="margin-bottom:0px;">
-                                            <label class="">Please specify the default cost of this Branch when purchasing items (Optional) :</label>
-                                            <select name="default_cost" id="cbo_default_cost" class="form-control" data-error-msg="Item type is required." required>
-                                                <option value="1">Purchase Cost 1 (Luzon Area)</option>
-                                                <option value="2">Purchase Cost 2 (Viz-Min Area)</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div><br /><br />
-
-
-
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button id="btn_save_department" class="btn btn-primary">Save Changes</button>
-                            <button id="btn_cancel_department" class="btn btn-default">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
             <footer role="contentinfo">
                 <div class="clearfix">
@@ -424,6 +399,10 @@
 <script src="assets/plugins/spinner/dist/spin.min.js"></script>
 <script src="assets/plugins/spinner/dist/ladda.min.js"></script>
 
+<!-- numeric formatter -->
+<script src="assets/plugins/formatter/autoNumeric.js" type="text/javascript"></script>
+<script src="assets/plugins/formatter/accounting.js" type="text/javascript"></script>
+
 <script src="assets/plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript" src="assets/plugins/datatables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
@@ -437,7 +416,30 @@ $(document).ready(function(){
     var initializeControls=function(){
         dt=$('#tbl_fixed_management').DataTable({
             "dom": '<"toolbar">frtip',
-            "bLengthChange":false
+            "bLengthChange":false,
+            "ajax" : "Fixed_asset_management/transaction/list",
+            "columns": [
+                {
+                    "targets": [0],
+                    "class":          "details-control",
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ""
+                },
+                { targets:[1],data: "asset_code" },
+                { targets:[2],data: "asset_description" },
+                { targets:[3],data: "location_name" },
+                { targets:[4],data: "category_name" },
+                {
+                    targets:[5],
+                    render: function (data, type, full, meta){
+                        var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
+                        var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
+
+                        return '<center>'+btn_edit+"&nbsp;"+btn_trash+'</center>';
+                    }
+                }
+            ]
         });
 
         $('.date-picker').datepicker({
@@ -503,6 +505,8 @@ $(document).ready(function(){
         _cboDepartments.on('select2:select', function(){
             if(_cboDepartments.val() == 0)
                 $('#modal_new_department').modal('show');
+
+            $('#btn_save_department').attr('disabled',false);
         });
 
         $('#btn_cancel_department').on('click', function(){
@@ -523,7 +527,7 @@ $(document).ready(function(){
             $('#modal_new_category').modal('hide');            
         });
 
-        $('#tbl_product_type tbody').on( 'click', 'tr td.details-control', function () {
+        $('#tbl_fixed_management tbody').on( 'click', 'tr td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = dt.row( tr );
             var idx = $.inArray( tr.attr('id'), detailRows );
@@ -545,6 +549,8 @@ $(document).ready(function(){
             }
         } );
 
+        $('.numeric').autoNumeric('init',{mDec:2});
+
         $('#btn_cancel_assets').click(function(){
             showList(true);
         });
@@ -552,14 +558,22 @@ $(document).ready(function(){
         $('#btn_new').click(function(){
             _txnMode="new";
             showList(false);
+            clearFields($('#frm_fixed_asset'));
             $('.panel-title').html('<i class="fa fa-plus"></i>&nbsp; New Asset');
+            _cboLocation.select2('val',null);
+            _cboDepartments.select2('val',null);
+            _cboCategory.select2('val',null);
+            _cboAsset.select2('val',null);
+            $('#txtSalvageValue').val('0.00');
+            $('#txtAcquisitionCost').val('0.00');
         });
 
-        $('#tbl_product_type tbody').on('click','button[name="edit_info"]',function(){
+        $('#tbl_fixed_management tbody').on('click','button[name="edit_info"]',function(){
             _txnMode="edit";
+            showList(false);
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
-            _selectedID=data.refproduct_id;
+            _selectedID=data.fixed_asset_id;
 
             $('input,textarea').each(function(){
                 var _elem=$(this);
@@ -569,57 +583,31 @@ $(document).ready(function(){
                     }
                 });
             });
-            $('#prodtype_title').text('Edit Product Type');
-            $('#modal_product_type').modal('show');
-            //showList(false);
+
+            $('.panel-title').html('<i class="fa fa-pencil"></i>&nbsp; Edit Asset');
+            _cboLocation.select2('val',data.location_id);
+            _cboDepartments.select2('val',data.department_id);
+            _cboCategory.select2('val',data.category_id);
+            _cboAsset.select2('val',data.asset_status_id);
         });
 
-        $('#tbl_product_type tbody').on('click','button[name="remove_info"]',function(){
+        $('#tbl_fixed_management tbody').on('click','button[name="remove_info"]',function(){
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
-            _selectedID=data.refproduct_id;
+            _selectedID=data.fixed_asset_id;
 
             $('#modal_confirmation').modal('show');
         });
 
         $('#btn_yes').click(function(){
-            removeProducttype().done(function(response){
+            removeFixedAsset().done(function(response){
                 showNotification(response);
                 dt.row(_selectRowObj).remove().draw();
             });
         });
 
-        $('input[name="file_upload[]"]').change(function(event){
-            var _files=event.target.files;
-
-            $('#div_img_unit').hide();
-            $('#div_img_loader').show();
-
-            var data=new FormData();
-            $.each(_files,function(key,value){
-                data.append(key,value);
-            });
-
-            console.log(_files);
-
-            $.ajax({
-                url : 'Refproducts/transaction/upload',
-                type : "POST",
-                data : data,
-                cache : false,
-                dataType : 'json',
-                processData : false,
-                contentType : false,
-                success : function(response){
-                    $('#div_img_loader').hide();
-                    $('#div_img_unit').show();
-                }
-            });
-        });
-
         $('#btn_cancel').click(function(){
             $('#modal_product_type').modal('hide');
-            //showList(true);
         });
 
         $('#btn_save_location').click(function(){
@@ -631,6 +619,21 @@ $(document).ready(function(){
                     clearFields($('#frm_location'));
                     $('#modal_new_location').modal('hide');
                     $('#btn_save_location').attr('disabled', true);
+                });
+            }
+        });
+
+        $('#btn_save_department').click(function(){
+            if(validateRequiredFields($('#frm_department'))){
+                createDepartment().done(function(response){
+                    showNotification(response);
+                    $('#cbo_department').append('<option value="'+ response.row_added[0].department_id +'">'+ response.row_added[0].department_name +'</option>');
+
+                    _cboDepartments.select2('val',response.row_added[0].department_id);
+                    clearFields($('#frm_department'));
+
+                    $('#modal_new_department').modal('hide');
+                    $('#btn_save_department').attr('disabled',true);
                 });
             }
         });
@@ -651,24 +654,23 @@ $(document).ready(function(){
         $('#btn_save').click(function(){
             if(validateRequiredFields($('#frm_fixed_asset'))){
                 if(_txnMode=="new"){
-                    createProducttype().done(function(response){
+                    createFixedAsset().done(function(response){
                         showNotification(response);
                         dt.row.add(response.row_added[0]).draw();
-                        clearFields();
+                        clearFields($('#frm_fixed_asset'));
                     }).always(function(){
                         showSpinningProgress($('#btn_save'));
                     });
-                }else{
-                    updateProducttype().done(function(response){
+                } else {
+                    updateFixedAsset().done(function(response){
                         showNotification(response);
                         dt.row(_selectRowObj).data(response.row_updated[0]).draw();
-                        clearFields();
-                        //showList(true);
+                        clearFields($('#frm_fixed_asset'));                    
                     }).always(function(){
                         showSpinningProgress($('#btn_save'));
                     });
                 }
-                $('#modal_product_type').modal('hide');
+                showList(true);
             }
         });
     })();
@@ -694,31 +696,31 @@ $(document).ready(function(){
         return $.ajax({
             "dataType":"json",
             "type":"POST",
-            "url":"Refproducts/transaction/create",
+            "url":"Fixed_asset_management/transaction/create",
             "data":_data,
             "beforeSend": showSpinningProgress($('#btn_save'))
         });
     };
 
-    var updateProducttype=function(){
-        var _data=$('#frm_product_type').serializeArray();
-        _data.push({name : "refproduct_id" ,value : _selectedID});
+    var updateFixedAsset=function(){
+        var _data=$('#frm_fixed_asset').serializeArray();
+        _data.push({name : "fixed_asset_id" ,value : _selectedID});
 
         return $.ajax({
             "dataType":"json",
             "type":"POST",
-            "url":"Refproducts/transaction/update",
+            "url":"Fixed_asset_management/transaction/update",
             "data":_data,
             "beforeSend": showSpinningProgress($('#btn_save'))
         });
     };
 
-    var removeProducttype=function(){
+    var removeFixedAsset=function(){
         return $.ajax({
             "dataType":"json",
             "type":"POST",
-            "url":"Refproducts/transaction/delete",
-            "data":{refproduct_id : _selectedID}
+            "url":"Fixed_asset_management/transaction/delete",
+            "data":{fixed_asset_id : _selectedID}
         });
     };
 
@@ -729,6 +731,17 @@ $(document).ready(function(){
             "dataType":"json",
             "type":"POST",
             "url":"Locations/transaction/create",
+            "data":_data
+        });
+    };
+
+    var createDepartment=function(){
+        var _data=$('#frm_department').serializeArray();
+
+        return $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"Departments/transaction/create",
             "data":_data
         });
     };
@@ -767,23 +780,52 @@ $(document).ready(function(){
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
     };
 
+    $('#txtAcquisitionCost').keypress(validateNumber);
+
+    $('#txtSalvageValue').keypress(validateNumber);
+
+    function validateNumber(event) {
+        var key = window.event ? event.keyCode : event.which;
+
+        if (event.keyCode === 8 || event.keyCode === 46
+            || event.keyCode === 37 || event.keyCode === 39 || key === 188) {
+            return true;
+        }
+        else if ( key < 48 || key > 57 ) {
+            return false;
+        }
+        else return true;
+    };
+
     var clearFields=function(frm){
         $('input,textarea,select', frm).val('');
         $('form').find('input:first').focus();
     };
 
     function format ( d ) {
-        return '<br /><table style="margin-left:10%;width: 80%;">' +
-        '<thead>' +
-        '</thead>' +
-        '<tbody>' +
-        '<tr>' +
-        '<td>Unit Name : </td><td><b>'+ d.unit_name+'</b></td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Unit Description : </td><td>'+ d.unit_desc+'</td>' +
-        '</tr>' +
-        '</tbody></table><br />';
+        return '<table style="width: 80%;">' +
+            '<tbody>' +
+                '<tr>' +
+                    '<td width="15%"><b>Asset Code :</b></td><td>'+ d.asset_code +'</td>' +
+                    '<td width="15%"><b>Asset Description :</b></td><td>'+ d.asset_description +'</td>' +
+                    '<td width="15%"><b>Serial no. :</b></td><td>'+ d.serial_no +'</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td width="15%"><b>Acquisition Cost :</b></td><td>'+ d.acquisition_cost +'</td>' +
+                    '<td width="15%"><b>Salvage Value :</b></td><td>'+ d.salvage_value +'</td>' +
+                    '<td width="15%"><b>Acquisition Date :</b></td><td>'+ d.date_acquired +'</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td width="15%"><b>Location :</b></td><td>'+ d.location_name +'</td>' +
+                    '<td width="15%"><b>Category :</b></td><td>'+ d.category_name +'</td>' +
+                    '<td width="15%"><b>Life in Years :</b></td><td>'+ d.life_years +'</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td width="15%"><b>Asset / Property Status :</b></td><td>'+ d.asset_property_status +'</td>' +
+                    '<td width="15%"><b>Department :</b></td><td>'+ d.department_name +'</td>' +
+                '</tr>' +
+            '</tbody>' +
+        '</table>';
     };
 });
 
