@@ -926,7 +926,7 @@ $(document).ready(function(){
 
         var createToolBarButton=function(){
             var _btnNew='<button class="btn btn-green" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Record Sales Invoice" >'+
-                '<i class="fa fa-file"></i> Record Sales Invoice</button>';
+                '<i class="fa fa-plus"></i> Record Sales Invoice</button>';
             $("div.toolbar").html(_btnNew);
         }();
 

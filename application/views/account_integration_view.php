@@ -28,8 +28,8 @@
     <style>
         body{
             -moz-transform: scale(.7,.7);
-            zoom: 0.7;
-            zoom: 70%;
+            zoom: 0.8;
+            zoom: 80%;
         }
 
 

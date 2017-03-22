@@ -941,8 +941,8 @@ $(document).ready(function(){
 
 
         var createToolBarButton=function() {
-            var _btnNew='<button class="btn btn-primary" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Journal" >'+
-                '<i class="fa fa-plus-circle"></i> New Cash Disbursement Journal</button>';
+            var _btnNew='<button class="btn btn-green" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Journal" >'+
+                '<i class="fa fa-plus"></i> New Cash Disbursement Journal</button>';
             $("div.toolbar").html(_btnNew);
         }();
 

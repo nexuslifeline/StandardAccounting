@@ -273,7 +273,7 @@
 
             var createToolBarButton=function(){
                 var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New category" >'+
-                    '<i class="fa fa-users"></i> New category</button>';
+                    '<i class="fa fa-plus"></i> New category</button>';
                 $("div.toolbar").html(_btnNew);
             }();
         }();

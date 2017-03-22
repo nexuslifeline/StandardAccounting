@@ -211,7 +211,7 @@
             <div id="modal_tax" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
-                        <div class="modal-header modal-erp">
+                        <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 id="tax_title" class="modal-title" style="color: white;"></h4>
                         </div>
@@ -370,7 +370,7 @@
 
             var createToolBarButton=function() {
                 var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Tax" >'+
-                    '<i class="fa fa-users"></i> New Tax</button>';
+                    '<i class="fa fa-plus"></i> New Tax</button>';
                 $("div.toolbar").html(_btnNew);
             }();
         }();

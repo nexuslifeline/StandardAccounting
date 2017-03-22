@@ -225,7 +225,7 @@
 <div id="modal_user_group" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
-            <div class="modal-header modal-erp">
+            <div class="modal-header">
                 <h4 id="usergroup_title" class="modal-title" style="color: white;"></h4>
             </div>
             <div class="modal-body">
@@ -355,7 +355,7 @@ $(document).ready(function(){
 
         var createToolBarButton=function(){
             var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Create User Group" >'+
-                '<i class="fa fa-users"></i> Create User Group</button>';
+                '<i class="fa fa-plus"></i> Create User Group</button>';
             $("div.toolbar").html(_btnNew);
         }();
 

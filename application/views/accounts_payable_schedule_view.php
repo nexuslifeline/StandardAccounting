@@ -332,10 +332,10 @@
 
 
         function createToolBarButton(){
-            var _btnPrint='<button class="btn btn-default" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >'+
+            var _btnPrint='<button class="btn btn-primary" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >'+
                 '<i class="fa fa-print"></i> Print Report</button>';
 
-            var _btnRefresh='<button class="btn btn-default" id="btn_refresh" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Reload" >'+
+            var _btnRefresh='<button class="btn btn-green" id="btn_refresh" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Reload" >'+
                 '<i class="fa fa-refresh"></i></button>';
 
             $("div.toolbar").html(_btnPrint+"&nbsp;"+_btnRefresh);
