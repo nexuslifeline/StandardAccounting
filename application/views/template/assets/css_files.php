@@ -20,8 +20,18 @@
         width: 100%;
     }
 
+    .group-box {
+        padding: 1%; 
+        border: 1px solid lightgray;
+        border-radius: 5px;
+    }
+
     .form-control {
         border: 1px solid #aaa!important;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0!important;
     }
 
     select:focus,

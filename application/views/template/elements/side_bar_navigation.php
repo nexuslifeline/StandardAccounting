@@ -102,6 +102,7 @@
                         <li class="<?php echo (in_array('9',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-bar-chart"></i><span>Accounting Reports</span></a>
                             <ul class="acc-menu">
                                 <li class="<?php echo (in_array('9-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Balance_sheet">Balance Sheet</a></li>
+                                <li class="<?php echo (in_array('9-9',$this->session->user_rights)?'':'hidden'); ?>"><a href="Depreciation_expense">Depreciation Expense</a></li>
                                 <li class="<?php echo (in_array('9-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Income_statement">Income Statement</a></li>
                                 <li class="<?php echo (in_array('9-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Trial_balance">Trial Balance</a></li>
                                 <li class="<?php echo (in_array('9-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_receivable_schedule">AR Schedule</a></li>
