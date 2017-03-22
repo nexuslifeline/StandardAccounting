@@ -209,7 +209,7 @@
         <div class="panel-body table-responsive">
 
             <table id="tbl_delivery_invoice" class="custom-design table-striped" cellspacing="0" width="100%">
-                <thead class="">
+                <thead>
                 <tr>
                     <th></th>
                     <th>Invoice #</th>
@@ -415,7 +415,7 @@
                     <th style="display: none;">V.I</th> <!-- vat input -->
                     <th style="display: none;">N.V</th> <!-- net of vat -->
                     <td style="display: none;">Item ID</td><!-- product id -->
-                    <td><center><strong>Action</strong></center></td>
+                    <td style="color:white;"><center><strong>Action</strong></center></td>
                 </tr>
                 </thead>
                 <tbody>
@@ -802,7 +802,10 @@
 
 
 $(document).ready(function(){
-    var dt; var dt_po; var _txnMode; var _selectedID; var _selectRowObj; var _cboSuppliers; var _cboTaxType; var _cboDepartments;
+    var dt; var dt_po; var _txnMode; var _selectedID; var _selectRowObj; var _cboSuppliers; var _cboTaxType;
+    var _productType; var _cboDepartments; var _defCostType;
+
+    //_defCostType=0;
 
     var oTableItems={
         qty : 'td:eq(0)',
@@ -932,92 +935,103 @@ $(document).ready(function(){
             allowClear: true
         });
 
-        _cboDepartments.select2('val',null);
+        _cboDepartments.select2('val',null); 
+
+        //var raw_data=<?php echo json_encode($products); ?>;
 
 
-        var raw_data=<?php echo json_encode($products); ?>;
-
+        /*var products = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            local : raw_data
+        });*/
 
         var products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local : raw_data
+            remote: {
+                cache: false,
+                url: 'Purchases/transaction/product-lookup/',
+
+                replace: function(url, uriEncodedQuery) {
+                    //var prod_type=$('#cbo_prodType').select2('val');
+                    //var prod_type=$('#cbo_prodType').select2('val');
+                    //var sid=$('#cbo_suppliers').select2('val');
+                    //var prod_type=$('#cbo_prodType').select2('val');
+
+                    return url + '?description='+uriEncodedQuery;
+                }
+            }
+
+            //local : raw_data
         });
 
         var _objTypeHead=$('#custom-templates .typeahead');
 
         _objTypeHead.typeahead(null, {
-            name: 'products',
-            display: 'description',
-            source: products,
-            templates: {
-                header: [
-                    '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="20%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
-                ].join('\n'),
+                name: 'products',
+                display: 'product_code',
+                source: products,
+                templates: {
+                    header: [
+                        '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>On hand</b><td width="10%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
+                    ].join('\n'),
 
-                suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="20%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
+                    suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="10%" align="right" style="padding-right: 2%;">{{on_hand}}</td><td width="10%" align="right" style="padding-right: 2%;">{{cost}}</td></tr></table>')
 
-            }
-        }).on('keyup', this, function (event) {
-            if (event.keyCode == 13) {
+                }
+            }).on('keyup', this, function (event) {
+                if (_objTypeHead.typeahead('val') == '') {
+                    return false;
+                }
+                if (event.keyCode == 13) {
+                    $('.tt-suggestion:first').click();
+                    _objTypeHead.typeahead('close');
+                    _objTypeHead.typeahead('val','');
+                }
+            }).bind('typeahead:select', function(ev, suggestion) {
 
-                $('.tt-suggestion:first').click();
-                _objTypeHead.typeahead('close');
-                _objTypeHead.typeahead('val','');
-            }
-        }).bind('typeahead:select', function(ev, suggestion) {
-            //if(_objTypeHead.typeahead('val')==''){ return false; }
-            //console.log(suggestion);
+                var tax_rate=suggestion.tax_rate; 
+                var total=getFloat(suggestion.purchase_cost);
+                var net_vat=0;
+                var vat_input=0;
+                //alert(suggestion.purchase_cost);
 
-            var tax_id=$('#cbo_tax_type').select2('val');
-            var tax_rate=parseFloat($('#cbo_tax_type').find('option[value="'+tax_id+'"]').data('tax-rate'));
-
-            var total=getFloat(suggestion.purchase_cost);
-            var net_vat=0;
-            var vat_input=0;
-
-            if(suggestion.is_tax_exempt=="0"){ //not tax excempt
-                net_vat=total/(1+(getFloat(tax_rate)/100));
-                vat_input=total-net_vat;
-            }else{
-                tax_rate=0;
-                net_vat=total;
-                vat_input=0;
-
-                if(tax_id!="1"){ //if supplier is taxable, notify the user that this item is tax excempt
-                    showNotification({title:"Tax Excempt!",stat:"info",msg:"This item is tax excempt."});
+                if(suggestion.is_tax_exempt=="0"){ //this is not excempted to tax
+                    net_vat=total/(1+(getFloat(tax_rate)/100));
+                    vat_input=total-net_vat;
+                }else{
+                    tax_rate=0;
+                    net_vat=total;
+                    vat_input=0;
                 }
 
-            }
+
+                $('#tbl_items > tbody').append(newRowItem({
+                    //dr_qty : value.dr_qty,
+                    dr_qty : "1",
+                    product_code : suggestion.product_code,
+                    unit_id : suggestion.unit_id,
+                    unit_name : suggestion.unit_name,
+                    product_id: suggestion.product_id,
+                    product_desc : suggestion.product_desc,
+                    dr_line_total_discount : "0.00",
+                    tax_exempt : false,
+                    dr_tax_rate : tax_rate,
+                    dr_price : suggestion.purchase_cost,
+                    dr_discount : "0.00",
+                    tax_type_id : null,
+                    dr_line_total_price : total,
+                    dr_non_tax_amount: net_vat,
+                    dr_tax_amount:vat_input
+                }));
 
 
-            $('#tbl_items > tbody').prepend(newRowItem({
-                dr_qty : "1",
-                product_code : suggestion.product_code,
-                unit_id : suggestion.unit_id,
-                unit_name : suggestion.unit_name,
-                product_id: suggestion.product_id,
-                product_desc : suggestion.product_desc,
-                dr_line_total_discount : "0.00",
-                tax_exempt : false,
-                dr_tax_rate : tax_rate,
-                dr_price : suggestion.purchase_cost,
-                dr_discount : "0.00",
-                tax_type_id : null,
-                dr_line_total_price : total,
-                dr_non_tax_amount: net_vat,
-                dr_tax_amount:vat_input
-            }));
+                reInitializeNumeric();
+                reComputeTotal();
 
 
-
-
-
-            reInitializeNumeric();
-            reComputeTotal();
-
-            //alert("dd")
-        });
+            });
 
         _cboDepartments.on("select2:select", function (e) {
 
@@ -1259,7 +1273,7 @@ $(document).ready(function(){
 
 
                     reInitializeNumeric();
-                    reInitializeExpireDate();
+                    //reInitializeExpireDate();
 
 
                    reComputeTotal();
@@ -1781,6 +1795,13 @@ $(document).ready(function(){
             after_tax+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
         });
         
+
+        var tbl_summary=$('#tbl_delivery_summary');
+        tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,4));
+        tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,4));
+        tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(tax_amount,4));
+        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
+
         $('#td_discount').html(accounting.formatNumber(discounts,4));
         $('#td_before_tax').html(accounting.formatNumber(before_tax,4));
         $('#td_tax').html(accounting.formatNumber(tax_amount,4));
