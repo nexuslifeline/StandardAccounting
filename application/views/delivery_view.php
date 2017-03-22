@@ -956,10 +956,10 @@ $(document).ready(function(){
                 replace: function(url, uriEncodedQuery) {
                     //var prod_type=$('#cbo_prodType').select2('val');
                     //var prod_type=$('#cbo_prodType').select2('val');
-                    var sid=$('#cbo_suppliers').select2('val');
+                    //var sid=$('#cbo_suppliers').select2('val');
                     //var prod_type=$('#cbo_prodType').select2('val');
 
-                    return url + '?sid='+sid+'&description='+uriEncodedQuery;
+                    return url + '?description='+uriEncodedQuery;
                 }
             }
 
