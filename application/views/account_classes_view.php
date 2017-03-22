@@ -186,7 +186,7 @@
             <div id="modal_account_class" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header modal-erp">
+                        <div class="modal-header">
                             <h4 id="modal-title" class="modal-title" style="color: white;"></h4>
                         </div>
                         <div class="modal-body">

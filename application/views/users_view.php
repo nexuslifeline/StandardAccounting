@@ -401,7 +401,7 @@
             <div id="modal_user_group" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-md">
                     <div class="modal-content"><!---content--->
-                        <div class="modal-header modal-erp">
+                        <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New User Group</h4>
 
@@ -528,7 +528,7 @@
 
             var createToolBarButton=function(){
                 var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Register User Account" >'+
-                    '<i class="fa fa-users"></i> Register User Account</button>';
+                    '<i class="fa fa-plus"></i> Register User Account</button>';
                 $("div.toolbar").html(_btnNew);
             }();
 

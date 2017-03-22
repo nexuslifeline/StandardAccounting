@@ -102,7 +102,8 @@
             </a>
             <ul class="dropdown-menu userinfo arrow">
                 <li><a href="Profile"><i class="ti ti-user"></i><span>Profile</span></a></li>
-                <li><a href="login/transaction/logout"><i class="ti ti-shift-right"></i><span>Sign Out</span></a></li>
+                <!-- <li><a href="login/transaction/logout"><i class="ti ti-shift-right"></i><span>Sign Out</span></a></li> -->
+                <li><a href="Login"><i class="ti ti-shift-right"></i><span>Sign Out</span></a></li>
             </ul>
         </li>
 

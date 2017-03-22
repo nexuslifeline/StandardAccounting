@@ -750,7 +750,7 @@ dt_si = $('#tbl_si_list').DataTable({
 
         var createToolBarButton=function(){
             var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Record item to issue" >'+
-                '<i class="fa fa-file"></i> Record item to issue</button>';
+                '<i class="fa fa-plus"></i> Record item to issue</button>';
             $("div.toolbar").html(_btnNew);
         }();
 
