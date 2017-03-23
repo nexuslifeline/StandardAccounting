@@ -62,21 +62,27 @@
     <table width="95%" style="margin-left: 5%; text-align: right;">
         <thead>
             <tr style="text-transform: uppercase;">
-                <td width="25%" style="text-align: left;"><strong>Invoice #</strong></td>
-                <td width="25%" style="text-align: left;"><strong>Date</strong></td>
-                <td width="25%"style="text-align: left;"><strong>Remarks</strong></td>
-                <td width="25%"><strong>Invoice Amount</strong></td>
+                <td style="text-align: left;"><strong>Invoice #</strong></td> 
+                <td style="text-align: left;"><strong>Date</strong></td> 
+                <td style="text-align: left;"><strong>Product Code</strong></td> 
+                <td style="text-align: left;"><strong>Description</strong></td> 
+                <td style="text-align: right;"><strong>Unit Price</strong></td> 
+                <td style="text-align: left;"><strong>Qty</strong></td> 
+                <td style="text-align: right;"><strong>Total Amount</strong></td> 
             </tr><hr>
         </thead>
         <tbody>
             <?php $sum=0; 
-                foreach($sales_summary as $summary) { 
-                    if($summary->customer_id==$customer->customer_id) { ?>
+                foreach($sales_details as $detail) {  
+                    if($detail->customer_id==$customer->customer_id) { ?> 
                         <tr>
-                            <td style="text-align: left;"><?php echo $summary->sales_inv_no; ?></td>
-                            <td style="text-align: left;"><?php echo $summary->date_invoice; ?></td>
-                            <td style="text-align: left;"><?php echo $summary->remarks; ?></td>
-                            <td><?php echo number_format($summary->total_after_tax,2); ?></td>
+                            <td style="text-align: left;"><?php echo $detail->sales_inv_no; ?></td> 
+                            <td style="text-align: left;"><?php echo $detail->date_invoice; ?></td> 
+                            <td style="text-align: left;"><?php echo $detail->product_code; ?></td> 
+                            <td style="text-align: left;"><?php echo $detail->product_desc; ?></td> 
+                            <td style="text-align: right;"><?php echo number_format($detail->sale_price,2); ?></td> 
+                            <td style="text-align: left;"><?php echo $detail->on_hand; ?></td> 
+                            <td style="text-align: right;"><?php echo number_format($detail->total_amount,2); ?></td>
                         </tr>
                     <?php
                     $sum+=$summary->total_after_tax; 

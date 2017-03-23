@@ -47,6 +47,14 @@
             float: left;
         }
 
+        .text-right { 
+            text-align: right!important; 
+        } 
+ 
+        .text-left {  
+            text-align: left!important; 
+        } 
+
         td:nth-child(5),td:nth-child(6){
             text-align: right;
         }
@@ -117,18 +125,18 @@
                                                         <div class="tab-container tab-top tab-primary">
                                                             <ul class="nav nav-tabs">
                                                                 <li class="active"><a data-toggle="tab" href="#customers">Customers</a></li>
-                                                                <li><a data-toggle="tab" href="#vet_rep">Salesperson</a></li>
+                                                                <li><a data-toggle="tab" href="#salesman">Salesperson</a></li>
                                                                 <li><a data-toggle="tab" href="#per_product">Products</a></li>
                                                             </ul>
                                                             <div class="tab-content">
                                                                 <div id="customers" class="tab-pane fade in active">
-                                                                    <strong>Search Customers :</strong><br>
+                                                                   <!--  <strong>Search Customers :</strong><br>
                                                                     <select id="cbo_customers" class="form-control" style="width: 100%;">
                                                                         <option value="all">[All Customers]</option>
                                                                         <?php foreach($customers as $customer) { ?>
                                                                             <option value="<?php echo $customer->customer_id; ?>"><?php echo $customer->customer_name; ?></option>
                                                                         <?php } ?>
-                                                                    </select>
+                                                                    </select> -->
                                                                     <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_customer_report" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                     <i class="fa fa-print"></i> Print Report</button>
                                                                     <button class="btn btn-success pull-left" id="btn_refresh" style="text-transform: none; font-family: Tahoma, Georgia, Serif; margin-top: 10px; margin-bottom: 10px;" data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Reload" >
@@ -136,11 +144,14 @@
                                                                     <table id="tbl_account_subsidiary" style="margin-top: 10px;" class="custom-design table-striped" cellspacing="0" width="100%">
                                                                         <thead class="">
                                                                         <tr>
+                                                                            <th>Invoice #</th> 
+                                                                            <th>Date</th> 
                                                                             <th>Customer</th>
-                                                                            <th>Contact</th>
-                                                                            <th>Email</th>
-                                                                            <th>Address</th>
-                                                                            <th>Total Invoice</th>
+                                                                            <th>Product Code</th> 
+                                                                            <th>Description</th> 
+                                                                            <th>Unit Price</th> 
+                                                                            <th>Qty</th> 
+                                                                            <th>Total Amount</th> 
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -148,18 +159,18 @@
 
                                                                         <tfoot>
                                                                             <tr>
-                                                                                <td align="right" colspan="4">Current Page Total : </td>
+                                                                                <td align="left" colspan="7">Current Page Total : </td> 
                                                                                 <td id="td_page_total" align="right"></td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td align="right" colspan="4">Grand Total : </td>
+                                                                                <td align="left" colspan="7">Grand Total : </td> 
                                                                                 <td id="td_grand_total" align="right"></td>
                                                                             </tr>
 
                                                                         </tfoot>
                                                                     </table>
                                                                 </div>
-                                                                <div id="vet_rep" class="tab-pane fade">
+                                                                <div id="salesman" class="tab-pane fade">
                                                                     
                                                                 </div>
                                                                 <div id="products" class="tab-pane fade">
@@ -229,12 +240,12 @@
 
         var initializeControls=function(){
 
-            _cboCustomers = $('#cbo_customers').select2({
-                placeholder: 'Please Select Customer',
-                allowClear: true
-            });
+            // _cboCustomers = $('#cbo_customers').select2({
+            //     placeholder: 'Please Select Customer',
+            //     allowClear: true
+            // });
 
-            _cboCustomers.select2('val', 'all');
+            // _cboCustomers.select2('val', 'all');
 
             $('.date-picker').datepicker({
                 todayBtn: "linked",
@@ -259,13 +270,13 @@
                 reloadList();
             });
 
-            $(document).on('select2:select change',_cboCustomers,function(){
-                dt.destroy();
-                reloadList();
-            });
+            // $(document).on('select2:select change',_cboCustomers,function(){
+            //     dt.destroy();
+            //     reloadList();
+            // });
 
             $(document).on('click','#btn_print_customer_report',function(){
-                window.open('Sales_detailed_summary/transaction/summary-report?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&cus_id='+_cboCustomers.val());
+                window.open('Sales_detailed_summary/transaction/detailed-report?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&cus_id='+_cboCustomers.val());
             });
 
             $(document).on('click','#btn_refresh',function(){
@@ -292,7 +303,10 @@
             dt=$('#tbl_account_subsidiary').DataTable({
                 "dom": '<"toolbar">frtip',
                 "bLengthChange":false,
-                "bPaginate":false,
+                "bPaginate":true, 
+                language: { 
+                    "searchPlaceholder": "Search Customer" 
+                }, 
                 "ajax": {
                     "url": "Sales_detailed_summary/transaction/per-customer-sales",
                     "type": "GET",
@@ -300,24 +314,55 @@
                     "data": function ( d ) {
                         return $.extend( {}, d, {
                             "startDate":_date_from.val(),
-                            "endDate":_date_to.val(),
-                            "cus_id":_cboCustomers.val()
+                            "endDate":_date_to.val()
                         });
                     }
                 },
                 "columns": [
-                    { targets:[0],data: "customer_name" },
-                    { targets:[1],data: "contact_no" },
-                    { targets:[2],data: "email_address" },
-                    { targets:[3],data: "address" },
+                    { targets:[0],data: "sales_inv_no" }, 
+                    { targets:[1],data: "date_invoice" }, 
+                    {  
+                        visible:false,  
+                        targets:[2],data: "customer_name"  
+                    }, 
+                    { targets:[3],data: "product_code" }, 
+                    {  
+                        className: "text-left", 
+                        targets:[4],data: "product_desc"  
+                    }, 
+                    {  
+                        className: "text-right", 
+                        targets:[5],data: "sale_price", 
+                        render: function(data){ 
+                            return accounting.formatNumber(data,2); 
+                        }  
+                    }, 
+                    { targets:[6],data: "on_hand" }, 
                     {
-                        targets:[4],data:
-                        "total_amount_invoice",
-                        render: function(data){
-                            return '<b>'+accounting.formatNumber(data,2)+'</b>';
-                        }
-                    }
+                        className: "text-right", 
+                        targets:[7],data: 
+                        "total_amount", 
+                        render: function(data){ 
+                            return '<b>'+accounting.formatNumber(data,2)+'</b>'; 
+                        } 
+                    } 
                 ],
+                "order": [[ 2, 'asc' ]], 
+                "drawCallback": function ( settings ) { 
+                    var api = this.api(); 
+                    var rows = api.rows( {page:'current'} ).nodes(); 
+                    var last=null; 
+          
+                    api.column(2, {page:'current'} ).data().each( function ( group, i ) { 
+                        if ( last !== group ) { 
+                            $(rows).eq( i ).before( 
+                                '<tr class="group"><td colspan="7">'+group+'</td></tr>' 
+                            ); 
+          
+                            last = group; 
+                        } 
+                    } ); 
+                }, 
                 "footerCallback": function ( row, data, start, end, display ) {
                     var api = this.api(), data;
 
@@ -331,7 +376,7 @@
 
                     // Total over all pages
                     total = api
-                        .column( 4 )
+                        .column( 7 )
                         .data()
                         .reduce( function (a, b) {
                             return intVal(a) + intVal(b);
@@ -339,7 +384,7 @@
 
                     // Total over this page
                     pageTotal = api
-                        .column( 4, { page: 'current'} )
+                        .column( 7, { page: 'current'} )
                         .data()
                         .reduce( function (a, b) {
                             return intVal(a) + intVal(b);
