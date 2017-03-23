@@ -99,6 +99,7 @@
                                                             <tr>
                                                                 <th>Acronym Name</th>
                                                                 <th>Salesperson</th>
+                                                                <th>Department</th>
                                                                 <th><center>Action</center></th>
                                                             </tr>
                                                             </thead>
@@ -165,7 +166,7 @@
                         <div class="modal-content"><!---content--->
                             <div class="modal-header">
                                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                                <h4 class="modal-title"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                                <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
                             </div>
 
                             <div class="modal-body">
@@ -241,6 +242,50 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div><br><br>
+                                            <div class="col-xs-12">
+                                                <div class="form-group">
+                                                    <label class="col-xs-12 col-md-4 control-label "><strong>Contact Number :</strong></label>
+                                                    <div class="col-xs-12 col-md-8">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-phone"></i>
+                                                            </span>
+                                                            <input type="text" name="contact_no" id="contact_no" class="form-control" placeholder="Contact Number">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><br><br>
+                                            <div class="col-xs-12">
+                                                <div class="form-group">
+                                                    <label class="col-xs-12 col-md-4 control-label "><strong>Department :</strong></label>
+                                                    <div class="col-xs-12 col-md-8">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-bank"></i>
+                                                            </span>
+                                                            <select name="department_id" id="department_id" class="form-control" data-error-msg="Department is required!">
+                                                                <option value="">Please select department...</option>
+                                                                <?php foreach($departments as $department) { ?>
+                                                                    <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><br><br>
+                                            <div class="col-xs-12">
+                                                <div class="form-group">
+                                                    <label class="col-xs-12 col-md-4 control-label "><strong>TIN Number:</strong></label>
+                                                    <div class="col-xs-12 col-md-8">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-file-o"></i>
+                                                            </span>
+                                                            <input type="text" name="tin_no" id="tin_no" class="form-control" placeholder="TIN Number">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -292,8 +337,9 @@
 
                     { targets:[0],data: "acr_name" },
                     { targets:[1],data: "fullname" },
+                    { targets:[1],data: "department_name" },
                     {
-                        targets:[2],
+                        targets:[3],
                         render: function (data, type, full, meta){
                             var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                             var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
@@ -349,6 +395,10 @@
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
                 _selectedID=data.salesperson_id;
+                $('#contact_no').val(data.contact_no);
+                $('#department_id').val(data.department_id);
+                $('#tin_no').val(data.tin_no);
+                
                 $('input,textarea').each(function(){
                     var _elem=$(this);
                     $.each(data,function(name,value){
@@ -481,6 +531,9 @@
         var clearFields=function(){
             $('input[required],input,textarea','#frm_salesperson').val('');
             $('form').find('input:first').focus();
+            $('#department_id').val('');
+            $('#contact_no').val('');
+            $('#tin_no').val('');
         };
 
         function format ( d ) {

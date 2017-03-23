@@ -61,7 +61,7 @@
                     <div id="modal_tbalance" class="modal fade" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-md">
                             <div class="modal-content">
-                                <div class="modal-header modal-erp">
+                                <div class="modal-header">
                                     <h4 class="modal-title" style="color: white;">Export Trial Balance</h4>
                                 </div>
                                 <div class="modal-body">

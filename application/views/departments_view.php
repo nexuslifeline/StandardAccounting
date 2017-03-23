@@ -97,7 +97,6 @@
                                                     <tr>
                                                         <th>Department Name</th>
                                                         <th>Department Description</th>
-                                                        <th>Delivery Address</th>
                                                         <th><center>Action</center></th>
                                                     </tr>
                                                     </thead>
@@ -239,9 +238,8 @@ $(document).ready(function(){
             "columns": [
                 { targets:[0],data: "department_name" },
                 { targets:[1],data: "department_desc" },
-                { targets:[2],data: "delivery_address" },
                 {
-                    targets:[3],
+                    targets:[2],
                     render: function (data, type, full, meta){
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                         var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
@@ -254,7 +252,7 @@ $(document).ready(function(){
 
         var createToolBarButton=function(){
             var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Department" >'+
-                '<i class="fa fa-plus-circle"></i> New Department</button>';
+                '<i class="fa fa-plus"></i> New Department</button>';
             $("div.toolbar").html(_btnNew);
         }();
     }();
@@ -287,7 +285,7 @@ $(document).ready(function(){
         $('#btn_new').click(function(){
             _txnMode="new";
             //showList(false);
-            $('#department_title').text('New Branch');
+            $('#department_title').text('New Department');
             $('#modal_new_department').modal('show');
         });
 
@@ -305,7 +303,7 @@ $(document).ready(function(){
                     }
                 });
             });
-            $('#department_title').text('Edit Branch');
+            $('#department_title').text('Edit Department');
             $('#modal_new_department').modal('show');
             //showList(false);
         });

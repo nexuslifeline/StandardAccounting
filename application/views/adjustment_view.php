@@ -162,7 +162,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Adjustment (In)</b>
+            <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Adjustment</b>
         </div>
         <div class="panel-body table-responsive">
 
@@ -589,7 +589,7 @@ $(document).ready(function(){
 
         var createToolBarButton=function(){
             var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Adjust Inventory" >'+
-                '<i class="fa fa-file"></i> Record item adjustment</button>';
+                '<i class="fa fa-plus"></i> Record item adjustment</button>';
             $("div.toolbar").html(_btnNew);
         }();
 

@@ -213,10 +213,10 @@
 
 
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Sales Order</b>
-        </div>
+    <div class="panel panel-default" style="border: 4px solid #2980b9;">
+
+        <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Sales Order</b></div></a>
+
         <div class="panel-body table-responsive" >
 
             <table id="tbl_sales_order" class="custom-design table-striped" cellspacing="0" width="100%">
@@ -260,9 +260,9 @@
 
                 <div class="row">
                     <div class="col-sm-5">
-                        Branch :<br />
+                        Department :<br />
                         <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
-                            <option value="0">[ Create New Branch ]</option>
+                            <option value="0">[ Create New Department ]</option>
                             <?php foreach($departments as $department){ ?>
                                 <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
                             <?php } ?>
@@ -325,13 +325,15 @@
     </div>
 
     <hr>
-    <div class="row">
+    <div class="row" style="padding: 1%;margin-top: 0px;padding-top:0px;">
+
+        <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
+        <div id="custom-templates">
+            <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
+        </div><br />
 
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
-            <div id="custom-templates">
-                <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
-            </div><br />
+
 
             <form id="frm_items">
                 <div class="table-responsive">
@@ -388,7 +390,7 @@
 
                         <div class="col-lg-12">
                             <label><strong>Remarks :</strong></label><br />
-                            <textarea name="remarks" id="remarks" class="form-control" placeholder="Remarks"></textarea>
+                            <textarea name="remarks" class="form-control" placeholder="Remarks"></textarea>
                         </div>
                 </div>
 
@@ -476,7 +478,7 @@
         <div class="modal-content"><!---content--->
             <div class="modal-header">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                <h4 class="modal-title"><span id="modal_mode"> </span>Confirm Deletion</h4>
 
             </div>
 
@@ -625,8 +627,6 @@
     </div>
 </div><!---modal-->
 
-
-
 <div id="modal_new_salesperson" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -689,6 +689,50 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div><br><br>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-4 control-label "><strong>Contact Number :</strong></label>
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                            <input type="text" name="contact_no" id="contact_no" class="form-control" placeholder="Contact Number">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><br><br>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-4 control-label "><strong>Department :</strong></label>
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-bank"></i>
+                                            </span>
+                                            <select name="department_id" id="department_id" class="form-control" data-error-msg="Department is required!">
+                                                <option value="">Please select department...</option>
+                                                <?php foreach($departments as $department) { ?>
+                                                    <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><br><br>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-4 control-label "><strong>TIN Number:</strong></label>
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-file-o"></i>
+                                            </span>
+                                            <input type="text" name="tin_no" id="tin_no" class="form-control" placeholder="TIN Number">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -705,10 +749,10 @@
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
-        <div class="modal-content"><!---content--->
+        <div class="modal-content">
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Branch</h4>
+                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
 
             </div>
 
@@ -716,17 +760,17 @@
                 <form id="frm_department_new">
 
                     <div class="form-group">
-                        <label>* Branch :</label>
+                        <label>* Department :</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-users"></i>
                             </span>
-                            <input type="text" name="department_name" class="form-control" placeholder="Branch" data-error-msg="Branch name is required." required>
+                            <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Branch Description :</label>
+                        <label>Department Description :</label>
                         <textarea name="department_desc" class="form-control"></textarea>
                     </div>
 
@@ -742,7 +786,7 @@
                 <button id="btn_create_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
                 <button id="btn_close_close_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
 </div><!---modal-->
 
@@ -809,7 +853,8 @@
 
 
 $(document).ready(function(){
-    var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboDepartments, _cboSalesperson; var _cboCustomers;
+    var dt; var _txnMode; var _selectedID; var _selectRowObj;
+    var _cboDepartments, _cboSalesperson; var _cboCustomers; var _lookUpPrice;
 
     var oTableItems={
         qty : 'td:eq(0)',
@@ -837,6 +882,7 @@ $(document).ready(function(){
         dt=$('#tbl_sales_order').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
+            "pageLength":15,
             "ajax" : "Sales_order/transaction/list",
             "columns": [
                 {
@@ -854,7 +900,7 @@ $(document).ready(function(){
                 {
                     targets:[6],
                     render: function (data, type, full, meta){
-                        var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
+                        var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:0px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                         var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
 
                         return '<center>'+btn_edit+"&nbsp;"+btn_trash+'</center>';
@@ -862,13 +908,12 @@ $(document).ready(function(){
                 }
             ]
 
-        });
-
+        }); 
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Create Sales Order" >'+
-                '<i class="fa fa-file"></i> Create Sales Order</button>';
-            $("div.toolbar").html(_btnNew);
+            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Sales Order" >'+
+                '<i class="fa fa-plus"></i> New Sales Order</button>';
+                $("div.toolbar").html(_btnNew);
         }();
 
         _cboCustomers=$("#cbo_customers").select2({
@@ -876,8 +921,14 @@ $(document).ready(function(){
             allowClear: true
         });
 
+
+        /*_lookUpPrice = $('#cboLookupPrice').select2({
+            allowClear: false
+        });
+        _lookUpPrice.select2('val',1);*/
+
         _cboDepartments=$("#cbo_departments").select2({
-            placeholder: "Please select branch.",
+            placeholder: "Please select department.",
             allowClear: true
         });
 
@@ -888,9 +939,17 @@ $(document).ready(function(){
 
         _cboSalesperson.select2('val',null);
 
+        /*_productType = $('#cbo_prodType').select2({
+            placeholder: "Please select Product Type",
+            allowClear: false
+        });*/
+
+
         $('.numeric').autoNumeric('init');
 
-        $('#contact_no').keypress(validateNumber);
+        $('#mobile_no').keypress(validateNumber);
+
+        $('#landline').keypress(validateNumber);
 
         _cboDepartments.select2('val',null);
         _cboCustomers.select2('val',null);
@@ -904,7 +963,7 @@ $(document).ready(function(){
 
         });
 
-        _cboSalesperson.on('select2:select',function(e){
+         _cboSalesperson.on('select2:select',function(e){
             var i=$(this).select2('val');
 
             if(i == 0) {
@@ -947,10 +1006,30 @@ $(document).ready(function(){
             }
 
 
-        });  
+        });
 
-        var raw_data=<?php echo json_encode($products); ?>;
+        $('#custom-templates .typeahead').keypress(function(event){
+            if (event.keyCode == 13) {
+                $('.tt-suggestion:first').click();
+            }
+        });
 
+
+        /*var products = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace(''),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                cache: false,
+                url: 'Sales_order/transaction/list/',
+
+                replace: function(url, uriEncodedQuery) {
+                    //var prod_type=$('#cbo_prodType').select2('val');
+                    return url + '?description='+uriEncodedQuery;
+                }
+            }
+        });*/
+
+        var raw_data = <?php echo json_encode($products); ?>;
 
         var products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
@@ -958,36 +1037,59 @@ $(document).ready(function(){
             local : raw_data
         });
 
+
         var _objTypeHead=$('#custom-templates .typeahead');
 
-        _objTypeHead.typeahead(null, {
-            name: 'products',
-            display: 'description',
-            source: products,
-            templates: {
-                header: [
-                    '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="20%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
-                ].join('\n'),
+    _objTypeHead.typeahead(null, {
+        name: 'products',
+        display: 'product_code',
+        source: products,
+        templates: {
+            header: [
+                '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="left" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
+            ].join('\n'),
 
-                suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="20%" align="right" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
+            suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="10%" align="left" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
 
-            }
-        }).on('keyup', this, function (event) {
-            if (_objTypeHead.typeahead('val') == '')
+        }
+    }).on('keyup', this, function (event) {
+            if(_objTypeHead.typeahead('val') == '')
                 return false;
             if (event.keyCode == 13) {
-                $('.tt-suggestion:first').click();
+                //$('.tt-suggestion:first').click();
                 _objTypeHead.typeahead('close');
                 _objTypeHead.typeahead('val');
             }
-        }).bind('typeahead:select', function(ev, suggestion) {
-
-            //console.log(suggestion);
+    }).bind('typeahead:select', function(ev, suggestion) {
 
 
-            var tax_rate=0;
+            //var tax_rate=suggestion.tax_rate; // tax rate is based the tax type set to selected product
+            //var _defLookUp=_lookUpPrice.select2('val');
 
-            var total=getFloat(suggestion.sale_price);
+            /*if(_defLookUp=="2"){
+                total=getFloat(suggestion.distributor_price);
+            }else if(_defLookUp=="3"){
+                total=getFloat(suggestion.dealer_price);
+            }
+            else if(_defLookUp=="4"){
+                total=getFloat(suggestion.public_price);
+            }
+            else if(_defLookUp=="5"){
+                total=getFloat(suggestion.discounted_price);
+            }
+            else if(_defLookUp=="6"){
+                total=getFloat(suggestion.purchase_cost);
+            }else{
+                total=getFloat(suggestion.sale_price);
+            }*/
+            //alert(suggestion.sale_price);
+            var tax_rate=suggestion.tax_rate; //base on the tax rate set to current product
+
+            //choose what purchase cost to be use
+            var sale_price=0.00;
+            sale_price=suggestion.sale_price;
+            //alert(suggestion.sale_price);
+            var total=getFloat(sale_price);
             var net_vat=0;
             var vat_input=0;
 
@@ -1001,7 +1103,7 @@ $(document).ready(function(){
             }
 
 
-            $('#tbl_items > tbody').prepend(newRowItem({
+            $('#tbl_items > tbody').append(newRowItem({
                 so_qty : "1",
                 product_code : suggestion.product_code,
                 unit_id : suggestion.unit_id,
@@ -1012,7 +1114,7 @@ $(document).ready(function(){
                 so_line_total_discount : "0.00",
                 tax_exempt : false,
                 so_tax_rate : tax_rate,
-                so_price : suggestion.sale_price,
+                so_price : total,
                 so_discount : "0.00",
                 tax_type_id : null,
                 so_line_total_price : total,
@@ -1029,11 +1131,12 @@ $(document).ready(function(){
             reInitializeNumeric();
             reComputeTotal();
 
-            //alert("dd")
-        });
+
+    });
 
         $('div.tt-menu').on('click','table.tt-suggestion',function(){
             _objTypeHead.typeahead('val','');
+
         });
 
         $("input#touchspin4").TouchSpin({
@@ -1098,7 +1201,7 @@ $(document).ready(function(){
             var i=$(this).select2('val');
 
             if(i==0){ //new departmet
-                clearFields($('#modal_new_department').find('form'));
+                //clearFields($('#modal_new_department').find('form'));
                 _cboDepartments.select2('val',null)
                 $('#modal_new_department').modal('show');
             }
@@ -1109,7 +1212,7 @@ $(document).ready(function(){
 
             var i=$(this).select2('val');
             if(i==0){ //new customer
-                clearFields($('#modal_new_customer').find('form'));
+                //clearFields($('#modal_new_customer').find('form'));
                 _cboCustomers.select2('val',null)
                 $('#modal_new_customer').modal('show');
             }
@@ -1171,22 +1274,23 @@ $(document).ready(function(){
         $('#btn_new').click(function(){
             _txnMode="new";
             //$('.toggle-fullscreen').click();
+            //$('#cbo_prodType').select2('val', 3);
             $('#cbo_salesperson').select2('val',null);
             clearFields($('#frm_sales_order'));
-            $('.sales_order_title').html('New Sales Order');
+
+            ///$('.sales_order_title').html('New Sales Order');
             showList(false);
-            reComputeTotal();
         });
 
         $('#tbl_sales_order tbody').on('click','button[name="edit_info"]',function(){
             ///alert("ddd");
             _txnMode="edit";
-            $('.sales_order_title').html('Edit Sales Order');
+            //$('.sales_order_title').html('Edit Sales Order');
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.sales_order_id;
 
-
+            $('textarea[name="remarks"]').val(data.remarks);
 
             $('input,textarea').each(function(){
                 var _elem=$(this);
@@ -1195,8 +1299,6 @@ $(document).ready(function(){
                         _elem.val(value);
                     }
                 });
-
-
             });
 
             $('#cbo_departments').select2('val',data.department_id);
@@ -1219,7 +1321,7 @@ $(document).ready(function(){
 
                     $.each(rows,function(i,value){
 
-                        $('#tbl_items > tbody').prepend(newRowItem({
+                        $('#tbl_items > tbody').append(newRowItem({
                             so_qty : value.so_qty,
                             product_code : value.product_code,
                             unit_id : value.unit_id,
@@ -1238,6 +1340,7 @@ $(document).ready(function(){
                             so_tax_amount:value.so_tax_amount,
                             batch_no: value.batch_no,
                             exp_date: value.exp_date
+
                         }));
                     });
 
@@ -1284,7 +1387,7 @@ $(document).ready(function(){
             var net_vat=line_total/(1+tax_rate);
             var vat_input=line_total-net_vat;
 
-            $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(line_total,2)); // line total amount
+            $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(line_total,4)); // line total amount
             $(oTableItems.total_line_discount,row).find('input.numeric').val(line_total_discount); //line total discount
             $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
             $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
@@ -1339,7 +1442,7 @@ $(document).ready(function(){
                 }else{
                     updateSalesOrder().done(function(response){
                         showNotification(response);
-                        dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                        dt.row(_selectRowObj).data(response.row_updated[0]).draw(false);
                         clearFields($('#frm_sales_order'));
                         showList(true);
                     }).always(function(){
@@ -1415,18 +1518,19 @@ $(document).ready(function(){
 
     var validateRequiredFields=function(f){
         var stat=true;
+
         $('div.form-group').removeClass('has-error');
         $('input[required],textarea[required],select[required]',f).each(function(){
-                if($(this).is('select')){
-                if($(this).val()==0){
+
+            if($(this).is('select')){
+                if($(this).select2('val')==0||$(this).select2('val')==null){
                     showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
                     $(this).closest('div.form-group').addClass('has-error');
                     $(this).focus();
                     stat=false;
                     return false;
                 }
-            
-                }else{
+            }else{
                 if($(this).val()==""){
                     showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
                     $(this).closest('div.form-group').addClass('has-error');
@@ -1435,7 +1539,11 @@ $(document).ready(function(){
                     return false;
                 }
             }
+
+
+
         });
+
         return stat;
     };
 
@@ -1524,16 +1632,17 @@ $(document).ready(function(){
 
 
     var showSpinningProgress=function(e){
+        $(e).toggleClass('disabled');
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
     };
 
     var clearFields=function(f){
-        $('input,textarea,select,input:not(.date-picker)',f).val('');
-        $('#remarks').val('');
+        $('input,textarea,select',f).val('');
         $(f).find('input:first').focus();
         $('#tbl_items > tbody').html('');
         $('#cbo_departments').select2('val', null);
         $('#cbo_customers').select2('val', null);
+        //$('#cbo_prodType').select2('val', 3);
         $('#img_user').attr('src','assets/img/anonymous-icon.png');
     };
 
@@ -1578,10 +1687,12 @@ $(document).ready(function(){
         '<td style="display: none;"><input name="so_tax_amount[]" type="text" class="numeric form-control" value="'+ d.so_tax_amount+'" readonly></td>'+
         '<td style="display: none;"><input name="so_non_tax_amount[]" type="text" class="numeric form-control" value="'+ d.so_non_tax_amount+'" readonly></td>'+
         '<td style="display: none;"><input name="product_id[]" type="text" class="form-control" value="'+ d.product_id+'" readonly></td>'+
-        '<td style="display: none;"><input name="batch_no[]" type="text" class="form-control" value="'+ d.batch_no+'" readonly></td>'+
-        '<td style="display: none;"><input name="exp_date[]" type="text" class="numeric form-control" value="'+ d.exp_date+'" readonly></td>'+
+            '<td style="display: none;"><input name="batch_no[]" type="text" class="form-control" value="'+ d.batch_no+'" readonly></td>'+
+            '<td style="display: none;"><input name="exp_date[]" type="text" class="numeric form-control" value="'+ d.exp_date+'" readonly></td>'+
         '<td align="center"><button type="button" name="remove_item" class="btn btn-red"><i class="fa fa-trash"></i></button></td>'+
         '</tr>';
+
+
     };
 
 
@@ -1600,23 +1711,25 @@ $(document).ready(function(){
             after_tax+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
         });
 
-        /*var tbl_summary=$('#tbl_sales_order_summary');
-        tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,2));
-        tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,2));
-        tbl_summary.find(oTableDetails.so_tax_amount).html(accounting.formatNumber(so_tax_amount,2));
-        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,2)+'</b>');*/
+        var tbl_summary=$('#tbl_sales_order_summary');
+        tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,4));
+        tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,4));
+        tbl_summary.find(oTableDetails.so_tax_amount).html(accounting.formatNumber(so_tax_amount,4));
+        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
 
         $('#td_before_tax').html(accounting.formatNumber(before_tax,4));
-        $('#td_after_tax').html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
+        $('#td_after_tax').html(accounting.formatNumber(after_tax,4));
         $('#td_discount').html(accounting.formatNumber(discounts,4));
         $('#td_tax').html(accounting.formatNumber(so_tax_amount,4));
+
 
     };
 
 
 
     var reInitializeNumeric=function(){
-        $('.numeric').autoNumeric('init');
+        $('.numeric').autoNumeric('init', {mDec:4});
+        $('.number').autoNumeric('init', {mDec:0});
     };
 
 

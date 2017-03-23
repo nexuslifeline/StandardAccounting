@@ -164,33 +164,29 @@ class Sales_invoice_model extends CORE_Model
         return $this->db->query($sql)->result();
     }
 
-    function get_customers_sales_summary($start=null,$end=null){
-        $sql="SELECT n.* FROM(SELECT si.sales_invoice_id,
-            si.sales_inv_no,si.customer_id,c.customer_name,'SI' as type,c.address,c.contact_no,c.email_address,
-            SUM(sii.inv_line_total_price)as total_amount_invoice
-
-            FROM (sales_invoice as si
-            LEFT JOIN customers as c ON c.customer_id=si.customer_id)
-            INNER JOIN sales_invoice_items as sii ON si.sales_invoice_id=sii.sales_invoice_id
-            WHERE si.is_active=TRUE AND si.is_deleted=FALSE
-            AND si.date_invoice BETWEEN '$start' AND '$end' AND si.inv_type=1
-            GROUP BY si.customer_id
-
-
-            UNION ALL
-
-
-			SELECT si.sales_invoice_id,
-            si.sales_inv_no,d.department_id as customer_id,
-            CONCAT(d.department_name,' (DR)') as customer_name,'DR' as type,'' as address,'' as contact_no,'' as email_address,
-            SUM(sii.inv_line_total_price)as total_amount_invoice
-
-            FROM (sales_invoice as si
-            LEFT JOIN departments as d ON d.department_id=si.issue_to_department)
-            INNER JOIN sales_invoice_items as sii ON si.sales_invoice_id=sii.sales_invoice_id
-            WHERE si.is_active=TRUE AND si.is_deleted=FALSE
-            AND si.date_invoice BETWEEN '$start' AND '$end' AND si.inv_type=2
-            GROUP BY si.department_id) as  n ORDER By n.customer_name";
+    function get_customers_sales_detailed($start=null,$end=null){ 
+        $sql="SELECT  
+                si.sales_invoice_id, 
+                si.sales_inv_no, 
+                si.date_invoice, 
+                si.customer_id, 
+                c.customer_name, 
+                p.product_id, 
+                p.product_code, 
+                p.product_desc, 
+                p.sale_price, 
+                p.on_hand, 
+                ((p.sale_price) * (p.on_hand)) as total_amount 
+            FROM 
+                (sales_invoice AS si 
+                LEFT JOIN customers AS c ON c.customer_id = si.customer_id) 
+                    INNER JOIN 
+                sales_invoice_items AS sii ON si.sales_invoice_id = sii.sales_invoice_id 
+                LEFT JOIN products AS p ON p.product_id=sii.product_id 
+            WHERE 
+                si.is_active = TRUE AND si.is_deleted = FALSE 
+                AND si.date_invoice BETWEEN '$start' AND '$end' 
+            ORDER BY si.customer_id ASC"; 
         return $this->db->query($sql)->result();
     }
 

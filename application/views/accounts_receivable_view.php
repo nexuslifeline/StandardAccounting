@@ -847,8 +847,8 @@ $(document).ready(function(){
 
 
         var createToolBarButton=function() {
-            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Sales Journal" >'+
-                '<i class="fa fa-plus-circle"></i> New Sales Journal</button>';
+            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Sales Journal" >'+
+                '<i class="fa fa-plus"></i> New Sales Journal</button>';
             $("div.toolbar").html(_btnNew);
         }();
 

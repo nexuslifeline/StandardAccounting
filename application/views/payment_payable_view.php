@@ -599,7 +599,7 @@ $(document).ready(function(){
 
         var createToolBarButton=function(){
             var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Payment" >'+
-                '<i class="fa fa-plus-circle"></i> New Payment</button>';
+                '<i class="fa fa-plus"></i> New Payment</button>';
             $("div.toolbar").html(_btnNew);
         }();
 

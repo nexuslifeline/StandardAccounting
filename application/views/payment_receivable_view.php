@@ -199,9 +199,13 @@
 
                                 <div id="div_payment_fields" style="display: none;">
 
-                                    <div class="row custom_frame" style="border: 3px solid #2196f3;padding: 1%;border-radius: 6px;min-height: 300px;">
+                                    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;">
 
-                                        <span style=""><strong><i class="fa fa-file-o"></i> Payment Information</strong></span><br /><br />
+                                    <div class="panel-body">
+                                    <div>
+
+                                    <div class="row ">
+                                        <div class="container-fluid">
 
 
                                         <form id="frm_payments" role="form" class="form-horizontal">
@@ -601,7 +605,7 @@
 
             var createToolBarButton=function(){
                 var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Payment" >'+
-                    '<i class="fa fa-plus-circle"></i>  New Payment</button>';
+                    '<i class="fa fa-plus"></i>  New Payment</button>';
                 $("div.toolbar").html(_btnNew);
             }();
 

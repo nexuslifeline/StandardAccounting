@@ -183,7 +183,7 @@
             <div id="modal_units" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header modal-erp">
+                        <div class="modal-header">
                             <h4 id="unit_title" class="modal-title" style="color: white;"></h4>
                         </div>
                         <div class="modal-body">
@@ -267,7 +267,7 @@ $(document).ready(function(){
 
         var createToolBarButton=function(){
             var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New unit" >'+
-                '<i class="fa fa-users"></i> New Unit</button>';
+                '<i class="fa fa-plus"></i> New Unit</button>';
             $("div.toolbar").html(_btnNew);
         }();
     }();
@@ -318,7 +318,7 @@ $(document).ready(function(){
                     }
                 });
             });
-            $('#modal-title').text('Edit Unit');
+            $('#unit_title').text('Edit Unit');
             $('#modal_units').modal('show');
             //showList(false);
         });

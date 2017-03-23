@@ -7,6 +7,7 @@ class Salesperson extends CORE_Controller {
         parent::__construct('');
         $this->validate_session();
         $this->load->model('Salesperson_model');
+        $this->load->model('Departments_model');
     }
 
     public function index() {
@@ -16,6 +17,7 @@ class Salesperson extends CORE_Controller {
         $data['_side_bar_navigation']=$this->load->view('template/elements/side_bar_navigation','',TRUE);
         $data['_top_navigation']=$this->load->view('template/elements/top_navigation','',TRUE);
         $data['title']='Salesperson Management';
+        $data['departments']=$this->Departments_model->get_list(array('departments.is_deleted'=>FALSE));
 
         $this->load->view('salesperson_view',$data);
     }
@@ -27,7 +29,11 @@ class Salesperson extends CORE_Controller {
                 $m_salesperson=$this->Salesperson_model;
                 $response['data']=$m_salesperson->get_list(
                     array('salesperson.is_deleted'=>FALSE),
-                    'salesperson_id, acr_name, CONCAT(firstname, " ", middlename, " ", lastname) AS fullname, firstname, middlename, lastname'
+                    'salesperson.*, salesperson_id, acr_name, CONCAT(firstname, " ", middlename, " ", lastname) AS fullname, firstname, middlename, lastname, departments.department_id, departments.department_name',
+
+                    array(
+                        array('departments','departments.department_id=salesperson.department_id','left')
+                    )
                 );
                 echo json_encode($response);
 
@@ -42,6 +48,10 @@ class Salesperson extends CORE_Controller {
                 $m_salesperson->middlename=$this->input->post('middlename',TRUE);
                 $m_salesperson->lastname=$this->input->post('lastname',TRUE);
                 $m_salesperson->acr_name=$this->input->post('acr_name',TRUE);
+                $m_salesperson->contact_no=$this->input->post('contact_no',TRUE);
+                $m_salesperson->department_id=$this->input->post('department_id',TRUE);
+                $m_salesperson->tin_no=$this->input->post('tin_no',TRUE);
+
 
                 $m_salesperson->posted_by_user=$this->session->user_id;
                 $m_salesperson->save();
@@ -53,7 +63,12 @@ class Salesperson extends CORE_Controller {
                 $response['msg']='Salesperson Information successfully created.';
                 $response['row_added']= $m_salesperson->get_list(
                     $salesperson_id,
-                    'salesperson_id, acr_name, CONCAT(firstname, " ", middlename, " ", lastname) AS fullname, firstname, middlename, lastname'
+
+                    'salesperson.*, salesperson_id, acr_name, CONCAT(firstname, " ", middlename, " ", lastname) AS fullname, firstname, middlename, lastname, departments.department_id, departments.department_name',
+
+                    array(
+                        array('departments','departments.department_id=salesperson.department_id','left')
+                    )
                 );
                 echo json_encode($response);
 
@@ -76,12 +91,14 @@ class Salesperson extends CORE_Controller {
 
             case 'update':
                 $m_salesperson=$this->Salesperson_model;
-
                 $salesperson_id=$this->input->post('salesperson_id',TRUE);
                 $m_salesperson->firstname=$this->input->post('firstname',TRUE);
                 $m_salesperson->middlename=$this->input->post('middlename',TRUE);
                 $m_salesperson->lastname=$this->input->post('lastname',TRUE);
                 $m_salesperson->acr_name=$this->input->post('acr_name',TRUE);
+                $m_salesperson->contact_no=$this->input->post('contact_no',TRUE);
+                $m_salesperson->department_id=$this->input->post('department_id',TRUE);
+                $m_salesperson->tin_no=$this->input->post('tin_no',TRUE);
                 $m_salesperson->modify($salesperson_id);
 
                 $response['title']='Success!';
@@ -89,7 +106,12 @@ class Salesperson extends CORE_Controller {
                 $response['msg']='Salesperson Information successfully updated.';
                 $response['row_updated']=$m_salesperson->get_list(
                     $salesperson_id,
-                    'salesperson_id, acr_name, CONCAT(firstname, " ", middlename, " ", lastname) AS fullname, firstname, middlename, lastname'
+                    
+                    'salesperson.*, salesperson_id, acr_name, CONCAT(firstname, " ", middlename, " ", lastname) AS fullname, firstname, middlename, lastname, departments.department_id, departments.department_name',
+
+                    array(
+                        array('departments','departments.department_id=salesperson.department_id','left')
+                    )
                 );
                 echo json_encode($response);
 
