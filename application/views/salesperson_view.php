@@ -238,7 +238,7 @@
                                                             <span class="input-group-addon">
                                                                 <i class="fa fa-users"></i>
                                                             </span>
-                                                            <input type="text" name="lastname" class="form-control" placeholder="Last name">
+                                                            <input type="text" name="lastname" class="form-control" placeholder="Lastname" data-error-msg="Lastname is required!" required>
                                                         </div>
                                                     </div>
                                                 </div>
