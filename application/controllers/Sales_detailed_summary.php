@@ -35,7 +35,7 @@ class Sales_detailed_summary extends CORE_Controller {
                 $start=date("Y-m-d",strtotime($this->input->get('startDate',TRUE)));
                 $end=date("Y-m-d",strtotime($this->input->get('endDate',TRUE)));
 
-                $response['data']=$m_sales_invoice->get_customers_sales_summary($start,$end);
+                $response['data']=$m_sales_invoice->get_customers_sales_detailed($start,$end);
                 echo(
                 json_encode($response)
                 );
@@ -45,7 +45,7 @@ class Sales_detailed_summary extends CORE_Controller {
 
                 break;
 
-            case 'summary-report':
+            case 'detailed-report': 
                 $m_company_info=$this->Company_model;
                 $m_sales_invoice=$this->Sales_invoice_model;
 
@@ -55,9 +55,9 @@ class Sales_detailed_summary extends CORE_Controller {
                 $startDate=date('Y-m-d',strtotime($this->input->get('startDate')));
                 $endDate=date('Y-m-d',strtotime($this->input->get('endDate')));
 
-                $data['customers']=$m_sales_invoice->get_customers_sales_summary($startDate,$endDate);
+                $data['customers']=$m_sales_invoice->get_customers_sales_detailed($startDate,$endDate);
 
-                $data['sales_summary']=$m_sales_invoice->get_report_summary($startDate,$endDate);
+                $data['sales_details']=$m_sales_invoice->get_customers_sales_detailed($startDate,$endDate);
 
                 $this->load->view('template/sales_summary_report',$data);
             break;
