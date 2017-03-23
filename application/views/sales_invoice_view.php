@@ -215,7 +215,7 @@
                     <th>Invoice Date</th>
                     <th>Due Date</th>
                     <th>Customer</th>
-                    <th>Branch</th>
+                    <th>Department</th>
                     <th>Remarks</th>
                     <th><center>Action</center></th>
                 </tr>
@@ -262,9 +262,9 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            Branch : <br />
-                            <select name="department" id="cbo_departments" data-error-msg="Branch is required." required>
-                                <option value="0">[ Create New Branch ]</option>
+                            Department : <br />
+                            <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
+                                <option value="0">[ Create New Department ]</option>
                                 <?php foreach($departments as $department){ ?>
                                     <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
                                 <?php } ?>
@@ -713,6 +713,50 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div><br><br>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-4 control-label "><strong>Contact Number :</strong></label>
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                            <input type="text" name="contact_no" id="contact_no" class="form-control" placeholder="Contact Number">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><br><br>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-4 control-label "><strong>Department :</strong></label>
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-bank"></i>
+                                            </span>
+                                            <select name="department_id" id="department_id" class="form-control" data-error-msg="Department is required!">
+                                                <option value="">Please select department...</option>
+                                                <?php foreach($departments as $department) { ?>
+                                                    <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><br><br>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-4 control-label "><strong>TIN Number:</strong></label>
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-file-o"></i>
+                                            </span>
+                                            <input type="text" name="tin_no" id="tin_no" class="form-control" placeholder="TIN Number">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -732,7 +776,7 @@
         <div class="modal-content"><!---content--->
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Branch</h4>
+                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
 
             </div>
 
@@ -740,7 +784,7 @@
                 <form id="frm_department_new">
 
                     <div class="form-group">
-                        <label>* Branch :</label>
+                        <label>* Department :</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-users"></i>
@@ -750,7 +794,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Branch Description :</label>
+                        <label>Department Description :</label>
                         <textarea name="department_desc" class="form-control"></textarea>
                     </div>
 
@@ -932,7 +976,7 @@ $(document).ready(function(){
 
 
         _cboDepartments=$("#cbo_departments").select2({
-            placeholder: "Please select branch.",
+            placeholder: "Please select Department.",
             allowClear: true
         });
 
@@ -959,8 +1003,7 @@ $(document).ready(function(){
 
         });
 
-        var raw_data=<?php echo json_encode($products); ?>;
-
+        var raw_data = <?php echo json_encode($products); ?>;
 
         var products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
@@ -971,17 +1014,17 @@ $(document).ready(function(){
         var _objTypeHead=$('#custom-templates .typeahead');
 
         _objTypeHead.typeahead(null, {
-            name: 'products',
-            display: 'description',
-            source: products,
-            templates: {
-                header: [
-                    '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="20%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
-                ].join('\n'),
+        name: 'products',
+        display: 'product_code',
+        source: products,
+        templates: {
+            header: [
+                '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="left" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
+            ].join('\n'),
 
-                suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="20%" align="right" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
+            suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="10%" align="left" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
 
-            }
+        }
         }).on('keyup', this, function (event) {
             if (_objTypeHead.typeahead('val') == '') {
                 return false;
@@ -995,24 +1038,28 @@ $(document).ready(function(){
 
             //console.log(suggestion);
 
+            //alert(suggestion.sale_price);
+            var tax_rate=suggestion.tax_rate; //base on the tax rate set to current product
 
-            var tax_rate=0;
-
-            var total=getFloat(suggestion.sale_price);
+            //choose what purchase cost to be use
+            var sale_price=0.00;
+            sale_price=suggestion.sale_price;
+            //alert(suggestion.sale_price);
+            var total=getFloat(sale_price);
             var net_vat=0;
             var vat_input=0;
 
             if(suggestion.is_tax_exempt=="0"){ //not tax excempt
                 net_vat=total/(1+(getFloat(tax_rate)/100));
                 vat_input=total-net_vat;
-            }else {
+            }else{
                 tax_rate=0;
                 net_vat=total;
                 vat_input=0;
             }
 
 
-            $('#tbl_items > tbody').prepend(newRowItem({
+            $('#tbl_items > tbody').append(newRowItem({
                 inv_qty : "1",
                 product_code : suggestion.product_code,
                 unit_id : suggestion.unit_id,
@@ -1158,7 +1205,7 @@ $(document).ready(function(){
             var i=$(this).select2('val');
 
             if(i == 0) {
-                clearFields($('#modal_new_salesperson').find('form'));
+                //clearFields($('#modal_new_salesperson').find('form'));
                 _cboSalesperson.select2('val',null);
                 $('#modal_new_salesperson').modal('show');
                 $('#salesperson_title').text('Create New Salesperson');
@@ -1175,7 +1222,7 @@ $(document).ready(function(){
             var i=$(this).select2('val');
 
             if(i==0){ //new departmet
-                clearFields($('#modal_new_department').find('form'));
+                //clearFields($('#modal_new_department').find('form'));
                 _cboDepartments.select2('val',null)
                 $('#modal_new_department').modal('show');
             }
@@ -1186,7 +1233,7 @@ $(document).ready(function(){
 
             var i=$(this).select2('val');
             if(i==0){ //new customer
-                clearFields($('#modal_new_customer').find('form'));
+                //clearFields($('#modal_new_customer').find('form'));
                 _cboCustomers.select2('val',null)
                 $('#modal_new_customer').modal('show');
             }

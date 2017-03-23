@@ -260,9 +260,9 @@
 
                 <div class="row">
                     <div class="col-sm-5">
-                        Branch :<br />
+                        Department :<br />
                         <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
-                            <option value="0">[ Create New Branch ]</option>
+                            <option value="0">[ Create New Department ]</option>
                             <?php foreach($departments as $department){ ?>
                                 <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
                             <?php } ?>
@@ -332,7 +332,7 @@
             <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
         </div><br />
 
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><br />
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 
             <form id="frm_items">
@@ -627,8 +627,6 @@
     </div>
 </div><!---modal-->
 
-
-
 <div id="modal_new_salesperson" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -691,6 +689,50 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div><br><br>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-4 control-label "><strong>Contact Number :</strong></label>
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                            <input type="text" name="contact_no" id="contact_no" class="form-control" placeholder="Contact Number">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><br><br>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-4 control-label "><strong>Department :</strong></label>
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-bank"></i>
+                                            </span>
+                                            <select name="department_id" id="department_id" class="form-control" data-error-msg="Department is required!">
+                                                <option value="">Please select department...</option>
+                                                <?php foreach($departments as $department) { ?>
+                                                    <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><br><br>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-4 control-label "><strong>TIN Number:</strong></label>
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-file-o"></i>
+                                            </span>
+                                            <input type="text" name="tin_no" id="tin_no" class="form-control" placeholder="TIN Number">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -707,10 +749,10 @@
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
-        <div class="modal-content"><!---content--->
+        <div class="modal-content">
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Branch</h4>
+                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
 
             </div>
 
@@ -718,17 +760,17 @@
                 <form id="frm_department_new">
 
                     <div class="form-group">
-                        <label>* Branch :</label>
+                        <label>* Department :</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-users"></i>
                             </span>
-                            <input type="text" name="department_name" class="form-control" placeholder="Branch" data-error-msg="Branch name is required." required>
+                            <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Branch Description :</label>
+                        <label>Department Description :</label>
                         <textarea name="department_desc" class="form-control"></textarea>
                     </div>
 
@@ -744,7 +786,7 @@
                 <button id="btn_create_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
                 <button id="btn_close_close_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
 </div><!---modal-->
 
@@ -870,7 +912,7 @@ $(document).ready(function(){
 
         var createToolBarButton=function(){
             var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Sales Order" >'+
-                '<i class="fa fa-plus-circle"></i> New Sales Order</button>';
+                '<i class="fa fa-plus"></i> New Sales Order</button>';
                 $("div.toolbar").html(_btnNew);
         }();
 
@@ -886,7 +928,7 @@ $(document).ready(function(){
         _lookUpPrice.select2('val',1);*/
 
         _cboDepartments=$("#cbo_departments").select2({
-            placeholder: "Please select branch.",
+            placeholder: "Please select department.",
             allowClear: true
         });
 
@@ -973,18 +1015,26 @@ $(document).ready(function(){
         });
 
 
-        var products = new Bloodhound({
+        /*var products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace(''),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {
                 cache: false,
-                url: 'Sales_invoice/transaction/current-items/',
+                url: 'Sales_order/transaction/list/',
 
                 replace: function(url, uriEncodedQuery) {
                     //var prod_type=$('#cbo_prodType').select2('val');
                     return url + '?description='+uriEncodedQuery;
                 }
             }
+        });*/
+
+        var raw_data = <?php echo json_encode($products); ?>;
+
+        var products = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            local : raw_data
         });
 
 
@@ -996,10 +1046,10 @@ $(document).ready(function(){
         source: products,
         templates: {
             header: [
-                '<table width="100%"><tr><td width=7%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description 1</b></td><td width="7%" align="left"><b>Batch #</b></td><td width="7%" align="left"><b>Expiration</b></td><td width="7%" style="text-align: right;padding-right:1%;"><b>On hand</b></td><td width="7%" align="right" style="padding-right: 2%;"><b>SRP</b></td><td width="7%" align="right" style="padding-right: 0%;"><b>Dealer</b></td><td width="7%" align="right" style="padding-right: 0%;"><b>Distributor</b></td><td width="7%" align="right" style="padding-right: 0%;"><b>Discounted</b></td><td width="7%" align="right" style="padding-right: 0%;"><b>Public</b></td><td width="7%" align="right" style="padding-right: 1%;"><b>Cost</b></td></tr></table>'
+                '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="left" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
             ].join('\n'),
 
-            suggestion: Handlebars.compile('<table width="100%"><tr><td width="7%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="7%" align="left">{{batch_no}}</td><td width="7%" align="left">{{exp_date}}</td><td width="7%" style="padding-right:1%;" align="right">{{on_hand_per_batch}}</td><td width="7%" align="right" style="padding-right: 2%;">{{srp}}</td><td width="7%" align="right" style="padding-right: 0%;">{{srp_dealer}}</td><td width="7%" align="right" style="padding-right: 0%;">{{srp_distributor}}</td><td width="7%" align="right" style="padding-right: 0%;">{{srp_discounted}}</td><td width="7%" align="right" style="padding-right: 0%;">{{srp_public}}</td><td width="7%" align="right" style="padding-right: 1%;">{{srp_cost}}</td></tr></table>')
+            suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="10%" align="left" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
 
         }
     }).on('keyup', this, function (event) {
@@ -1032,13 +1082,13 @@ $(document).ready(function(){
             }else{
                 total=getFloat(suggestion.sale_price);
             }*/
-
+            //alert(suggestion.sale_price);
             var tax_rate=suggestion.tax_rate; //base on the tax rate set to current product
 
             //choose what purchase cost to be use
             var sale_price=0.00;
             sale_price=suggestion.sale_price;
-            alert(suggestion.sale_price);
+            //alert(suggestion.sale_price);
             var total=getFloat(sale_price);
             var net_vat=0;
             var vat_input=0;
@@ -1151,7 +1201,7 @@ $(document).ready(function(){
             var i=$(this).select2('val');
 
             if(i==0){ //new departmet
-                clearFields($('#modal_new_department').find('form'));
+                //clearFields($('#modal_new_department').find('form'));
                 _cboDepartments.select2('val',null)
                 $('#modal_new_department').modal('show');
             }
@@ -1162,7 +1212,7 @@ $(document).ready(function(){
 
             var i=$(this).select2('val');
             if(i==0){ //new customer
-                clearFields($('#modal_new_customer').find('form'));
+                //clearFields($('#modal_new_customer').find('form'));
                 _cboCustomers.select2('val',null)
                 $('#modal_new_customer').modal('show');
             }

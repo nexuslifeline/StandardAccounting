@@ -962,7 +962,7 @@ $(document).ready(function(){
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Products</b>
                                             </div>
                                             <div class="panel-body table-responsive">
-                                                <button class="btn btn-green" id="btn_new" style="float: left; text-transform: capitalize;font-family: Tahoma, Georgia, Serif;margin-bottom: 0px !important;" data-toggle="modal" data-target="" data-placement="left" title="Create New product" ><i class="fa fa-plus-circle"></i> Create New Product</button>
+                                                <button class="btn btn-green" id="btn_new" style="float: left; text-transform: capitalize;font-family: Tahoma, Georgia, Serif;margin-bottom: 0px !important;" data-toggle="modal" data-target="" data-placement="left" title="Create New product" ><i class="fa fa-plus"></i> Create New Product</button>
                                                 <table id="tbl_products" class="custom-design table-striped" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>    
