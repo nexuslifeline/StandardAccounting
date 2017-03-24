@@ -148,12 +148,6 @@
             margin-left: 20px !important;
         }
 
-        #img_user {
-            padd
-
-
-
-
     </style>
 </head>
 
@@ -226,9 +220,9 @@
                                         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                                             <div class="row">
                                                 <div class="col-sm-5" >
-                                                    Branch * : <br />
-                                                    <select name="department" id="cbo_departments"  data-error-msg="Branch is required." required>
-                                                        <option value="0">[ Create New Branch ]</option>
+                                                    Department * : <br />
+                                                    <select name="department" id="cbo_departments"  data-error-msg="Department is required." required>
+                                                        <option value="0">[ Create New Department ]</option>
                                                         <?php foreach($departments as $department){ ?>
                                                             <option value="<?php echo $department->department_id; ?>" data-default-cost="<?php echo $department->default_cost; ?>" data-delivery-address="<?php echo $department->delivery_address;  ?>"><?php echo $department->department_name; ?></option>
                                                         <?php } ?>
@@ -460,6 +454,75 @@
     </div>
 </div><!---modal-->
 
+<div id="modal_new_department" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #2ecc71">
+                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+                 <h2 id="department_title" class="modal-title" style="color:white;">New Department</h2>
+            </div>
+            <div class="modal-body">
+                <form id="frm_department" role="form" class="form-horizontal">
+                    <div class="row" style="margin: 2%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <label>* Department :</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-users"></i>
+                                    </span>
+                                    <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="margin: 2%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                    <label class="">Department Description :</label>
+                                    <textarea name="department_desc" class="form-control" placeholder="Department Description"></textarea>
+
+                            </div>
+                        </div>
+                    </div><!-- 
+
+                    <div class="row" style="margin: 1%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <label class="">Delivery Address :</label>
+                                <textarea name="delivery_address" class="form-control" placeholder="Delivery Address"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row" style="margin: 1%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <label class="">Please specify the default cost of this Branch when purchasing items (Optional) :</label>
+                                <select name="default_cost" id="cbo_default_cost" class="form-control" data-error-msg="Item type is required." required>
+                                    <option value="1">Purchase Cost 1 (Luzon Area)</option>
+                                    <option value="2">Purchase Cost 2 (Viz-Min Area)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div><br /><br /> -->
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_create_new_department" class="btn btn-primary">Save</button>
+                <button id="btn_close_new_department" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="modal_new_supplier" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-lg">
@@ -809,7 +872,7 @@ $(document).ready(function(){
         });*/
 
         _cboDepartments=$("#cbo_departments").select2({
-            placeholder: "Please select branch.",
+            placeholder: "Please select department.",
             allowClear: true
         });
 
@@ -839,9 +902,15 @@ $(document).ready(function(){
             }
         });
 
-
+        var raw_data = <?php echo json_encode($products); ?>;
 
         var products = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            local : raw_data
+        });
+
+        /*var products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace(''),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {
@@ -857,7 +926,7 @@ $(document).ready(function(){
                     return url + '?description='+uriEncodedQuery;
                 }
             }
-        });
+        });*/
 
         
 
@@ -889,6 +958,7 @@ $(document).ready(function(){
 
                 //var tax_id=$('#cbo_tax_type').select2('val');
                 //var tax_rate=parseFloat($('#cbo_tax_type').find('option[value="'+tax_id+'"]').data('tax-rate'));
+                //alert(suggestion.tax_rate);
 
                 var tax_rate=suggestion.tax_rate; //base on the tax rate set to current product
 
@@ -1033,7 +1103,27 @@ $(document).ready(function(){
             showList(false);
         });
 
+        $('#btn_create_new_department').click(function(){
 
+            var btn=$(this);
+
+            if(validateRequiredFields($('#frm_department'))){
+                var data=$('#frm_department').serializeArray();
+                /*_data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});*/
+                createDepartment().done(function(response){
+                    showNotification(response);
+                    $('#modal_new_department').modal('hide');
+
+                    var _department=response.row_added[0];
+                    $('#cbo_departments').append('<option value="'+_department.department_id+'" data-tax-type="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
+                    $('#cbo_departments').select2('val',_department.department_id);
+                    $('#cbo_tax_type').select2('val',_department.tax_type_id);
+
+                }).always(function(){
+                    showSpinningProgress(btn);
+                });
+            }
+        });
 
         $('#btn_create_new_supplier').click(function(){
 
@@ -1208,7 +1298,13 @@ $(document).ready(function(){
             showList(true);
         });
 
+        $('#btn_close_new_department').click(function() {
+            $('#modal_new_department').modal('hide');
+        });
 
+        $('#btn_close_new_supplier').click(function() {
+            $('#modal_new_supplier').modal('hide');
+        });
 
         $('#btn_save').click(function(){
 
@@ -1310,6 +1406,18 @@ $(document).ready(function(){
         });
 
         return stat;
+    };
+
+    var createDepartment=function(){
+        var _data=$('#frm_department').serializeArray();
+
+        return $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"Departments/transaction/create",
+            "data":_data,
+            "beforeSend": showSpinningProgress($('#btn_create_new_department'))
+        });
     };
 
     var createSupplier=function() {
@@ -1493,6 +1601,23 @@ $(document).ready(function(){
 
 
     });
+
+    _cboDepartments.on("select2:select", function (e) {
+
+            var i=$(this).select2('val');
+
+            if(i==0){ //new supplier
+                _cboDepartments.select2('val',null)
+                $('#modal_new_department').modal('show');
+                //clearFields($('#modal_new_supplier').find('form'));
+            }else{
+                var obj_department=$('#cbo_departments').find('option[value="'+i+'"]');
+                _defCostType=obj_department.data('default-cost');
+                //_cboTaxType.select2('val',obj_supplier.data('tax-type')); //set tax type base on selected Supplier
+            }
+
+
+        });
 
 
     _cboSuppliers.on("select2:select", function (e) {

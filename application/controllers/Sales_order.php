@@ -49,7 +49,33 @@ class Sales_order extends CORE_Controller
             'is_deleted=FALSE'
         );
 
-        $data['products']=$this->Products_model->get_current_item_list();
+        $data['products']=$this->Products_model->get_list(
+            null, //no id filter
+            array(
+                       'products.product_id',
+                       'products.product_code',
+                       'products.product_desc',
+                       'products.product_desc1',
+                       'products.is_tax_exempt',
+                       'products.size',
+                       'products.sale_price',
+                       //'FORMAT(products.sale_price,2)as sale_price',
+                       'FORMAT(products.purchase_cost,2)as purchase_cost',
+                       'products.unit_id',
+                       'products.on_hand',
+                       'units.unit_name',
+                       'tax_types.tax_type_id',
+                       'tax_types.tax_rate'
+            ),
+            array(
+                // parameter (table to join(left) , the reference field)
+                array('units','units.unit_id=products.unit_id','left'),
+                array('categories','categories.category_id=products.category_id','left'),
+                array('tax_types','tax_types.tax_type_id=products.tax_type_id','left')
+
+            )
+
+        );
 
         $data['title'] = 'Sales Order';
         $this->load->view('sales_order_view', $data);
