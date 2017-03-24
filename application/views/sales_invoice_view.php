@@ -664,7 +664,7 @@
                         <div class="">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong>* First name :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> First name :</strong></label>
                                     <div class="col-xs-12 col-md-8">
                                         <input type="text" name="firstname" class="form-control" placeholder="Firstname" data-error-msg="Firstname is required!" required>
                                     </div>
@@ -680,7 +680,7 @@
                             </div><br><br>
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong>* Last name :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Last name :</strong></label>
                                     <div class="col-xs-12 col-md-8">
                                         <input type="text" name="lastname" class="form-control" placeholder="Lastname" data-error-msg="Lastname is required!" required>
                                     </div>
@@ -739,7 +739,7 @@
                     <div class="row" style="margin: 1%;">
                         <div class="col-lg-12">
                             <div class="form-group" style="margin-bottom:0px;">
-                                <label class="">Department Name * :</label>
+                                <label class=""><font color="red">*</font> Department Name :</label>
                                 <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
 
                             </div>
@@ -761,6 +761,44 @@
             <div class="modal-footer">
                 <button id="btn_create_department" class="btn btn-primary">Save</button>
                 <button id="btn_cancel_department" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal_new_department_sp" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #2ecc71">
+                 <h2 id="department_title" class="modal-title" style="color:white;">Create New Department</h2>
+            </div>
+            <div class="modal-body">
+                <form id="frm_department_new_sp" role="form" class="form-horizontal">
+                    <div class="row" style="margin: 1%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <label class=""><font color="red">*</font> Department Name :</label>
+                                <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="margin: 1%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <label class="">Department Description :</label>
+                                <textarea name="department_desc" class="form-control" placeholder="Department Description"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_create_department_sp" class="btn btn-primary">Save</button>
+                <button id="btn_cancel_department_sp" class="btn btn-default">Cancel</button>
             </div>
         </div>
     </div>
@@ -1189,7 +1227,7 @@ $(document).ready(function(){
         _cboDepartment.on('select2:select', function(){
             if (_cboDepartment.val() == 0) {
                 clearFields($('#frm_department_new'));
-                $('#modal_new_department').modal('show');
+                $('#modal_new_department_sp').modal('show');
                 $('#modal_new_salesperson').modal('hide');
             }
         });
@@ -1197,6 +1235,11 @@ $(document).ready(function(){
         $('#btn_cancel_department').on('click', function(){
             $('#modal_new_department').modal('hide');
             _cboDepartments.select2('val',null);
+        });
+
+        $('#btn_cancel_department_sp').on('click', function(){
+            $('#modal_new_department_sp').modal('hide');
+            $('#modal_new_salesperson').modal('show');
             _cboDepartment.select2('val',null);
         });
 
@@ -1263,6 +1306,35 @@ $(document).ready(function(){
                     var _department=response.row_added[0];
                     $('#cbo_departments').append('<option value="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
                     $('#cbo_departments').select2('val',_department.department_id);
+
+                }).always(function(){
+                    showSpinningProgress(btn);
+                });
+            }
+
+
+        });
+
+        $('#btn_create_department_sp').click(function(){
+            var btn=$(this);
+
+            if(validateRequiredFields($('#frm_department_new_sp'))){
+                var data=$('#frm_department_new_sp').serializeArray();
+
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":"Departments/transaction/create",
+                    "data":data,
+                    "beforeSend" : function(){
+                        showSpinningProgress(btn);
+                    }
+                }).done(function(response){
+                    showNotification(response);
+                    $('#modal_new_department_sp').modal('hide');
+                    $('#modal_new_salesperson').modal('show');
+
+                    var _department=response.row_added[0];
                     $('#cbo_department').append('<option value="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
                     $('#cbo_department').select2('val',_department.department_id);
 
@@ -1309,6 +1381,7 @@ $(document).ready(function(){
 
             $('#cbo_customers').select2('val', null);
             $('#cbo_departments').select2('val', null);
+            $('#cbo_department').select2('val', null);
             $('#cbo_salesperson').select2('val',null);
 
             /*$('#cbo_prodType').select2('val', 3);
@@ -1334,6 +1407,7 @@ $(document).ready(function(){
 
                 $('#cbo_customers').select2('val',data.customer_id);
                 $('#cbo_departments').select2('val',data.department_id);
+                $('#cbo_department').select2('val',data.department_id);
                 $('#cbo_salesperson').select2('val',data.salesperson_id);
 
             });
@@ -1421,6 +1495,7 @@ $(document).ready(function(){
             });
 
             $('#cbo_departments').select2('val',data.department_id);
+            $('#cbo_department').select2('val',data.department_id);
             $('#cbo_customers').select2('val',data.customer_id);
             $('#cbo_salesperson').select2('val',data.salesperson_id);
 
@@ -1752,6 +1827,7 @@ $(document).ready(function(){
         $(f).find('input:first').focus();
         $('#tbl_items > tbody').html('');
         $('#cbo_departments').select2('val', null);
+        $('#cbo_department').select2('val', null);
         $('#cbo_customers').select2('val', null);
         $('#cbo_salesperson').select2('val', null);
         $('#img_user').attr('src','assets/img/anonymous-icon.png');

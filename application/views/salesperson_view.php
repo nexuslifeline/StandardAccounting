@@ -200,7 +200,7 @@
                                         <div class="">
                                             <div class="col-xs-12">
                                                 <div class="form-group">
-                                                    <label class="col-xs-12 col-md-4 control-label "><strong>* First name :</strong></label>
+                                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> First name :</strong></label>
                                                     <div class="col-xs-12 col-md-8">
                                                         <input type="text" name="firstname" class="form-control" placeholder="Firstname" data-error-msg="Firstname is required!" required>
                                                     </div>
@@ -216,7 +216,7 @@
                                             </div><br><br>
                                             <div class="col-xs-12">
                                                 <div class="form-group">
-                                                    <label class="col-xs-12 col-md-4 control-label "><strong>* Last name :</strong></label>
+                                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Last name :</strong></label>
                                                     <div class="col-xs-12 col-md-8">
                                                         <input type="text" name="lastname" class="form-control" placeholder="Last name">
                                                     </div>
@@ -272,7 +272,7 @@
                                 <div class="row" style="margin: 1%;">
                                     <div class="col-lg-12">
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class="">Department Name * :</label>
+                                            <label class=""><font color="red">*</font> Department Name :</label>
                                             <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
 
                                         </div>
@@ -375,6 +375,7 @@
 
             $('#btn_cancel_department').on('click', function(){
                 $('#modal_new_department').modal('hide');
+                $('#modal_new_department_sp').modal('hide');
                 $('#modal_new_salesperson').modal('show');
                 _cboDepartment.select2('val',null);
             });
