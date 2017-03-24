@@ -47,7 +47,6 @@ class Salesperson extends CORE_Controller {
                 $m_salesperson->firstname=$this->input->post('firstname',TRUE);
                 $m_salesperson->middlename=$this->input->post('middlename',TRUE);
                 $m_salesperson->lastname=$this->input->post('lastname',TRUE);
-                $m_salesperson->acr_name=$this->input->post('acr_name',TRUE);
                 $m_salesperson->contact_no=$this->input->post('contact_no',TRUE);
                 $m_salesperson->department_id=$this->input->post('department_id',TRUE);
                 $m_salesperson->tin_no=$this->input->post('tin_no',TRUE);
@@ -95,7 +94,6 @@ class Salesperson extends CORE_Controller {
                 $m_salesperson->firstname=$this->input->post('firstname',TRUE);
                 $m_salesperson->middlename=$this->input->post('middlename',TRUE);
                 $m_salesperson->lastname=$this->input->post('lastname',TRUE);
-                $m_salesperson->acr_name=$this->input->post('acr_name',TRUE);
                 $m_salesperson->contact_no=$this->input->post('contact_no',TRUE);
                 $m_salesperson->department_id=$this->input->post('department_id',TRUE);
                 $m_salesperson->tin_no=$this->input->post('tin_no',TRUE);
