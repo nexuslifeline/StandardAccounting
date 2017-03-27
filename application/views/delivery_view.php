@@ -1062,7 +1062,6 @@ $(document).ready(function(){
                 var total=getFloat(suggestion.purchase_cost);
                 var net_vat=0;
                 var vat_input=0;
-                alert(suggestion.tax_rate);
 
                 if(suggestion.is_tax_exempt=="0"){ //this is not excempted to tax
                     net_vat=total/(1+(getFloat(tax_rate)/100));

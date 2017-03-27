@@ -262,7 +262,7 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            Department : <br />
+                            <font color="red"><b>*</b></font> Department : <br />
                             <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
                                 <option value="0">[ Create New Department ]</option>
                                 <?php foreach($departments as $department){ ?>
@@ -271,9 +271,9 @@
                             </select>
                         </div>
                         <div class="col-sm-2 col-sm-offset-6">
-                            Invoice Date : <br />
+                            <font color="red"><b>*</b></font> Invoice Date : <br />
                             <div class="input-group">
-                                <input type="text" name="date_invoice" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Invoice" data-error-msg="Please set the date this items are issued!" required>
+                                <input type="text" name="date_invoice" id="invoice_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Invoice" data-error-msg="Please set the date this items are issued!" required>
                                  <span class="input-group-addon">
                                      <i class="fa fa-calendar"></i>
                                 </span>
@@ -282,7 +282,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            * Customer : <br />
+                            <font color="red"><b>*</b></font> Customer : <br />
                             <select name="customer" id="cbo_customers" data-error-msg="Customer is required." required>
                                 <option value="0">[ Create New Customer ]</option>
                                 <?php foreach($customers as $customer){ ?>
@@ -291,8 +291,8 @@
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            * Sales person :<br/>
-                            <select name="salesperson_id" id="cbo_salesperson" data-error-msg="Sales person is required." required>
+                            Sales person :<br/>
+                            <select name="salesperson_id" id="cbo_salesperson">
                                 <option value="0">[ Create New Salesperson ]</option>
                                 <?php foreach($salespersons as $salesperson){ ?>
                                     <option value="<?php echo $salesperson->salesperson_id; ?>"><?php echo $salesperson->acr_name.' - '.$salesperson->fullname; ?></option>
@@ -309,10 +309,10 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                           * Due Date : <br />
+                            <font color="red"><b>*</b></font> Due Date : <br />
                             <div class="input-group">
 
-                                <input type="text" name="date_due" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Due" data-error-msg="Please set the date this items are issued!" required>
+                                <input type="text" name="date_due" id="due_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Due" data-error-msg="Please set the date this items are issued!" required>
                                  <span class="input-group-addon">
                                      <i class="fa fa-calendar"></i>
                                 </span>
@@ -345,10 +345,10 @@
 
 
             <form id="frm_items">
-                <div class="table-responsive"  style="min-height: 200px;padding: 1px;">
+                <div class="table-responsive">
                     <table id="tbl_items" class="custom-design table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
 
-                        <thead class="">
+                        <thead class="">    
                         <tr>
 
                             <th width="10%">Qty</th>
@@ -589,52 +589,123 @@
 </div>
 
 <div id="modal_new_customer" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-    <div class="modal-dialog modal-md">
-        <div class="modal-content"><!---content--->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Customer</h4>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#2ecc71;">
+                <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"> </span>New Customer</h4>
+
             </div>
 
             <div class="modal-body">
                 <form id="frm_customer_new">
-                    <div class="form-group">
-                        <label>* Customer :</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-users"></i>
-                            </span>
-                            <input type="text" name="customer_name" class="form-control" placeholder="Customer" data-error-msg="Customer name is required." required>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="col-md-12">
+                                <div class="col-md-4" id="label">
+                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Customer Name :</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-users"></i>
+                                        </span>
+                                        <input type="text" name="customer_name" class="form-control" placeholder="Customer Name" data-error-msg="Customer Name is required!" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="col-md-4" id="label">
+                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Contact Person :</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-users"></i>
+                                        </span>
+                                        <input type="text" name="contact_name" class="form-control" placeholder="Contact Person" data-error-msg="Contact Person is required!" required>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="col-md-12">
+                                <div class="col-md-4" id="label">
+                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Address :</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-home"></i>
+                                         </span>
+                                         <textarea name="address" class="form-control" data-error-msg="Supplier address is required!" placeholder="Address" required ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="col-md-12">
+                                <div class="col-md-4" id="label">
+                                     <label class="control-label boldlabel" style="text-align:right;">Email Address :</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-envelope-o"></i>
+                                        </span>
+                                        <input type="text" name="email_address" class="form-control" placeholder="Email Address">
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="col-md-12">
+                                <div class="col-md-4" id="label">
+                                     <label class="control-label boldlabel" style="text-align:right;">Landline :</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-phone"></i>
+                                        </span>
+                                        <input type="text" name="landline" id="landline" class="form-control" placeholder="Landline">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="col-md-4" id="label">
+                                     <label class="control-label boldlabel" style="text-align:right;">Mobile No :</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-mobile"></i>
+                                        </span>
+                                        <input type="text" name="mobile_no" id="mobile_no" class="form-control" placeholder="Mobile No">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <label class="control-label boldlabel" style="text-align:left;padding-top:10px;"><i class="fa fa-user" aria-hidden="true" style="padding-right:10px;"></i>Customer's Photo</label>
+                                    <hr style="margin-top:0px !important;height:1px;background-color:black;">
+                                </div>
+                                <div style="width:100%;height:300px;border:2px solid #34495e;border-radius:5px;">
+                                    <center>
+                                        <img name="img_user" id="img_user" src="assets/img/anonymous-icon.png" height="140px;" width="140px;"></img>
+                                    </center>
+                                    <hr style="margin-top:0px !important;height:1px;background-color:black;">
+                                    <center>
+                                         <button type="button" id="btn_browse" style="width:150px;margin-bottom:5px;" class="btn btn-primary">Browse Photo</button>
+                                         <button type="button" id="btn_remove_photo" style="width:150px;" class="btn btn-danger">Remove</button>
+                                         <input type="file" name="file_upload[]" class="hidden">
+                                    </center> 
+                                </div>
+                            </div>   
                         </div>
                     </div>
-
-
-                    <div class="form-group">
-                        <label>Address :</label>
-                        <textarea name="address" class="form-control"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Email :</label>
-                        <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="fa fa-envelope-o"></i>
-                                                </span>
-                            <input type="text" name="email_address" class="form-control" placeholder="Email">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Mobile :</label>
-                        <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="fa fa-send"></i>
-                                                </span>
-                            <input type="text" name="mobile_no" class="form-control" placeholder="Mobile No">
-                        </div>
-                    </div>
-
-
                 </form>
 
 
@@ -662,6 +733,14 @@
                 <div class="row">
                     <form id="frm_salesperson" role="form">
                         <div class="">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Salesperson Code :</strong></label>
+                                    <div class="col-xs-12 col-md-8">
+                                        <input type="text" name="salesperson_code" class="form-control" placeholder="Salesperson Code" data-error-msg="Salesperson Code is required!" required>
+                                    </div>
+                                </div>
+                            </div><br><br>
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> First name :</strong></label>
@@ -1273,7 +1352,7 @@ $(document).ready(function(){
                     $('#modal_new_salesperson').modal('hide');
 
                     var _salesperson=response.row_added[0];
-                    $('#cbo_salesperson').append('<option value="'+_salesperson.salesperson_id+'" selected>'+ _salesperson.acr_name + ' - ' +_salesperson.fullname+'</option>');
+                    $('#cbo_salesperson').append('<option value="'+_salesperson.salesperson_id+'" selected>'+ _salesperson.salesperson_code + ' - ' +_salesperson.fullname+'</option>');
                     $('#cbo_salesperson').select2('val',_salesperson.salesperson_id);
 
                 }).always(function(){
@@ -1346,23 +1425,34 @@ $(document).ready(function(){
 
         });
 
-        //create new customer
         $('#btn_create_customer').click(function(){
             var btn=$(this);
 
-            if(validateRequiredFields($('#frm_customer'))){
-                var data=$('#frm_customer').serializeArray();
-                createCustomer().done(function(response){
+            if(validateRequiredFields($('#frm_customer_new'))){
+                var data=$('#frm_customer_new').serializeArray();
+
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":"Customers/transaction/create",
+                    "data":data,
+                    "beforeSend" : function(){
+                        showSpinningProgress(btn);
+                    }
+                }).done(function(response){
                     showNotification(response);
                     $('#modal_new_customer').modal('hide');
+
                     var _customer=response.row_added[0];
-                    $('#cbo_customers').append('<option value="'+_customer.customer_id+'" selected>'+_customer.customer_name+'</option>');
+                    $('#cbo_customers').append('<option value="'+_customer.customer_id+'" selected>'+ _customer.customer_name + '</option>');
                     $('#cbo_customers').select2('val',_customer.customer_id);
-                    clearFields($('#modal_new_customer').find('form'));
+
                 }).always(function(){
                     showSpinningProgress(btn);
                 });
             }
+
+
         });
 
 
@@ -1383,6 +1473,9 @@ $(document).ready(function(){
             $('#cbo_departments').select2('val', null);
             $('#cbo_department').select2('val', null);
             $('#cbo_salesperson').select2('val',null);
+            $('#invoice_default').datepicker('setDate', 'today');
+            $('#due_default').datepicker('setDate', 'today');
+
 
             /*$('#cbo_prodType').select2('val', 3);
             $('#cboLookupPrice').select2('val', 1);*/
