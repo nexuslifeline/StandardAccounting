@@ -1894,11 +1894,11 @@ $(document).ready(function(){
             after_tax+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
         });
 
-        /*var tbl_summary=$('#tbl_sales_invoice_summary');
+        var tbl_summary=$('#tbl_sales_invoice_summary');
         tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,2));
         tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,2));
         tbl_summary.find(oTableDetails.inv_tax_amount).html(accounting.formatNumber(inv_tax_amount,2));
-        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,2)+'</b>');*/
+        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,2)+'</b>');
 
         $('#td_before_tax').html(accounting.formatNumber(before_tax,4));
         $('#td_after_tax').html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
