@@ -18,7 +18,7 @@
         <?php echo $_def_css_files; ?>
 
         <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-
+        <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
@@ -61,6 +61,13 @@
                 to { -webkit-transform: rotate(360deg); }
             }
 
+            .select2-close-mask{
+                z-index: 999999;
+            }
+            .select2-dropdown{
+                z-index: 999999;
+            }
+
         </style>
 
     </head>
@@ -97,7 +104,7 @@
                                                         <table id="tbl_salesperson" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                             <thead class="">
                                                             <tr>
-                                                                <th>Acronym Name</th>
+                                                                <!-- <th>Acronym Name</th> -->
                                                                 <th>Salesperson</th>
                                                                 <th>Department</th>
                                                                 <th><center>Action</center></th>
@@ -180,7 +187,7 @@
                         </div><!-content-->
                     </div>
                 </div><!---modal-->
-                <div id="modal_new_salesperson" class="modal fade" tabindex="-1" role="dialog">
+                <div id="modal_new_salesperson" class="modal fade" role="dialog">
                     <div class="modal-dialog modal-md">
                         <div class="modal-content">
                             <div class="modal-header" style="background-color:#2ecc71;">
@@ -193,27 +200,9 @@
                                         <div class="">
                                             <div class="col-xs-12">
                                                 <div class="form-group">
-                                                    <label class="col-xs-12 col-md-4 control-label "><strong>* Acronym name :</strong></label>
+                                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> First name :</strong></label>
                                                     <div class="col-xs-12 col-md-8">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">
-                                                                <i class="fa fa-users"></i>
-                                                            </span>
-                                                            <input type="text" name="acr_name" class="form-control" placeholder="Acronym" data-error-msg="Acronym name is required!" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><br><br>
-                                            <div class="col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="col-xs-12 col-md-4 control-label "><strong>* First name :</strong></label>
-                                                    <div class="col-xs-12 col-md-8">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">
-                                                                <i class="fa fa-users"></i>
-                                                            </span>
-                                                            <input type="text" name="firstname" class="form-control" placeholder="Firstname" data-error-msg="Firstname is required!" required>
-                                                        </div>
+                                                        <input type="text" name="firstname" class="form-control" placeholder="Firstname" data-error-msg="Firstname is required!" required>
                                                     </div>
                                                 </div>
                                             </div><br><br>
@@ -221,25 +210,15 @@
                                                 <div class="form-group">
                                                     <label class="col-xs-12 col-md-4 control-label "><strong>&nbsp;&nbsp;Middle name :</strong></label>
                                                     <div class="col-xs-12 col-md-8">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">
-                                                                <i class="fa fa-users"></i>
-                                                            </span>
-                                                            <input type="text" name="middlename" class="form-control" placeholder="Middlename">
-                                                        </div>
+                                                        <input type="text" name="middlename" class="form-control" placeholder="Middlename">
                                                     </div>
                                                 </div>
                                             </div><br><br>
                                             <div class="col-xs-12">
                                                 <div class="form-group">
-                                                    <label class="col-xs-12 col-md-4 control-label "><strong>* Last name :</strong></label>
+                                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Last name :</strong></label>
                                                     <div class="col-xs-12 col-md-8">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">
-                                                                <i class="fa fa-users"></i>
-                                                            </span>
-                                                            <input type="text" name="lastname" class="form-control" placeholder="Last name">
-                                                        </div>
+                                                        <input type="text" name="lastname" class="form-control" placeholder="Last name">
                                                     </div>
                                                 </div>
                                             </div><br><br>
@@ -247,43 +226,26 @@
                                                 <div class="form-group">
                                                     <label class="col-xs-12 col-md-4 control-label "><strong>Contact Number :</strong></label>
                                                     <div class="col-xs-12 col-md-8">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">
-                                                                <i class="fa fa-phone"></i>
-                                                            </span>
-                                                            <input type="text" name="contact_no" id="contact_no" class="form-control" placeholder="Contact Number">
-                                                        </div>
+                                                        <input type="text" name="contact_no" id="contact_no" class="form-control" placeholder="Contact Number">
                                                     </div>
                                                 </div>
                                             </div><br><br>
                                             <div class="col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="col-xs-12 col-md-4 control-label "><strong>Department :</strong></label>
-                                                    <div class="col-xs-12 col-md-8">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">
-                                                                <i class="fa fa-bank"></i>
-                                                            </span>
-                                                            <select name="department_id" id="department_id" class="form-control" data-error-msg="Department is required!">
-                                                                <option value="">Please select department...</option>
-                                                                <?php foreach($departments as $department) { ?>
-                                                                    <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                                <label class="col-xs-12 col-md-4 control-label "><strong>Department :</strong></label>
+                                                <div class="col-xs-12 col-md-8">
+                                                    <select name="department_id" id="cbo_department" class="form-control" data-error-msg="Department is required!" style="width: 100%;">
+                                                        <option value="0">[ Create New Department ]</option>
+                                                        <?php foreach($departments as $department) { ?>
+                                                            <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
+                                                        <?php } ?>
+                                                    </select>
                                                 </div>
                                             </div><br><br>
                                             <div class="col-xs-12">
                                                 <div class="form-group">
                                                     <label class="col-xs-12 col-md-4 control-label "><strong>TIN Number:</strong></label>
                                                     <div class="col-xs-12 col-md-8">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">
-                                                                <i class="fa fa-file-o"></i>
-                                                            </span>
-                                                            <input type="text" name="tin_no" id="tin_no" class="form-control" placeholder="TIN Number">
-                                                        </div>
+                                                        <input type="text" name="tin_no" id="tin_no" class="form-control" placeholder="TIN Number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -298,6 +260,44 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="modal_new_department" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background: #2ecc71">
+                             <h2 id="department_title" class="modal-title" style="color:white;">Create New Department</h2>
+                        </div>
+                        <div class="modal-body">
+                            <form id="frm_department" role="form" class="form-horizontal">
+                                <div class="row" style="margin: 1%;">
+                                    <div class="col-lg-12">
+                                        <div class="form-group" style="margin-bottom:0px;">
+                                            <label class=""><font color="red">*</font> Department Name :</label>
+                                            <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" style="margin: 1%;">
+                                    <div class="col-lg-12">
+                                        <div class="form-group" style="margin-bottom:0px;">
+                                            <label class="">Department Description :</label>
+                                            <textarea name="department_desc" class="form-control" placeholder="Department Description"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btn_save_department" class="btn btn-primary">Save</button>
+                            <button id="btn_cancel_department" class="btn btn-default">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
                 <footer role="contentinfo">
                     <div class="clearfix">
@@ -319,14 +319,14 @@
     <script src="assets/plugins/spinner/dist/spin.min.js"></script>
     <script src="assets/plugins/spinner/dist/ladda.min.js"></script>
 
-
+    <script src="assets/plugins/select2/select2.full.min.js"></script>
     <script type="text/javascript" src="assets/plugins/datatables/jquery.dataTables.js"></script>
     <script type="text/javascript" src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
 
     <script>
 
     $(document).ready(function(){
-        var dt; var _txnMode; var _selectedID; var _selectRowObj;
+        var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboDepartment;
 
         var initializeControls=function(){
             dt=$('#tbl_salesperson').DataTable({
@@ -334,12 +334,10 @@
                 "bLengthChange":false,
                 "ajax" : "Salesperson/transaction/list",
                 "columns": [
-
-                    { targets:[0],data: "acr_name" },
-                    { targets:[1],data: "fullname" },
+                    { targets:[0],data: "fullname" },
                     { targets:[1],data: "department_name" },
                     {
-                        targets:[3],
+                        targets:[2],
                         render: function (data, type, full, meta){
                             var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                             var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
@@ -350,6 +348,13 @@
                 ]
             });
 
+            _cboDepartment=$('#cbo_department').select2({
+                placeholder: "Please Select Department",
+                allowClear: true
+            });
+
+            _cboDepartment.select2('val',null);
+
             var createToolBarButton=function(){
                 var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New category" >'+
                     '<i class="fa fa-plus"></i> New Sales person</button>';
@@ -359,6 +364,21 @@
 
         var bindEventHandlers=(function(){
             var detailRows = [];
+
+            _cboDepartment.on('select2:select', function(){
+                if (_cboDepartment.val() == 0) {
+                    clearFields($('#frm_department'));
+                    $('#modal_new_department').modal('show');
+                    $('#modal_new_salesperson').modal('hide');
+                }
+            });
+
+            $('#btn_cancel_department').on('click', function(){
+                $('#modal_new_department').modal('hide');
+                $('#modal_new_department_sp').modal('hide');
+                $('#modal_new_salesperson').modal('show');
+                _cboDepartment.select2('val',null);
+            });
 
             $('#tbl_salesperson tbody').on( 'click', 'tr td.details-control', function () {
                 var tr = $(this).closest('tr');
@@ -384,10 +404,10 @@
 
             $('#btn_new').click(function(){
                 _txnMode="new";
-                clearFields();
+                clearFields($('#frm_salesperson'));
                 $('#salesperson_title').text('New Sales person');
                 $('#modal_new_salesperson').modal('show');
-                //showList(false);
+                _cboDepartment.select2('val',null);
             });
 
             $('#tbl_salesperson tbody').on('click','button[name="edit_info"]',function(){
@@ -395,9 +415,6 @@
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
                 _selectedID=data.salesperson_id;
-                $('#contact_no').val(data.contact_no);
-                $('#department_id').val(data.department_id);
-                $('#tin_no').val(data.tin_no);
                 
                 $('input,textarea').each(function(){
                     var _elem=$(this);
@@ -407,6 +424,8 @@
                         }
                     });
                 });
+
+                _cboDepartment.select2('val',data.department_id);
 
                 $('#salesperson_title').text('Edit Sales person');
                 $('#modal_new_salesperson').modal('show');
@@ -430,13 +449,28 @@
                 $('#modal_new_salesperson').modal('hide');
             });
 
+            $('#btn_save_department').click(function(){
+                if(validateRequiredFields($('#frm_department'))){
+                    createDepartment().done(function(response){
+                        var department=response.row_added[0];
+
+                        $('#cbo_department').append('<option value="'+ department.department_id +'">'+ department.department_name +'</option>');
+                        _cboDepartment.select2('val',department.department_id);
+
+                        $('#modal_new_department').modal('hide');
+                        $('#modal_new_salesperson').modal('show');
+                        clearFields($('#frm_department'));
+                    });
+                }
+            }); 
+
             $('#btn_save').click(function(){
-                if(validateRequiredFields()){
+                if(validateRequiredFields($('#frm_salesperson'))){
                     if(_txnMode=="new"){
                         createSalesperson().done(function(response){
                             showNotification(response);
                             dt.row.add(response.row_added[0]).draw();
-                            clearFields();
+                            clearFields($('#frm_salesperson'));
 
                         }).always(function(){
                             showSpinningProgress($('#btn_save'));
@@ -445,8 +479,7 @@
                         updateSalesperson().done(function(response){
                             showNotification(response);
                             dt.row(_selectRowObj).data(response.row_updated[0]).draw();
-                            clearFields();
-                            showList(true);
+                            clearFields($('#frm_salesperson'));
                         }).always(function(){
                             showSpinningProgress($('#btn_save'));
                         });
@@ -456,13 +489,17 @@
             });
         })();
 
-        var validateRequiredFields=function(){
+        var validateRequiredFields=function(frm){
             var stat=true;
 
             $('div.form-group').removeClass('has-error');
-            $('input[required],textarea','#frm_salesperson').each(function(){
+            $('input[required],textarea[required]',frm).each(function(){
                 if($(this).val()==""){
-                    showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
+                    showNotification({
+                        title:"Error!",
+                        stat:"error",
+                        msg:$(this).data('error-msg')
+                    });
                     $(this).closest('div.form-group').addClass('has-error');
                     stat=false;
                     return false;
@@ -470,6 +507,17 @@
             });
             return stat;
         };
+
+        var createDepartment=function(){
+            var _dataDepartment=$('#frm_department').serializeArray();
+
+            return $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Departments/transaction/create",
+                "data":_dataDepartment
+            });
+        }
 
         var createSalesperson=function(){
             var _data=$('#frm_salesperson').serializeArray();
@@ -528,12 +576,9 @@
             $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
         };
 
-        var clearFields=function(){
-            $('input[required],input,textarea','#frm_salesperson').val('');
+        var clearFields=function(frm){
+            $('input[required],input,textarea',frm).val('');
             $('form').find('input:first').focus();
-            $('#department_id').val('');
-            $('#contact_no').val('');
-            $('#tin_no').val('');
         };
 
         function format ( d ) {
