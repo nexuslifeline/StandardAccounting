@@ -664,27 +664,9 @@
                         <div class="">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong>* Acronym name :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> First name :</strong></label>
                                     <div class="col-xs-12 col-md-8">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-users"></i>
-                                            </span>
-                                            <input type="text" name="acr_name" class="form-control" placeholder="Acronym" data-error-msg="Acronym name is required!" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><br><br>
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong>* First name :</strong></label>
-                                    <div class="col-xs-12 col-md-8">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-users"></i>
-                                            </span>
-                                            <input type="text" name="firstname" class="form-control" placeholder="Firstname" data-error-msg="Firstname is required!" required>
-                                        </div>
+                                        <input type="text" name="firstname" class="form-control" placeholder="Firstname" data-error-msg="Firstname is required!" required>
                                     </div>
                                 </div>
                             </div><br><br>
@@ -692,25 +674,15 @@
                                 <div class="form-group">
                                     <label class="col-xs-12 col-md-4 control-label "><strong>&nbsp;&nbsp;Middle name :</strong></label>
                                     <div class="col-xs-12 col-md-8">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-users"></i>
-                                            </span>
-                                            <input type="text" name="middlename" class="form-control" placeholder="Middlename">
-                                        </div>
+                                        <input type="text" name="middlename" class="form-control" placeholder="Middlename">
                                     </div>
                                 </div>
                             </div><br><br>
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong>* Last name :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Last name :</strong></label>
                                     <div class="col-xs-12 col-md-8">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-users"></i>
-                                            </span>
-                                            <input type="text" name="lastname" class="form-control" placeholder="Lastname" data-error-msg="Lastname is required!" required>
-                                        </div>
+                                        <input type="text" name="lastname" class="form-control" placeholder="Lastname" data-error-msg="Lastname is required!" required>
                                     </div>
                                 </div>
                             </div><br><br>
@@ -718,12 +690,7 @@
                                 <div class="form-group">
                                     <label class="col-xs-12 col-md-4 control-label "><strong>Contact Number :</strong></label>
                                     <div class="col-xs-12 col-md-8">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-phone"></i>
-                                            </span>
-                                            <input type="text" name="contact_no" id="contact_no" class="form-control" placeholder="Contact Number">
-                                        </div>
+                                        <input type="text" name="contact_no" id="contact_no" class="form-control" placeholder="Contact Number">
                                     </div>
                                 </div>
                             </div><br><br>
@@ -731,17 +698,12 @@
                                 <div class="form-group">
                                     <label class="col-xs-12 col-md-4 control-label "><strong>Department :</strong></label>
                                     <div class="col-xs-12 col-md-8">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-bank"></i>
-                                            </span>
-                                            <select name="department_id" id="department_id" class="form-control" data-error-msg="Department is required!">
-                                                <option value="">Please select department...</option>
-                                                <?php foreach($departments as $department) { ?>
-                                                    <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
+                                        <select name="department_id" id="cbo_department" class="form-control" data-error-msg="Department is required!">
+                                            <option value="0">[ Create New Department ]</option>
+                                            <?php foreach($departments as $department) { ?>
+                                                <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div><br><br>
@@ -749,12 +711,7 @@
                                 <div class="form-group">
                                     <label class="col-xs-12 col-md-4 control-label "><strong>TIN Number:</strong></label>
                                     <div class="col-xs-12 col-md-8">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-file-o"></i>
-                                            </span>
-                                            <input type="text" name="tin_no" id="tin_no" class="form-control" placeholder="TIN Number">
-                                        </div>
+                                        <input type="text" name="tin_no" id="tin_no" class="form-control" placeholder="TIN Number">
                                     </div>
                                 </div>
                             </div>
@@ -771,45 +728,81 @@
 </div>
 
 
-<div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-    <div class="modal-dialog modal-md">
-        <div class="modal-content"><!---content--->
-            <div class="modal-header ">
-                <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
-
+<div id="modal_new_department" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #2ecc71">
+                 <h2 id="department_title" class="modal-title" style="color:white;">Create New Department</h2>
             </div>
-
             <div class="modal-body">
-                <form id="frm_department_new">
+                <form id="frm_department_new" role="form" class="form-horizontal">
+                    <div class="row" style="margin: 1%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <label class=""><font color="red">*</font> Department Name :</label>
+                                <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
 
-                    <div class="form-group">
-                        <label>* Department :</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-users"></i>
-                            </span>
-                            <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Department Description :</label>
-                        <textarea name="department_desc" class="form-control"></textarea>
+
+                    <div class="row" style="margin: 1%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <label class="">Department Description :</label>
+                                <textarea name="department_desc" class="form-control" placeholder="Department Description"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_create_department" class="btn btn-primary">Save</button>
+                <button id="btn_cancel_department" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal_new_department_sp" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #2ecc71">
+                 <h2 id="department_title" class="modal-title" style="color:white;">Create New Department</h2>
+            </div>
+            <div class="modal-body">
+                <form id="frm_department_new_sp" role="form" class="form-horizontal">
+                    <div class="row" style="margin: 1%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <label class=""><font color="red">*</font> Department Name :</label>
+                                <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
+
+                            </div>
+                        </div>
                     </div>
 
+
+                    <div class="row" style="margin: 1%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <label class="">Department Description :</label>
+                                <textarea name="department_desc" class="form-control" placeholder="Department Description"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
                 </form>
-
-
             </div>
-
             <div class="modal-footer">
-                <button id="btn_create_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
-                <button id="btn_close_close_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
+                <button id="btn_create_department_sp" class="btn btn-primary">Save</button>
+                <button id="btn_cancel_department_sp" class="btn btn-default">Cancel</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
-</div><!---modal-->
+</div>
 
 
 
@@ -879,7 +872,7 @@
 
 
 $(document).ready(function(){
-    var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboDepartments; var _cboCustomers; var dt_so;
+    var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboDepartments; var _cboDepartments; var _cboCustomers; var dt_so;
     var oTableItems={
         qty : 'td:eq(0)',
         unit_price : 'td:eq(3)',
@@ -980,6 +973,11 @@ $(document).ready(function(){
             allowClear: true
         });
 
+        _cboDepartment=$("#cbo_department").select2({
+            placeholder: "Please select Department.",
+            allowClear: true
+        });
+
         _cboCustomers=$("#cbo_customers").select2({
             placeholder: "Please select customer.",
             allowClear: true
@@ -992,6 +990,7 @@ $(document).ready(function(){
 
         _cboSalesperson.select2('val',null);
         _cboDepartments.select2('val', null);
+        _cboDepartment.select2('val', null);
         _cboCustomers.select2('val',null);
 
         $('.date-picker').datepicker({
@@ -1217,16 +1216,31 @@ $(document).ready(function(){
         });
 
         //loads modal to create new department
-        _cboDepartments.on("select2:select", function (e) {
-
-            var i=$(this).select2('val');
-
-            if(i==0){ //new departmet
-                //clearFields($('#modal_new_department').find('form'));
-                _cboDepartments.select2('val',null)
+        _cboDepartments.on('select2:select', function(){
+            if (_cboDepartments.val() == 0) {
+                clearFields($('#frm_department_new'));
                 $('#modal_new_department').modal('show');
+                $('#modal_new_salesperson').modal('hide');
             }
+        });
 
+        _cboDepartment.on('select2:select', function(){
+            if (_cboDepartment.val() == 0) {
+                clearFields($('#frm_department_new'));
+                $('#modal_new_department_sp').modal('show');
+                $('#modal_new_salesperson').modal('hide');
+            }
+        });
+
+        $('#btn_cancel_department').on('click', function(){
+            $('#modal_new_department').modal('hide');
+            _cboDepartments.select2('val',null);
+        });
+
+        $('#btn_cancel_department_sp').on('click', function(){
+            $('#modal_new_department_sp').modal('hide');
+            $('#modal_new_salesperson').modal('show');
+            _cboDepartment.select2('val',null);
         });
 
         _cboCustomers.on("select2:select", function (e) {
@@ -1301,6 +1315,37 @@ $(document).ready(function(){
 
         });
 
+        $('#btn_create_department_sp').click(function(){
+            var btn=$(this);
+
+            if(validateRequiredFields($('#frm_department_new_sp'))){
+                var data=$('#frm_department_new_sp').serializeArray();
+
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":"Departments/transaction/create",
+                    "data":data,
+                    "beforeSend" : function(){
+                        showSpinningProgress(btn);
+                    }
+                }).done(function(response){
+                    showNotification(response);
+                    $('#modal_new_department_sp').modal('hide');
+                    $('#modal_new_salesperson').modal('show');
+
+                    var _department=response.row_added[0];
+                    $('#cbo_department').append('<option value="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
+                    $('#cbo_department').select2('val',_department.department_id);
+
+                }).always(function(){
+                    showSpinningProgress(btn);
+                });
+            }
+
+
+        });
+
         //create new customer
         $('#btn_create_customer').click(function(){
             var btn=$(this);
@@ -1336,6 +1381,7 @@ $(document).ready(function(){
 
             $('#cbo_customers').select2('val', null);
             $('#cbo_departments').select2('val', null);
+            $('#cbo_department').select2('val', null);
             $('#cbo_salesperson').select2('val',null);
 
             /*$('#cbo_prodType').select2('val', 3);
@@ -1361,6 +1407,7 @@ $(document).ready(function(){
 
                 $('#cbo_customers').select2('val',data.customer_id);
                 $('#cbo_departments').select2('val',data.department_id);
+                $('#cbo_department').select2('val',data.department_id);
                 $('#cbo_salesperson').select2('val',data.salesperson_id);
 
             });
@@ -1448,6 +1495,7 @@ $(document).ready(function(){
             });
 
             $('#cbo_departments').select2('val',data.department_id);
+            $('#cbo_department').select2('val',data.department_id);
             $('#cbo_customers').select2('val',data.customer_id);
             $('#cbo_salesperson').select2('val',data.salesperson_id);
 
@@ -1779,6 +1827,7 @@ $(document).ready(function(){
         $(f).find('input:first').focus();
         $('#tbl_items > tbody').html('');
         $('#cbo_departments').select2('val', null);
+        $('#cbo_department').select2('val', null);
         $('#cbo_customers').select2('val', null);
         $('#cbo_salesperson').select2('val', null);
         $('#img_user').attr('src','assets/img/anonymous-icon.png');
@@ -1845,11 +1894,11 @@ $(document).ready(function(){
             after_tax+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
         });
 
-        /*var tbl_summary=$('#tbl_sales_invoice_summary');
+        var tbl_summary=$('#tbl_sales_invoice_summary');
         tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,2));
         tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,2));
         tbl_summary.find(oTableDetails.inv_tax_amount).html(accounting.formatNumber(inv_tax_amount,2));
-        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,2)+'</b>');*/
+        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,2)+'</b>');
 
         $('#td_before_tax').html(accounting.formatNumber(before_tax,4));
         $('#td_after_tax').html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
