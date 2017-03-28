@@ -322,7 +322,7 @@ class Sales_invoice extends CORE_Controller
 
                     $m_invoice->begin();
 
-                    $m_invoice->sales_inv_no=$sales_inv_no;
+                    //$m_invoice->sales_inv_no=$sales_inv_no;
                     $m_invoice->customer_id=$this->input->post('customer',TRUE);
                     $m_invoice->department_id=$this->input->post('department',TRUE);
                     $m_invoice->remarks=$this->input->post('remarks',TRUE);
