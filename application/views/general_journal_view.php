@@ -118,7 +118,7 @@
 
 <div id="div_payable_list">
 
-    <div class="panel-group panel-default" id="accordionA">
+    <div class="panel panel-default">
 
 
         <div class="panel panel-default">
@@ -161,94 +161,90 @@
 
 
     <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-default" style=" margin: 20px; border-top: 3px solid #2196f3;">
+        <div class="col-lg-12">
+
+            <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;padding: 1%;margin: 1%;">
                 <!-- <div class="panel-heading">
                     <h2>General Journal</h2>
                     <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body, .panel-footer"}'></div>
                 </div> -->
 
 
-                <div class="panel-body">
-                    <h2>General Journal</h2>
-                    <div class="tab-container tab-top tab-primary">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#general_journal" data-toggle="tab"><i class="fa fa-bars"></i> Transaction</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="general_journal" style="min-height: 300px;">
-
+               
+                       
+                            <b><i class="fa fa-bars"></i> General Journal</b><hr />
 
                                 <form id="frm_journal" role="form" class="form-horizontal">
+                                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+                                        <span><strong><i class="fa fa-bars"></i> Info</strong></span>
+                                        <hr />
 
-                                    <span><strong><i class="fa fa-bars"></i> Info</strong></span>
-                                    <hr />
+                                        <label class="col-lg-2"> * Txn # :</label>
+                                        <div class="col-lg-4">
 
-                                    <label class="col-lg-2"> * Txn # :</label>
-                                    <div class="col-lg-4">
+                                            <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-code"></i>
+                                        </span>
+                                                <input type="text" name="txn_no" class="form-control" placeholder="TXN-YYYYMMDD-XXX" readonly>
 
-                                        <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-code"></i>
-                                    </span>
-                                            <input type="text" name="txn_no" class="form-control" placeholder="TXN-YYYYMMDD-XXX" readonly>
+                                            </div>
+
 
                                         </div>
 
+                                        <label class="col-lg-2"> * Date :</label>
+                                        <div class="col-lg-4">
+                                            <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                                <input type="text" name="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
+                                            </div>
 
-                                    </div>
-
-                                    <label class="col-lg-2"> * Date :</label>
-                                    <div class="col-lg-4">
-                                        <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                            <input type="text" name="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
                                         </div>
 
-                                    </div>
+                                        <br /><br />
 
-                                    <br /><br />
+                                        <label class="col-lg-2"> * Particular :</label>
+                                        <div class="col-lg-10">
+                                            <select id="cbo_particulars" name="particular_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Customer is required." required>
 
-                                    <label class="col-lg-2"> * Particular :</label>
-                                    <div class="col-lg-10">
-                                        <select id="cbo_particulars" name="particular_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Customer is required." required>
+                                                <optgroup label="Customers">
+                                                    <?php foreach($customers as $customer){ ?>
+                                                        <option value='C-<?php echo $customer->customer_id; ?>'><?php echo $customer->customer_name; ?></option>
+                                                    <?php } ?>
+                                                </optgroup>
 
-                                            <optgroup label="Customers">
-                                                <?php foreach($customers as $customer){ ?>
-                                                    <option value='C-<?php echo $customer->customer_id; ?>'><?php echo $customer->customer_name; ?></option>
-                                                <?php } ?>
-                                            </optgroup>
+                                                <optgroup label="Suppliers">
+                                                    <?php foreach($suppliers as $supplier){ ?>
+                                                        <option value='S-<?php echo $supplier->supplier_id; ?>'><?php echo $supplier->supplier_name; ?></option>
+                                                    <?php } ?>
+                                                </optgroup>
 
-                                            <optgroup label="Suppliers">
-                                                <?php foreach($suppliers as $supplier){ ?>
-                                                    <option value='S-<?php echo $supplier->supplier_id; ?>'><?php echo $supplier->supplier_name; ?></option>
-                                                <?php } ?>
-                                            </optgroup>
+                                            </select>
+                                        </div>
 
-                                        </select>
-                                    </div>
+                                        <br /><br />
 
-                                    <br /><br />
-
-                                    <label class="col-lg-2"> * Branch :</label>
-                                    <div class="col-lg-10">
-                                        <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
+                                        <label class="col-lg-2"> * Branch :</label>
+                                        <div class="col-lg-10">
+                                            <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
 
 
 
-                                            <option value="0">[ Create New Department ]</option>
-                                                <?php foreach($departments as $department){ ?>
-                                                    <option value='<?php echo $department->department_id; ?>'><?php echo $department->department_name; ?></option>
-                                                <?php } ?>
+                                                <option value="0">[ Create New Department ]</option>
+                                                    <?php foreach($departments as $department){ ?>
+                                                        <option value='<?php echo $department->department_id; ?>'><?php echo $department->department_name; ?></option>
+                                                    <?php } ?>
 
 
-                                        </select>
-                                    </div>
+                                            </select>
+                                        </div><br /><br />
 
+                                    </div><br />
 
-                                    <br /><br />
+                                <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                                     <span><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
                                     <hr />
 
@@ -314,7 +310,7 @@
                                         </table>
 
                                     </div>
-
+                                </div>
 
                                     <hr />
                                     <label>Remarks :</label><br />
@@ -330,9 +326,6 @@
                                         <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"">Cancel</button>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
 
 
@@ -341,7 +334,7 @@
 
 
 
-                </div>
+                
 
 
                 <table id="table_hidden" class="hidden">

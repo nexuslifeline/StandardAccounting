@@ -37,6 +37,7 @@
         html{
             zoom: 0.8;
             zoom: 80%;
+            overflow-x: hidden;
         }
 
         div.dataTables_filter input { 
@@ -83,7 +84,7 @@
 
                     <ol class="breadcrumb" style="margin-bottom: 0px;">
                         <li><a href="dashboard">Dashboard</a></li>
-                        <li><a href="Sales_detailed_summary">Sales Detailed summary</a></li>
+                        <li><a href="Sales_detailed_summary">Sales Report</a></li>
                     </ol>
 
                     <div class="container-fluid">
@@ -98,8 +99,7 @@
                                                     <div class="panel-body">
                                                         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
                                                             <div class="row">
-
-                                                                <div class="col-lg-3">
+                                                                <div class="col-xs-12 col-lg-4">
                                                                     Period Start * :<br />
                                                                     <div class="input-group">
                                                                         <input type="text" id="txt_date" name="date_from" class="date-picker form-control" value="01/01/<?php echo date("Y"); ?>">
@@ -109,7 +109,7 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col-lg-3">
+                                                                <div class="col-xs-12 col-lg-4">
                                                                     Period End * :<br />
                                                                     <div class="input-group">
                                                                         <input type="text" id="txt_date" name="date_to" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>">
@@ -122,59 +122,230 @@
                                                             </div>
                                                         </div>
                                                         <br />
-                                                        <div class="tab-container tab-top tab-primary">
+                                                        <div class="tab-container tab-left tab-warning">
                                                             <ul class="nav nav-tabs">
-                                                                <li class="active"><a data-toggle="tab" href="#customers">Customers</a></li>
-                                                                <li><a data-toggle="tab" href="#salesman">Salesperson</a></li>
-                                                                <li><a data-toggle="tab" href="#per_product">Products</a></li>
+                                                                <li class="active"><a data-toggle="tab" href="#customers" id="btn_customer">Customers</a></li>
+                                                                <li><a data-toggle="tab" href="#salesman" id="btn_salesman">Salesperson</a></li>
+                                                                <li><a data-toggle="tab" href="#products" id="btn_products">Products</a></li>
                                                             </ul>
                                                             <div class="tab-content">
                                                                 <div id="customers" class="tab-pane fade in active">
-                                                                   <!--  <strong>Search Customers :</strong><br>
-                                                                    <select id="cbo_customers" class="form-control" style="width: 100%;">
-                                                                        <option value="all">[All Customers]</option>
-                                                                        <?php foreach($customers as $customer) { ?>
-                                                                            <option value="<?php echo $customer->customer_id; ?>"><?php echo $customer->customer_name; ?></option>
-                                                                        <?php } ?>
-                                                                    </select> -->
-                                                                    <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_customer_report" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
+                                                                    <div class="tab-container tab-top tab-primary">
+                                                                        <ul class="nav nav-tabs">
+                                                                            <li class="active">
+                                                                                <a data-toggle="tab" href="#customer_detailed">Detailed</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a data-toggle="tab" href="#customer_summary">Summary</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    <div class="tab-content">
+                                                                        <div id="customer_detailed" class="tab-pane fade in active">
+                                                                            <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_customer_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                     <i class="fa fa-print"></i> Print Report</button>
-                                                                    <button class="btn btn-success pull-left" id="btn_refresh" style="text-transform: none; font-family: Tahoma, Georgia, Serif; margin-top: 10px; margin-bottom: 10px;" data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Reload" >
-                                                                    <i class="fa fa-refresh"></i></button>
-                                                                    <table id="tbl_account_subsidiary" style="margin-top: 10px;" class="custom-design table-striped" cellspacing="0" width="100%">
-                                                                        <thead class="">
-                                                                        <tr>
-                                                                            <th>Invoice #</th> 
-                                                                            <th>Date</th> 
-                                                                            <th>Customer</th>
-                                                                            <th>Product Code</th> 
-                                                                            <th>Description</th> 
-                                                                            <th>Unit Price</th> 
-                                                                            <th>Qty</th> 
-                                                                            <th>Total Amount</th> 
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        </tbody>
+                                                                                <table id="tbl_detailed_customer" style="margin-top: 10px;" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                                                    <thead class="">
+                                                                                    <tr>
+                                                                                        <th>Invoice #</th> 
+                                                                                        <th>Date</th> 
+                                                                                        <th>Customer</th>
+                                                                                        <th>Product Code</th> 
+                                                                                        <th>Description</th> 
+                                                                                        <th>Unit Price</th> 
+                                                                                        <th>Qty</th> 
+                                                                                        <th>Total Amount</th> 
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                    </tbody>
 
-                                                                        <tfoot>
-                                                                            <tr>
-                                                                                <td align="left" colspan="7">Current Page Total : </td> 
-                                                                                <td id="td_page_total" align="right"></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="left" colspan="7">Grand Total : </td> 
-                                                                                <td id="td_grand_total" align="right"></td>
-                                                                            </tr>
+                                                                                    <tfoot>
+                                                                                        <tr>
+                                                                                            <td align="left" colspan="7">Current Page Total : </td> 
+                                                                                            <td id="td_page_total_cs_detailed" align="right"></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td align="left" colspan="7">Grand Total : </td> 
+                                                                                            <td id="td_grand_total_cs_detailed" align="right"></td>
+                                                                                        </tr>
 
-                                                                        </tfoot>
-                                                                    </table>
+                                                                                    </tfoot>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div id="customer_summary" class="tab-pane fade in">
+                                                                                <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_customer_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
+                                                                    <i class="fa fa-print"></i> Print Report</button>
+                                                                                <table id="tbl_summary_customer" style="margin-top: 10px;" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                                                    <thead class="">
+                                                                                    <tr>
+                                                                                        <th>Customer Code</th>
+                                                                                        <th>Customer</th>
+                                                                                        <th>Total Sales</th> 
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                    </tbody>
+
+                                                                                    <tfoot>
+                                                                                        <tr>
+                                                                                            <td align="left" colspan="2">Current Page Total : </td> 
+                                                                                            <td id="td_page_total_cs_summary" align="right"></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td align="left" colspan="2">Grand Total : </td> 
+                                                                                            <td id="td_grand_total_cs_summary" align="right"></td>
+                                                                                        </tr>
+
+                                                                                    </tfoot>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <div id="salesman" class="tab-pane fade">
-                                                                    
+                                                                    <div class="tab-container tab-top tab-primary">
+                                                                        <ul class="nav nav-tabs">
+                                                                            <li class="active">
+                                                                                <a data-toggle="tab" href="#salesman_detailed">Detailed</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a data-toggle="tab" href="#salesman_summary">Summary</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <div class="tab-content">
+                                                                            <div id="salesman_detailed" class="tab-pane fade in active">
+                                                                                <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sm_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
+                                                                                <i class="fa fa-print"></i> Print Report</button>
+                                                                                <table id="tbl_detailed_salesman" style="margin-top: 10px;" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                                                    <thead class="">
+                                                                                    <tr>
+                                                                                        <th>Invoice #</th> 
+                                                                                        <th>Date</th> 
+                                                                                        <th>Salesman</th>
+                                                                                        <th>Product Code</th>
+                                                                                        <th>Description</th>
+                                                                                        <th>Unit Price</th>
+                                                                                        <th>Qty</th>
+                                                                                        <th>Total Amount</th>
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                    </tbody>
+
+                                                                                    <tfoot>
+                                                                                        <tr>
+                                                                                            <td align="left" colspan="7">Current Page Total : </td> 
+                                                                                            <td id="td_page_total_sm_detailed" align="right"><b>0.00</b></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td align="left" colspan="7">Grand Total : </td> 
+                                                                                            <td id="td_grand_total_sm_detailed" align="right"><b>0.00</b></td>
+                                                                                        </tr>
+
+                                                                                    </tfoot>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div id="salesman_summary" class="tab-pane fade in">
+                                                                                <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sm_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
+                                                                                <i class="fa fa-print"></i> Print Report</button>
+                                                                                <table id="tbl_summary_salesman" style="margin-top: 10px;" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                                                    <thead class="">
+                                                                                    <tr>
+                                                                                        <th>Salesperson Code</th>
+                                                                                        <th>Salesperson</th>
+                                                                                        <th>Total Invoice Sale</th>
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                    </tbody>
+
+                                                                                    <tfoot>
+                                                                                        <tr>
+                                                                                            <td align="left" colspan="2">Current Page Total : </td> 
+                                                                                            <td id="td_page_total_sm_summary" align="right"><b>0.00</b></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td align="left" colspan="2">Grand Total : </td> 
+                                                                                            <td id="td_grand_total_sm_summary" align="right"><b>0.00</b></td>
+                                                                                        </tr>
+
+                                                                                    </tfoot>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <div id="products" class="tab-pane fade">
-                                                                    
+                                                                    <div class="tab-container tab-top tab-primary">
+                                                                        <ul class="nav nav-tabs">
+                                                                            <li class="active">
+                                                                                <a data-toggle="tab" href="#product_detailed">Detailed</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a data-toggle="tab" href="#product_summary">Summary</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <div class="tab-content">
+                                                                            <div id="product_detailed" class="tab-pane fade in active">
+                                                                                <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_product_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
+                                                                                <i class="fa fa-print"></i> Print Report</button>
+                                                                                <table id="tbl_detailed_product" style="margin-top: 10px;" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                                                    <thead class="">
+                                                                                    <tr>    
+                                                                                        <th>Invoice #</th> 
+                                                                                        <th>Date</th> 
+                                                                                        <th>Product Code</th> 
+                                                                                        <th>Description</th> 
+                                                                                        <th>Unit Price</th> 
+                                                                                        <th>Qty</th> 
+                                                                                        <th>Total Amount</th> 
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                    </tbody>
+
+                                                                                    <tfoot>
+                                                                                        <tr>
+                                                                                            <td align="left" colspan="6">Current Page Total : </td> 
+                                                                                            <td id="td_page_total_p_detailed" align="right"><b>0.00</b></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td align="left" colspan="6">Grand Total : </td> 
+                                                                                            <td id="td_grand_total_p_detailed" align="right"><b>0.00</b></td>
+                                                                                        </tr>
+
+                                                                                    </tfoot>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div id="product_summary" class="tab-pane fade in">
+                                                                                <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_product_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
+                                                                                <i class="fa fa-print"></i> Print Report</button>
+                                                                                <table id="tbl_summary_product" style="margin-top: 10px;" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                                                    <thead class="">
+                                                                                    <tr>
+                                                                                        <th>Product Code</th>
+                                                                                        <th>Description</th>
+                                                                                        <th>Invoice Total Sales</th>
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                    </tbody>
+
+                                                                                    <tfoot>
+                                                                                        <tr>
+                                                                                            <td align="left" colspan="2">Current Page Total : </td> 
+                                                                                            <td id="td_page_total_p_summary" align="right"><b>0.00</b></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td align="left" colspan="2">Grand Total : </td> 
+                                                                                            <td id="td_grand_total_p_summary" align="right"><b>0.00</b></td>
+                                                                                        </tr>
+
+                                                                                    </tfoot>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -233,82 +404,107 @@
 
 <script>
     $(document).ready(function(){
-        var _cboAccounts; var dt; var _cboCustomers;    
+        var _cboAccounts; 
+        var dtCustomerDetailed; 
+        var dtCustomerSummary;
+        var dtSalesmanDetailed;
+        var dtSalesmanSummary; 
+        var dtProductDetailed;
+        var dtProductSummary;
+        var dtProduct; 
+        var type;
         var _date_from = $('input[name="date_from"]');
         var _date_to = $('input[name="date_to"]');
 
 
         var initializeControls=function(){
-
-            // _cboCustomers = $('#cbo_customers').select2({
-            //     placeholder: 'Please Select Customer',
-            //     allowClear: true
-            // });
-
-            // _cboCustomers.select2('val', 'all');
-
             $('.date-picker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,
                 calendarWeeks: true,
                 autoclose: true
-
             });
-
-            reloadList();
-
-            //createToolBarButton();
-
-
-
+            type=2;
+            reloadCustomerList();
+            reloadSalesmanList();
+            reloadProductList();
         }();
 
         var bindEventControls=function(){
             $('.date-picker').on('change',function(){
-                dt.destroy();
-                reloadList();
+                if (type == 1){
+                    dtCustomerDetailed.destroy();
+                    dtCustomerSummary.destroy();
+                    reloadCustomerList();
+                } else if (type == 2) {
+                    dtSalesmanDetailed.destroy();
+                    dtSalesmanSummary.destroy();
+                    reloadSalesmanList();
+                } else {
+                    dtProductDetailed.destroy();
+                    dtProductSummary.destroy();
+                    reloadProductList();
+                }
+                
             });
 
-            // $(document).on('select2:select change',_cboCustomers,function(){
-            //     dt.destroy();
-            //     reloadList();
-            // });
-
-            $(document).on('click','#btn_print_customer_report',function(){
-                window.open('Sales_detailed_summary/transaction/detailed-report?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&cus_id='+_cboCustomers.val());
+            $(document).on('click','#btn_print_customer_detailed',function(){
+                window.open('Sales_detailed_summary/transaction/detailed-report-smcp?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=c');
             });
 
-            $(document).on('click','#btn_refresh',function(){
-                dt.destroy();
-                reloadList();
-                //createToolBarButton();
+            $(document).on('click','#btn_print_customer_summary',function(){
+                window.open('Sales_detailed_summary/transaction/summary-report-smc?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=c');
             });
 
+            $(document).on('click','#btn_print_sm_detailed', function(){
+                window.open('Sales_detailed_summary/transaction/detailed-report-smcp?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=sp');
+            });
 
+            $(document).on('click','#btn_print_sm_summary', function(){
+                window.open('Sales_detailed_summary/transaction/summary-report-smc?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=sp');
+            });
+
+            $(document).on('click','#btn_print_product_detailed', function(){
+                window.open('Sales_detailed_summary/transaction/detailed-report-smcp?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=p');
+            });
+
+            $(document).on('click','#btn_print_product_summary', function(){
+                window.open('Sales_detailed_summary/transaction/summary-report-smc?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=p');
+            });
+
+            $('#btn_customer').click(function(){
+                type=1;
+                dtCustomerDetailed.destroy();
+                dtCustomerSummary.destroy();
+                reloadCustomerList();
+            });
+
+            $('#btn_salesman').click(function(){
+                type=2;
+                dtSalesmanSummary.destroy();
+                dtSalesmanDetailed.destroy();
+                reloadSalesmanList();
+            });
+
+            $('#btn_products').click(function(){
+                type=3;
+                dtProductDetailed.destroy();
+                dtProductSummary.destroy();
+                reloadProductList();
+            });
         }();
 
-        // function createToolBarButton(){
-        //     var _btnPrint='<button class="btn btn-primary" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >'+
-        //         '<i class="fa fa-print"></i> Print Report</button>';
-
-        //     var _btnRefresh='<button class="btn btn-success" id="btn_refresh" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Reload" >'+
-        //         '<i class="fa fa-refresh"></i></button>';
-
-        //     $("div.toolbar").html(_btnPrint+"&nbsp;"+_btnRefresh);
-        // };
-
-        function reloadList(){
-
-            dt=$('#tbl_account_subsidiary').DataTable({
+        function reloadProductList() {  
+            dtProductDetailed=$('#tbl_detailed_product').DataTable({
                 "dom": '<"toolbar">frtip',
                 "bLengthChange":false,
                 "bPaginate":true, 
-                language: { 
-                    "searchPlaceholder": "Search Customer" 
+                language: {     
+                    "searchPlaceholder": "Search Product" 
                 }, 
                 "ajax": {
-                    "url": "Sales_detailed_summary/transaction/per-customer-sales",
+                    "url": "Sales_detailed_summary/transaction/per-sales-detailed",
                     "type": "GET",
                     "bDestroy": true,
                     "data": function ( d ) {
@@ -319,50 +515,178 @@
                     }
                 },
                 "columns": [
-                    { targets:[0],data: "sales_inv_no" }, 
-                    { targets:[1],data: "date_invoice" }, 
-                    {  
-                        visible:false,  
-                        targets:[2],data: "customer_name"  
-                    }, 
-                    { targets:[3],data: "product_code" }, 
+                    { "searchable": false,targets:[0],data: "sales_inv_no" }, 
+                    { "searchable": false,targets:[1],data: "date_invoice" },
+                    { "searchable": true,targets:[2],data: "product_code" }, 
                     {  
                         className: "text-left", 
-                        targets:[4],data: "product_desc"  
+                        "searchable": true,
+                        targets:[3],data: "product_desc"  
                     }, 
                     {  
                         className: "text-right", 
-                        targets:[5],data: "sale_price", 
+                        "searchable": false,targets:[4],data: "sale_price", 
                         render: function(data){ 
                             return accounting.formatNumber(data,2); 
                         }  
                     }, 
-                    { targets:[6],data: "on_hand" }, 
+                    { targets:[5],data: "inv_qty" }, 
                     {
                         className: "text-right", 
-                        targets:[7],data: 
+                        "searchable": false,targets:[6],data: 
                         "total_amount", 
                         render: function(data){ 
                             return '<b>'+accounting.formatNumber(data,2)+'</b>'; 
                         } 
                     } 
                 ],
-                "order": [[ 2, 'asc' ]], 
-                "drawCallback": function ( settings ) { 
-                    var api = this.api(); 
-                    var rows = api.rows( {page:'current'} ).nodes(); 
-                    var last=null; 
-          
-                    api.column(2, {page:'current'} ).data().each( function ( group, i ) { 
-                        if ( last !== group ) { 
-                            $(rows).eq( i ).before( 
-                                '<tr class="group"><td colspan="7">'+group+'</td></tr>' 
-                            ); 
-          
-                            last = group; 
-                        } 
-                    } ); 
+                "footerCallback": function ( row, data, start, end, display ) {
+                    var api = this.api(), data;
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function ( i ) {
+                        return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '')*1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    // Total over all pages
+                    total = api
+                        .column( 6 )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+
+                    // Total over this page
+                    pageTotal = api
+                        .column( 6, { page: 'current'} )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+
+                    $('#td_page_total_p_detailed').html('<b>'+accounting.formatNumber(pageTotal,2)+'</b>');
+                    $('#td_grand_total_p_detailed').html('<b>'+accounting.formatNumber(total,2)+'</b>');
+                }
+            });
+
+            dtProductSummary=$('#tbl_summary_product').DataTable({
+                "dom": '<"toolbar">frtip',
+                "bLengthChange":false,
+                "bPaginate":true, 
+                language: {     
+                    "searchPlaceholder": "Search Product" 
                 }, 
+                "ajax": {
+                    "url": "Sales_detailed_summary/transaction/product-sales-summary",
+                    "type": "GET",
+                    "bDestroy": true,
+                    "data": function ( d ) {
+                        return $.extend( {}, d, {
+                            "startDate":_date_from.val(),
+                            "endDate":_date_to.val()
+                        });
+                    }
+                },
+                "columns": [
+                    { "searchable": true,targets:[0],data: "product_code" }, 
+                    {  
+                        className: "text-left", 
+                        "searchable": true,
+                        targets:[1],data: "product_desc"  
+                    },
+                    {
+                        className: "text-right", 
+                        "searchable": false,targets:[2],data: 
+                        "total_amount", 
+                        render: function(data){ 
+                            return '<b>'+accounting.formatNumber(data,2)+'</b>'; 
+                        } 
+                    } 
+                ],
+                "footerCallback": function ( row, data, start, end, display ) {
+                    var api = this.api(), data;
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function ( i ) {
+                        return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '')*1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    // Total over all pages
+                    total = api
+                        .column( 2 )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+
+                    // Total over this page
+                    pageTotal = api
+                        .column( 2, { page: 'current'} )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+
+                    $('#td_page_total_p_summary').html('<b>'+accounting.formatNumber(pageTotal,2)+'</b>');
+                    $('#td_grand_total_p_summary').html('<b>'+accounting.formatNumber(total,2)+'</b>');
+                }
+            });
+        };  
+
+        function reloadSalesmanList() {
+            dtSalesmanDetailed=$('#tbl_detailed_salesman').DataTable({
+                "dom": '<"toolbar">frtip',
+                "bLengthChange":false,
+                "bPaginate":true, 
+                language: { 
+                    "searchPlaceholder": "Search Salesperson" 
+                }, 
+                "ajax": {
+                    "url": "Sales_detailed_summary/transaction/per-sales-detailed",
+                    "type": "GET",
+                    "bDestroy": true,
+                    "data": function ( d ) {
+                        return $.extend( {}, d, {
+                            "startDate":_date_from.val(),
+                            "endDate":_date_to.val()
+                        });
+                    }
+                },
+                "columns": [
+                    { "searchable": false,targets:[0],data: "sales_inv_no" }, 
+                    { "searchable": false,targets:[1],data: "date_invoice" }, 
+                    {
+                        targets:[2],data: "salesperson_name"  
+                    }, 
+                    { "searchable": false,targets:[3],data: "product_code" }, 
+                    {  
+                        className: "text-left", 
+                        "searchable": false,
+                        targets:[4],data: "product_desc"  
+                    }, 
+                    {  
+                        className: "text-right", 
+                        "searchable": false,targets:[5],data: "sale_price", 
+                        render: function(data){ 
+                            return accounting.formatNumber(data,2); 
+                        }  
+                    }, 
+                    { targets:[6],data: "inv_qty" }, 
+                    {
+                        className: "text-right", 
+                        "searchable": false,targets:[7],data: 
+                        "total_amount", 
+                        render: function(data){ 
+                            return '<b>'+accounting.formatNumber(data,2)+'</b>'; 
+                        } 
+                    } 
+                ],
                 "footerCallback": function ( row, data, start, end, display ) {
                     var api = this.api(), data;
 
@@ -390,20 +714,226 @@
                             return intVal(a) + intVal(b);
                         }, 0 );
 
-                     $('#td_page_total').html('<b>'+accounting.formatNumber(pageTotal,2)+'</b>');
-                    $('#td_grand_total').html('<b>'+accounting.formatNumber(total,2)+'</b>');
-
-
-
+                    $('#td_page_total_sm_detailed').html('<b>'+accounting.formatNumber(pageTotal,2)+'</b>');
+                    $('#td_grand_total_sm_detailed').html('<b>'+accounting.formatNumber(total,2)+'</b>');
                 }
+            });
 
+            dtSalesmanSummary=$('#tbl_summary_salesman').DataTable({
+                "dom": '<"toolbar">frtip',
+                "bLengthChange":false,
+                "bPaginate":true, 
+                language: { 
+                    "searchPlaceholder": "Search Salesperson" 
+                }, 
+                "ajax": {
+                    "url": "Sales_detailed_summary/transaction/per-sales-summary",
+                    "type": "GET",
+                    "bDestroy": true,
+                    "data": function ( d ) {
+                        return $.extend( {}, d, {
+                            "startDate":_date_from.val(),
+                            "endDate":_date_to.val()
+                        });
+                    }
+                },
+                "columns": [
+                    {   "searchable": false,
+                        targets:[0],data: "salesperson_code" 
+                    },
+                    {
+                        targets:[1],data: "salesperson_name" 
+                    },
+                    {  
+                        className: "text-right", 
+                        "searchable": false,
+                        targets:[2],data: "total_amount", 
+                        render: function(data){ 
+                            return accounting.formatNumber(data,2); 
+                        }  
+                    }
+                ],
+                "footerCallback": function ( row, data, start, end, display ) {
+                    var api = this.api(), data;
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function ( i ) {
+                        return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '')*1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    // Total over all pages
+                    total = api
+                        .column( 2 )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+
+                    // Total over this page
+                    pageTotal = api
+                        .column( 2, { page: 'current'} )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+
+                     $('#td_page_total_sm_summary').html('<b>'+accounting.formatNumber(pageTotal,2)+'</b>');
+                    $('#td_grand_total_sm_summary').html('<b>'+accounting.formatNumber(total,2)+'</b>');
+                }
             });
         };
 
 
+        function reloadCustomerList(){
+            dtCustomerDetailed=$('#tbl_detailed_customer').DataTable({
+                "dom": '<"toolbar">frtip',
+                "bLengthChange":false,
+                "bPaginate":true, 
+                language: { 
+                    "searchPlaceholder": "Search Customer" 
+                }, 
+                "ajax": {
+                    "url": "Sales_detailed_summary/transaction/per-sales-detailed",
+                    "type": "GET",
+                    "bDestroy": true,
+                    "data": function ( d ) {
+                        return $.extend( {}, d, {
+                            "startDate":_date_from.val(),
+                            "endDate":_date_to.val()
+                        });
+                    }
+                },
+                "columns": [
+                    { "searchable": false,targets:[0],data: "sales_inv_no" }, 
+                    { "searchable": false,targets:[1],data: "date_invoice" }, 
+                    {
+                        targets:[2],data: "customer_name"  
+                    }, 
+                    { "searchable": false,targets:[3],data: "product_code" }, 
+                    {  
+                        className: "text-left", 
+                        "searchable": false,
+                        targets:[4],data: "product_desc"  
+                    }, 
+                    {  
+                        className: "text-right", 
+                        "searchable": false,targets:[5],data: "sale_price", 
+                        render: function(data){ 
+                            return accounting.formatNumber(data,2); 
+                        }  
+                    }, 
+                    { targets:[6],data: "inv_qty" }, 
+                    {
+                        className: "text-right", 
+                        "searchable": false,targets:[7],data: 
+                        "total_amount", 
+                        render: function(data){ 
+                            return '<b>'+accounting.formatNumber(data,2)+'</b>'; 
+                        } 
+                    } 
+                ],
+                "footerCallback": function ( row, data, start, end, display ) {
+                    var api = this.api(), data;
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function ( i ) {
+                        return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '')*1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    // Total over all pages
+                    total = api
+                        .column( 7 )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+
+                    // Total over this page
+                    pageTotal = api
+                        .column( 7, { page: 'current'} )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+
+                    $('#td_page_total_cs_detailed').html('<b>'+accounting.formatNumber(pageTotal,2)+'</b>');
+                    $('#td_grand_total_cs_detailed').html('<b>'+accounting.formatNumber(total,2)+'</b>');
+                }
+            });
 
 
+            dtCustomerSummary=$('#tbl_summary_customer').DataTable({
+                "dom": '<"toolbar">frtip',
+                "bLengthChange":false,
+                "bPaginate":true, 
+                language: { 
+                    "searchPlaceholder": "Search Customer" 
+                }, 
+                "ajax": {
+                    "url": "Sales_detailed_summary/transaction/per-sales-summary",
+                    "type": "GET",
+                    "bDestroy": true,
+                    "data": function ( d ) {
+                        return $.extend( {}, d, {
+                            "startDate":_date_from.val(),
+                            "endDate":_date_to.val()
+                        });
+                    }
+                },
+                "columns": [
+                    {   "searchable": false,
+                        targets:[0],data: "customer_code" 
+                    },
+                    {
+                        targets:[1],data: "customer_name" 
+                    },
+                    {  
+                        className: "text-right", 
+                        "searchable": false,
+                        targets:[2],data: "total_amount", 
+                        render: function(data){ 
+                            return accounting.formatNumber(data,2); 
+                        }  
+                    }
+                ],
+                "footerCallback": function ( row, data, start, end, display ) {
+                    var api = this.api(), data;
 
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function ( i ) {
+                        return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '')*1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    // Total over all pages
+                    total = api
+                        .column( 2 )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+
+                    // Total over this page
+                    pageTotal = api
+                        .column( 2, { page: 'current'} )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+
+                     $('#td_page_total_cs_summary').html('<b>'+accounting.formatNumber(pageTotal,2)+'</b>');
+                    $('#td_grand_total_cs_summary').html('<b>'+accounting.formatNumber(total,2)+'</b>');
+                }
+            });
+        };
     });
 </script>
 

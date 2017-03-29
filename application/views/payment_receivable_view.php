@@ -42,7 +42,7 @@
             float: left;
         }
 
-        #tbl_receivables td,#tbl_receivables tr,#tbl_receivables th{
+        #tbl_items td,#tbl_items tr,#tbl_items th{
             table-layout: fixed;
             border: 1px solid gray;
             border-collapse: collapse;
@@ -148,7 +148,7 @@
 
                     <ol class="breadcrumb"  style="margin-bottom: 0px;">
                         <li><a href="Dashboard">Dashboard</a></li>
-                        <li><a href="Payable_payments">AP Payments</a></li>
+                        <li><a href="Payable_payments">AR Payments</a></li>
                     </ol>
 
 
@@ -164,8 +164,8 @@
                                             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Collection Entry</b>
                                         </div>
                                         <div class="panel-body table-responsive">
-                                            <table id="tbl_payments" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                                <thead class="table-erp">
+                                            <table id="tbl_payments" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                <thead class="">
                                                 <tr>
                                                     <th></th>
                                                     <th>Receipt #</th>
@@ -327,7 +327,7 @@
 
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <label><strong>Please select Customer first * :</strong></label>
+                                                        <label class="control-label"><strong>Please select Customer first * :</strong></label>
                                                         <select name="customer_id" id="cbo_Customers" data-error-msg="Customer is required." required>
                                                             <?php foreach($customers as $customer){ ?>
                                                                 <option value="<?php echo $customer->customer_id; ?>"><?php echo $customer->customer_name; ?></option>
@@ -337,17 +337,17 @@
                                                 </div>
 
                                                 <br />
-
-
+                                                
                                                 <div class="table-responsive">
-                                                    <table id="tbl_receivables" class="table table-striped table-bordered" cellspacing="0" width="100%" style="font-font:tahoma;border: 1px solid gray;">
-                                                        <thead class="table-erp">
-                                                        <tr>
+                                                    <table id="tbl_items" class="custom-design table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
+
+                                                        <thead class="">    
+                                                        <tr>        
 
                                                             <th width="12%">Invoice #</th>
                                                             <th width="12%">Due Date</th>
                                                             <th width="30%">Remarks</th>
-                                                            <th width="12%" style="text-align: right;">Payable</th>
+                                                            <th width="12%" style="text-align: right;">Amount due</th>
                                                             <th width="14%">Payment</th>
                                                             <th width="5%">Action</th>
                                                         </tr>
@@ -368,7 +368,11 @@
 
                                                         </tfoot>
                                                     </table>
+
+
                                                 </div>
+
+
 
 
                                             </div>
@@ -722,12 +726,12 @@
                     "type":"GET",
                     "url":"Customers/transaction/receivables?id="+customer_id,
                     "beforeSend": function(){
-                        var obj=$("#tbl_receivables");
+                        var obj=$("#tbl_items");
                         showTableLoader(obj);
                         resetSummaryDetails();
                     }
                 }).done(function(response){
-                    $('#tbl_receivables > tbody').html(response);
+                    $('#tbl_items > tbody').html(response);
                     reInitializeNumeric();
                     reComputeDetails();
                 });
@@ -779,14 +783,14 @@
             });
 
 
-            $('#tbl_receivables > tbody').on('click','button.btn_set_amount',function(e){
+            $('#tbl_items > tbody').on('click','button.btn_set_amount',function(e){
                 var row=$(this).closest('tr');
                 var payableAmount=getFloat(row.find('input[name="receivable_amount[]"]').val());
                 row.find('input[name="payment_amount[]"]').val(accounting.formatNumber(payableAmount,2));
                 reComputeDetails();
             });
 
-            $('#tbl_receivables > tbody').on('keyup','input.numeric',function(e){
+            $('#tbl_items > tbody').on('keyup','input.numeric',function(e){
                 var row=$(this).closest('tr');
 
                 var payment=getFloat($(this).val());
@@ -893,7 +897,7 @@
             $('input:not(.date-picker),textarea',f).val('');
 
             $(f).find('input:first').focus();
-            $('#tbl_receivables > tbody').html('');
+            $('#tbl_items > tbody').html('');
 
             _cboCustomers.select2('val',null);
 
@@ -912,7 +916,7 @@
         };
 
         var reComputeDetails=function(){
-            var rows=$('#tbl_receivables > tbody > tr');
+            var rows=$('#tbl_items > tbody > tr');
             var total_payment=0; var total_payable=0;
 
             $.each(rows,function(i,value){

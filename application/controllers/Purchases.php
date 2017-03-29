@@ -208,14 +208,14 @@ class Purchases extends CORE_Controller
                 case 'create':
                     $m_purchases=$this->Purchases_model;
 
-                    if(count($m_purchases->get_list(array('po_no'=>$this->input->post('po_no',TRUE))))>0){
+                    /*if(count($m_purchases->get_list(array('po_no'=>$this->input->post('po_no',TRUE))))>0){
                         $response['title'] = 'Invalid!';
                         $response['stat'] = 'error';
                         $response['msg'] = 'PO # already exists.';
 
                         echo json_encode($response);
                         exit;
-                    }
+                    }*/
 
 
                     $m_purchases->begin();

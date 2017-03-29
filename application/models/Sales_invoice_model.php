@@ -164,7 +164,7 @@ class Sales_invoice_model extends CORE_Model
         return $this->db->query($sql)->result();
     }
 
-    function get_customers_sales_detailed($start=null,$end=null){ 
+    function get_sales_detailed_list($start=null,$end=null){ 
         $sql="SELECT  
                 si.sales_invoice_id, 
                 si.sales_inv_no, 
@@ -175,22 +175,61 @@ class Sales_invoice_model extends CORE_Model
                 p.product_code, 
                 p.product_desc, 
                 p.sale_price, 
-                p.on_hand, 
-                ((p.sale_price) * (p.on_hand)) as total_amount 
+                sii.inv_qty, 
+                s.salesperson_id,
+                s.salesperson_code,
+                CONCAT(s.firstname,' ',s.lastname) AS salesperson_name,
+                ((p.sale_price) * (sii.inv_qty)) as total_amount 
             FROM 
                 (sales_invoice AS si 
                 LEFT JOIN customers AS c ON c.customer_id = si.customer_id) 
-                    INNER JOIN 
-                sales_invoice_items AS sii ON si.sales_invoice_id = sii.sales_invoice_id 
-                LEFT JOIN products AS p ON p.product_id=sii.product_id 
+                INNER JOIN sales_invoice_items AS sii ON si.sales_invoice_id = sii.sales_invoice_id 
+                LEFT JOIN products AS p ON p.product_id=sii.product_id
+                LEFT JOIN salesperson AS s ON s.salesperson_id=si.salesperson_id
             WHERE 
                 si.is_active = TRUE AND si.is_deleted = FALSE 
                 AND si.date_invoice BETWEEN '$start' AND '$end' 
-            ORDER BY si.customer_id ASC"; 
+            ORDER BY si.sales_inv_no ASC"; 
         return $this->db->query($sql)->result();
     }
 
+    function get_sales_summary_list($start=null,$end=null){ 
+        $sql="SELECT
+                  si.customer_id, 
+                  c.customer_code,
+                  c.customer_name,
+                  s.salesperson_code,
+                  CONCAT(s.firstname,' ',s.lastname) AS salesperson_name,
+                  SUM((p.sale_price) * (sii.inv_qty)) as total_amount 
+              FROM 
+                  (sales_invoice AS si 
+                  LEFT JOIN customers AS c ON c.customer_id = si.customer_id) 
+                  INNER JOIN sales_invoice_items AS sii ON si.sales_invoice_id = sii.sales_invoice_id 
+                  LEFT JOIN products AS p ON p.product_id=sii.product_id 
+                  LEFT JOIN salesperson AS s ON s.salesperson_id=si.salesperson_id
+              WHERE 
+                  si.is_active = TRUE AND si.is_deleted = FALSE 
+                  AND si.date_invoice BETWEEN '$start' AND '$end'
+              GROUP BY si.customer_id"; 
+        return $this->db->query($sql)->result();
+    }
 
+    function get_sales_product_summary_list($start=null,$end=null){
+        $sql="SELECT
+                  si.customer_id,
+                  p.product_code,
+                  p.product_desc,
+                  SUM((p.sale_price) * (sii.inv_qty)) as total_amount 
+              FROM 
+                  (sales_invoice AS si) 
+                  INNER JOIN sales_invoice_items AS sii ON si.sales_invoice_id = sii.sales_invoice_id 
+                  LEFT JOIN products AS p ON p.product_id=sii.product_id
+              WHERE 
+                  si.is_active = TRUE AND si.is_deleted = FALSE 
+                  AND si.date_invoice BETWEEN '$start' AND '$end'
+              GROUP BY sii.product_id";
+         return $this->db->query($sql)->result();
+    }
 }
 
 

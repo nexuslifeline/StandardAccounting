@@ -72,7 +72,7 @@
             </tr><hr>
         </thead>
         <tbody>
-            <?php $sum=0; 
+            <?php
                 foreach($sales_details as $detail) {  
                     if($detail->customer_id==$customer->customer_id) { ?> 
                         <tr>
@@ -85,7 +85,6 @@
                             <td style="text-align: right;"><?php echo number_format($detail->total_amount,2); ?></td>
                         </tr>
                     <?php
-                    $sum+=$summary->total_after_tax; 
                     }
                 }
             ?>
@@ -93,7 +92,6 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><h2><?php echo number_format($sum,2); ?></h2></td>
             </tr>
         </tbody>
     </table>

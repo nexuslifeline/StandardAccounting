@@ -95,7 +95,7 @@
                                 <li class="<?php echo (in_array('6-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="users">Create User Account</a></li>
                                 <li class="<?php echo (in_array('6-6',$this->session->user_rights)?'':'hidden'); ?>"><a href="company">Setup Company Info</a></li>
                                 <li class="<?php echo (in_array('6-7',$this->session->user_rights)?'':'hidden'); ?>"><a href="Check_layout">Setup Check Layout</a></li>
-
+                                <li class="<?php echo (in_array('6-8',$this->session->user_rights)?'':'hidden'); ?>"><a href="Recurring_template">Recurring Template</a></li>
                             </ul>
                         </li>
 

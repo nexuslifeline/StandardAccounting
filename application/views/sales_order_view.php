@@ -295,7 +295,7 @@
                             <?php $customers = $this->db->where('is_active',TRUE);?>
                             <?php $customers = $this->db->get('customers');?>
                             <?php foreach($customers->result() as $customer){ ?>
-                                <option value="<?php echo $customer->customer_id; ?>"><?php echo $customer->customer_name; ?></option>
+                            <option value="<?php echo $customer->customer_id; ?>"><?php echo $customer->customer_name; ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -313,13 +313,13 @@
                         Order Date : <br />
                         <div class="input-group">
 
-                            <input type="text" name="date_order" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Order" data-error-msg="Please set the date this items are ordered!" required>
-                                 <span class="input-group-addon">
+                            <input type="text" id="order_default" name="date_order" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Order" data-error-msg="Please set the date this items are ordered!" required>
+                                <span class="input-group-addon">
                                      <i class="fa fa-calendar"></i>
                                 </span>
                         </div>
                     </div>
-                </div>
+            </div>
 
 
 
@@ -336,12 +336,10 @@
             <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
         </div><br />
 
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 
             <form id="frm_items">
                 <div class="table-responsive">
-                    <div class="table-responsive"  style="min-height: 200px;">
                         <table id="tbl_items" class="custom-design table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
 
                         <thead class="">
@@ -434,7 +432,7 @@
             </div>
 
 
-        </div>
+       
     </div>
 
 
@@ -642,6 +640,14 @@
                 <div class="row">
                     <form id="frm_salesperson" role="form">
                         <div class="">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Salesperson Code :</strong></label>
+                                    <div class="col-xs-12 col-md-8">
+                                        <input type="text" name="salesperson_code" class="form-control" placeholder="Salesperson Code" data-error-msg="Salesperson Code is required!" required>
+                                    </div>
+                                </div>
+                            </div><br><br>
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> First name :</strong></label>
@@ -1007,7 +1013,7 @@ $(document).ready(function(){
                     $('#modal_new_salesperson').modal('hide');
 
                     var _salesperson=response.row_added[0];
-                    $('#cbo_salesperson').append('<option value="'+_salesperson.salesperson_id+'" selected>'+ _salesperson.acr_name + ' - ' +_salesperson.fullname+'</option>');
+                    $('#cbo_salesperson').append('<option value="'+_salesperson.salesperson_id+'" selected>'+ _salesperson.salesperson_code + ' - ' +_salesperson.fullname+'</option>');
                     $('#cbo_salesperson').select2('val',_salesperson.salesperson_id);
 
                 }).always(function(){
@@ -1050,99 +1056,99 @@ $(document).ready(function(){
 
         var _objTypeHead=$('#custom-templates .typeahead');
 
-    _objTypeHead.typeahead(null, {
-        name: 'products',
-        display: 'product_code',
-        source: products,
-        templates: {
-            header: [
-                '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="left" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
-            ].join('\n'),
+        _objTypeHead.typeahead(null, {
+                name: 'products',
+                display: 'product_code',
+                source: products,
+                templates: {
+                    header: [
+                        '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
+                    ].join('\n'),
 
-            suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="10%" align="left" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
+                    suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="10%" align="right" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
 
-        }
-    }).on('keyup', this, function (event) {
-            if(_objTypeHead.typeahead('val') == '')
-                return false;
-            if (event.keyCode == 13) {
-                //$('.tt-suggestion:first').click();
-                _objTypeHead.typeahead('close');
-                _objTypeHead.typeahead('val');
-            }
-    }).bind('typeahead:select', function(ev, suggestion) {
-
-
-            //var tax_rate=suggestion.tax_rate; // tax rate is based the tax type set to selected product
-            //var _defLookUp=_lookUpPrice.select2('val');
-
-            /*if(_defLookUp=="2"){
-                total=getFloat(suggestion.distributor_price);
-            }else if(_defLookUp=="3"){
-                total=getFloat(suggestion.dealer_price);
-            }
-            else if(_defLookUp=="4"){
-                total=getFloat(suggestion.public_price);
-            }
-            else if(_defLookUp=="5"){
-                total=getFloat(suggestion.discounted_price);
-            }
-            else if(_defLookUp=="6"){
-                total=getFloat(suggestion.purchase_cost);
-            }else{
-                total=getFloat(suggestion.sale_price);
-            }*/
-            //alert(suggestion.sale_price);
-            var tax_rate=suggestion.tax_rate; //base on the tax rate set to current product
-
-            //choose what purchase cost to be use
-            var sale_price=0.00;
-            sale_price=suggestion.sale_price;
-            //alert(suggestion.sale_price);
-            var total=getFloat(sale_price);
-            var net_vat=0;
-            var vat_input=0;
-
-            if(suggestion.is_tax_exempt=="0"){ //not tax excempt
-                net_vat=total/(1+(getFloat(tax_rate)/100));
-                vat_input=total-net_vat;
-            }else{
-                tax_rate=0;
-                net_vat=total;
-                vat_input=0;
-            }
+                }
+            }).on('keyup', this, function (event) {
+                if (_objTypeHead.typeahead('val') == '')
+                    return false;
+                if (event.keyCode == 13) {
+                    //$('.tt-suggestion:first').click();
+                    _objTypeHead.typeahead('close');
+                    _objTypeHead.typeahead('val','');
+                }
+            }).bind('typeahead:select', function(ev, suggestion) {
 
 
-            $('#tbl_items > tbody').append(newRowItem({
-                so_qty : "1",
-                product_code : suggestion.product_code,
-                unit_id : suggestion.unit_id,
-                unit_name : suggestion.unit_name,
-                size : suggestion.size,
-                product_id: suggestion.product_id,
-                product_desc : suggestion.product_desc,
-                so_line_total_discount : "0.00",
-                tax_exempt : false,
-                so_tax_rate : tax_rate,
-                so_price : total,
-                so_discount : "0.00",
-                tax_type_id : null,
-                so_line_total_price : total,
-                so_non_tax_amount: net_vat,
-                so_tax_amount:vat_input,
-                batch_no : suggestion.batch_no,
-                exp_date : suggestion.exp_date
-            }));
+                //var tax_rate=suggestion.tax_rate; // tax rate is based the tax type set to selected product
+                //var _defLookUp=_lookUpPrice.select2('val');
+
+                /*if(_defLookUp=="2"){
+                    total=getFloat(suggestion.distributor_price);
+                }else if(_defLookUp=="3"){
+                    total=getFloat(suggestion.dealer_price);
+                }
+                else if(_defLookUp=="4"){
+                    total=getFloat(suggestion.public_price);
+                }
+                else if(_defLookUp=="5"){
+                    total=getFloat(suggestion.discounted_price);
+                }
+                else if(_defLookUp=="6"){
+                    total=getFloat(suggestion.purchase_cost);
+                }else{
+                    total=getFloat(suggestion.sale_price);
+                }*/
+                //alert(suggestion.sale_price);
+                var tax_rate=suggestion.tax_rate; //base on the tax rate set to current product
+
+                //choose what purchase cost to be use
+                var sale_price=0.00;
+                sale_price=suggestion.sale_price;
+                //alert(suggestion.sale_price);
+                var total=getFloat(sale_price);
+                var net_vat=0;
+                var vat_input=0;
+
+                if(suggestion.is_tax_exempt=="0"){ //not tax excempt
+                    net_vat=total/(1+(getFloat(tax_rate)/100));
+                    vat_input=total-net_vat;
+                }else{
+                    tax_rate=0;
+                    net_vat=total;
+                    vat_input=0;
+                }
 
 
+                $('#tbl_items > tbody').append(newRowItem({
+                    so_qty : "1",
+                    product_code : suggestion.product_code,
+                    unit_id : suggestion.unit_id,
+                    unit_name : suggestion.unit_name,
+                    size : suggestion.size,
+                    product_id: suggestion.product_id,
+                    product_desc : suggestion.product_desc,
+                    so_line_total_discount : "0.00",
+                    tax_exempt : false,
+                    so_tax_rate : tax_rate,
+                    so_price : total,
+                    so_discount : "0.00",
+                    tax_type_id : null,
+                    so_line_total_price : total,
+                    so_non_tax_amount: net_vat,
+                    so_tax_amount:vat_input,
+                    batch_no : suggestion.batch_no,
+                    exp_date : suggestion.exp_date
+                }));
 
 
 
-            reInitializeNumeric();
-            reComputeTotal();
 
 
-    });
+                reInitializeNumeric();
+                reComputeTotal();
+
+
+        });
 
         $('div.tt-menu').on('click','table.tt-suggestion',function(){
             _objTypeHead.typeahead('val','');
@@ -1332,6 +1338,7 @@ $(document).ready(function(){
             //$('.toggle-fullscreen').click();
             //$('#cbo_prodType').select2('val', 3);
             $('#cbo_salesperson').select2('val',null);
+            $('#order_default').datepicker('setDate', 'today');
             clearFields($('#frm_sales_order'));
 
             ///$('.sales_order_title').html('New Sales Order');
@@ -1519,22 +1526,35 @@ $(document).ready(function(){
         });
 
         //create new customer
+
         $('#btn_create_customer').click(function(){
             var btn=$(this);
 
             if(validateRequiredFields($('#frm_customer'))){
                 var data=$('#frm_customer').serializeArray();
-                createCustomer().done(function(response){
+
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":"Customers/transaction/create",
+                    "data":data,
+                    "beforeSend" : function(){
+                        showSpinningProgress(btn);
+                    }
+                }).done(function(response){
                     showNotification(response);
                     $('#modal_new_customer').modal('hide');
+
                     var _customer=response.row_added[0];
-                    $('#cbo_customers').append('<option value="'+_customer.customer_id+'" selected>'+_customer.customer_name+'</option>');
+                    $('#cbo_customers').append('<option value="'+_customer.customer_id+'" selected>'+ _customer.customer_name + '</option>');
                     $('#cbo_customers').select2('val',_customer.customer_id);
-                    clearFields($('#modal_new_customer').find('form'));
+
                 }).always(function(){
                     showSpinningProgress(btn);
                 });
             }
+
+
         });
 
         $('#btn_browse').click(function(event){
@@ -1694,7 +1714,7 @@ $(document).ready(function(){
     };
 
     var clearFields=function(f){
-        $('input,textarea,select',f).val('');
+        $('input,textarea,select,input:not(.date-picker)',f).val('');
         $(f).find('input:first').focus();
         $('#tbl_items > tbody').html('');
         $('#cbo_departments').select2('val', null);

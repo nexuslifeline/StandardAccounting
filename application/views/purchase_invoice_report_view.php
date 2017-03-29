@@ -306,8 +306,10 @@
 
         function initializeDataTable(){
                 dtSummary=tbl_summary.DataTable({   
+                    "dom": '<"toolbar">frtip',
                     "bLengthChange":false,
                     "bPaginate":false,
+                    "language": { searchPlaceholder: "Search" },
                     "ajax": {
                         "url":"Purchase_Invoice_Report/transaction/summary",
                         "type":"GET",
@@ -369,8 +371,10 @@
                 });
 
                 dtDetailed=tbl_detailed.DataTable({
+                    "dom": '<"toolbar">frtip',
                     "bLengthChange":false,
                     "bPaginate":false,
+                    "language": { searchPlaceholder: "Search" },
                     "ajax": {
                         "url":"Purchase_Invoice_Report/transaction/detailed",
                         "type":"GET",

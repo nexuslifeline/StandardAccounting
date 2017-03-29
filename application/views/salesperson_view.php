@@ -200,6 +200,14 @@
                                         <div class="">
                                             <div class="col-xs-12">
                                                 <div class="form-group">
+                                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Salesperson Code :</strong></label>
+                                                    <div class="col-xs-12 col-md-8">
+                                                        <input type="text" name="salesperson_code" class="form-control" placeholder="Salesperson Code" data-error-msg="Salesperson Code is required!" required>
+                                                    </div>
+                                                </div>
+                                            </div><br><br>
+                                            <div class="col-xs-12">
+                                                <div class="form-group">
                                                     <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> First name :</strong></label>
                                                     <div class="col-xs-12 col-md-8">
                                                         <input type="text" name="firstname" class="form-control" placeholder="Firstname" data-error-msg="Firstname is required!" required>

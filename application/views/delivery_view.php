@@ -268,7 +268,7 @@
                     Invoice Date :<br />
                     <div class="input-group">
 
-                        <input type="text" name="date_delivered" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Due Date" data-error-msg="Delivery Date is required!" required>
+                        <input type="text" name="date_delivered" id="order_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Due Date" data-error-msg="Delivery Date is required!" required>
                          <span class="input-group-addon">
                              <i class="fa fa-calendar"></i>
                         </span>
@@ -297,7 +297,7 @@
                 <div class="col-sm-2">
                     Due Date:<br />
                     <div class="input-group">
-                        <input type="text" name="date_due" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Due Date" data-error-msg="Due Date is required!" required>
+                        <input type="text" name="date_due" id="due_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Due Date" data-error-msg="Due Date is required!" required>
                         <span class="input-group-addon">
                                  <i class="fa fa-calendar"></i>
                         </span>
@@ -1062,7 +1062,6 @@ $(document).ready(function(){
                 var total=getFloat(suggestion.purchase_cost);
                 var net_vat=0;
                 var vat_input=0;
-                alert(suggestion.tax_rate);
 
                 if(suggestion.is_tax_exempt=="0"){ //this is not excempted to tax
                     net_vat=total/(1+(getFloat(tax_rate)/100));
@@ -1255,6 +1254,8 @@ $(document).ready(function(){
             _txnMode="new";
             //$('.toggle-fullscreen').click();
             clearFields($('#frm_deliveries'));
+            $('#order_default').datepicker('setDate', 'today');
+            $('#due_default').datepicker('setDate', 'today');
             showList(false);
         });
 

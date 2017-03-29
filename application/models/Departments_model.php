@@ -25,7 +25,7 @@ class Departments_model extends CORE_Model {
 
         //return;
         $sql="INSERT INTO
-                  departments(department_id,department_name,department_desc,date_created) VALUES (1,'All Branches ( Main )','',NOW())
+                  departments(department_id,department_name,department_desc,date_created) VALUES (1,'Admin','',NOW())
               ON DUPLICATE KEY UPDATE
                 departments.department_name=VALUES(departments.department_name),
                 departments.department_desc=VALUES(departments.department_desc);
