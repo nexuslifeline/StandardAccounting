@@ -68,7 +68,7 @@ class Sales_order_item_model extends CORE_Model
 
 
                 LEFT JOIN products as p ON main.product_id=p.product_id
-                LEFT JOIN units as u ON p.unit_id=u.unit_id)as n) as o LIMIT 5";
+                LEFT JOIN units as u ON p.unit_id=u.unit_id)as n) as o";
 
         return $this->db->query($sql)->result();
 
