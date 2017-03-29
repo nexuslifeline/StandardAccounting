@@ -49,7 +49,7 @@ class Sales_order_item_model extends CORE_Model
                     soi.so_price,soi.so_discount,soi.so_tax_rate,soi.batch_no,soi.exp_date FROM sales_order as so
                     INNER JOIN sales_order_items as soi ON so.sales_order_id=soi.sales_order_id
                     WHERE so.sales_order_id=$sales_order_id AND so.is_active=TRUE AND so.is_deleted=FALSE
-                    GROUP BY so.so_no,soi.product_id,soi.batch_no,soi.exp_date,soi.so_price
+                    GROUP BY so.so_no,soi.product_id
 
 
                     UNION ALL
@@ -60,9 +60,9 @@ class Sales_order_item_model extends CORE_Model
                     INNER JOIN sales_order as so ON si.sales_order_id=so.sales_order_id)
                     INNER JOIN sales_invoice_items as sii ON si.sales_invoice_id=sii.sales_invoice_id
                     WHERE so.sales_order_id=$sales_order_id AND si.is_active=TRUE AND si.is_deleted=FALSE
-                    GROUP BY so.so_no,sii.product_id,sii.batch_no,sii.exp_date,sii.orig_so_price)as
+                    GROUP BY so.so_no,sii.product_id)as
 
-                    m GROUP BY m.so_no,m.product_id,m.price HAVING so_qty>0
+                    m GROUP BY m.so_no,m.product_id HAVING so_qty>0
 
                 )as main
 
