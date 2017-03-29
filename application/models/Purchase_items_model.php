@@ -7,7 +7,7 @@ class Purchase_items_model extends CORE_Model {
 
     function __construct() {
         parent::__construct();
-    }
+    } 
 
 
     function get_products_with_balance_qty($purchase_order_id){

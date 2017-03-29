@@ -120,14 +120,14 @@ class Deliveries extends CORE_Controller
             case 'create':
                 $m_delivery_invoice=$this->Delivery_invoice_model;
 
-                if(count($m_delivery_invoice->get_list(array('dr_invoice_no'=>$this->input->post('dr_invoice_no',TRUE))))>0){
+                /*if(count($m_delivery_invoice->get_list(array('dr_invoice_no'=>$this->input->post('dr_invoice_no',TRUE))))>0){
                     $response['title'] = 'Invalid!';
                     $response['stat'] = 'error';
                     $response['msg'] = 'Delivery Invoice No. already exists.';
 
                     echo json_encode($response);
                     exit;
-                }
+                }*/
 
                 //get purchase order id base on po number
                 $m_po=$this->Purchases_model;

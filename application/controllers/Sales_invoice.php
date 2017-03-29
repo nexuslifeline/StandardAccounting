@@ -247,7 +247,8 @@ class Sales_invoice extends CORE_Controller
 
                     $m_invoice_items->sales_invoice_id=$sales_invoice_id;
                     $m_invoice_items->product_id=$this->get_numeric_value($prod_id[$i]);
-                    $m_invoice_items->inv_qty=$this->get_numeric_value($inv_qty[$i]);
+                    //+$m_invoice_items->inv_qty=$this->get_numeric_value($inv_qty[$i]);
+                    $m_invoice_items->inv_qty=$inv_qty[$i];
                     $m_invoice_items->inv_price=$this->get_numeric_value($inv_price[$i]);
                     $m_invoice_items->inv_discount=$this->get_numeric_value($inv_discount[$i]);
                     $m_invoice_items->inv_line_total_discount=$this->get_numeric_value($inv_line_total_discount[$i]);
@@ -428,6 +429,30 @@ class Sales_invoice extends CORE_Controller
 
             //***************************************************************************************
             case 'delete':
+                /*$m_invoice=$this->Sales_invoice_model;
+                $sales_invoice_id=$this->input->post('sales_invoice_id',TRUE);
+
+                //mark Items as deleted
+                $m_invoice->set('date_deleted','NOW()'); //treat NOW() as function and not string
+                $m_invoice->deleted_by_user=$this->session->user_id;//user that deleted the record
+                $m_invoice->is_deleted=1;//mark as deleted
+                $m_invoice->modify($sales_invoice_id);
+
+                $so_info=$m_invoice->get_list($sales_invoice_id,'sales_invoice.sales_order_id'); //get purchase order first
+                if(count($so_info)>0){ //make sure po info return resultset before executing other process
+                    $sales_order_id=$so_info[0]->sales_order_id; //pass it to variable
+                    //update purchase order status
+                    $m_order=$this->Sales_order_model;
+                    $m_order->order_status_id=$this->get_so_status($sales_order_id);
+                    $m_order->modify($sales_order_id);
+                }
+
+
+                $response['title']='Success!';
+                $response['stat']='success';
+                $response['msg']='Record successfully deleted.';
+                echo json_encode($response);*/
+
                 $m_invoice=$this->Sales_invoice_model;
                 $sales_invoice_id=$this->input->post('sales_invoice_id',TRUE);
 
@@ -495,7 +520,7 @@ class Sales_invoice extends CORE_Controller
             array(
                 'sales_invoice.sales_invoice_id',
                 'sales_invoice.sales_inv_no',
-                'sales_invoice.remarks',
+                'sales_invoice.remarks', 
                 'sales_invoice.date_created',
                 'sales_invoice.customer_id',
                 'sales_invoice.inv_type',

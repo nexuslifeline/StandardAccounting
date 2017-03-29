@@ -125,9 +125,12 @@ class Sales_order extends CORE_Controller
             ////****************************************items/products of selected Items***********************************************
             case 'item-balance':
                 $m_items=$this->Sales_order_item_model;
-                $response['data']=$m_items->get_products_with_balance_qty($id_filter);
+                $response['data']=$m_items->get_products_with_balance_qty_so($id_filter);
                 echo json_encode($response);
 
+                /*$m_items=$this->Sales_order_item_model;
+                $response['data']=$m_items->get_products_with_balance_qty($id_filter);
+                echo json_encode($response);*/
                 break;
 
             ////****************************************items/products of selected Items***********************************************
@@ -159,20 +162,16 @@ class Sales_order extends CORE_Controller
             case 'create':
                 $m_sales_order=$this->Sales_order_model;
 
-                if(count($m_sales_order->get_list(array('so_no'=>$this->input->post('so_no',TRUE))))>0){
+                /*if(count($m_sales_order->get_list(array('so_no'=>$this->input->post('so_no',TRUE))))>0){
                     $response['title'] = 'Invalid!';
                     $response['stat'] = 'error';
                     $response['msg'] = 'Slip No. already exists.';
 
                     echo json_encode($response);
                     exit;
-                }
-
-
-
+                }*/
 
                 $m_sales_order->begin();
-
 
                 //treat NOW() as function and not string
                 $m_sales_order->set('date_created','NOW()'); //treat NOW() as function and not string

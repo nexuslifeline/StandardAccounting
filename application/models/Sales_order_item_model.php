@@ -19,7 +19,7 @@ class Sales_order_item_model extends CORE_Model
 
 
 
-    function get_products_with_balance_qty($sales_order_id){
+    function get_products_with_balance_qty_so($sales_order_id){
         $sql="SELECT o.*,(o.so_line_total-o.non_tax_amount)as tax_amount FROM
 
                 (SELECT n.*,

@@ -1487,7 +1487,7 @@ $(document).ready(function(){
             _selectRowObj=$(this).closest('tr');
             var data=dt_so.row(_selectRowObj).data();
 
-            //alert(d.sales_order_id);
+            //alert(data.sales_order_id);
 
             $('input,textarea').each(function(){
                 var _elem=$(this);
@@ -1544,8 +1544,8 @@ $(document).ready(function(){
                             inv_line_total_price : value.so_line_total,
                             inv_non_tax_amount: value.non_tax_amount,
                             inv_tax_amount:value.tax_amount,
-                            batch_no : value.batch_no,
-                            exp_date : value.exp_date,
+                            /*batch_no : value.batch_no,
+                            exp_date : value.exp_date,*/
                             orig_so_price : value.so_price,
                             cost_upon_invoice : value.purchase_cost
                         }));
@@ -1608,7 +1608,7 @@ $(document).ready(function(){
 
                     $.each(rows,function(i,value){
 
-                        $('#tbl_items > tbody').prepend(newRowItem({
+                        $('#tbl_items > tbody').append(newRowItem({
                             inv_qty : value.inv_qty,
                             product_code : value.product_code,
                             unit_id : value.unit_id,
@@ -1643,7 +1643,7 @@ $(document).ready(function(){
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.sales_invoice_id;
 
-            alert(_selectedID);
+            //alert(_selectedID);
 
             $('#modal_confirmation').modal('show');
         });
@@ -1703,9 +1703,34 @@ $(document).ready(function(){
             showList(true);
         });
 
-
-
         $('#btn_save').click(function(){
+
+            if(validateRequiredFields($('#frm_sales_invoice'))){
+                if(_txnMode=="new"){
+                    createSalesInvoice().done(function(response){
+                        showNotification(response);
+                        dt.row.add(response.row_added[0]).draw();
+                        clearFields($('#frm_sales_invoice'));
+                        showList(true);
+                    }).always(function(){
+                        showSpinningProgress($('#btn_save'));
+                    });
+                }else{
+                    updateSalesInvoice().done(function(response){
+                        showNotification(response);
+                        dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                        clearFields($('#frm_sales_invoice'));
+                        showList(true);
+                    }).always(function(){
+                        showSpinningProgress($('#btn_save'));
+                    });
+                }
+
+            }
+
+        });
+
+        /*$('#btn_save').click(function(){
 
                 if(validateRequiredFields($('#frm_sales_invoice'))){
                     if(_txnMode=="new"){
@@ -1713,7 +1738,7 @@ $(document).ready(function(){
                             showNotification(response);
                             if(response.stat=="success"){
                                 dt.row.add(response.row_added[0]).draw();
-                                clearFields($('#frm_sales_invoice'));
+                                clearFields($('#frmSO @#_sales_invoice'));
                                 showList(true);
 
                             }
@@ -1752,7 +1777,7 @@ $(document).ready(function(){
 
                 }
 
-            });
+            });*/
 
 
 
