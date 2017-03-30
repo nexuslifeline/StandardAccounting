@@ -68,6 +68,22 @@
             to { -webkit-transform: rotate(360deg); }
         }
 
+        #asset_code {
+            text-align: right;
+        }
+
+        #txtAcquisitionCost {
+            text-align: right;
+        }
+
+        #txtSalvageValue {
+            text-align: right;
+        }
+
+        .select2-container {
+            height: 34px;
+        }
+
     </style>
 
 </head>
@@ -138,7 +154,7 @@
                                                                            <span class="input-group-addon">
                                                                                  <i class="fa fa-code"></i>
                                                                             </span>
-                                                                           <input class="form-control" type="text" name="asset_code">
+                                                                           <input class="form-control" type="text" name="asset_code" id="asset_code">
                                                                        </div>
                                                                             Asset Description : <br>
                                                                        <div class="input-group">
@@ -168,9 +184,9 @@
                                                                         <span class="input-group-addon">
                                                                                  <i class="fa fa-credit-card"></i>
                                                                             </span>
-                                                                       <input id="txtSalvageValue" class="form-control numeric" type="text" name="salvage_value">
-                                                                       </div>
-                                                                           Acquisition Date : <br>
+                                                                        <input id="txtSalvageValue" class="form-control numeric" type="text" name="salvage_value">
+                                                                        </div>
+                                                                            Acquisition Date : <br>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon">
                                                                                  <i class="fa fa-calendar"></i>
@@ -178,19 +194,19 @@
                                                                            <input class="date-picker form-control " value="<?php echo date("m/d/Y"); ?>" type="text" name="date_acquired">
                                                                         </div>
                                                                         Location : <br>
-                                                                       <select id="cbo_location" name="location_id" class="form-control">
+                                                                        <select id="cbo_location" name="location_id" class="form-control" style="width: 100% !important;">
                                                                             <option value="0">[ Add New Location ]</option>
                                                                             <?php foreach($locations as $location) { ?>
                                                                                 <option value="<?php echo $location->location_id; ?>"><?php echo $location->location_name; ?></option>
                                                                             <?php } ?>
-                                                                       </select><br>
-                                                                       Category : <br>
-                                                                       <select id="cbo_category" name="category_id" class="form-control">
+                                                                        </select><br>
+                                                                        Category : <br>
+                                                                        <select id="cbo_category" name="category_id" class="form-control" style="width: 100% !important;">
                                                                             <option value="0">[ Add New Category ]</option>
                                                                             <?php foreach($categories as $category) { ?>
                                                                                 <option value="<?php echo $category->category_id; ?>"><?php echo $category->category_name; ?></option>
                                                                             <?php } ?>
-                                                                       </select>
+                                                                        </select>
                                                                     </div>
                                                                     <div class="col-xs-12 col-md-4">
                                                                         Life <i>(in Years)</i> : <br>
@@ -201,13 +217,13 @@
                                                                            <input class="form-control" type="text" name="life_years">
                                                                         </div>
                                                                         Asset / Property Status : <br>
-                                                                       <select id="cbo_asset_status" name="asset_status_id" class="form-control">
+                                                                       <select id="cbo_asset_status" name="asset_status_id" class="form-control" style="width: 100% !important;">
                                                                             <?php foreach($asset_properties as $asset_property) { ?>
                                                                                 <option value="<?php echo $asset_property->asset_status_id; ?>"><?php echo $asset_property->asset_property_status; ?></option>
                                                                             <?php } ?>
                                                                        </select>
                                                                        Department : <br>
-                                                                       <select id="cbo_department" name="department_id" class="form-control">
+                                                                       <select id="cbo_department" name="department_id" class="form-control" style="width: 100% !important;">
                                                                             <option value="0">[ Create New Department ]</option>
                                                                             <?php foreach($departments as $department) { ?>
                                                                                 <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
