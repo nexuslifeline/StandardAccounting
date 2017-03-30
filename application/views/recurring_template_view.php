@@ -93,6 +93,8 @@
                                     <table id="tbl_recurring_templates" class="table table-striped table-bordered" width="100%">
                                         <thead>
                                             <th>Book Type</th>
+                                            <th>Template Code</th>
+                                            <th>Template Description</th>
                                             <th>Payee / Particular</th>
                                             <th><center>Action</center></th>
                                         </thead>
@@ -104,32 +106,43 @@
                                     <form id="frm_journal" role="form">
                                         <div class="container-fluid">
                                             <div class="container-fluid group-box">
+                                                <div class="col-xs-12 col-md-4">
+                                                    <strong>* Template Code :</strong>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-code"></i>
+                                                        </div>
+                                                        <input type="text" name="template_code" class="form-control" placeholder="Enter Template Code">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-md-4">
+                                                    <strong>* Template Description :</strong><br>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-code"></i>
+                                                        </div>
+                                                        <input type="text" name="template_description" class="form-control" placeholder="Template Description">
+                                                    </div>
+                                                </div>
                                                 <div id="show_gj">
-                                                    <strong>* Particular :</strong><br>
-                                                    <select id="cbo_particulars" name="particular_id" class="show-tick form-control" data-live-search="true">
-                                                        <optgroup label="Customers">
-                                                            <?php foreach($customers as $customer){ ?>
-                                                                <option value='C-<?php echo $customer->customer_id; ?>'><?php echo $customer->customer_name; ?></option>
-                                                            <?php } ?>
-                                                        </optgroup>
-                                                        <optgroup label="Suppliers">
-                                                            <?php foreach($suppliers as $supplier){ ?>
-                                                                <option value='S-<?php echo $supplier->supplier_id; ?>'><?php echo $supplier->supplier_name; ?></option>
-                                                            <?php } ?>
-                                                        </optgroup>
-                                                    </select>
+                                                    <div class="col-xs-12 col-md-4">
+                                                        <strong>* Particular :</strong><br>
+                                                        <select id="cbo_particulars" name="particular_id" class="show-tick form-control" data-live-search="true">
+                                                            <optgroup label="Customers">
+                                                                <?php foreach($customers as $customer){ ?>
+                                                                    <option value='C-<?php echo $customer->customer_id; ?>'><?php echo $customer->customer_name; ?></option>
+                                                                <?php } ?>
+                                                            </optgroup>
+                                                            <optgroup label="Suppliers">
+                                                                <?php foreach($suppliers as $supplier){ ?>
+                                                                    <option value='S-<?php echo $supplier->supplier_id; ?>'><?php echo $supplier->supplier_name; ?></option>
+                                                                <?php } ?>
+                                                            </optgroup>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 <div id="show_cdj">
                                                     <div class="col-xs-12 col-md-4">
-                                                        <strong>* Template Code :</strong>
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <i class="fa fa-code"></i>
-                                                            </div>
-                                                            <input type="text" name="template_code" class="form-control" placeholder="Enter Template Code">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-12 col-md-8">
                                                         <strong>* Supplier :</strong><br>
                                                         <select id="cbo_supplier" name="particular_id" class="show-tick form-control" data-live-search="true">
                                                             <?php foreach($suppliers as $supplier){ ?>
@@ -162,8 +175,8 @@
                                                                 </select>
                                                             </td>
                                                             <td><input type="text" name="memo[]" class="form-control"></td>
-                                                            <td><input type="text" name="dr_amount[]" class="form-control numeric"></td>
-                                                            <td><input type="text" name="cr_amount[]" class="form-control numeric"></td>
+                                                            <td><input type="text" name="dr_amount[]" class="form-control numeric text-right"></td>
+                                                            <td><input type="text" name="cr_amount[]" class="form-control numeric text-right"></td>
                                                             <td>
                                                                 <button type="button" class="btn btn-default add_account"><i class="fa fa-plus-circle" style="color: green;"></i></button>
                                                                 <button type="button" class="btn btn-default remove_account"><i class="fa fa-times-circle" style="color: red;"></i></button>
@@ -179,8 +192,8 @@
                                                                 </select>
                                                             </td>
                                                             <td><input type="text" name="memo[]" class="form-control"></td>
-                                                            <td><input type="text" name="dr_amount[]" class="form-control numeric"></td>
-                                                            <td><input type="text" name="cr_amount[]" class="form-control numeric"></td>
+                                                            <td><input type="text" name="dr_amount[]" class="form-control numeric text-right"></td>
+                                                            <td><input type="text" name="cr_amount[]" class="form-control numeric text-right"></td>
                                                             <td>
                                                                 <button type="button" class="btn btn-default add_account"><i class="fa fa-plus-circle" style="color: green;"></i></button>
                                                                 <button type="button" class="btn btn-default remove_account"><i class="fa fa-times-circle" style="color: red;"></i></button>
@@ -229,8 +242,8 @@
                                     </select>
                                 </td>
                                 <td><input type="text" name="memo[]" class="form-control"></td>
-                                <td><input type="text" name="dr_amount[]" class="form-control numeric"></td>
-                                <td><input type="text" name="cr_amount[]" class="form-control numeric"></td>
+                                <td><input type="text" name="dr_amount[]" class="form-control numeric text-right"></td>
+                                <td><input type="text" name="cr_amount[]" class="form-control numeric text-right"></td>
                                 <td>
                                     <button type="button" class="btn btn-default add_account"><i class="fa fa-plus-circle" style="color: green;"></i></button>
                                     <button type="button" class="btn btn-default remove_account"><i class="fa fa-times-circle" style="color: red;"></i></button>
@@ -251,7 +264,7 @@
                         <div class="modal-body">
                             <strong>Book Type :</strong>
                             <select id="cboBookType" class="form-control">
-                                <option value="GJ">General Journal</option>
+                                <option value="GJE">General Journal</option>
                                 <option value="CDJ">Cash Disbursement Journal</option>
                             </select>
                         </div>
@@ -348,9 +361,11 @@ $(document).ready(function(){
             "ajax" : "Recurring_template/transaction/list",
             "columns": [
                 { targets:[0],data: "book_type" },
-                { targets:[1],data: "particular" },
+                { targets:[1],data: "template_code" },
+                { targets:[2],data: "template_description" },
+                { targets:[3],data: "particular" },
                 {
-                    targets:[2],
+                    targets:[4],
                     render: function (data, type, full, meta){
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                         var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
@@ -630,7 +645,7 @@ $(document).ready(function(){
     };
 
     function showBookType(bt) {
-        if (bt == 'GJ') {
+        if (bt == 'GJE') {
             $('#show_gj').show();
             $('#show_cdj').hide();
             $('.panel-title').html('<i class="fa fa-bars"></i> Recurring Template (General Journal)');

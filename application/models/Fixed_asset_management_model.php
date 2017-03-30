@@ -12,6 +12,7 @@
 		function get_depreciation_expense($month=null,$year=null) {
 			$sql="SELECT 
 					ai.*,
+					DATE_FORMAT(ai.date_acquired,'%m-%d-%Y') AS acquired_date,
 					x.*
 					FROM
 					(SELECT 

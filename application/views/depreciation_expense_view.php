@@ -224,7 +224,7 @@ $(document).ready(function(){
             "columns": [
                 { targets:[0],data: "asset_code" },
                 { targets:[1],data: "asset_description" },
-                { targets:[2],data: "date_acquired" },
+                { targets:[2],data: "acquired_date" },
                 {
                     sClass: "text-right", 
                     targets:[3],data: "acquisition_cost",

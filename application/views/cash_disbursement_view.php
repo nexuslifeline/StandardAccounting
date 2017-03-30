@@ -119,10 +119,6 @@
             font-weight: bold;
         }
 
-        .modal-body {
-            padding-left:0px !important;
-        }
-
         .form-group {
             padding:0;
             margin:5px;
@@ -145,7 +141,15 @@
             padding-bottom: 15px;
         }
 
-
+        input[type=checkbox] {
+          /* Double-sized Checkboxes */
+          margin-top: 10px;
+          margin-left: 10px;
+          -ms-transform: scale(1.5); /* IE */
+          -moz-transform: scale(1.5); /* FF */
+          -webkit-transform: scale(1.5); /* Safari and Chrome */
+          -o-transform: scale(1.5); /* Opera */
+        }
     </style>
 
 </head>
@@ -252,7 +256,7 @@
     <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;padding: 1%;margin: 1%;">
 
         <b><i class="fa fa-bars"></i> Cash Disbursement Journal</b><hr />
-
+        <button id="btn_browse_recurring" class="btn btn-green" style="margin-bottom: 15px; text-transform: capitalize;"><i class="fa fa-folder-open-o"></i> Browse Recurring Template</button>
         <form id="frm_journal" role="form" class="form-horizontal">
 
             <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
@@ -353,7 +357,7 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-                        Branch * :<br />
+                        Department * :<br />
                         <select id="cbo_branch" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Branch is required." required>
                             <option value="0">[ Create New Department ]</option>
                             <?php foreach($departments as $department){ ?>
@@ -456,6 +460,13 @@
 
 
         </form>
+        <div id="div_check">
+            <input type="checkbox" name="chk_save">&nbsp;&nbsp;<label for="chk_save"><strong>Save as Template</strong></label>
+        </div>
+        <div id="div_no_check">
+            <br>
+            <br>
+        </div>
 
         <br />
         <div class="row">
@@ -519,6 +530,31 @@
 </div>
 
 
+<div id="modal_recurring" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 70%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="color: white;"><i class="fa fa-folder-open-o"></i>  Browse Recurring Templates</h4>
+            </div>
+            <div class="modal-body">
+                <table id="tbl_recurring" class="table-striped custom-design" width="100%">
+                    <thead>
+                        <th>Template Code</th>
+                        <th>Template Description</th>
+                        <th>Payee / Particular</th>
+                        <th><center>Action</center></th>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_cancel_browsing" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-sm">
         <div class="modal-content"><!---content--->
@@ -548,7 +584,7 @@
         <div class="modal-content"><!---content--->
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Branch</h4>
+                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
 
             </div>
 
@@ -556,7 +592,7 @@
                 <form id="frm_department_new">
 
                     <div class="form-group">
-                        <label>* Branch :</label>
+                        <label>* Department :</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-users"></i>
@@ -566,7 +602,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Branch Description :</label>
+                        <label>Department Description :</label>
                         <textarea name="department_desc" class="form-control"></textarea>
                     </div>
 
@@ -754,9 +790,6 @@
     </div>
 </div><!---modal-->
 
-
-
-
 <div id="modal_check_layout" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -840,13 +873,35 @@ $(document).ready(function(){
         "cr" : "td:eq(2)"
     };
 
+    var initializeRecurringTable=function(){
+        dtRecurring=$('#tbl_recurring').DataTable({
+            "bLengthChange": false,
+            "bPaginate":true, 
+            language: { 
+                "searchPlaceholder": "Search Template" 
+            },
+            "ajax" : {
+                "url":"Recurring_template/transaction/list-template?type=CDJ",
+                "bDestroy": true
+            },
+            "columns": [
+                { targets:[0],data: "template_code" },
+                { targets:[1],data: "template_description" },
+                { targets:[2],data: "particular" },
+                {
+                    targets:[3],
+                    render: function (data, type, full, meta){
+                        var btn_recurring='<button class="btn btn-success" name="accept_rt"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Accept Recurring"><i class="fa fa-check"></i></button>';
 
-
-
-
+                        return '<center>'+btn_recurring+'</center>';
+                    }
+                }
+            ]
+        });
+    };
 
     var initializeControls=function(){
-
+        initializeRecurringTable();
 
         dt=$('#tbl_cash_disbursement_list').DataTable({
             "dom": '<"toolbar">frtip',
@@ -959,7 +1014,7 @@ $(document).ready(function(){
         _cboPaymentMethod.select2('val',null);
 
          _cboBranches=$('#cbo_branch').select2({
-            placeholder: "Please select branch.",
+            placeholder: "Please select department.",
             allowClear: true
         });
         _cboBranches.select2('val',null);
@@ -1022,6 +1077,44 @@ $(document).ready(function(){
                 });
             }
         } );
+
+        $('#tbl_recurring tbody').on('click', 'button[name="accept_rt"]', function() {
+            _selectRowObj=$(this).closest('tr');
+            var data=dtRecurring.row(_selectRowObj).data();
+            _selectedID=data.template_id;
+
+            $.ajax({
+                url: 'Recurring_template/transaction/get-entries?id=' + _selectedID,
+                type: 'GET',
+                cache: false,
+                dataType: 'html',
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    $('#tbl_entries > tbody').html('<tr><td align="center" colspan="4"><br /><img src="assets/img/loader/ajax-loader-sm.gif" /><br /><br /></td></tr>');
+                }
+            }).done(function(response){
+                $('#tbl_entries > tbody').html(response);
+                reInitializeDropDownAccounts($('#tbl_entries'),false);
+                reInitializeNumeric();
+                reComputeTotals($('#tbl_entries'));
+            });
+
+            _cboSuppliers.select2('val',data.supplier_id);
+
+            $('#modal_recurring').modal('hide');
+
+        });
+
+        $('#btn_browse_recurring').on('click', function(){
+            dtRecurring.destroy();
+            initializeRecurringTable();
+            $('#modal_recurring').modal('show');
+        });
+
+        $('#btn_cancel_browsing').on('click',function(){
+            $('#modal_recurring').modal('hide');    
+        });
 
 
 
@@ -1189,7 +1282,8 @@ $(document).ready(function(){
 
         $('#btn_new').click(function(){
             _txnMode="new";
-
+            $('#div_check').show();
+            $('#div_no_check').hide();
             var _currentDate=<?php echo json_encode(date("m/d/Y")); ?>;
 
             reInitializeDropDownAccounts($('#tbl_entries'),false);
@@ -1280,6 +1374,9 @@ $(document).ready(function(){
         $('#tbl_cash_disbursement_list').on('click','button[name="edit_info"]',function(){
             _txnMode="edit";
 
+            $('#div_check').hide();
+            $('#div_no_check').show();
+
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.journal_id;
@@ -1352,6 +1449,13 @@ $(document).ready(function(){
 
             if(validateRequiredFields(f)){
                 if(_txnMode=="new"){
+
+                    if ($('input[name="chk_save"]').is(':checked')) {
+                        createTemplate().done(function(response){
+                            showNotification(response);
+                        });
+                    }
+
                     createJournal().done(function(response){
                         showNotification(response);
                         if(response.stat=="success"){
@@ -1494,6 +1598,18 @@ $(document).ready(function(){
         });
     };
 
+    var createTemplate=function(){
+        var _data=$('#frm_journal').serializeArray();
+        _data.push({ name:'template_code', value:$("#cbo_suppliers option:selected").text() });
+        _data.push({ name:'book_type', value: 'CDJ'});
+        
+        return $.ajax({ 
+            "dataType":"json",
+            "type":"POST",
+            "url":"Cash_disbursement/transaction/create-template",
+            "data":_data
+        });
+    };
 
     var showList=function(b){
         if(b){
