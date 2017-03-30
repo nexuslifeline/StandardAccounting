@@ -73,10 +73,10 @@
                 <td width="10%">PLU</td>
                 <td width="30%">Description</td>
                 <td width="5%">Size</td>
-                <td width="5%">Type</td>
+                <!-- <td width="5%">Type</td> -->
                 <td width="10%">Category</td>
-                <td width="10%">Batch #</td>
-                <td width="10%">Expiration</td>
+                <!-- <td width="10%">Batch #</td>
+                <td width="10%">Expiration</td> -->
                 <td width="10%" align="right">On Hand</td>
             </tr>
         </thead>
@@ -86,10 +86,10 @@
                 <td><?php echo $product->product_code; ?></td>
                 <td><?php echo $product->product_desc; ?></td>
                 <td><?php echo $product->size; ?></td>
-                <td><?php echo $product->product_type; ?></td>
+                <!-- <td><?php echo $product->product_type; ?></td> -->
                 <td><?php echo $product->category_name; ?></td>
-                <td><?php echo $product->batch_no; ?></td>
-                <td><?php echo $product->expiration; ?></td>
+                <!-- <td><?php echo $product->batch_no; ?></td>
+                <td><?php echo $product->expiration; ?></td> -->
                 <td align="right"><?php echo $product->on_hand_per_batch; ?></td>
             </tr>
             <?php } ?>

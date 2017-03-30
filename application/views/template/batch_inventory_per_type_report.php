@@ -51,8 +51,8 @@
                     <td><b>PLU</b></th>
                     <td><b>Description</b></td>
                     <td><b>Size</b></td>
-                    <td><b>Batch #</b></td>
-                    <td><b>Expiration</b></td>
+                    <!-- <td><b>Batch #</b></td>
+                    <td><b>Expiration</b></td> -->
                     <td align="right"><b>On Hand</b></td>
 
                 </tr>
@@ -66,8 +66,8 @@
                             <td><?php echo $product->product_code; ?></td>
                             <td><?php echo $product->product_desc; ?></td>
                             <td><?php echo $product->size; ?></td>
-                            <td><?php echo $product->batch_no; ?></td>
-                            <td><?php echo $product->expiration; ?></td>
+                            <!-- <td><?php echo $product->batch_no; ?></td>
+                            <td><?php echo $product->expiration; ?></td> -->
                             <td align="right"><?php echo number_format($product->on_hand_per_batch,2); ?></td>
                         </tr>
                     <?php } ?>

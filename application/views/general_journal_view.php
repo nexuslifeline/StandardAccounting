@@ -248,18 +248,18 @@
                                     <span><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
                                     <hr />
 
-                                    <div style="width: 100%;">
+                                    <div style="width: 100%;table-layout:fixed;">
                                         <table id="tbl_entries" class="custom-design table-striped">
                                             <thead class="">
                                             <tr>
                                                 <th style="width: 30%;">Account</th>
                                                 <th style="width: 30%;">Memo</th>
-                                                <th style="width: 15%;text-align: right;">Dr</th>
-                                                <th style="width: 15%;text-align: right;">Cr</th>
+                                                <th style="width: 15%; text-align: right;">Dr</th>
+                                                <th style="width: 15%; text-align: right;">Cr</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
-
+ 
                                             <tbody>
                                             <tr>
                                                 <td>
