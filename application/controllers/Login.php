@@ -23,6 +23,7 @@ class Login extends CORE_Controller {
         $this->load->model('Journal_account_model');
         $this->load->model('Journal_info_model');
         $this->load->model('Asset_property_status_model');
+        $this->load->model('Company_model');
     }
 
 
@@ -251,6 +252,8 @@ class Login extends CORE_Controller {
             $this->load->view('dashboard_view',$data);
 
         } else {
+            $company=$this->Company_model->get_list();
+            $data['company']=$company[0];
             $this->load->view('login_view',$data); 
         }
         //END WORKAROUND FOR LOGIN REDIRECTION TO DASHBOARD (if user session is ACTIVE)

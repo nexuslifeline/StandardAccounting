@@ -206,6 +206,7 @@ $(document).ready(function(){
 
     function initializeDataTable() {
         dt=$('#tbl_depreciation').DataTable({
+            "dom":'<"toolbar">frtip',
             "bLengthChange": false,
             "language": {
                 searchPlaceholder: "Search records"
