@@ -145,6 +145,10 @@
             padding-bottom: 15px;
         }
 
+        .select2-container {
+            width: 100% !important;
+        }
+
 
     </style>
 
@@ -385,7 +389,7 @@
                             <th style="width: 30%;">Memo</th>
                             <th style="width: 15%;text-align: right;">Dr</th>
                             <th style="width: 15%;text-align: right;">Cr</th>
-                            <th>Action</th>
+                            <th style="width: 10%;">Action</th>
                         </tr>
                         </thead>
 
@@ -468,7 +472,7 @@
 
     <table id="table_hidden" class="hidden">
         <tr>
-            <td>
+            <td width="30%">
                 <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
                     <?php $i=0; foreach($accounts as $account){ ?>
                         <option value='<?php echo $account->account_id; ?>' <?php echo ($i==0?'':''); ?>><?php echo $account->account_title; ?></option>
@@ -938,7 +942,6 @@ $(document).ready(function(){
             autoclose: true
 
         });
-
 
         var createToolBarButton=function() {
             var _btnNew='<button class="btn btn-green" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Journal" >'+
