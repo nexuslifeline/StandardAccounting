@@ -265,7 +265,7 @@ class Sales_invoice extends CORE_Controller
                     $unit_id=$m_products->get_list(array('product_id'=>$prod_id[$i]));
                     $m_invoice_items->unit_id=$unit_id[0]->unit_id;
 
-                    $on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
+                    //$on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
 
                     $m_invoice_items->save();
                 }

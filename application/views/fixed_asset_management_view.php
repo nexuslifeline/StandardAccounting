@@ -76,12 +76,23 @@
             text-align: right;
         }
 
+        #serial_no {
+            text-align: right;
+        }
+
         #txtSalvageValue {
             text-align: right;
         }
 
         .select2-container {
             height: 34px;
+        }
+
+        .select2-close-mask{
+            z-index: 999999;
+        }
+        .select2-dropdown{
+            z-index: 999999;
         }
 
     </style>
@@ -136,119 +147,6 @@
                                             <div class="panel-footer"></div>
                                         </div>
                                     </div>
-
-                                    <div id="div_assets_fields">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <b class="panel-title" style="color: white; font-size: 12pt;"></b>
-                                            </div>
-                                            <div class="panel-body">
-                                                <!-- <h4 style="margin-top: 0;margin-bottom: 5px;"><b>Asset # : <span id="span_asset_no"><?php echo date('Y'); ?>-XXXX</span></b></h4><hr> -->
-
-                                                <form id="frm_fixed_asset">
-                                                        <div class="row">
-                                                            <div class="container-fluid">
-                                                                    <div class="col-xs-12 col-md-4">
-                                                                       Asset Code : <br>
-                                                                       <div class="input-group">
-                                                                           <span class="input-group-addon">
-                                                                                 <i class="fa fa-code"></i>
-                                                                            </span>
-                                                                           <input class="form-control" type="text" name="asset_code" id="asset_code">
-                                                                       </div>
-                                                                            Asset Description : <br>
-                                                                       <div class="input-group">
-                                                                           <span class="input-group-addon">
-                                                                                 <i class="fa fa-file-text-o"></i>
-                                                                            </span>
-                                                                           <input class="form-control" type="text" name="asset_description">
-                                                                       </div>
-                                                                        Serial No. : <br>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                                 <i class="fa fa-code"></i>
-                                                                            </span>
-                                                                            <input class="form-control" type="text" name="serial_no">
-                                                                       </div>
-                                                                       Acquisition Cost : <br>
-                                                                       <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                                 <i class="fa fa-credit-card"></i>
-                                                                            </span>
-                                                                            <input id="txtAcquisitionCost" class="form-control numeric" type="text" name="acquisition_cost">
-                                                                       </div>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-md-4">
-                                                                        Salvage Value : <br>
-                                                                        <div class="input-group">
-                                                                        <span class="input-group-addon">
-                                                                                 <i class="fa fa-credit-card"></i>
-                                                                            </span>
-                                                                        <input id="txtSalvageValue" class="form-control numeric" type="text" name="salvage_value">
-                                                                        </div>
-                                                                            Acquisition Date : <br>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                                 <i class="fa fa-calendar"></i>
-                                                                            </span>
-                                                                           <input class="date-picker form-control " value="<?php echo date("m/d/Y"); ?>" type="text" name="date_acquired">
-                                                                        </div>
-                                                                        Location : <br>
-                                                                        <select id="cbo_location" name="location_id" class="form-control" style="width: 100% !important;">
-                                                                            <option value="0">[ Add New Location ]</option>
-                                                                            <?php foreach($locations as $location) { ?>
-                                                                                <option value="<?php echo $location->location_id; ?>"><?php echo $location->location_name; ?></option>
-                                                                            <?php } ?>
-                                                                        </select><br>
-                                                                        Category : <br>
-                                                                        <select id="cbo_category" name="category_id" class="form-control" style="width: 100% !important;">
-                                                                            <option value="0">[ Add New Category ]</option>
-                                                                            <?php foreach($categories as $category) { ?>
-                                                                                <option value="<?php echo $category->category_id; ?>"><?php echo $category->category_name; ?></option>
-                                                                            <?php } ?>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-xs-12 col-md-4">
-                                                                        Life <i>(in Years)</i> : <br>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                                 <i class="fa fa-line-chart"></i>
-                                                                            </span>
-                                                                           <input class="form-control" type="text" name="life_years">
-                                                                        </div>
-                                                                        Asset / Property Status : <br>
-                                                                       <select id="cbo_asset_status" name="asset_status_id" class="form-control" style="width: 100% !important;">
-                                                                            <?php foreach($asset_properties as $asset_property) { ?>
-                                                                                <option value="<?php echo $asset_property->asset_status_id; ?>"><?php echo $asset_property->asset_property_status; ?></option>
-                                                                            <?php } ?>
-                                                                       </select>
-                                                                       Department : <br>
-                                                                       <select id="cbo_department" name="department_id" class="form-control" style="width: 100% !important;">
-                                                                            <option value="0">[ Create New Department ]</option>
-                                                                            <?php foreach($departments as $department) { ?>
-                                                                                <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
-                                                                            <?php } ?>
-                                                                       </select>
-                                                                    </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr>
-                                                        <div class="row">
-                                                            <div class="container-fluid">
-                                                                <div style="padding: 0 1% 0 1%;">
-                                                                    Notes
-                                                                    <textarea class="form-control" name="remarks"></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                            </div>
-                                            <div class="panel-footer">
-                                                <button id="btn_save" class="btn btn-primary">Save Changes</button>
-                                                <button id="btn_cancel_assets" class="btn btn-default">Cancel</button>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -256,6 +154,125 @@
 
                 </div> <!-- #page-content -->
             </div>
+
+
+           
+
+            <div id="modal_create_asset" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+                <div class="modal-dialog" style="width: 75%;">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#2ecc71;">
+                            <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+                            <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"></span></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="frm_fixed_asset">
+                                <div class="row">
+                                    <div class="container-fluid">
+                                        <div class="col-xs-12 col-md-4">
+                                            Asset Code : <br>
+                                           <div class="input-group">
+                                               <span class="input-group-addon">
+                                                     <i class="fa fa-code"></i>
+                                                </span>
+                                               <input class="form-control" type="text" name="asset_code" id="asset_code">
+                                           </div>
+                                                Asset Description : <br>
+                                           <div class="input-group">
+                                               <span class="input-group-addon">
+                                                     <i class="fa fa-file-text-o"></i>
+                                                </span>
+                                               <input class="form-control" type="text" name="asset_description">
+                                           </div>
+                                            Serial No. : <br>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                     <i class="fa fa-code"></i>
+                                                </span>
+                                                <input class="form-control" id="serial_no" type="text" name="serial_no">
+                                           </div>
+                                           Acquisition Cost : <br>
+                                           <div class="input-group">
+                                                <span class="input-group-addon">
+                                                     <i class="fa fa-credit-card"></i>
+                                                </span>
+                                                <input id="txtAcquisitionCost" class="form-control numeric" type="text" name="acquisition_cost">
+                                           </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-4">
+                                            Salvage Value : <br>
+                                            <div class="input-group">
+                                            <span class="input-group-addon">
+                                                     <i class="fa fa-credit-card"></i>
+                                                </span>
+                                            <input id="txtSalvageValue" class="form-control numeric" type="text" name="salvage_value">
+                                            </div>
+                                                Acquisition Date : <br>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                     <i class="fa fa-calendar"></i>
+                                                </span>
+                                               <input class="date-picker form-control" id="date_acquired" value="<?php echo date("m/d/Y"); ?>" type="text" name="date_acquired">
+                                            </div>
+                                            Location : <br>
+                                            <select id="cbo_location" name="location_id" class="form-control" style="width: 100% !important;">
+                                                <option value="0">[ Add New Location ]</option>
+                                                <?php foreach($locations as $location) { ?>
+                                                    <option value="<?php echo $location->location_id; ?>"><?php echo $location->location_name; ?></option>
+                                                <?php } ?>
+                                            </select><br>
+                                            Category : <br>
+                                            <select id="cbo_category" name="category_id" class="form-control" style="width: 100% !important;">
+                                                <option value="0">[ Add New Category ]</option>
+                                                <?php foreach($categories as $category) { ?>
+                                                    <option value="<?php echo $category->category_id; ?>"><?php echo $category->category_name; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-12 col-md-4">
+                                            Life <i>(in Years)</i> : <br>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                     <i class="fa fa-line-chart"></i>
+                                                </span>
+                                               <input class="form-control" type="text" name="life_years">
+                                            </div>
+                                            Asset / Property Status : <br>
+                                           <select id="cbo_asset_status" name="asset_status_id" class="form-control" style="width: 100% !important;">
+                                                <?php foreach($asset_properties as $asset_property) { ?>
+                                                    <option value="<?php echo $asset_property->asset_status_id; ?>"><?php echo $asset_property->asset_property_status; ?></option>
+                                                <?php } ?>
+                                           </select>
+                                           Department : <br>
+                                           <select id="cbo_department" name="department_id" class="form-control" style="width: 100% !important;">
+                                                <option value="0">[ Create New Department ]</option>
+                                                <?php foreach($departments as $department) { ?>
+                                                    <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
+                                                <?php } ?>
+                                           </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="container-fluid">
+                                        <div style="padding: 0 1% 0 1%;">
+                                            Notes
+                                            <textarea class="form-control" name="remarks"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="btn_save" type="button" class="btn"  style="background-color:#2ecc71;color:white;"><span class=""></span> Save</button>
+                                    <button id="btn_cancel_assets" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
 
             <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-sm">
@@ -492,6 +509,15 @@ $(document).ready(function(){
         _cboLocation.select2('val',null);
         _cboDepartments.select2('val',null);
 
+        $('.date-picker').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+
+        });
+
         var createToolBarButton=function(){
             var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New unit" >'+
                 '<i class="fa fa-plus"></i> New Asset</button>';
@@ -524,6 +550,8 @@ $(document).ready(function(){
 
             $('#btn_save_department').attr('disabled',false);
         });
+
+        $('.date-picker').datepicker( "option", "dateFormat", 'mm/dd/yy' );
 
         $('#btn_cancel_department').on('click', function(){
             clearFields($('#frm_department'));
@@ -568,12 +596,13 @@ $(document).ready(function(){
         $('.numeric').autoNumeric('init',{mDec:2});
 
         $('#btn_cancel_assets').click(function(){
+            $('#modal_create_asset').modal('toggle');
             showList(true);
         });
 
         $('#btn_new').click(function(){
             _txnMode="new";
-            showList(false);
+            showList(true);
             clearFields($('#frm_fixed_asset'));
             $('.panel-title').html('<i class="fa fa-plus"></i>&nbsp; New Asset');
             _cboLocation.select2('val',null);
@@ -582,11 +611,17 @@ $(document).ready(function(){
             _cboAsset.select2('val',null);
             $('#txtSalvageValue').val('0.00');
             $('#txtAcquisitionCost').val('0.00');
+            $('#modal_create_asset').modal('show');
+            $('.modal-title').html('Create Fixed Asset');
+            $('#date_acquired').format("dateFormat", 'mm/dd/yyyy' );
         });
 
         $('#tbl_fixed_management tbody').on('click','button[name="edit_info"]',function(){
             _txnMode="edit";
-            showList(false);
+            showList(true);
+            $('#modal_create_asset').modal('show');
+            $('.modal-title').html('Edit Fixed Asset');
+            $('#date_acquired').format("dateFormat", 'mm/dd/yyyy' );
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.fixed_asset_id;
@@ -622,9 +657,9 @@ $(document).ready(function(){
             });
         });
 
-        $('#btn_cancel').click(function(){
+        /*$('#btn_cancel').click(function(){
             $('#modal_product_type').modal('hide');
-        });
+        });*/
 
         $('#btn_save_location').click(function(){
             if(validateRequiredFields($('#frm_location'))){
@@ -667,28 +702,59 @@ $(document).ready(function(){
             }
         });
 
-        $('#btn_save').click(function(){
+        /*$('#btn_save').click(function(){
             if(validateRequiredFields($('#frm_fixed_asset'))){
                 if(_txnMode=="new"){
                     createFixedAsset().done(function(response){
                         showNotification(response);
                         dt.row.add(response.row_added[0]).draw();
                         clearFields($('#frm_fixed_asset'));
+                        showList(true);
                     }).always(function(){
+                        $('$modal_create_asset').modal('toggle');
                         showSpinningProgress($('#btn_save'));
                     });
-                } else {
+                    return;
+                }
+                if(_txnMode==="edit"){
                     updateFixedAsset().done(function(response){
                         showNotification(response);
                         dt.row(_selectRowObj).data(response.row_updated[0]).draw();
-                        clearFields($('#frm_fixed_asset'));                    
                     }).always(function(){
+                        $('$modal_create_asset').modal('toggle'); 
                         showSpinningProgress($('#btn_save'));
                     });
+                    return;
                 }
-                showList(true);
             }
-        });
+        });*/
+
+        $('#btn_save').click(function(){
+        if(validateRequiredFields($('#frm_fixed_asset'))){
+            if(_txnMode=="new"){
+                createFixedAsset().done(function(response){
+                    showNotification(response);
+                    dt.row.add(response.row_added[0]).draw();
+                    clearFields($('#frm_fixed_asset'))
+                    showList(true);
+                }).always(function(){
+                    $('#modal_create_asset').modal('toggle');
+                    showSpinningProgress($('#btn_save'));
+                });
+                return;
+            }
+            if(_txnMode==="edit"){
+                updateFixedAsset().done(function(response){
+                    showNotification(response);
+                    dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                }).always(function(){
+                    $('#modal_create_asset').modal('toggle');
+                    showSpinningProgress($('#btn_save'));
+                });
+                return;
+            }
+        }
+    });
     })();
 
     var validateRequiredFields=function(){

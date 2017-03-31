@@ -133,6 +133,10 @@
             padding-bottom: 15px;
         }
 
+        .select2-container {
+            width: 100% !important;
+        }
+
 
     </style>
 
