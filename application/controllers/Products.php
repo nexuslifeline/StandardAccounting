@@ -19,8 +19,6 @@ class Products extends CORE_Controller
     }
 
     public function index() {
-
-
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', TRUE);
