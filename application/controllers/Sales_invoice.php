@@ -269,6 +269,8 @@ class Sales_invoice extends CORE_Controller
                     //$on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
 
                     $m_invoice_items->save();
+                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                    $m_products->modify($this->get_numeric_value($prod_id[$i]));
                 }
 
                 //update invoice number base on formatted last insert id
@@ -389,6 +391,8 @@ class Sales_invoice extends CORE_Controller
                         $on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
 
                         $m_invoice_items->save();
+                        $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                        $m_products->modify($this->get_numeric_value($prod_id[$i]));
                     }
 
 
