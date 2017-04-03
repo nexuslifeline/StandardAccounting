@@ -66,7 +66,8 @@
 							array('departments','departments.department_id=fixed_assets.department_id','left'),
 							array('categories','categories.category_id=fixed_assets.category_id','left'),
 							array('asset_property_status','asset_property_status.asset_status_id=fixed_assets.asset_status_id','left')
-						)
+						),
+						'fixed_assets.fixed_asset_id DESC'
 					);
 
 					echo json_encode($response);
@@ -74,6 +75,15 @@
 
 				case 'create':
 					$m_fixed_asset=$this->Fixed_asset_management_model;
+
+					if(count($m_fixed_asset->get_list(array('asset_code'=>$this->input->post('asset_code',TRUE))))>0){
+	                    $response['title'] = 'Invalid!';
+	                    $response['stat'] = 'error';
+	                    $response['msg'] = 'Asset Code already exists.';
+
+	                    echo json_encode($response);
+	                    exit;
+	                }
 
 					$m_fixed_asset->begin();
 
