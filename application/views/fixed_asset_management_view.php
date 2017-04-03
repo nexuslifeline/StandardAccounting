@@ -23,7 +23,7 @@
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
 
     <style>
 
@@ -128,7 +128,7 @@
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Fixed Asset Management</b>
                                             </div>
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_fixed_management" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                <table id="tbl_fixed_management" class="custom-design table-striped" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>
                                                         <th></th>
@@ -475,15 +475,6 @@ $(document).ready(function(){
             ]
         });
 
-        $('.date-picker').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
-
-        });
-
         _cboDepartments=$('#cbo_department').select2({
             placeholder:"Please select Department",
             allowClear:true
@@ -508,15 +499,6 @@ $(document).ready(function(){
         _cboCategory.select2('val',null);
         _cboLocation.select2('val',null);
         _cboDepartments.select2('val',null);
-
-        $('.date-picker').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
-
-        });
 
         var createToolBarButton=function(){
             var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New unit" >'+
@@ -550,8 +532,6 @@ $(document).ready(function(){
 
             $('#btn_save_department').attr('disabled',false);
         });
-
-        $('.date-picker').datepicker( "option", "dateFormat", 'mm/dd/yy' );
 
         $('#btn_cancel_department').on('click', function(){
             clearFields($('#frm_department'));
@@ -600,6 +580,15 @@ $(document).ready(function(){
             showList(true);
         });
 
+        $('.date-picker').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+
+        });
+
         $('#btn_new').click(function(){
             _txnMode="new";
             showList(true);
@@ -613,7 +602,7 @@ $(document).ready(function(){
             $('#txtAcquisitionCost').val('0.00');
             $('#modal_create_asset').modal('show');
             $('.modal-title').html('Create Fixed Asset');
-            $('#date_acquired').format("dateFormat", 'mm/dd/yyyy' );
+            $('#date_acquired').datepicker('setDate', 'today');
         });
 
         $('#tbl_fixed_management tbody').on('click','button[name="edit_info"]',function(){
@@ -621,10 +610,15 @@ $(document).ready(function(){
             showList(true);
             $('#modal_create_asset').modal('show');
             $('.modal-title').html('Edit Fixed Asset');
-            $('#date_acquired').format("dateFormat", 'mm/dd/yyyy' );
+            
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.fixed_asset_id;
+
+            //$('#date_acquired').format("dateFormat", 'm/d/y');
+            //$('#date_acquired').datepicker("option", "dateFormat", 'mm/dd/yyyy');
+            //$('#date_acquired').datepicker('dateFormat', 'mm/dd/yyyy');
+            //$('#date_acquired').format('mm/dd/yyyy');
 
             $('input,textarea').each(function(){
                 var _elem=$(this);
