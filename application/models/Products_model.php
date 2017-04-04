@@ -20,8 +20,65 @@ class Products_model extends CORE_Model {
         return $query->result();
     }
 
+    function get_product_qty($product_id){
+        $sql="SELECT 
+            (((in_qty-out_qty)+(adj_in_qty-adj_out_qty))-si_out_qty) AS on_hand
+        FROM
+            (SELECT 
+                IFNULL(SUM(dii.dr_qty), 0) AS in_qty
+            FROM
+                delivery_invoice_items AS dii
+            INNER JOIN delivery_invoice AS di ON dii.dr_invoice_id = di.dr_invoice_id
+            WHERE
+                dii.product_id = $product_id
+                    AND di.is_active = TRUE
+                    AND di.is_deleted = FALSE) AS in_qty
+                INNER JOIN
+            (SELECT 
+                IFNULL(SUM(iss.issue_qty), 0) AS out_qty
+            FROM
+                issuance_items AS iss
+            INNER JOIN issuance_info AS ii ON iss.issuance_id = ii.issuance_id
+            WHERE
+                iss.product_id = $product_id
+                    AND ii.is_active = TRUE
+                    AND ii.is_deleted = FALSE) AS out_qty
+                INNER JOIN
+            (SELECT 
+                IFNULL(SUM(ai.adjust_qty), 0) AS adj_out_qty
+            FROM
+                adjustment_items AS ai
+            INNER JOIN adjustment_info AS a ON a.adjustment_id = ai.adjustment_id
+            WHERE
+                ai.product_id = $product_id
+                    AND a.is_active = TRUE
+                    AND a.is_deleted = FALSE
+                    AND a.adjustment_type = 'OUT') AS adj_out_qty
+                INNER JOIN
+            (SELECT 
+                IFNULL(SUM(ai.adjust_qty), 0) AS adj_in_qty
+            FROM
+                adjustment_items AS ai
+            INNER JOIN adjustment_info AS a ON a.adjustment_id = ai.adjustment_id
+            WHERE
+                ai.product_id = $product_id
+                    AND a.is_active = TRUE
+                    AND a.is_deleted = FALSE
+                    AND a.adjustment_type = 'IN') AS adj_in_qty
+                INNER JOIN
+            (SELECT 
+                IFNULL(SUM(sii.inv_qty), 0) AS si_out_qty
+            FROM
+                `sales_invoice_items` AS sii
+            INNER JOIN sales_invoice AS si ON si.sales_invoice_id = sii.sales_invoice_id
+            WHERE
+                sii.product_id = $product_id
+                    AND si.is_active = TRUE
+                    AND si.is_deleted = FALSE) AS si_out_qty";
 
-
+            $result = $this->db->query($sql)->result();
+            return $result[0]->on_hand;
+    }
 
     function get_product_history($product_id){
         $this->db->query("SET @nBalance:=0.00;");

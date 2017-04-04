@@ -145,7 +145,8 @@ class Sales_invoice extends CORE_Controller
             case 'list':  //this returns JSON of Issuance to be rendered on Datatable
                 $m_invoice=$this->Sales_invoice_model;
                 $response['data']=$this->response_rows(
-                    'sales_invoice.is_active=TRUE AND sales_invoice.is_deleted=FALSE'.($id_filter==null?'':' AND sales_invoice.sales_invoice_id='.$id_filter)
+                    'sales_invoice.is_active=TRUE AND sales_invoice.is_deleted=FALSE'.($id_filter==null?'':' AND sales_invoice.sales_invoice_id='.$id_filter),
+                    'sales_invoice.sales_invoice_id DESC'
                 );
                 echo json_encode($response);
                 break;
@@ -265,9 +266,11 @@ class Sales_invoice extends CORE_Controller
                     $unit_id=$m_products->get_list(array('product_id'=>$prod_id[$i]));
                     $m_invoice_items->unit_id=$unit_id[0]->unit_id;
 
-                    $on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
+                    //$on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
 
                     $m_invoice_items->save();
+                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                    $m_products->modify($this->get_numeric_value($prod_id[$i]));
                 }
 
                 //update invoice number base on formatted last insert id
@@ -388,6 +391,8 @@ class Sales_invoice extends CORE_Controller
                         $on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
 
                         $m_invoice_items->save();
+                        $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                        $m_products->modify($this->get_numeric_value($prod_id[$i]));
                     }
 
 

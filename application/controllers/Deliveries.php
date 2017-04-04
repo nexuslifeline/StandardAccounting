@@ -156,7 +156,7 @@ class Deliveries extends CORE_Controller
                 $m_delivery_invoice->date_due = date('Y-m-d',strtotime($this->input->post('date_due',TRUE)));
                 $m_delivery_invoice->posted_by_user = $this->session->user_id;
                 $m_delivery_invoice->total_discount = $this->get_numeric_value($this->input->post('summary_discount',TRUE));
-                $m_delivery_invoice->total_before_tax = $this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
+                $m_delivery_invoice->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                 $m_delivery_invoice->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                 $m_delivery_invoice->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
 
@@ -203,8 +203,6 @@ class Deliveries extends CORE_Controller
                         die(json_encode($response));
                     }*/
 
-
-
                     //$m_dr_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
 
                     //unit id retrieval is change, because of TRIGGER restriction
@@ -212,6 +210,9 @@ class Deliveries extends CORE_Controller
                     $m_dr_items->unit_id=$unit_id[0]->unit_id;
 
                     $m_dr_items->save();
+
+                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                    $m_products->modify($this->get_numeric_value($prod_id[$i]));
                 }
 
                 //update invoice number base on formatted last insert id
@@ -323,6 +324,8 @@ class Deliveries extends CORE_Controller
 
                     $m_dr_items->save();
 
+                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                    $m_products->modify($this->get_numeric_value($prod_id[$i]));
                 }
 
                 //update status of po

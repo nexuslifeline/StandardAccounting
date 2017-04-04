@@ -955,7 +955,6 @@ $(document).ready(function(){
                         <div data-widget-group="group1">
                             <div class="row">
                                 <div class="col-md-12">
-
                                     <div id="div_product_list">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -1354,7 +1353,7 @@ $(document).ready(function(){
 
                                         <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Tax * :</label>
-                                            <select name="tax_type_id" id="cbo_tax" class="form-control" data-error-msg="Category is required." required>
+                                            <select name="tax_type_id" id="cbo_tax" class="form-control" data-error-msg="Tax Type is required." required>
                                                 <option value="">Please Select...</option>
                                                 <?php foreach($tax_types as $tax_type) { ?>
                                                     <option value="<?php echo $tax_type->tax_type_id; ?>"><?php echo $tax_type->tax_type; ?></option>

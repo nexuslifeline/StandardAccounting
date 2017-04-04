@@ -86,7 +86,15 @@
             text-align: right;
         }
 
-
+        input[type=checkbox] {
+          /* Double-sized Checkboxes */
+          margin-top: 10px;
+          margin-left: 10px;
+          -ms-transform: scale(1.5); /* IE */
+          -moz-transform: scale(1.5); /* FF */
+          -webkit-transform: scale(1.5); /* Safari and Chrome */
+          -o-transform: scale(1.5); /* Opera */
+        }
 
     </style>
 
@@ -168,12 +176,9 @@
                     <h2>General Journal</h2>
                     <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body, .panel-footer"}'></div>
                 </div> -->
-
-
-               
-                       
                             <b><i class="fa fa-bars"></i> General Journal</b><hr />
-
+                            <button id="btn_browse_recurring" class="btn btn-green" style="margin-bottom: 10px; text-transform: capitalize;"><i class="fa fa-folder-open-o"></i> Browse Recurring Template</button>
+                            
                                 <form id="frm_journal" role="form" class="form-horizontal">
                                     <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                                         <span><strong><i class="fa fa-bars"></i> Info</strong></span>
@@ -227,18 +232,13 @@
 
                                         <br /><br />
 
-                                        <label class="col-lg-2"> * Branch :</label>
+                                        <label class="col-lg-2"> * Department :</label>
                                         <div class="col-lg-10">
                                             <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
-
-
-
                                                 <option value="0">[ Create New Department ]</option>
                                                     <?php foreach($departments as $department){ ?>
                                                         <option value='<?php echo $department->department_id; ?>'><?php echo $department->department_name; ?></option>
                                                     <?php } ?>
-
-
                                             </select>
                                         </div><br /><br />
 
@@ -248,18 +248,18 @@
                                     <span><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
                                     <hr />
 
-                                    <div style="width: 100%;">
+                                    <div style="width: 100%;table-layout:fixed;">
                                         <table id="tbl_entries" class="custom-design table-striped">
                                             <thead class="">
                                             <tr>
                                                 <th style="width: 30%;">Account</th>
                                                 <th style="width: 30%;">Memo</th>
-                                                <th style="width: 15%;text-align: right;">Dr</th>
-                                                <th style="width: 15%;text-align: right;">Cr</th>
+                                                <th style="width: 15%; text-align: right;">Dr</th>
+                                                <th style="width: 15%; text-align: right;">Cr</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
-
+ 
                                             <tbody>
                                             <tr>
                                                 <td>
@@ -317,8 +317,14 @@
                                     <textarea name="remarks" class="col-lg-12"></textarea>
 
                                 </form>
-
-                                <br /><br /><hr />
+                                <div id="div_check">
+                                    <input type="checkbox" name="chk_save">&nbsp;&nbsp;<label for="chk_save"><strong>Save as Template</strong></label>
+                                </div>
+                                <div id="div_no_check">
+                                    <br>
+                                    <br>
+                                </div>
+                                <hr />
 
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -326,17 +332,6 @@
                                         <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"">Cancel</button>
                                     </div>
                                 </div>
-
-
-
-
-
-
-
-
-                
-
-
                 <table id="table_hidden" class="hidden">
                     <tr>
                         <td>
@@ -344,7 +339,7 @@
                                 <?php foreach($accounts as $account){ ?>
                                     <option value='<?php echo $account->account_id; ?>'><?php echo $account->account_title; ?></option>
                                 <?php } ?>
-                            </select>
+                            </select>   
                         </td>
                         <td><input type="text" name="memo[]" class="form-control"></td>
                         <td><input type="text" name="dr_amount[]" class="form-control numeric"></td>
@@ -391,11 +386,34 @@
 </div>
 </div>
 
+<div id="modal_recurring" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 70%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="color: white;"><i class="fa fa-folder-open-o"></i>  Browse Recurring Templates</h4>
+            </div>
+            <div class="modal-body">
+                <table id="tbl_recurring" class="table-striped custom-design" width="100%">
+                    <thead>
+                        <th>Template Code</th>
+                        <th>Template Description</th>
+                        <th>Payee / Particular</th>
+                        <th><center>Action</center></th>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_cancel_browsing" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-sm">
-        <div class="modal-content"><!---content--->
+        <div class="modal-content"><!---content-->
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
@@ -410,7 +428,7 @@
                 <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Yes</button>
                 <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">No</button>
             </div>
-        </div><!---content---->
+        </div><!---content-->
     </div>
 </div><!---modal-->
 
@@ -418,8 +436,8 @@
 
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-    <div class="modal-dialog modal-md">
-        <div class="modal-content"><!---content--->
+    <div class="modal-dialog">
+        <div class="modal-content"><!---content-->
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Branch</h4>
@@ -453,7 +471,7 @@
                 <button id="btn_create_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
                 <button id="btn_close_close_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
             </div>
-        </div><!---content---->
+        </div><!---content-->
     </div>
 </div><!---modal-->
 
@@ -509,14 +527,35 @@ $(document).ready(function(){
         "cr" : "td:eq(2)"
     };
 
+    var initializeRecurringTable=function(){
+        dtRecurring=$('#tbl_recurring').DataTable({
+            "bLengthChange": false,
+            "bPaginate":true, 
+            language: { 
+                "searchPlaceholder": "Search Template" 
+            },
+            "ajax" : {
+                "url":"Recurring_template/transaction/list-template?type=GJE",
+                "bDestroy": true
+            },
+            "columns": [
+                { targets:[0],data: "template_code" },
+                { targets:[1],data: "template_description" },
+                { targets:[2],data: "particular" },
+                {
+                    targets:[3],
+                    render: function (data, type, full, meta){
+                        var btn_recurring='<button class="btn btn-success" name="accept_rt"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Accept Recurring"><i class="fa fa-check"></i></button>';
 
-
-
-
+                        return '<center>'+btn_recurring+'</center>';
+                    }
+                }
+            ]
+        });
+    };
 
     var initializeControls=function(){
-
-
+        initializeRecurringTable();
         dt=$('#tbl_accounts_receivable').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
@@ -601,6 +640,7 @@ $(document).ready(function(){
             allowClear: true
         });
         _cboParticulars.select2('val',null);
+        _cboDepartments.select2('val',null);
 
 
 
@@ -654,14 +694,46 @@ $(document).ready(function(){
                         detailRows.push( tr.attr('id') );
                     }
                 });
-
-
-
-
             }
         } );
 
+        $('#tbl_recurring tbody').on('click', 'button[name="accept_rt"]', function() {
+            _selectRowObj=$(this).closest('tr');
+            var data=dtRecurring.row(_selectRowObj).data();
+            _selectedID=data.template_id;
 
+            $.ajax({
+                url: 'Recurring_template/transaction/get-entries?id=' + _selectedID,
+                type: 'GET',
+                cache: false,
+                dataType: 'html',
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    $('#tbl_entries > tbody').html('<tr><td align="center" colspan="4"><br /><img src="assets/img/loader/ajax-loader-sm.gif" /><br /><br /></td></tr>');
+                }
+            }).done(function(response){
+                $('#tbl_entries > tbody').html(response);
+                reInitializeNumeric();
+                reInitializeDropDownAccounts($('#tbl_entries'));
+                reComputeTotals($('#tbl_entries'));
+            });
+
+            $('#cbo_particulars').select2('val',data.particular_id);
+
+            $('#modal_recurring').modal('hide');
+
+        });
+
+        $('#btn_browse_recurring').on('click', function(){
+            dtRecurring.destroy();
+            initializeRecurringTable();
+            $('#modal_recurring').modal('show');
+        });
+
+        $('#btn_cancel_browsing').on('click',function(){
+            $('#modal_recurring').modal('hide');
+        });
 
         $('#tbl_sales_review tbody').on( 'click', 'tr td.details-control', function () {
             var tr = $(this).closest('tr');
@@ -707,10 +779,6 @@ $(document).ready(function(){
 
 
                 });
-
-
-
-
             }
         } );
 
@@ -718,7 +786,9 @@ $(document).ready(function(){
 
         $('#btn_new').click(function(){
             _txnMode="new";
-            clearFields($('#frm_journal'))
+            clearFields($('#frm_journal'));
+            $('#div_check').show();
+            $('#div_no_check').hide();
             showList(false);
             //$('#modal_journal_entry').modal('show');
         });
@@ -828,6 +898,9 @@ $(document).ready(function(){
         $('#tbl_accounts_receivable').on('click','button[name="edit_info"]',function(){
             _txnMode="edit";
 
+            $('#div_check').hide();
+            $('#div_no_check').show();
+
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.journal_id;
@@ -842,8 +915,8 @@ $(document).ready(function(){
                 });
             });
 
-
            _cboParticulars.select2('val',data.particular_id);
+           _cboDepartments.select2('val',data.department_id);
 
             $.ajax({
                 url: 'General_journal/transaction/get-entries?id=' + data.journal_id,
@@ -904,6 +977,12 @@ $(document).ready(function(){
                     }).always(function(){
                         showSpinningProgress(btn);
                     });
+
+                    if ($('input[name="chk_save"]').is(':checked')) {
+                        createTemplate().done(function(response){
+                            showNotification(response);
+                        });
+                    }
                 }else{
                     updateJournal().done(function(response){
                         showNotification(response);
@@ -971,6 +1050,19 @@ $(document).ready(function(){
         });
     };
 
+    var createTemplate=function(){
+        var _data=$('#frm_journal').serializeArray();
+        _data.push({ name:'template_code', value:$("#cbo_particulars option:selected").text() });
+        _data.push({ name:'book_type', value: 'GJE'});
+
+        return $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"Recurring_template/transaction/create",
+            "data":_data,
+            "beforeSend": showSpinningProgress($('#btn_save'))
+        });
+    };
 
     var showList=function(b){
         if(b){
@@ -984,7 +1076,8 @@ $(document).ready(function(){
 
     var clearFields=function(f){
         $('input,textarea',f).val('');
-        //$(f).find('select').select2('val',null);
+        $(f).find('select').select2('val',null); 
+        _cboDepartments.select2('val',null);
         $(f).find('input:first').focus();
         $('#tbl_entries > tbody tr').slice(2).remove();
 

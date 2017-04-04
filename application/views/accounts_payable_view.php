@@ -133,6 +133,10 @@
             padding-bottom: 15px;
         }
 
+        .select2-container {
+            width: 100% !important;
+        }
+
 
     </style>
 
@@ -233,35 +237,17 @@
 
 
 
-                        <div id="div_payable_fields" style="display: none;">
-
-
-
-
-
+                       <div id="div_payable_fields" style="display: none;">
                             <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="panel panel-default" style="">
+                            <div class="col-lg-12">
 
+                                <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;padding: 1%;margin: 1%;">
 
-
-
-
-                                        <div class="panel-body">
-                                        <h2 style="margin-top: 0px;">Accounts Payable</h2>
-
-
-                                            <div class="tab-container tab-top tab-primary">
-                                                <ul class="nav nav-tabs">
-                                                    <li class="active"><a href="#supplier_info" data-toggle="tab"><i class="fa fa-bars"></i> Transaction</a></li>
-
-                                                </ul>
-                                                <div class="tab-content">
-                                                    <div class="tab-pane active" id="supplier_info" style="min-height: 300px;">
+                                    <b><i class="fa fa-bars"></i> Accounts Payable</b><hr />
 
 
                                                         <form id="frm_journal" role="form" class="form-horizontal">
-
+                                                            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                                                             <span><strong><i class="fa fa-bars"></i> Info</strong></span>
                                                             <hr />
 
@@ -269,9 +255,9 @@
                                                             <div class="col-lg-4">
 
                                                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-code"></i>
-                                    </span>
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-code"></i>
+                                                                </span>
                                                                     <input type="text" name="txn_no" class="form-control" placeholder="TXN-YYYYMMDD-XXX" readonly>
 
                                                                 </div>
@@ -311,6 +297,8 @@
                                                             </div>
 
                                                             <br /><br />
+                                                            </div><br>
+                                                            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                                                             <span><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
                                                             <hr />
 
@@ -376,7 +364,7 @@
                                                                 </table>
 
                                                             </div>
-
+                                                            </div>
 
                                                             <hr />
                                                             <label>Remarks :</label><br />
@@ -392,11 +380,6 @@
                                                                 <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"">Cancel</button>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
 
 
 

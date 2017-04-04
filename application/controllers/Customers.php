@@ -34,7 +34,7 @@ class Customers extends CORE_Controller {
             //****************************************************************************************************************
             case 'list':
                 $m_customers=$this->Customers_model;
-                $response['data']=$this->get_list(array('customers.is_deleted'=>FALSE));
+                $response['data']=$m_customers->get_list(array('customers.is_deleted'=>FALSE));
                 echo json_encode($response);
                 break;
 

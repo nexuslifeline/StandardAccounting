@@ -348,7 +348,7 @@
                     <select name="supplier" id="cbo_suppliers" data-error-msg="Supplier is required." required>
                         <option value="0">[ Create New Supplier ]</option>
                         <?php foreach($suppliers as $supplier){ ?>
-                            <option value="<?php echo $supplier->supplier_id; ?>" data-tax-type="<?php echo $supplier->tax_type_id; ?>"><?php echo $supplier->supplier_name; ?></option>
+                            <option value="<?php echo $supplier->supplier_id; ?>" data-tax-type="<?php echo $supplier->tax_type_id; ?>" data-contact-person="<?php echo $supplier->contact_name; ?>"><?php echo $supplier->supplier_name; ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -1052,7 +1052,7 @@ $(document).ready(function(){
                     return false;
                 }
                 if (event.keyCode == 13) {
-                    $('.tt-suggestion:first').click();
+                    //$('.tt-suggestion:first').click();
                     _objTypeHead.typeahead('close');
                     _objTypeHead.typeahead('val','');
                 }
@@ -1227,10 +1227,12 @@ $(document).ready(function(){
                 $('#modal_new_supplier').modal('show');
                 //clearFields($('#modal_new_supplier').find('form'));
             }else{
-                var obj_supplier=$('#cbo_suppliers').find('option[value="'+i+'"]');
-                _cboTaxType.select2('val',obj_supplier.data('tax-type')); //set tax type base on selected Supplier
+                // var obj_supplier=$('#cbo_suppliers').find('option[value="'+i+'"]');
+                // _cboTaxType.select2('val',obj_supplier.data('tax-type')); //set tax type base on selected Supplier
+                // $('input[name="contact_person"]').text(obj_supplier.data('contact-person'));
+                _cboTaxType.select2('val',$(this).find('option:selected').data('tax-type'));
+                $('input[name="contact_person"]').val($(this).find('option:selected').data('contact-person'));
             }
-
 
         });
 

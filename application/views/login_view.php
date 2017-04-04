@@ -41,7 +41,7 @@
 					<div class="panel-body" style="border-top: 3px solid #2196f3; border-radius: 0;">
 						<!-- <h2>Login Form</h2> -->
 						<div class="col-xs-12 text-center" style="margin-bottom: 20px;">
-							<img class="" src="assets/img/logo.png" style="max-width: 150px;">
+							<img class="" src="<?php echo base_url($company->logo_path); ?>" style="max-width: 150px;">
 						</div>
 						<form action="#" class="form-horizontal" id="validate-form">
 							<div class="form-group mb-md">
@@ -65,7 +65,7 @@
 									</div>
 		                        </div>
 							</div>
-							<div class="form-group mb-n">
+							<!-- <div class="form-group mb-n">
 								<div class="col-xs-12">
 									<a href="#" class="pull-left">Forgot password?</a>
 									<div class="checkbox-inline icheck pull-right p-n">
@@ -75,7 +75,7 @@
 										</label>
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</form>
 							<br>
 					</div>
@@ -83,10 +83,11 @@
 						<div class="clearfix">
 							<div class="row">
 								<div class="container-fluid">
-									<div class="col-xs-12 col-sm-6" style="margin-bottom: 10px;">
+									<div class="col-xs-12 col-sm-6 hidden " style="margin-bottom: 10px;">
 										<button id="btn_register" class="btn btn-info btn-block">Register</button>
-									</div>									
-									<div class="col-xs-12 col-sm-6">
+									</div>
+									<div class="col-sm-offset-6"></div>								
+									<div class="col-xs-12 col-sm-12">
 										<button id="btn_login" class="btn btn-success btn-block ladda-button" data-style="expand-left" data-spinner-color="white" data-size="l">
 										<span class=""></span> Login
 										</button>

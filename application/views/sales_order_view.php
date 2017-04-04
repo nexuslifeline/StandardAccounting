@@ -834,7 +834,7 @@
 
 
 
-<!-- Date range use moment.js same as full calendar plugin -->
+<!-- a range use moment.js same as full calendar plugin -->
 <script src="assets/plugins/fullcalendar/moment.min.js"></script>
 <!-- Data picker -->
 <script src="assets/plugins/datapicker/bootstrap-datepicker.js"></script>
@@ -1714,7 +1714,7 @@ $(document).ready(function(){
     };
 
     var clearFields=function(f){
-        $('input,textarea,select,input:not(.date-picker)',f).val('');
+        $('input,textarea,select',f).val('');
         $(f).find('input:first').focus();
         $('#tbl_items > tbody').html('');
         $('#cbo_departments').select2('val', null);
@@ -1722,6 +1722,7 @@ $(document).ready(function(){
         $('#cbo_customers').select2('val', null);
         //$('#cbo_prodType').select2('val', 3);
         $('#img_user').attr('src','assets/img/anonymous-icon.png');
+        $('#order_default').datepicker('setDate', 'today');
     };
 
 

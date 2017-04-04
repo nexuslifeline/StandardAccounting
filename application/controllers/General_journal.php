@@ -87,7 +87,7 @@ class General_journal extends CORE_Controller
                 }
 
 
-
+                $m_journal->department_id=$this->input->post('department_id',TRUE);
                 $m_journal->remarks=$this->input->post('remarks',TRUE);
                 $m_journal->date_txn=date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)));
                 $m_journal->book_type='GJE';
@@ -161,7 +161,7 @@ class General_journal extends CORE_Controller
                 }
 
 
-
+                $m_journal->department_id=$this->input->post('department_id',TRUE);
                 $m_journal->remarks=$this->input->post('remarks',TRUE);
                 $m_journal->date_txn=date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)));
                 $m_journal->book_type='GJE';
@@ -242,6 +242,7 @@ class General_journal extends CORE_Controller
             array(
                 'journal_info.journal_id',
                 'journal_info.txn_no',
+                'journal_info.department_id',
                 'DATE_FORMAT(journal_info.date_txn,"%m/%d/%Y")as date_txn',
                 'journal_info.is_active',
                 'journal_info.remarks',

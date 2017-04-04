@@ -23,7 +23,7 @@
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', true);
 	        $data['title'] = 'Depreciation Expense Report';
 
-	        $data['starting_year']=date('Y', strtotime('-10 year'));
+	        $data['starting_year']=date('Y', strtotime('-100 year'));
 	        $data['ending_year']=date('Y', strtotime('+10 year'));
 	        $data['current_year']=date('Y');
 

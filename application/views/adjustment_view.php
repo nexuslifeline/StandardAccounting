@@ -239,8 +239,8 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            Adjustment type : <br />
-                            <select name="adjustment_type" id="cbo_adjustments">
+                            Adjustment type * : <br />
+                            <select name="adjustment_type" id="cbo_adjustments" data-error-msg="Adjustment Type is required" required>
                                 <option value="IN" selected>Adjustment IN</option>
                                 <option value="OUT">Adjustment OUT</option>
                             </select>
@@ -605,6 +605,8 @@ $(document).ready(function(){
             placeholder: "Please select type of adjustment."
         });
 
+        _cboAdjustments.select2('val',null);
+
         _cboDepartments.select2('val',null);
 
 
@@ -634,7 +636,7 @@ $(document).ready(function(){
             }
         }).on('keyup', this, function (event) {
             if (event.keyCode == 13) {
-                $('.tt-suggestion:first').click();
+                //$('.tt-suggestion:first').click();
                 _objTypeHead.typeahead('close');
                 _objTypeHead.typeahead('val','');
             }
@@ -814,6 +816,8 @@ $(document).ready(function(){
         $('#btn_new').click(function(){
             _txnMode="new";
             //$('.toggle-fullscreen').click();
+            _cboAdjustments.select2('val',null);
+            _cboDepartments.select2('val',null);
             clearFields($('#frm_adjustments'));
             showList(false);
             reComputeTotal();
@@ -853,6 +857,7 @@ $(document).ready(function(){
                 });
             });
 
+            _cboAdjustments.select2('val',data.adjustment_type);
             $('#cbo_departments').select2('val',data.department_id);
 
             $.ajax({
