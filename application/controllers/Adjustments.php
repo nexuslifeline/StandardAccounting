@@ -280,6 +280,8 @@ class Adjustments extends CORE_Controller
             //***************************************************************************************
             case 'delete':
                 $m_adjustment=$this->Adjustment_model;
+                $m_adjustment_items=$this->Adjustment_item_model;
+                $m_products=$this->Products_model;
                 $adjustment_id=$this->input->post('adjustment_id',TRUE);
                 $prod_id=$this->input->post('product_id',TRUE);
 
@@ -288,6 +290,20 @@ class Adjustments extends CORE_Controller
                 $m_adjustment->deleted_by_user=$this->session->user_id;//user that deleted the record
                 $m_adjustment->is_deleted=1;//mark as deleted
                 $m_adjustment->modify($adjustment_id);
+
+                //update product on_hand after Adjustment is deleted...
+                $products=$m_adjustment_items->get_list(
+                    'adjustment_id='.$adjustment_id,
+                    'product_id'
+                ); 
+
+                for($i=0;$i<count($products);$i++) {
+                    $prod_id_adjustment=$products[$i]->product_id;
+                    $m_products->on_hand=$m_products->get_product_qty($prod_id_adjustment);
+                    $m_products->modify($prod_id_adjustment);
+                }
+
+                //end update product on_hand after Adjustment is deleted...
 
                 $response['title']='Success!';
                 $response['stat']='success';
