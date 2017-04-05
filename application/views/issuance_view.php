@@ -157,7 +157,7 @@ echo $_side_bar_navigation;
                 <tr>
                     <th></th>
                     <th>Slip #</th>
-                    <th>Branch</th>
+                    <th>Department</th>
                     <th>Issued to person</th>
                     <th>Remarks</th>
                     <th><center>Action</center></th>
@@ -174,14 +174,14 @@ echo $_side_bar_navigation;
 
 
 <div id="div_user_fields" style="display: none;">
-<div class="panel panel-default" style="border-top: 3px solid #2196f3;">
-<!-- <div class="panel-heading">
-    <h2>Item Issuance</h2>
+<div class="panel panel-default">
+<div class="panel-heading">
+    <h2 id="item_issuance_title"><i class="fa fa-bars"></i>Item Issuance</h2>
     <div class="panel-ctrls" data-actions-container=""></div>
-</div> -->
+</div>
 
 <div class="panel-body">
-<h2 id="item_issuance_title"></h2>
+<!-- <h2 id="item_issuance_title"></h2> -->
 <div class="row">
     <div class="container-fluid">
         <!--<div class="btn btn-green" style="margin-left: 10px;">
@@ -201,9 +201,9 @@ echo $_side_bar_navigation;
                     </div>
                     <div class="col-lg-4"></div>
                     <div class="col-xs-12 col-lg-4">
-                        * Branch : <br />
+                        * Department : <br />
                         <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
-                            <option value="0">[ Create New Branch ]</option>
+                            <option value="0">[ Create New Department ]</option>
                             <?php foreach($departments as $department){ ?>
                             <option value="<?php echo $department->department_id; ?>" data-tax-type="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
                             <?php } ?>
@@ -214,8 +214,9 @@ echo $_side_bar_navigation;
                     <div class="col-xs-12 col-lg-4">
                         * Issue to : <br />
                         <select name="issued_to_person" id="cbo_customers" data-error-msg="Customer is required." required>
+                            <option value="0">[ Create New Customer ]</option>
                             <?php foreach($customers as $customer){ ?>
-                            <option data-address="<?php echo $customer->address; ?>" value="<?php echo $customer->customer_id; ?>"><?php echo $customer->customer_name; ?></option>
+                                <option data-address="<?php echo $customer->address; ?>" value="<?php echo $customer->customer_id; ?>"><?php echo $customer->customer_name; ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -456,7 +457,7 @@ echo $_side_bar_navigation;
         <div class="modal-content"><!---content--->
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>New Branch</h4>
+                <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>New Department</h4>
 
             </div>
 
@@ -464,12 +465,12 @@ echo $_side_bar_navigation;
                 <form id="frm_department_new">
 
                     <div class="form-group">
-                        <label>* Branch :</label>
+                        <label>* Department :</label>
                         <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-users"></i>
                                                 </span>
-                            <input type="text" name="department_name" class="form-control" placeholder="Branch" data-error-msg="Department name is required." required>
+                            <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
                         </div>
                     </div>
 
@@ -493,6 +494,163 @@ echo $_side_bar_navigation;
         </div><!---content---->
     </div>
 </div><!---modal-->
+
+<div id="modal_create_customer" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#2ecc71;">
+                            <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+                            <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"> </span>Customer Information</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <form id="frm_customer">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Customer Name :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-users"></i>
+                                                    </span>
+                                                    <input type="text" name="customer_name" class="form-control" placeholder="Customer Name" data-error-msg="Customer Name is required!" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"><font color="red"></font> Contact Person :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-users"></i>
+                                                    </span>
+                                                    <input type="text" name="contact_name" class="form-control" placeholder="Contact Person">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Address :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-home"></i>
+                                                     </span>
+                                                     <textarea name="address" class="form-control" data-error-msg="Supplier address is required!" placeholder="Address" required ></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"> Term :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-file-code-o"></i>
+                                                    </span>
+                                                    <input type="text" name="term" id="term" class="form-control" placeholder="Term in days">
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                                        <!-- <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"> Credit Limit :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-file-code-o"></i>
+                                                    </span>
+                                                    <input type="text" name="credit_limit" id="credit_limit" class="form-control" placeholder="Credit Limit">
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;">Email Address :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-envelope-o"></i>
+                                                    </span>
+                                                    <input type="text" name="email_address" class="form-control" placeholder="Email Address">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;">Contact No :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-phone"></i>
+                                                    </span>
+                                                    <input type="text" name="contact_no" id="contact_no" class="form-control" placeholder="Contact No">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;">Tin No :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-file-code-o"></i>
+                                                    </span>
+                                                    <input type="text" name="tin_no" id="tin_no" class="form-control" placeholder="Tin No">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <label class="control-label boldlabel" style="text-align:left;padding-top:10px;"><i class="fa fa-user" aria-hidden="true" style="padding-right:10px;"></i>Customer's Photo</label>
+                                                <hr style="margin-top:0px !important;height:1px;background-color:black;">
+                                            </div>
+                                            <div style="width:100%;height:300px;border:2px solid #34495e;border-radius:5px;">
+                                                <center>
+                                                    <img name="img_user" id="img_user" src="assets/img/anonymous-icon.png" height="140px;" width="140px;"></img>
+                                                </center>
+                                                <hr style="margin-top:0px !important;height:1px;background-color:black;">
+                                                <center>
+                                                     <button type="button" id="btn_browse" style="width:150px;margin-bottom:5px;" class="btn btn-primary">Browse Photo</button>
+                                                     <button type="button" id="btn_remove_photo" style="width:150px;" class="btn btn-danger">Remove</button>
+                                                     <input type="file" name="file_upload[]" class="hidden">
+                                                </center> 
+                                            </div>
+                                        </div>   
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button id="btn_save_customer" type="button" class="btn" style="background-color:#2ecc71;color:white;">Save</button>
+                            <button id="btn_cancel_customer" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div><!---content---->
+                </div>
+            </div><!---modal-->
 
 <div class="modal fade" id="modal_item_issuance" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg" role="document">
@@ -760,7 +918,7 @@ dt_si = $('#tbl_si_list').DataTable({
         });
 
         _cboDepartments=$("#cbo_departments").select2({
-            placeholder: "Issue item to Branch.",
+            placeholder: "Issue item to Department.",
             allowClear: true
         });
 
@@ -801,7 +959,7 @@ dt_si = $('#tbl_si_list').DataTable({
             }
         }).on('keyup', this, function (event) {
             if (event.keyCode == 13) {
-                $('.tt-suggestion:first').click();
+                //$('.tt-suggestion:first').click();
                 _objTypeHead.typeahead('close');
                 _objTypeHead.typeahead('val','');
             }
@@ -870,13 +1028,17 @@ dt_si = $('#tbl_si_list').DataTable({
 
     }();
 
-    _cboCustomers.on("change", function (e) {
-        var i=$(this).select2('val');
-        var obj_customers=$('#cbo_customers').find('option[value="' + i + '"]');
-        $('#txt_address').val(obj_customers.data('address'));
-    });
+    // _cboCustomers.on("change", function (e) {
+    //     var i=$(this).select2('val');
+    //     var obj_customers=$('#cbo_customers').find('option[value="' + i + '"]');
+    //     $('#txt_address').val(obj_customers.data('address'));
+    // });
 
     _cboCustomers.on("select2:select", function (e) {
+        if (_cboCustomers.val() == 0) {
+            clearFields($('#frm_customer'));
+            $('#modal_create_customer').modal('show');
+        }
         var i=$(this).select2('val');
         var obj_customers=$('#cbo_customers').find('option[value="' + i + '"]');
         $('#txt_address').val(obj_customers.data('address'));
@@ -947,6 +1109,32 @@ dt_si = $('#tbl_si_list').DataTable({
 
         });
 
+        $('#btn_save_customer').click(function(){
+            if(validateRequiredFields($('#frm_customer'))){
+                var _dataCustomer=$('#frm_customer').serializeArray();
+
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":"Customers/transaction/create",
+                    "data":_dataCustomer
+                }).done(function(response){
+                    showNotification(response);
+                    $('#modal_create_customer').modal('hide');
+
+                    var _customer=response.row_added[0];
+                    $('#cbo_customers').append('<option value="'+ _customer.customer_id +'" selected>'+ _customer.customer_name +'</option>');
+                    $('#cbo_customers').select2('val',_customer.customer_id);
+                    $('#txt_address').val(_customer.address);
+                });
+            }
+        });
+
+        $('#btn_cancel_customer').click(function(){
+            clearFields($('#frm_customer'));
+            $('#cbo_customers').select2('val',null);
+            $('#modal_create_customer').modal('hide');
+        });
 
         //create new department
         $('#btn_create_department').click(function(){

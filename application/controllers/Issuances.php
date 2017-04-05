@@ -14,7 +14,7 @@ class Issuances extends CORE_Controller
         $this->load->model('Departments_model');
         $this->load->model('Tax_types_model');
         $this->load->model('Products_model');
-        $this->load->model('Customers_Model');
+        $this->load->model('Customers_model');
         $this->load->model('Refproduct_model');
 
     }
@@ -34,7 +34,7 @@ class Issuances extends CORE_Controller
             array('departments.is_active'=>TRUE,'departments.is_deleted'=>FALSE)
         );
 
-        $data['customers']=$this->Customers_Model->get_list(
+        $data['customers']=$this->Customers_model->get_list(
             array('customers.is_active'=>TRUE, 'customers.is_deleted'=>FALSE)
         );
 
@@ -152,14 +152,14 @@ class Issuances extends CORE_Controller
                     $m_issue_items->issue_tax_amount=$this->get_numeric_value($issue_tax_amount[$i]);
                     $m_issue_items->issue_non_tax_amount=$this->get_numeric_value($issue_non_tax_amount[$i]);
 
-                    $m_issue_items->batch_no=$batch_no[$i];
-                    $m_issue_items->exp_date=date('Y-m-d',strtotime($exp_date[$i]));
+                    // $m_issue_items->batch_no=$batch_no[$i];
+                    // $m_issue_items->exp_date=date('Y-m-d',strtotime($exp_date[$i]));
 
                     //unit id retrieval is change, because of TRIGGER restriction
                     $unit_id=$m_products->get_list(array('product_id'=>$prod_id[$i]));
                     $m_issue_items->unit_id=$unit_id[0]->unit_id;
 
-                    $on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
+                    //$on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
 
                     /*if ($this->get_numeric_value($issue_qty[$i]) > $this->get_numeric_value($on_hand)) {
                         $prod_description=$unit_id[0]->product_desc;
@@ -173,6 +173,8 @@ class Issuances extends CORE_Controller
 
                     //$m_issue_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
                     $m_issue_items->save();
+                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                    $m_products->modify($this->get_numeric_value($prod_id[$i]));
                 }
 
                 //update invoice number base on formatted last insert id
@@ -254,17 +256,19 @@ class Issuances extends CORE_Controller
                     $m_issue_items->issue_tax_amount=$this->get_numeric_value($issue_tax_amount[$i]);
                     $m_issue_items->issue_non_tax_amount=$this->get_numeric_value($issue_non_tax_amount[$i]);
 
-                    $m_issue_items->batch_no=$batch_no[$i];
-                    $m_issue_items->exp_date=date('Y-m-d',strtotime($exp_date[$i]));
+                    // $m_issue_items->batch_no=$batch_no[$i];
+                    // $m_issue_items->exp_date=date('Y-m-d',strtotime($exp_date[$i]));
 
                     //unit id retrieval is change, because of TRIGGER restriction
                     $unit_id=$m_products->get_list(array('product_id'=>$prod_id[$i]));
                     $m_issue_items->unit_id=$unit_id[0]->unit_id;
 
-                    $on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
+                    //$on_hand=$m_products->get_product_current_qty($batch_no[$i], $prod_id[$i], date('Y-m-d', strtotime($exp_date[$i])));
                     
                     //$m_issue_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
                     $m_issue_items->save();
+                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                    $m_products->modify($this->get_numeric_value($prod_id[$i]));
                 }
 
 
@@ -289,6 +293,8 @@ class Issuances extends CORE_Controller
             //***************************************************************************************
             case 'delete':
                 $m_issuance=$this->Issuance_model;
+                $m_issuance_items=$this->Issuance_item_model;
+                $m_products=$this->Products_model;
                 $issuance_id=$this->input->post('issuance_id',TRUE);
 
                 //mark Items as deleted
@@ -297,7 +303,19 @@ class Issuances extends CORE_Controller
                 $m_issuance->is_deleted=1;
                 $m_issuance->modify($issuance_id);
 
+                //update product on_hand after issuance is deleted...
+                $products=$m_issuance_items->get_list(
+                    'issuance_id='.$issuance_id,
+                    'product_id'
+                ); 
 
+                for($i=0;$i<count($products);$i++) {
+                    $prod_id=$products[$i]->product_id;
+                    $m_products->on_hand=$m_products->get_product_qty($prod_id);
+                    $m_products->modify($prod_id);
+                }
+
+                //end update product on_hand after issuance is deleted...
 
                 $response['title']='Success!';
                 $response['stat']='success';

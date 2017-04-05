@@ -5,7 +5,7 @@ class AR_Receivable extends CORE_Controller {
     function __construct() {
         parent::__construct('');
         $this->validate_session();
-        $this->load->model('Ar_Receivable_model');
+        $this->load->model('AR_Receivable_model');
 		$this->load->model('Customers_model');
     }
 

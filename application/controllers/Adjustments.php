@@ -75,7 +75,7 @@ class Adjustments extends CORE_Controller
             case 'list':  //this returns JSON of Issuance to be rendered on Datatable
                 $m_adjustment=$this->Adjustment_model;
                 $response['data']=$this->response_rows(
-                    "adjustment_info.is_active=TRUE AND adjustment_info.adjustment_type='IN' AND adjustment_info.is_deleted=FALSE".($id_filter==null?"":" AND adjustment_info.adjustment_id=".$id_filter)
+                    "adjustment_info.is_active=TRUE AND adjustment_info.is_deleted=FALSE".($id_filter==null?"":" AND adjustment_info.adjustment_id=".$id_filter)
                 );
                 echo json_encode($response);
                 break;
@@ -127,7 +127,7 @@ class Adjustments extends CORE_Controller
 
 
                 $m_adjustment->department_id=$this->input->post('department',TRUE);
-                $m_adjustment->adjustment_type='IN';
+                $m_adjustment->adjustment_type=$this->input->post('adjustment_type',TRUE);
                 $m_adjustment->remarks=$this->input->post('remarks',TRUE);
                 $m_adjustment->date_adjusted=date('Y-m-d',strtotime($this->input->post('date_adjusted',TRUE)));
                 $m_adjustment->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
@@ -150,8 +150,6 @@ class Adjustments extends CORE_Controller
                 $adjust_line_total_price=$this->input->post('adjust_line_total_price',TRUE);
                 $adjust_tax_amount=$this->input->post('adjust_tax_amount',TRUE);
                 $adjust_non_tax_amount=$this->input->post('adjust_non_tax_amount',TRUE);
-                $exp_date = $this->input->post('exp_date',TRUE);
-                $batch_no = $this->input->post('batch_code',TRUE);
 
                 $m_products=$this->Products_model;
 
@@ -167,25 +165,15 @@ class Adjustments extends CORE_Controller
                     $m_adjustment_items->adjust_line_total_price=$this->get_numeric_value($adjust_line_total_price[$i]);
                     $m_adjustment_items->adjust_tax_amount=$this->get_numeric_value($adjust_tax_amount[$i]);
                     $m_adjustment_items->adjust_non_tax_amount=$this->get_numeric_value($adjust_non_tax_amount[$i]);
-                    $m_adjustment_items->exp_date=date('Y-m-d', strtotime($exp_date[$i]));
-                    $m_adjustment_items->batch_no=$batch_no[$i];
-
-                    /*if($exp_date[$i]==null||$exp_date[$i]==""){
-                        $response['title'] = 'Invalid Expiration!';
-                        $response['stat'] = 'error';
-                        $response['msg'] = 'Expiration date is required.';
-                        $response['current_row_index'] = $i;
-
-                        die(json_encode($response));
-                    }*/
-
-                    //$m_adjustment_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
 
                     //unit id retrieval is change, because of TRIGGER restriction
                     $unit_id=$m_products->get_list(array('product_id'=>$prod_id[$i]));
                     $m_adjustment_items->unit_id=$unit_id[0]->unit_id;
 
                     $m_adjustment_items->save();
+
+                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                    $m_products->modify($this->get_numeric_value($prod_id[$i]));
                 }
 
                 //update invoice number base on formatted last insert id
@@ -221,7 +209,7 @@ class Adjustments extends CORE_Controller
 
                 $m_adjustment->department_id=$this->input->post('department',TRUE);
                 $m_adjustment->remarks=$this->input->post('remarks',TRUE);
-                $m_adjustment->adjustment_type='IN';
+                $m_adjustment->adjustment_type=$this->input->post('adjustment_type',TRUE);
                 $m_adjustment->date_adjusted=date('Y-m-d',strtotime($this->input->post('date_adjusted',TRUE)));
                 $m_adjustment->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
                 $m_adjustment->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
@@ -244,8 +232,6 @@ class Adjustments extends CORE_Controller
                 $adjust_line_total_price=$this->input->post('adjust_line_total_price',TRUE);
                 $adjust_tax_amount=$this->input->post('adjust_tax_amount',TRUE);
                 $adjust_non_tax_amount=$this->input->post('adjust_non_tax_amount',TRUE);
-                $exp_date = $this->input->post('exp_date',TRUE);
-                $batch_no = $this->input->post('batch_code',TRUE);
 
                 $m_products=$this->Products_model;
 
@@ -261,8 +247,6 @@ class Adjustments extends CORE_Controller
                     $m_adjustment_items->adjust_line_total_price=$this->get_numeric_value($adjust_line_total_price[$i]);
                     $m_adjustment_items->adjust_tax_amount=$this->get_numeric_value($adjust_tax_amount[$i]);
                     $m_adjustment_items->adjust_non_tax_amount=$this->get_numeric_value($adjust_non_tax_amount[$i]);
-                    $m_adjustment_items->exp_date=date('Y-m-d', strtotime($exp_date[$i]));
-                    $m_adjustment_items->batch_no=$batch_no[$i];
 
                     //$m_adjustment_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
 
@@ -270,9 +254,8 @@ class Adjustments extends CORE_Controller
                     $m_adjustment_items->unit_id=$unit_id[0]->unit_id;
 
                     $m_adjustment_items->save();
-
-
-
+                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                    $m_products->modify($this->get_numeric_value($prod_id[$i]));
                 }
 
 
@@ -297,7 +280,10 @@ class Adjustments extends CORE_Controller
             //***************************************************************************************
             case 'delete':
                 $m_adjustment=$this->Adjustment_model;
+                $m_adjustment_items=$this->Adjustment_item_model;
+                $m_products=$this->Products_model;
                 $adjustment_id=$this->input->post('adjustment_id',TRUE);
+                $prod_id=$this->input->post('product_id',TRUE);
 
                 //mark Items as deleted
                 $m_adjustment->set('date_deleted','NOW()'); //treat NOW() as function and not string
@@ -305,7 +291,19 @@ class Adjustments extends CORE_Controller
                 $m_adjustment->is_deleted=1;//mark as deleted
                 $m_adjustment->modify($adjustment_id);
 
+                //update product on_hand after Adjustment is deleted...
+                $products=$m_adjustment_items->get_list(
+                    'adjustment_id='.$adjustment_id,
+                    'product_id'
+                ); 
 
+                for($i=0;$i<count($products);$i++) {
+                    $prod_id_adjustment=$products[$i]->product_id;
+                    $m_products->on_hand=$m_products->get_product_qty($prod_id_adjustment);
+                    $m_products->modify($prod_id_adjustment);
+                }
+
+                //end update product on_hand after Adjustment is deleted...
 
                 $response['title']='Success!';
                 $response['stat']='success';

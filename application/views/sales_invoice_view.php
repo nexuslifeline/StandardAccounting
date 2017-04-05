@@ -1108,7 +1108,7 @@ $(document).ready(function(){
                 return false;
             }
             if (event.keyCode == 13) {
-                $('.tt-suggestion:first').click();
+                //$('.tt-suggestion:first').click();
                 _objTypeHead.typeahead('close');
                 _objTypeHead.typeahead('val','');
             }
@@ -1330,7 +1330,8 @@ $(document).ready(function(){
                 _cboCustomers.select2('val',null)
                 $('#modal_new_customer').modal('show');
             }
-
+            var obj_customers=$('#cbo_customers').find('option[value="' + i + '"]');
+            $('#txt_address').val(obj_customers.data('address'));
         });
 
         $('#btn_create_salesperson').click(function(){
@@ -1446,7 +1447,7 @@ $(document).ready(function(){
                     var _customer=response.row_added[0];
                     $('#cbo_customers').append('<option value="'+_customer.customer_id+'" selected>'+ _customer.customer_name + '</option>');
                     $('#cbo_customers').select2('val',_customer.customer_id);
-
+                    $('#txt_address').val(_customer.address);
                 }).always(function(){
                     showSpinningProgress(btn);
                 });
