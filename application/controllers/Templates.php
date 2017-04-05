@@ -742,12 +742,14 @@ class Templates extends CORE_Controller {
                         'suppliers.email_address',
                         'suppliers.contact_no',
                         'suppliers.contact_name',
-                        'departments.department_name'
+                        'departments.department_name',
+                        'payment_methods.*'
                     ),
 
                     array(
                         array('suppliers','suppliers.supplier_id=journal_info.supplier_id','left'),
-                        array('departments','departments.department_id=journal_info.department_id','left')
+                        array('departments','departments.department_id=journal_info.department_id','left'),
+                        array('payment_methods','payment_methods.payment_method_id=journal_info.payment_method_id','left')
                     )
 
                 );

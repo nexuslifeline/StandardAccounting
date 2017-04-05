@@ -109,7 +109,8 @@ class Delivery_invoice_model extends CORE_Model {
             `delivery_invoice` AS di
             LEFT JOIN suppliers AS s ON s.`supplier_id`=di.`supplier_id`
             WHERE di.is_deleted=FALSE AND di.is_active=TRUE
-            AND di.date_delivered BETWEEN '$startDate' AND '$endDate'";
+            AND di.date_delivered BETWEEN '$startDate' AND '$endDate'
+            AND s.tax_type_id=2";
 
             return $this->db->query($sql)->result();
     }
@@ -122,7 +123,8 @@ class Delivery_invoice_model extends CORE_Model {
             `delivery_invoice` AS di
             LEFT JOIN suppliers AS s ON s.`supplier_id`=di.`supplier_id`
             WHERE di.is_deleted=FALSE AND di.is_active=TRUE
-            AND di.date_delivered BETWEEN '$startDate' AND '$endDate'";
+            AND di.date_delivered BETWEEN '$startDate' AND '$endDate'
+            AND s.tax_type_id=2";
 
             return $this->db->query($sql)->result();
     }

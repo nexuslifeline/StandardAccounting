@@ -42,10 +42,10 @@
 				<td colspan="2"><strong>SUPPLIER : </strong><?php echo $supplier->supplier_name; ?></strong></td>
 				<td colspan="2"><strong> TIN # :</strong> <?php echo $supplier->tin_no; ?></strong></td>
 			</tr>
-    		<th width="25%">Invoice</th>
-    		<th width="25%">Invoice Amount</th>
-    		<th width="25%">VAT Input</th>
-    		<th width="25%">Net of VAT</th>
+    		<th width="25%" align="left">Invoice / OR #</th>
+    		<th width="25%" align="right">Invoice Amount</th>
+    		<th width="25%" align="right">VAT Input</th>
+    		<th width="25%" align="right">Net of VAT</th>
     	</thead>
     	<tbody>
     		<?php 

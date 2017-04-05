@@ -119,7 +119,7 @@
 		                    				<table id="tbl_vat_relief" class="table-striped custom-design">
 		                    					<thead>
 		                    						<th>Supplier</th>
-		                    						<th>Invoice</th>
+		                    						<th>Invoice / OR #</th>
 		                    						<th>Invoice Amount</th>
 		                    						<th>VAT Input</th>
 		                    						<th>Net of VAT</th>
