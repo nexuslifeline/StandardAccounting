@@ -279,7 +279,7 @@
                     <div class="modal-content"><!---content-->
                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                            <h4 class="modal-title" style="color: white"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                            <h4 class="" style="color: white"><span id="modal_mode"> </span>Confirm Deletion</h4>
                         </div>
 
                         <div class="modal-body">
@@ -299,7 +299,7 @@
                     <div class="modal-content">
                         <div class="modal-header" style="background: #2ecc71">
                              <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                             <h2 id="department_title" class="modal-title" style="color:white;">New Department</h2>
+                             <h2 id="department_title" class="" style="color:white;">New Department</h2>
                         </div>
                         <div class="modal-body">
                             <form id="frm_department" role="form" class="form-horizontal">
@@ -338,7 +338,7 @@
                         <div class="modal-content">
                             <div class="modal-header" style="background-color:#2ecc71;">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                                <h2 id="department_title" class="modal-title" style="color:white;">New Category</h2>
+                                <h2 id="department_title" class="" style="color:white;">New Category</h2>
                             </div>
                             <div class="modal-body">
                                 <div class="row">
@@ -379,7 +379,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                                    <h2 id="department_title" class="modal-title" style="color:white;">New Location</h2>
+                                    <h2 id="department_title" class="" style="color:white;">New Location</h2>
                                 </div>
 
                                 <div class="modal-body">

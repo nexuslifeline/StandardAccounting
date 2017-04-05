@@ -1,5 +1,21 @@
+<html>
+<head>
+    <title>Income Statement</title>
+    <style>
+        @page  {
+            size: A4;
 
-<table width="100%">
+        }
+
+        body{
+            font-family: 'Times New Roman', serif;
+
+        }
+
+    </style>
+</head>
+<body>
+    <table width="100%">
     <tr>
         <td width="20%" valign="top"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
         <td width="80%" class="align-center">
@@ -78,3 +94,15 @@
 
     </div>
 </div>
+</body>
+<script>
+    window.print();
+</script>
+</html>
+
+
+
+
+
+
+

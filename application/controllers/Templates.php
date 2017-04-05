@@ -1407,7 +1407,7 @@ class Templates extends CORE_Controller {
                 $data['end']=date("m/d/Y",strtotime($end));
 
                 //download pdf
-                if($type=='pdf'){
+                /*if($type=='pdf'){
                     $file_name=date('Y-m-d');
                     $pdfFilePath = $file_name.".pdf"; //generate filename base on id
                     $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
@@ -1428,7 +1428,12 @@ class Templates extends CORE_Controller {
                     $pdf->WriteHTML($content);
                     //download it.
                     $pdf->Output();
+                }*/
+
+                if($type==null|$type=='preview'){
+                    $this->load->view('template/income_statement_report',$data);
                 }
+
 
 
 

@@ -271,7 +271,7 @@
                                                                     <span class="input-group-addon">
                                                                         <i class="fa fa-calendar"></i>
                                                                     </span>
-                                                                    <input type="text" name="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
+                                                                    <input type="text" name="date_txn" id="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
                                                                 </div>
                                                             </div>
                                                             <br /><br />
@@ -971,6 +971,7 @@
                 _txnMode="new";
                 clearFields($('#div_payable_fields'))
                 showList(false);
+                $('#date_txn').datepicker('setDate','today');
                 //$('#modal_journal_entry').modal('show');
             });
 
@@ -1327,9 +1328,10 @@
         };
 
         var clearFields=function(f){
-            $('input,textarea',f).val('');
-            //$(f).find('select').select2('val',null);
+            $('input,textarea,select',f).val('');
+            $(f).find('select').select2('val',null);
             $(f).find('input:first').focus();
+            $('#cbo_departments').select2('val',null);
             $('#tbl_entries > tbody tr').slice(2).remove();
             $('#img_user').attr('src','assets/img/anonymous-icon.png');
             $('#cbo_tax_group').select2('val',null);
