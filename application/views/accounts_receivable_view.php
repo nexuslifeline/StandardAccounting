@@ -55,10 +55,9 @@
             border-color: #e84e40;
         }
 
-
-
-
-
+        .select2-container { 
+            width: 100% !important; 
+        } 
 
         .toolbar{
             float: left;
@@ -310,7 +309,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </span>
-                                            <input type="text" name="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
+                                            <input type="text" name="date_txn" id="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
                                         </div>
 
                                     </div>
@@ -984,6 +983,7 @@ $(document).ready(function(){
         $('#btn_new').click(function(){
             _txnMode="new";
             clearFields($('#div_receivable_fields'))
+            $('#date_txn').datepicker('setDate','today');
             showList(false);
             //$('#modal_journal_entry').modal('show');
         });
@@ -1326,11 +1326,11 @@ $(document).ready(function(){
     };
 
     var clearFields=function(f){
-        $('input,textarea',f).val('');
-        ///$(f).find('select').select2('val',null);
+        $('input,textarea,select',f).val('');
+        $(f).find('select').select2('val',null);
         $(f).find('input:first').focus();
         $('#tbl_entries > tbody tr').slice(2).remove();
-
+        $('#cbo_departments').select2('val',null);
         $('#tbl_entries > tfoot tr').find(oTFSummary.dr).html('<b>0.00</b>');
         $('#tbl_entries > tfoot tr').find(oTFSummary.cr).html('<b>0.00</b>');
     };

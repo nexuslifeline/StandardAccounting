@@ -133,7 +133,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
 
-                                                    <button id="btn_print" class="btn btn-default" style="text-transform: none;"><i class="fa fa-print"></i> Print Report</button>
+                                                    <button id="btn_print" class="btn btn-green" style="text-transform: none;"><i class="fa fa-print"></i> Print Report</button>
 
                                                     <button id="btn_export" class="btn btn-success disabled" style="text-transform: none;"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
 

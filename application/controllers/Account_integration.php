@@ -237,7 +237,9 @@ class Account_integration extends CORE_Controller
             ),
             array(
                 array('user_accounts as ua','ua.user_id=accounting_period.closed_by_user','left')
-            )
+            ),
+
+            'accounting_period.accounting_period_id DESC'
         );
     }
 
