@@ -16,6 +16,16 @@ class Products extends CORE_Controller
         $this->load->model('Refproduct_model');
         $this->load->model('Suppliers_model');
         $this->load->model('Tax_model');
+        $this->load->model('Purchases_model');
+        $this->load->model('Purchase_items_model');
+        $this->load->model('Sales_order_model');
+        $this->load->model('Sales_order_item_model');
+        $this->load->model('Sales_invoice_model');
+        $this->load->model('Sales_invoice_item_model');
+        $this->load->model('Issuance_model');
+        $this->load->model('Issuance_item_model');
+        $this->load->model('Delivery_invoice_model');
+        $this->load->model('Delivery_invoice_item_model');
     }
 
     public function index() {
@@ -174,20 +184,134 @@ class Products extends CORE_Controller
             case 'delete':
                 $m_products=$this->Products_model;
 
+                $m_purchases=$this->Purchases_model;
+                $m_purchase_items=$this->Purchase_items_model;
+                $m_sales_order=$this->Sales_order_model;
+                $m_order_items=$this->Sales_order_item_model;
+                $m_invoice=$this->Sales_invoice_model;
+                $m_invoice_items=$this->Sales_invoice_item_model;
+                $m_issuance=$this->Issuance_model;
+                $m_issuance_items=$this->Issuance_item_model;
+                $m_delivery_invoice=$this->Delivery_invoice_model;
+                $m_deliver_items=$this->Delivery_invoice_item_model;
+
                 $product_id=$this->input->post('product_id',TRUE);
 
-                $m_products->set('date_deleted','NOW()');
-                $m_products->deleted_by_user = $this->session->user_id;
-                $m_products->is_deleted=1;
-                if($m_products->modify($product_id)){
-                    $response['title']='Success!';
-                    $response['stat']='success';
-                    $response['msg']='Product information successfully deleted.';
+                if(count($m_purchase_items->get_list(
+
+                    'purchase_order.is_deleted=0 AND product_id='.$product_id,
+
+                    'purchase_order_items.product_id',
+
+                    array(
+                        array('purchase_order','purchase_order.purchase_order_id=purchase_order_items.purchase_order_id','left')
+                    )
+
+                ))>0){
+
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This product still has an active transaction in Purchase Order.';
 
                     echo json_encode($response);
+                    exit;
+                }
+
+                else if(count($m_order_items->get_list(
+
+                    'sales_order.is_deleted=0 AND product_id='.$product_id,
+
+                    'sales_order_items.product_id',
+
+                    array(
+                        array('sales_order','sales_order.sales_order_id=sales_order_items.sales_order_id','left')
+                    )
+
+                ))>0){
+
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This product still has an active transaction in Sales Order.';
+
+                    echo json_encode($response);
+                    exit;
+                }
+
+                else if(count($m_invoice_items->get_list(
+
+                    'sales_invoice.is_deleted=0 AND product_id='.$product_id,
+
+                    'sales_invoice_items.product_id',
+
+                    array(
+                        array('sales_invoice','sales_invoice.sales_invoice_id=sales_invoice_items.sales_invoice_id','left')
+                    )
+
+                ))>0){
+
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This product still has an active transaction in Sales Invoice.';
+
+                    echo json_encode($response);
+                    exit;
+                }
+
+                else if(count($m_issuance_items->get_list(
+
+                    'issuance_info.is_deleted=0 AND product_id='.$product_id,
+
+                    'issuance_items.product_id',
+
+                    array(
+                        array('issuance_info','issuance_info.issuance_id=issuance_items.issuance_id','left')
+                    )
+
+                ))>0){
+
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This product still has an active transaction in Item Issuance';
+
+                    echo json_encode($response);
+                    exit;
+                }
+
+                else if(count($m_deliver_items->get_list(
+
+                    'delivery_invoice.is_deleted=0 AND product_id='.$product_id,
+
+                    'delivery_invoice_items.product_id',
+
+                    array(
+                        array('delivery_invoice','delivery_invoice.dr_invoice_id=delivery_invoice_items.dr_invoice_id','left')
+                    )
+
+                ))>0){
+
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This product still has an active transaction in Purchase Invoice.';
+
+                    echo json_encode($response);
+                    exit;
+                }
+
+                else {
+                    $m_products->set('date_deleted','NOW()');
+                    $m_products->deleted_by_user = $this->session->user_id;
+                    $m_products->is_deleted=1;
+                    if($m_products->modify($product_id)){
+                        $response['title']='Success!';
+                        $response['stat']='success';
+                        $response['msg']='Product information successfully deleted.';
+
+                        echo json_encode($response);
+                    }
                 }
 
                 break;
+
             case 'product-history':
                 $product_id=$this->input->get('id');
                 $m_products=$this->Products_model;
@@ -197,6 +321,7 @@ class Products extends CORE_Controller
                 $this->load->view('Template/product_history_menus',$data);
                 $this->load->view('Template/product_history',$data);
                 break;
+                
             case 'export-product-history':
                 $excel=$this->excel;
                 $product_id=$this->input->get('id');

@@ -11,6 +11,10 @@ class Customers extends CORE_Controller {
         $this->load->model('Customer_photos_model');
         $this->load->model('Departments_model');
         $this->load->model('RefCustomerType_model');
+        $this->load->model('Journal_info_model');
+        $this->load->model('Sales_order_model');
+        $this->load->model('Sales_invoice_model');
+        $this->load->model('Receivable_payment_model');
     }
 
     public function index()
@@ -91,20 +95,63 @@ class Customers extends CORE_Controller {
             case 'delete':
                 $m_customers=$this->Customers_model;
                 $m_photos=$this->Customer_photos_model;
+
+                $m_journal=$this->Journal_info_model;
+                $m_sales_order=$this->Sales_order_model;
+                $m_invoice=$this->Sales_invoice_model;
+                $m_payment=$this->Receivable_payment_model;
+
                 $customer_id=$this->input->post('customer_id',TRUE);
 
-                $m_customers->set('date_deleted','NOW()');
-                $m_customers->deleted_by_user=$this->session->user_id;
-                $m_customers->is_deleted=1;
-                if($m_customers->modify($customer_id)){
-                    $response['title']='Success!';
-                    $response['stat']='success';
-                    $response['msg']='Customer Information successfully deleted.';
-                    //$response['row_updated']=$m_customers->get_customer_list($customer_id);
+                if(count($m_journal->get_list('is_active=1 AND customer_id='.$customer_id))>0){
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This customer still has an active transaction in General Journal.';
+
                     echo json_encode($response);
+                    exit;
                 }
 
+                else if(count($m_sales_order->get_list('is_active=1 AND customer_id='.$customer_id))>0){
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This customer still has an active transaction in Sales Order.';
 
+                    echo json_encode($response);
+                    exit;
+                }
+
+                else if(count($m_invoice->get_list('is_deleted=0 AND customer_id='.$customer_id))>0){
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This customer still has an active transaction in Sales Invoice.';
+
+                    echo json_encode($response);
+                    exit;
+                }
+
+                else if(count($m_payment->get_list('is_active=1 AND customer_id='.$customer_id))>0){
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This customer still has an active transaction in Collection Entry.';
+
+                    echo json_encode($response);
+                    exit;
+                }
+
+                else {
+                    $m_customers->set('date_deleted','NOW()');
+                    $m_customers->deleted_by_user=$this->session->user_id;
+                    $m_customers->is_deleted=0;
+                    
+                    if($m_customers->modify($customer_id)){
+                        $response['title']='Success!';
+                        $response['stat']='success';
+                        $response['msg']='Customer Information successfully deleted.';
+
+                        echo json_encode($response);
+                    }
+                }
 
                 break;
             //****************************************************************************************************************
@@ -207,4 +254,3 @@ class Customers extends CORE_Controller {
         );
     }
 }
-            

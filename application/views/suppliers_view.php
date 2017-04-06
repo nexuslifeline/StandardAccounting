@@ -211,7 +211,9 @@ $(document).ready(function(){
         $('#btn_yes').click(function(){
             removeSupplier().done(function(response){
                 showNotification(response);
-                dt.row(_selectRowObj).remove().draw();
+                if(response.stat == 'success') {
+                    dt.row(_selectRowObj).remove().draw();
+                }
             });
         });
 

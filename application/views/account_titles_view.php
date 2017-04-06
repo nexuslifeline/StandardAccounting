@@ -233,7 +233,7 @@
         <div class="modal-content"><!---content--->
             <div class="modal-header">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                <h4 class="modal-title" style="color:white;><span id="modal_mode"> </span>Confirm Deletion</h4>
 
             </div>
 
