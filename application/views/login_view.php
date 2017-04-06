@@ -16,12 +16,37 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style-blessed3ef7a.css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/style-blessed3ef7a.css"> -->
 
 
     <style>
 	    .ui-pnotify-title {
 	    	color: white !important;
+	    }
+
+	    .input-group-addon {
+	    	border: 1px solid #aaa!important;
+	    	border-right: none!important;
+	    	background: transparent!important;
+	    	color: white;
+	    }
+
+	    .login-background {
+	    	background: #28353b;
+	    }
+
+	    .form-control {
+	    	border-radius: 0;
+	    	background: transparent;
+	    	color: white;
+	    }
+
+	    .form-control:focus {
+	    	background: transparent!important;
+	    }
+
+	    .btn-custom-jk {
+	    	background: transparent!important;
 	    }
     </style>
 
@@ -33,35 +58,36 @@
 <div class="container" id="login-form">
 	<a href="Login" class="login-logo"></a>
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
-				<div class="panel panel-primary" style="border:none;">
-					<!-- <div class="panel-heading">
-						<h2>Login</h2>
-					</div> -->
-					<div class="panel-body" style="border-top: 3px solid #2196f3; border-radius: 0;">
+			<div class="hidden-xs hidden-sm col-md-8">
+				<span class="text-center" style="position: absolute; top: 110px; left: 11%; font-size: 40px; font-family: 'Segoe UI', sans-serif; color: white; font-weight: 200;"><img src="<?php echo base_url($company->logo_path); ?>" style="max-width: 150px;max-height: 100px;"><br><b>JCORE</b> ACCOUNTING SYSTEM</span>
+			</div>
+			<div class="col-md-4">
+				<div style="border:none; margin-top: 50px;">
+					<div class="panel-body">
 						<!-- <h2>Login Form</h2> -->
 						<div class="col-xs-12 text-center" style="margin-bottom: 20px;">
-							<img class="" src="<?php echo base_url($company->logo_path); ?>" style="max-width: 150px;">
+							<H4 style="color: white;"><strong>SIGN IN</strong> <span style="font-weight: 200;">TO YOUR ACCOUNT</span></H4>
 						</div>
 						<form action="#" class="form-horizontal" id="validate-form">
 							<div class="form-group mb-md">
 		                        <div class="col-xs-12">
-		                        	<div class="input-group">							
-										<span class="input-group-addon">
-											<i class="ti ti-user"></i>
-										</span>
-										<input name="user_name" type="text" class="form-control" placeholder="Username" data-parsley-minlength="20" placeholder="At least 6 characters" required>
-									</div>
+		                        	<div class="input-group">
+		                        		<div class="input-group-addon">
+		                        			<i class="fa fa-user"></i>
+		                        		</div>
+		                        		<input name="user_name" type="text" class="form-control " placeholder="Username" data-parsley-minlength="20" placeholder="At least 6 characters" required>
+		                        	</div>
+									
 		                        </div>
 							</div>
 
 							<div class="form-group mb-md">
 		                        <div class="col-xs-12">
 		                        	<div class="input-group">
-										<span class="input-group-addon">
-											<i class="ti ti-key"></i>
-										</span>
-										<input name="user_pword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+		                        		<div class="input-group-addon">
+		                        			<i class="fa fa-key"></i>
+		                        		</div>
+									<input name="user_pword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 									</div>
 		                        </div>
 							</div>
@@ -77,26 +103,25 @@
 								</div>
 							</div> -->
 						</form>
-							<br>
 					</div>
-					<div class="panel-footer">
-						<div class="clearfix">
-							<div class="row">
-								<div class="container-fluid">
-									<div class="col-xs-12 col-sm-6 hidden " style="margin-bottom: 10px;">
-										<button id="btn_register" class="btn btn-info btn-block">Register</button>
-									</div>
-									<div class="col-sm-offset-6"></div>								
-									<div class="col-xs-12 col-sm-12">
-										<button id="btn_login" class="btn btn-success btn-block ladda-button" data-style="expand-left" data-spinner-color="white" data-size="l">
-										<span class=""></span> Login
-										</button>
-									</div>
+					<div class="clearfix">
+						<div class="row">
+							<div class="container-fluid">
+								<div class="col-xs-12 col-sm-6 hidden " style="margin-bottom: 10px;">
+									<button id="btn_register" class="btn btn-info btn-block">Register</button>
+								</div>
+								<div class="col-sm-offset-6"></div>								
+								<div class="col-xs-12 col-sm-12">
+									<button id="btn_login" class="btn btn-primary btn-block btn-custom-jk" data-style="expand-left" data-spinner-color="white" data-size="l" style="margin-bottom: 50px;">
+									<span class=""></span> Login
+									</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
+				<span style="font-size: 12px; color: white; font-weight: 200; position: absolute; top: 150%; left: 60%;">Powered by : <img src="assets/img/jdev-logo-white.png" height="30" width="70"></span>
 <!--
 				<div class="text-center">
 					<a href="#" class="btn btn-label btn-social btn-facebook mb-md"><i class="ti ti-facebook"></i>Connect with Facebook</a>
