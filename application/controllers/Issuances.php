@@ -293,6 +293,8 @@ class Issuances extends CORE_Controller
             //***************************************************************************************
             case 'delete':
                 $m_issuance=$this->Issuance_model;
+                $m_issuance_items=$this->Issuance_item_model;
+                $m_products=$this->Products_model;
                 $issuance_id=$this->input->post('issuance_id',TRUE);
 
                 //mark Items as deleted
@@ -300,6 +302,20 @@ class Issuances extends CORE_Controller
                 $m_issuance->deleted_by_user=$this->session->user_id;
                 $m_issuance->is_deleted=1;
                 $m_issuance->modify($issuance_id);
+
+                //update product on_hand after issuance is deleted...
+                $products=$m_issuance_items->get_list(
+                    'issuance_id='.$issuance_id,
+                    'product_id'
+                ); 
+
+                for($i=0;$i<count($products);$i++) {
+                    $prod_id=$products[$i]->product_id;
+                    $m_products->on_hand=$m_products->get_product_qty($prod_id);
+                    $m_products->modify($prod_id);
+                }
+
+                //end update product on_hand after issuance is deleted...
 
                 $response['title']='Success!';
                 $response['stat']='success';

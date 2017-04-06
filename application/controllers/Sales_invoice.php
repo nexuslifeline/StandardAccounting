@@ -99,7 +99,7 @@ class Sales_invoice extends CORE_Controller
                        'products.product_desc1',
                        'products.is_tax_exempt',
                        'products.size',
-                       'products.sale_price',
+                       'FORMAT(products.sale_price,2)as sale_price',
                        //'FORMAT(products.sale_price,2)as sale_price',
                        'FORMAT(products.purchase_cost,2)as purchase_cost',
                        'products.unit_id',
@@ -459,6 +459,8 @@ class Sales_invoice extends CORE_Controller
                 echo json_encode($response);*/
 
                 $m_invoice=$this->Sales_invoice_model;
+                $m_invoice_items=$this->Sales_invoice_item_model;
+                $m_products=$this->Products_model;
                 $sales_invoice_id=$this->input->post('sales_invoice_id',TRUE);
 
                 //mark Items as deleted
@@ -467,7 +469,18 @@ class Sales_invoice extends CORE_Controller
                 $m_invoice->is_deleted=1;//mark as deleted
                 $m_invoice->modify($sales_invoice_id);
 
+                //update product on_hand after invoice is deleted...
+                $products=$m_invoice_items->get_list(
+                    'sales_invoice_id='.$sales_invoice_id,
+                    'product_id'
+                ); 
 
+                for($i=0;$i<count($products);$i++) {
+                    $prod_id=$products[$i]->product_id;
+                    $m_products->on_hand=$m_products->get_product_qty($prod_id);
+                    $m_products->modify($prod_id);
+                }
+                //end update product on_hand after invoice is deleted...
 
                 $response['title']='Success!';
                 $response['stat']='success';

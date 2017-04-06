@@ -358,13 +358,29 @@ class Deliveries extends CORE_Controller
             //***************************************************************************************
             case 'delete':
                 $m_delivery_invoice=$this->Delivery_invoice_model;
+                $m_delivery_items=$this->Delivery_invoice_item_model;
+                $m_products=$this->Products_model;
                 $dr_invoice_id=$this->input->post('dr_invoice_id',TRUE);
 
-                //mark purchase invoice as deleted
+                // mark purchase invoice as deleted
                 $m_delivery_invoice->set('date_deleted','NOW()'); //treat NOW() as function and not string,set deletion date
                 $m_delivery_invoice->deleted_by_user=$this->session->user_id; //user that delete this record
                 $m_delivery_invoice->is_deleted=1;
                 $m_delivery_invoice->modify($dr_invoice_id);
+
+                //update product on_hand after purchase invoice is deleted...
+                $products=$m_delivery_items->get_list(
+                    'dr_invoice_id='.$dr_invoice_id,
+                    'product_id'
+                ); 
+
+                for($i=0;$i<count($products);$i++) {
+                    $prod_id=$products[$i]->product_id;
+                    $m_products->on_hand=$m_products->get_product_qty($prod_id);
+                    $m_products->modify($prod_id);
+                }
+
+                //end update product on_hand after purchase invoice is deleted...
 
                 //********************************************************************************************************************
                 //if purchase invoice is mark as deleted, make sure purchase order status is updated(open, closed, partially invoice)
@@ -380,7 +396,7 @@ class Deliveries extends CORE_Controller
 
                 $response['title']='Success!';
                 $response['stat']='success';
-                $response['msg']='Purchase invoice successfully deleted.';
+                $response['msg']='Delivery invoice successfully deleted.';
                 echo json_encode($response);
 
                 break;

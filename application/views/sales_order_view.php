@@ -347,7 +347,6 @@
 
                             <th width="10%">Qty</th>
                             <th width="10%">UM</th>
-                            <th width="10%">Pack Size</th>
                             <th width="30%">Item</th>
                             <th width="20%" style="text-align: right;">Unit Price</th>
                             <th width="12%" style="text-align: right; display: none;">Discount</th>
@@ -366,18 +365,18 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="7" style="height: 50px;">&nbsp;</td>
+                                <td colspan="6" style="height: 50px;">&nbsp;</td>
                             </tr>
                             <tr>
                                 <td colspan="2" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Discount :</strong></td>
                                 <td align="right" colspan="2" id="td_discount color="red">0.00</td>
-                                <td colspan="2" id="" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total Before Tax :</strong></td>
+                                <td colspan="1" id="" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total Before Tax :</strong></td>
                                 <td align="right" colspan="1" id="td_before_tax" color="red">0.00</td>
                             </tr>
                             <tr>
                                 <td colspan="2" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Tax :</strong></td>
                                 <td align="right" colspan="2" id="td_tax" color="red">0.00</td>
-                                <td colspan="2" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total After Tax :</strong></td>
+                                <td colspan="1" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total After Tax :</strong></td>
                                 <td align="right" colspan="1" id="td_after_tax" color="red">0.00</td>
                             </tr>
                         </tfoot>
@@ -1062,10 +1061,36 @@ $(document).ready(function(){
                 source: products,
                 templates: {
                     header: [
-                        '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
+                        '<table width="100%">'+
+                            '<tr>'+
+                                '<td width=20%" style="padding-left: 1%;">'+
+                                    '<b>PLU</b>'+
+                                '</td>'+
+                                '<td width="20%" align="left">'+
+                                    '<b>Description</b>'+
+                                '</td>'+
+                                '<td width="10%" align="right" style="padding-right: 2%;">'+
+                                    '<b>SRP</b>'+
+                                '</td>'+
+                            '</tr>'+
+                        '</table>'
                     ].join('\n'),
 
-                    suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="10%" align="right" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
+                    suggestion: Handlebars.compile(
+                        '<table width="100%">'+
+                            '<tr>'+
+                                '<td width="20%" style="padding-left: 1%">'+
+                                    '{{product_code}}'+
+                                '</td>'+
+                                '<td width="20%" align="left">'+
+                                    '{{product_desc}}'+
+                                '</td>'+
+                                '<td width="10%" align="right" style="padding-right: 2%;">'+
+                                    '{{sale_price}}'+
+                                '</td>'+
+                            '</tr>'+
+                        '</table>'
+                        )
 
                 }
             }).on('keyup', this, function (event) {
@@ -1756,7 +1781,6 @@ $(document).ready(function(){
         return '<tr>'+
         '<td width="10%"><input name="so_qty[]" type="text" class="number form-control" value="'+ d.so_qty+'"></td>'+
         '<td width="5%">'+ d.unit_name+'</td>'+
-        '<td width="10%">'+ d.size + '</td>' + 
         '<td width="30%">'+d.product_desc+'</td>'+
         '<td width="11%"><input name="so_price[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(d.so_price,4)+'" style="text-align:right;"></td>'+
         '<td width="11%" style="display: none;"><input name="so_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.so_discount,4)+'" style="text-align:right;"></td>'+
@@ -1800,8 +1824,6 @@ $(document).ready(function(){
         $('#td_after_tax').html(accounting.formatNumber(after_tax,4));
         $('#td_discount').html(accounting.formatNumber(discounts,4));
         $('#td_tax').html(accounting.formatNumber(so_tax_amount,4));
-
-
     };
 
 

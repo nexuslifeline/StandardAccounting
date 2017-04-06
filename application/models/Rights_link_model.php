@@ -60,7 +60,8 @@ class Rights_link_model extends CORE_Model{
                                           (43,'4','4-4','Locations Management'),
                                           (44,'10','10-1','Fixed Asset Management'),
                                           (45,'9','9-9','Depreciation Expense'),
-                                          (46,'6','6-8','Recurring Template')
+                                          (46,'6','6-8','Recurring Template'),
+                                          (47,'9','9-10','VAT Relief Report')
                                           ON DUPLICATE KEY UPDATE
 
                                           rights_links.parent_code=VALUES(rights_links.parent_code),

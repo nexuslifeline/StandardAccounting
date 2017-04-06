@@ -157,6 +157,10 @@
         #img_user {
             padding-bottom: 15px;
         }
+
+        .select2-container { 
+            width: 100% !important; 
+        } 
         
     </style>
 
@@ -289,7 +293,7 @@
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </span>
-                                    <input type="text" name="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
+                                    <input type="text" name="date_txn" id="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-lg-offset-2">
@@ -341,7 +345,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </span>
-                                    <input type="text" name="check_date" class="date-picker form-control">
+                                    <input type="text" name="check_date" id="check_date" class="date-picker form-control">
                                 </div>
                             </div>
 
@@ -960,6 +964,7 @@ $(document).ready(function(){
             _txnMode="new";
 
             reInitializeDropDownAccounts($('#tbl_entries'),false);
+            $('#date_txn').datepicker('setDate','today');
 
             clearFields($('#frm_journal'));
             showList(false);
@@ -1031,6 +1036,13 @@ $(document).ready(function(){
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.journal_id;
 
+            if(data.check_date == '01/01/1970') {
+                //$('#check_date').datepicker('setDate','today');
+                //$('#check_date').val(null);
+                //clearFields($('#frm_journal'));
+
+                //alert('data.check_date');
+            }
 
             $('input,textarea').each(function(){
                 var _elem=$(this);
@@ -1464,7 +1476,7 @@ $(document).ready(function(){
         parent.find('input.date-picker').datepicker({
             todayBtn: "linked",
             keyboardNavigation: false,
-            forceParse: false,
+            forceParse: true,
             calendarWeeks: true,
             autoclose: true
 

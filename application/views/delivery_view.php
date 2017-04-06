@@ -1587,7 +1587,7 @@ $(document).ready(function(){
         $('#btn_yes').click(function(){
             removePurchaseInvoice().done(function(response){
                 showNotification(response);
-                dt.row(_selectRowObj).remove().draw();
+                dt.row(_selectRowObj).remove().draw();            
             });
         });
 

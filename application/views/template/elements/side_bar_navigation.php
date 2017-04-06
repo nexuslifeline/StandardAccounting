@@ -110,6 +110,7 @@
                                 <li class="<?php echo (in_array('9-6',$this->session->user_rights)?'':'hidden'); ?>"><a href="Customer_Subsidiary">Customer Subsidiary</a></li>
                                 <li class="<?php echo (in_array('9-7',$this->session->user_rights)?'':'hidden'); ?>"><a href="Supplier_Subsidiary">Supplier Subsidiary</a></li>
                                 <li class="<?php echo (in_array('9-8',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_Subsidiary">Account Subsidiary</a></li>
+                                <li class="<?php echo (in_array('9-10',$this->session->user_rights)?'':'hidden'); ?>"><a href="Vat_relief_report">Vat Relief Report</a></li>
                             </ul>
                         </li>
 
@@ -120,8 +121,6 @@
                                 <li class="<?php echo (in_array('8-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Purchase_Invoice_Report">Purchase Invoice Report</a></li>
                             </ul>
                         </li>
-
-
                     </ul>
                 </nav>
             </div>

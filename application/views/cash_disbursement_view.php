@@ -155,6 +155,7 @@
           -webkit-transform: scale(1.5); /* Safari and Chrome */
           -o-transform: scale(1.5); /* Opera */
         }
+        
     </style>
 
 </head>

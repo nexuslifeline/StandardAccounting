@@ -100,6 +100,34 @@ class Delivery_invoice_model extends CORE_Model {
 
     }
 
+    function get_vat_relief($startDate,$endDate) {
+        $sql="SELECT
+            di.*,
+            s.*,
+            (IFNULL(di.total_after_tax,0) - IFNULL(di.total_tax_amount,0)) AS net_of_vat
+            FROM
+            `delivery_invoice` AS di
+            LEFT JOIN suppliers AS s ON s.`supplier_id`=di.`supplier_id`
+            WHERE di.is_deleted=FALSE AND di.is_active=TRUE
+            AND di.date_delivered BETWEEN '$startDate' AND '$endDate'
+            AND s.tax_type_id=2";
+
+            return $this->db->query($sql)->result();
+    }
+
+    function get_vat_relief_supplier_list($startDate,$endDate) {
+        $sql="SELECT
+            DISTINCT(s.supplier_name),
+            s.*
+            FROM
+            `delivery_invoice` AS di
+            LEFT JOIN suppliers AS s ON s.`supplier_id`=di.`supplier_id`
+            WHERE di.is_deleted=FALSE AND di.is_active=TRUE
+            AND di.date_delivered BETWEEN '$startDate' AND '$endDate'
+            AND s.tax_type_id=2";
+
+            return $this->db->query($sql)->result();
+    }
 
 }
 

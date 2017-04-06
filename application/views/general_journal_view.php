@@ -96,6 +96,10 @@
           -o-transform: scale(1.5); /* Opera */
         }
 
+        .select2-container { 
+            width: 100% !important; 
+        } 
+
     </style>
 
 </head>
@@ -201,10 +205,10 @@
                                         <label class="col-lg-2"> * Date :</label>
                                         <div class="col-lg-4">
                                             <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
-                                                <input type="text" name="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="text" name="date_txn" id="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
                                             </div>
 
                                         </div>
@@ -789,6 +793,7 @@ $(document).ready(function(){
             clearFields($('#frm_journal'));
             $('#div_check').show();
             $('#div_no_check').hide();
+            $('#date_txn').datepicker('setDate','today');
             showList(false);
             //$('#modal_journal_entry').modal('show');
         });

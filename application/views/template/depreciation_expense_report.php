@@ -20,7 +20,7 @@
 <body>
 	<center>
 		<h3 style="text-transform: uppercase;">Depreciation Expense Report</h3>
-		<h4>For the Month of <?php echo date('F Y', strtotime($depreciation_expenses[0]->date_acquired)); ?></h4>
+		<h4>For the Month of <?php echo date('F Y', strtotime($_GET['y'].'-'.$_GET['m'])); ?></h4>
 	</center>
 	<table width="100%" border="1" cellspacing="0" cellpadding="3">
 		<thead>
