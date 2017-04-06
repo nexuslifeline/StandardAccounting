@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Login Form</title>
+    <title>JCORE - LOGIN</title>
 
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -59,10 +59,10 @@
 	<a href="Login" class="login-logo"></a>
 		<div class="row">
 			<div class="hidden-xs hidden-sm col-md-8">
-				<span class="text-center" style="position: absolute; top: 110px; left: 11%; font-size: 40px; font-family: 'Segoe UI', sans-serif; color: white; font-weight: 200;"><img src="<?php echo base_url($company->logo_path); ?>" style="max-width: 150px;max-height: 100px;"><br><b>JCORE</b> ACCOUNTING SYSTEM</span>
+				<span class="text-center" style="position: absolute; top: 10000%; left: 11%; font-size: 40px; font-family: 'Segoe UI', sans-serif; color: white; font-weight: 200;"><img src="<?php echo base_url($company->logo_path); ?>" style="max-width: 150px;max-height: 100px;"><br><b><i>J</i>CORE</b> ACCOUNTING SYSTEM</span>
 			</div>
 			<div class="col-md-4">
-				<div style="border:none; margin-top: 50px;">
+				<div style="border:none; margin-top: 15%;">
 					<div class="panel-body">
 						<!-- <h2>Login Form</h2> -->
 						<div class="col-xs-12 text-center" style="margin-bottom: 20px;">
@@ -112,7 +112,7 @@
 								</div>
 								<div class="col-sm-offset-6"></div>								
 								<div class="col-xs-12 col-sm-12">
-									<button id="btn_login" class="btn btn-primary btn-block btn-custom-jk" data-style="expand-left" data-spinner-color="white" data-size="l" style="margin-bottom: 50px;">
+									<button id="btn_login" class="btn btn-primary btn-block btn-custom-jk" data-style="expand-left" data-spinner-color="white" data-size="s" style="margin-bottom: 50px;">
 									<span class=""></span> Login
 									</button>
 								</div>
@@ -121,7 +121,7 @@
 					</div>
 				</div>
 
-				<span style="font-size: 12px; color: white; font-weight: 200; position: absolute; top: 150%; left: 60%;">Powered by : <img src="assets/img/jdev-logo-white.png" height="30" width="70"></span>
+				<span style="font-size: 12px; color: white; font-weight: 200; position: absolute; top: 130%; left: 60%;">Powered by : <img src="assets/img/jdev-logo-white.png" height="30" width="70"></span>
 <!--
 				<div class="text-center">
 					<a href="#" class="btn btn-label btn-social btn-facebook mb-md"><i class="ti ti-facebook"></i>Connect with Facebook</a>
