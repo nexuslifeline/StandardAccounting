@@ -9,6 +9,9 @@ class Suppliers extends CORE_Controller {
         $this->load->model('Suppliers_model');
         $this->load->model('Supplier_photos_model');
         $this->load->model('Tax_model');
+        $this->load->model('Journal_info_model');
+        $this->load->model('Delivery_invoice_model');
+        $this->load->model('Payable_payment_model');
     }
 
     public function index() {
@@ -85,15 +88,53 @@ class Suppliers extends CORE_Controller {
             case 'delete':
                 $m_suppliers=$this->Suppliers_model;
                 $m_photos=$this->Supplier_photos_model;
+
+                $m_payment=$this->Payable_payment_model;
+                $m_delivery_invoice=$this->Delivery_invoice_model;
+                $m_journal=$this->Journal_info_model;
+
                 $supplier_id=$this->input->post('supplier_id',TRUE);
 
-                $m_suppliers->is_deleted=1;
-                if($m_suppliers->modify($supplier_id)){
-                    $response['title']='Success!';
-                    $response['stat']='success';
-                    $response['msg']='supplier information successfully deleted.';
+                if(count($m_delivery_invoice->get_list('is_deleted=0 AND supplier_id='.$supplier_id))>0){
+
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This supplier still has an active transaction in Purchase Invoice.';
 
                     echo json_encode($response);
+                    exit;
+                }
+
+                else if(count($m_payment->get_list('is_active=1 AND supplier_id='.$supplier_id))>0){
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This supplier still has an active transaction in Record Payments.';
+
+                    echo json_encode($response);
+                    exit;
+                }
+
+                else if(count($m_journal->get_list('is_active=1 AND supplier_id='.$supplier_id))>0){
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This supplier still has an active transaction in General Journal.';
+
+                    echo json_encode($response);
+                    exit;
+                }
+
+                else {
+                    $m_suppliers->set('date_deleted','NOW()');
+                    $m_suppliers->deleted_by_user = $this->session->user_id;
+                    $m_suppliers->is_deleted=1;
+
+                    if($m_suppliers->modify($supplier_id)){
+                        $response['title']='Success!';
+                        $response['stat']='success';
+                        $response['msg']='Supplier information successfully deleted.';
+
+                        echo json_encode($response);
+                    }
                 }
 
                 break;

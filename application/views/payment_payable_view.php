@@ -456,7 +456,7 @@
             </div>
 
             <div class="modal-body">
-                <p id="modal-body-message">Are you sure ?</p>
+                <p id="modal-body-message">Are you sure you want to cancel this transaction ?</p>
             </div>
 
             <div class="modal-footer">
