@@ -564,9 +564,11 @@ $(document).ready(function(){
         $('#btn_yes').click(function(){
             removeAccount().done(function(response){
                 showNotification(response);
-                dt.row(_selectRowObj).remove().draw();
-                zNodes=response.row_hierarchy;
-                reInitializeTreeView();
+                if(response.stat=='success') {
+                    dt.row(_selectRowObj).remove().draw();
+                    zNodes=response.row_hierarchy;
+                    reInitializeTreeView();
+                }
             });
         });
 

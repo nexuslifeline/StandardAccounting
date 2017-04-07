@@ -10,6 +10,8 @@ class Account_titles extends CORE_Controller
         $this->load->model('Account_title_model');
         $this->load->model('Account_type_model');
         $this->load->model('Account_class_model');
+        $this->load->model('Journal_info_model');
+        $this->load->model('Journal_account_model');
     }
 
     public function index() {
@@ -140,25 +142,52 @@ class Account_titles extends CORE_Controller
                 break;
             case 'delete':
                 $m_accounts=$this->Account_title_model;
+
+                $m_journal=$this->Journal_info_model;
+                $m_journal_accounts=$this->Journal_account_model;
+
                 $account_id=$this->input->post('account_id',TRUE);
 
-                //******************************************************************************************************
-                //make sure, you cannot delete account with child accounts
+                if(count($m_accounts->get_list(
 
-                //mark Items as deleted
-                $m_accounts->set('date_deleted','NOW()'); //treat NOW() as function and not string
-                $m_accounts->deleted_by_user=$this->session->user_id;//user that deleted the record
-                $m_accounts->is_deleted=1;//mark as deleted
-                $m_accounts->modify($account_id);
+                    'journal_info.is_active=1 AND account_titles.account_id='.$account_id,
+
+                    'account_titles.account_id',
+
+                    array(
+                        array('journal_accounts','journal_accounts.account_id=account_titles.account_id','left'),
+                        array('journal_info','journal_info.journal_id=journal_accounts.journal_id','left')
+                    )
+
+                ))>0){
+
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'This account still has an active transaction in General Info.';
+
+                    echo json_encode($response);
+                    exit;
+                }
+
+                else {
+
+                    //******************************************************************************************************
+                    //make sure, you cannot delete account with child accounts
+
+                    //mark Items as deleted
+                    $m_accounts->set('date_deleted','NOW()'); //treat NOW() as function and not string
+                    $m_accounts->deleted_by_user=$this->session->user_id;//user that deleted the record
+                    $m_accounts->is_deleted=1;//mark as deleted
+                    $m_accounts->modify($account_id);
 
 
 
-                $response['title']='Success!';
-                $response['stat']='success';
-                $response['msg']='Account successfully deleted.';
-                $response['row_hierarchy']=$this->get_account_hierarchy();
-                echo json_encode($response);
-
+                    $response['title']='Success!';
+                    $response['stat']='success';
+                    $response['msg']='Account successfully deleted.';
+                    $response['row_hierarchy']=$this->get_account_hierarchy();
+                    echo json_encode($response);
+                }
 
                 break;
         }
