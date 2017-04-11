@@ -973,10 +973,12 @@ $(document).ready(function(){
                 if(_txnMode=="new"){
                     createJournal().done(function(response){
                         showNotification(response);
+                        $('#btn_save').attr('disabled',true);
                         if(response.stat=="success"){
                             dt.row.add(response.row_added[0]).draw();
                             clearFields(f);
                             showList(true);
+                            $('#btn_save').attr('disabled',false);
                         }
 
                     }).always(function(){
@@ -986,15 +988,19 @@ $(document).ready(function(){
                     if ($('input[name="chk_save"]').is(':checked')) {
                         createTemplate().done(function(response){
                             showNotification(response);
+                        }).always(function(){
+                            showSpinningProgress(btn);
                         });
                     }
                 }else{
                     updateJournal().done(function(response){
                         showNotification(response);
+                        $('#btn_save').attr('disabled',true);
                         if(response.stat=="success"){
                             dt.row(_selectRowObj).data(response.row_updated[0]).draw();
                             clearFields(f);
                             showList(true);
+                            $('#btn_save').attr('disabled',false);
                         }
 
                     }).always(function(){

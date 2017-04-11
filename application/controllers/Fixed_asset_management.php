@@ -52,7 +52,7 @@
 							'fixed_assets.category_id',
 							'fixed_assets.life_years',
 							'fixed_assets.asset_status_id',
-							'fixed_assets.date_acquired',
+							'DATE_FORMAT(fixed_assets.date_acquired,"%m/%d/%Y")as date_acquired',
 							'fixed_assets.remarks',
 							'FORMAT(fixed_assets.acquisition_cost, 2) AS acquisition_cost',
 							'FORMAT(fixed_assets.salvage_value, 2) AS salvage_value',
@@ -119,15 +119,6 @@
 
 				case 'update':
 					$m_fixed_asset=$this->Fixed_asset_management_model;
-
-					if(count($m_fixed_asset->get_list(array('asset_code'=>$this->input->post('asset_code',TRUE))))>0){
-	                    $response['title'] = 'Invalid!';
-	                    $response['stat'] = 'error';
-	                    $response['msg'] = 'Asset Code already exists.';
-
-	                    echo json_encode($response);
-	                    exit;
-	                }
 	                
 					$fixed_asset_id=$this->input->post('fixed_asset_id',TRUE);
 

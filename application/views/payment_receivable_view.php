@@ -418,7 +418,7 @@
 
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><i class="fa fa-floppy-o"></i> <span class=""></span>  Record Payment</button>
+                                                <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> <i class="fa fa-floppy-o"></i> Record Payment</button>
                                                 <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"">Cancel</button>
                                             </div>
                                         </div>
@@ -758,10 +758,12 @@
                     if(_txnMode=="new"){
                         postPayment().done(function(response){
                             showNotification(response);
+                            $('#btn_save').attr('disabled',true);
                             if(response.stat=="success"){
                                 dt.row.add(response.row_added[0]).draw();
                                 clearFields($('#frm_payments'));
                                 showList(true);
+                                $('#btn_save').attr('disabled',false);
                             }
 
                         }).always(function(){

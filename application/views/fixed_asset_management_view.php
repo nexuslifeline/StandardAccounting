@@ -30,6 +30,7 @@
         html {
             zoom: 0.8;
             zoom: 80%;
+            overflow: hidden;
         }
 
         select {
@@ -212,7 +213,7 @@
                                                 <span class="input-group-addon">
                                                      <i class="fa fa-calendar"></i>
                                                 </span>
-                                               <input class="date-picker form-control" id="date_acquired" value="<?php echo date("m/d/Y"); ?>" type="text" name="date_acquired">
+                                               <input class="date-picker form-control" id="date_acquired_format" value="<?php echo date("m/d/Y"); ?>" type="text" name="date_acquired">
                                             </div>
                                             Location : <br>
                                             <select id="cbo_location" name="location_id" class="form-control" style="width: 100% !important;">
@@ -262,7 +263,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button id="btn_save" type="button" class="btn"  style="background-color:#2ecc71;color:white;"><span class=""></span> Save</button>
+                                    <button id="btn_save" type="button" class="btn"  style="background-color:#2ecc71;color:white;"><span class=""></span>  Save</button>
                                     <button id="btn_cancel_assets" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                 </div>
                             </form>
@@ -307,7 +308,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Department Name * :</label>
-                                            <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
+                                            <textarea name="department_name" id="department_txt" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
 
                                         </div>
                                     </div>
@@ -318,7 +319,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group" style="margin-bottom:0px;">
                                                 <label class="">Department Description :</label>
-                                                <textarea name="department_desc" class="form-control" placeholder="Department Description"></textarea>
+                                                <textarea name="department_desc" id="department_txt_desc" class="form-control" placeholder="Department Description"></textarea>
 
                                         </div>
                                     </div>
@@ -352,14 +353,14 @@
                                                             <span class="input-group-addon">
                                                                 <i class="fa fa-users"></i>
                                                             </span>
-                                                            <input type="text" name="category_name" class="form-control" placeholder="Category Name" data-error-msg="category name is required!" required>
+                                                            <input type="text" name="category_name" id="category_txt" class="form-control" placeholder="Category Name" data-error-msg="category name is required!" required>
                                                         </div>
                                                     </div>
                                                 </div><br/>
                                                 <div class="form-group">
                                                     <label class="col-md-4 control-label"><strong>* Category Description :</strong></label>
                                                     <div class="col-md-8">
-                                                        <textarea name="category_desc" class="form-control" data-error-msg="Category Description is required!" placeholder="Description" required></textarea>
+                                                        <textarea name="category_desc" id="category_txt_desc" class="form-control" data-error-msg="Category Description is required!" placeholder="Description" required></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -368,7 +369,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button id="btn_save_category" class="btn btn-primary" name="btn_save">Save</button>
+                                <button id="btn_save_category" class="btn btn-primary" name="btn_save"><span class=""></span> Save</button>
                                 <button id="btn_cancel_category" class="btn btn-default">Cancel</button>
                             </div>
                         </div>
@@ -393,7 +394,7 @@
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-users"></i>
                                                     </span>
-                                                    <input type="text" name="location_name" class="form-control" placeholder="Location Name" data-error-msg="Location name is required!" required>
+                                                    <input type="text" name="location_name" id="location_txt" class="form-control" placeholder="Location Name" data-error-msg="Location name is required!" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -602,7 +603,7 @@ $(document).ready(function(){
             $('#txtAcquisitionCost').val('0.00');
             $('#modal_create_asset').modal('show');
             $('.modal-title').html('Create Fixed Asset');
-            $('#date_acquired').datepicker('setDate', 'today');
+            $('#date_acquired_format').datepicker('setDate', 'today');
         });
 
         $('#tbl_fixed_management tbody').on('click','button[name="edit_info"]',function(){
@@ -615,10 +616,10 @@ $(document).ready(function(){
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.fixed_asset_id;
 
-            //$('#date_acquired').format("dateFormat", 'm/d/y');
-            //$('#date_acquired').datepicker("option", "dateFormat", 'mm/dd/yyyy');
-            //$('#date_acquired').datepicker('dateFormat', 'mm/dd/yyyy');
-            //$('#date_acquired').format('mm/dd/yyyy');
+            //$('#date_acquired_format').format("dateFormat", 'm/d/y');
+            //$('#date_acquired_format').datepicker("option", "dateFormat", 'mm/dd/yyyy');
+            //$('#date_acquired_format').datepicker('dateFormat', 'mm/dd/yyyy');
+            //$('#date_acquired_format').format('mm/dd/yyyy');
 
             $('input,textarea').each(function(){
                 var _elem=$(this);
@@ -687,25 +688,33 @@ $(document).ready(function(){
             if(validateRequiredFields($('#frm_category'))){
                 createCategory().done(function(response){
                     showNotification(response);
-                    $('#cbo_category').append('<option value="'+ response.row_added[0].category_id +'">'+ response.row_added[0].category_name +'</option>');
-                    _cboCategory.select2('val',response.row_added[0].category_id);
-                    clearFields($('#frm_category'));
-                    $('#modal_new_category').modal('hide');
                     $('#btn_save_category').attr('disabled',true);
+                    if(response.stat=="success"){
+                        $('#cbo_category').append('<option value="'+ response.row_added[0].category_id +'">'+ response.row_added[0].category_name +'</option>');
+                        _cboCategory.select2('val',response.row_added[0].category_id);
+                        clearFields($('#frm_category'));
+                        $('#btn_save_category').attr('disabled',false);
+                    }
+                }).always(function(){
+                    showSpinningProgress($('#btn_save_category'));
                 });
-            }
+        }
         });
 
-        /*$('#btn_save').click(function(){
+        $('#btn_save').click(function(){
             if(validateRequiredFields($('#frm_fixed_asset'))){
                 if(_txnMode=="new"){
                     createFixedAsset().done(function(response){
                         showNotification(response);
-                        dt.row.add(response.row_added[0]).draw();
-                        clearFields($('#frm_fixed_asset'));
-                        showList(true);
+                        $('#btn_save_category').attr('disabled',true);
+                        if(response.stat=="success"){
+                            dt.row.add(response.row_added[0]).draw();
+                            clearFields($('#frm_fixed_asset'));
+                            showList(true);
+                            $('#btn_save_category').attr('disabled',false);
+                        }
                     }).always(function(){
-                        $('$modal_create_asset').modal('toggle');
+                        $('#modal_create_asset').modal('toggle');
                         showSpinningProgress($('#btn_save'));
                     });
                     return;
@@ -713,42 +722,20 @@ $(document).ready(function(){
                 if(_txnMode==="edit"){
                     updateFixedAsset().done(function(response){
                         showNotification(response);
-                        dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                        $('#btn_save_category').attr('disabled',true);
+                        if(response.stat=="success"){
+                            dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                            clearFields($('#frm_fixed_asset'));
+                            $('#btn_save_category').attr('disabled',false);
+                        }
                     }).always(function(){
-                        $('$modal_create_asset').modal('toggle'); 
+                        $('#modal_create_asset').modal('toggle');
                         showSpinningProgress($('#btn_save'));
                     });
                     return;
                 }
             }
-        });*/
-
-        $('#btn_save').click(function(){
-        if(validateRequiredFields($('#frm_fixed_asset'))){
-            if(_txnMode=="new"){
-                createFixedAsset().done(function(response){
-                    showNotification(response);
-                    dt.row.add(response.row_added[0]).draw();
-                    clearFields($('#frm_fixed_asset'))
-                    showList(true);
-                }).always(function(){
-                    $('#modal_create_asset').modal('toggle');
-                    showSpinningProgress($('#btn_save'));
-                });
-                return;
-            }
-            if(_txnMode==="edit"){
-                updateFixedAsset().done(function(response){
-                    showNotification(response);
-                    dt.row(_selectRowObj).data(response.row_updated[0]).draw();
-                }).always(function(){
-                    $('#modal_create_asset').modal('toggle');
-                    showSpinningProgress($('#btn_save'));
-                });
-                return;
-            }
-        }
-    });
+        });
     })();
 
     var validateRequiredFields=function(){
@@ -829,7 +816,8 @@ $(document).ready(function(){
             "dataType":"json",
             "type":"POST",
             "url":"Categories/transaction/create",
-            "data":_data
+            "data":_data,
+            "beforeSend": showSpinningProgress($('#btn_save_category'))
         });
     };
 
@@ -853,6 +841,7 @@ $(document).ready(function(){
     };
 
     var showSpinningProgress=function(e){
+        $(e).toggleClass('disabled');
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
     };
 
@@ -876,6 +865,11 @@ $(document).ready(function(){
     var clearFields=function(frm){
         $('input,textarea,select', frm).val('');
         $('form').find('input:first').focus();
+        $('#location_txt').val('');
+        $('#category_txt').val('');
+        $('#category_txt_desc').val('');
+        $('#department_txt').val('');
+        $('#department_txt_desc').val('');
     };
 
     function format ( d ) {
