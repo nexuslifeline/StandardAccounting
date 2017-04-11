@@ -159,7 +159,7 @@ class Account_titles extends CORE_Controller
                         array('journal_info','journal_info.journal_id=journal_accounts.journal_id','left')
                     )
 
-                ))>0){
+                ))>0){  
 
                     $response['title'] = 'Cannot delete!';
                     $response['stat'] = 'error';
@@ -177,7 +177,7 @@ class Account_titles extends CORE_Controller
                     //mark Items as deleted
                     $m_accounts->set('date_deleted','NOW()'); //treat NOW() as function and not string
                     $m_accounts->deleted_by_user=$this->session->user_id;//user that deleted the record
-                    $m_accounts->is_deleted=1;//mark as deleted
+                    $m_accounts->is_deleted=1   ;//mark as deleted
                     $m_accounts->modify($account_id);
 
 

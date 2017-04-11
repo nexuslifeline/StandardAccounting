@@ -1443,7 +1443,7 @@ $(document).ready(function(){
             row.clone().insertAfter(tbl.find('tbody > tr:last'));
 
             reInitializeNumeric();
-            reInitializeDropDownAccounts(tbl);
+            //reInitializeDropDownAccounts(tbl);
 
         });
 

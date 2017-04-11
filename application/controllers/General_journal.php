@@ -123,7 +123,7 @@ class General_journal extends CORE_Controller
 
                 $response['stat']='success';
                 $response['title']='Success!';
-                $response['msg']='Journal successfully posted.'.$particular[0];
+                $response['msg']='Journal successfully posted.';
                 $response['row_added']=$this->get_response_rows($journal_id);
                 echo json_encode($response);
                 break;

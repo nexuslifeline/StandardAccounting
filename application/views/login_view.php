@@ -48,6 +48,8 @@
 	    .btn-custom-jk {
 	    	background: transparent!important;
 	    }
+
+
     </style>
 
     </head>
@@ -69,25 +71,25 @@
 							<H4 style="color: white;"><strong>SIGN IN</strong> <span style="font-weight: 200;">TO YOUR ACCOUNT</span></H4>
 						</div>
 						<form action="#" class="form-horizontal" id="validate-form">
-							<div class="form-group mb-md">
+							<div class="form-group mb-md" id="userdiv">
 		                        <div class="col-xs-12">
 		                        	<div class="input-group">
 		                        		<div class="input-group-addon">
 		                        			<i class="fa fa-user"></i>
 		                        		</div>
-		                        		<input name="user_name" type="text" class="form-control " placeholder="Username" data-parsley-minlength="20" placeholder="At least 6 characters" required>
+		                        		<input name="user_name" id="user" type="text" class="form-control " placeholder="Username" data-parsley-minlength="20" placeholder="At least 6 characters" required>
 		                        	</div>
 									
 		                        </div>
 							</div>
 
-							<div class="form-group mb-md">
+							<div class="form-group mb-md" id="passdiv">
 		                        <div class="col-xs-12">
 		                        	<div class="input-group">
 		                        		<div class="input-group-addon">
 		                        			<i class="fa fa-key"></i>
 		                        		</div>
-									<input name="user_pword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+									<input name="user_pword" id="pass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 									</div>
 		                        </div>
 							</div>
@@ -203,8 +205,41 @@
                 });
             };
 
+	        $('#user').focus(function()
+			{ 
+			$(this).animate({
+			    height: '60px',
+			    'font-size': '20px',
+			  }, 500, function() {
+			    // Animation complete.
+			  });
+			}).blur(function()
+			{
+			$(this).animate({
+			    height: '33px',
+			    'font-size': '14px',
+			  }, 500, function() {
+			    // Animation complete.
+			  });	
+			});
 
-
+			$('#pass').focus(function()
+			{ 
+			$(this).animate({
+			    height: '60px',
+			    'font-size': '20px',
+			  }, 500, function() {
+			    // Animation complete.
+			  });
+			}).blur(function()
+			{
+			$(this).animate({
+			    height: '33px',
+			    'font-size': '14px',
+			  }, 500, function() {
+			    // Animation complete.
+			  });	
+			});
 
         });
     </script>

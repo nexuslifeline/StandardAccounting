@@ -60,6 +60,10 @@
             to { -webkit-transform: rotate(360deg); }
         }
 
+        .select2-container { 
+            width: 100% !important; 
+        } 
+
     </style>
 
 </head>
@@ -112,7 +116,7 @@
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-code"></i>
                                                         </div>
-                                                        <input type="text" name="template_code" class="form-control" placeholder="Enter Template Code">
+                                                        <input type="text" name="template_code" class="form-control" data-error-msg="Template Code is required!" placeholder="Enter Template Code" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-12 col-md-4">
@@ -121,13 +125,13 @@
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-code"></i>
                                                         </div>
-                                                        <input type="text" name="template_description" class="form-control" placeholder="Template Description">
+                                                        <input type="text" name="template_description" class="form-control" data-error-msg="Template Description is required!" placeholder="Enter Template Description" required>
                                                     </div>
                                                 </div>
                                                 <div id="show_gj">
                                                     <div class="col-xs-12 col-md-4">
                                                         <strong>* Particular :</strong><br>
-                                                        <select id="cbo_particulars" name="particular_id" class="show-tick form-control" data-live-search="true">
+                                                        <select id="cbo_particulars" name="particular_id" class="show-tick form-control" data-live-search="true" data-error-msg="Particular is required!" placeholder="Enter Particular" required>
                                                             <optgroup label="Customers">
                                                                 <?php foreach($customers as $customer){ ?>
                                                                     <option value='C-<?php echo $customer->customer_id; ?>'><?php echo $customer->customer_name; ?></option>
@@ -228,7 +232,7 @@
                                 </div>
                             </div>
                             <div class="panel-footer">
-                                <button id="btn_save_entry" class="btn btn-primary" style="text-transform: capitalize;">Save Changes</button>
+                                <button id="btn_save_entry" class="btn btn-primary" style="text-transform: capitalize;"><span class=""></span> Save Changes</button>
                                 <button id="btn_cancel_entry" class="btn btn-default" style="text-transform: capitalize;">Cancel</button>
                             </div>
                         </div>
@@ -521,18 +525,28 @@ $(document).ready(function(){
                 if (_txnMode=="new"){
                     createTemplate().done(function(response){
                         showNotification(response);
-                        dt.row.add(response.row_added[0]).draw();
-                        clearFields($('#frm_journal'));
-                        showList(true);
+                        $('#btn_save_entry').attr('disabled',true);
+                        if(response.stat=="success"){
+                            dt.row.add(response.row_added[0]).draw();
+                            clearFields($('#frm_journal'));
+                            showList(true);
+                            $('#btn_save_entry').attr('disabled',false);
+                        }
+                    }).always(function(){
+                        showSpinningProgress($('#btn_save_entry'));
                     });
                 } else {
                     updateTemplate().done(function(response){
                         showNotification(response);
+                        $('#btn_save_entry').attr('disabled',true);
                         if(response.stat=="success"){
                             dt.row(_selectRowObj).data(response.row_updated[0]).draw();
                             clearFields($('#frm_journal'));
                             showList(true);
+                            $('#btn_save_entry').attr('disabled',false);
                         }
+                    }).always(function(){
+                        showSpinningProgress($('#btn_save_entry'));
                     });
                 }
                 $('.panel-title').html('<i class="fa fa-bars"></i> Recurring Template');
@@ -580,7 +594,8 @@ $(document).ready(function(){
             "dataType":"json",
             "type":"POST",
             "url":"Recurring_template/transaction/create",
-            "data":_data
+            "data":_data,
+            "beforeSend": showSpinningProgress($('#btn_save_entry'))
         });
     };
 
@@ -591,7 +606,8 @@ $(document).ready(function(){
             "dataType":"json",
             "type":"POST",
             "url":"Recurring_template/transaction/update?id="+_selectedID,
-            "data":_data
+            "data":_data,
+            "beforeSend": showSpinningProgress($('#btn_save_entry'))
         });
     };
 

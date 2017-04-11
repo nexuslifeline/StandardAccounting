@@ -323,7 +323,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-credit-card"></i>
                             </span>
-                            <input type="text" name="bank" maxlength="10" class="form-control">
+                            <input type="text" name="bank" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -345,7 +345,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </span>
-                            <input type="text" name="check_date" class="date-picker form-control">
+                            <input type="text" name="check_date" id="check_date" class="date-picker form-control" data-error-msg="Check date is required!">
                         </div>
                     </div>
 
@@ -355,7 +355,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-list-alt"></i>
                             </span>
-                            <input type="text" name="check_no" maxlength="15" class="form-control">
+                            <input type="text" name="check_no" id="check_no" maxlength="15" class="form-control" data-error-msg="Check number is required!">
                         </div>
                     </div>
 
@@ -460,8 +460,12 @@
 
 
             <br />
-            <label>Remarks :</label><br />
-            <textarea name="remarks" class="col-lg-12"></textarea>
+            <div class="row">
+                <div class="col-lg-12">
+                    <label>Remarks :</label><br />
+                    <textarea name="remarks" class="form-control"></textarea>
+                </div>
+            </div>
             <br /><br />
 
 
@@ -1551,14 +1555,18 @@ $(document).ready(function(){
             $('img[name="img_user"]').attr('src','assets/img/anonymous-icon.png');
         });
 
+        $("#cbo_pay_type").change(function(){
+            if($(this).val() == 2) {
+                $('#check_date').prop('required',true);
+                $('#check_no').prop('required',true);
+            } else {
+                $('#check_date').prop('required',false);
+                $('#check_no').prop('required',false);
+            }
+        });
+
 
     }();
-
-
-
-
-
-
 
 
 
