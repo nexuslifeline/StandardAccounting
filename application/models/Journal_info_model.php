@@ -137,8 +137,48 @@ class Journal_info_model extends CORE_Model{
 
     }
 
+    function get_petty_cash_list($asOfDate=null) {
+        $sql="SELECT 
+            ji.*,
+            s.*,
+            ja.account_id
+            FROM journal_info AS ji
+            LEFT JOIN suppliers AS s ON s.supplier_id=ji.`supplier_id`
+            INNER JOIN journal_accounts AS ja ON ja.`journal_id`=ji.`journal_id`
+            WHERE 
+            ji.`is_active`=TRUE AND 
+            ji.`is_deleted`=FALSE AND
+            ji.book_type='PCV' AND
+            ja.cr_amount != 0 AND 
+            ji.`date_txn` <= '$asOfDate'";
 
+        return $this->db->query($sql)->result();
+    }
 
+    function get_remaining_amount($asOfDate=null) {
+        $sql="SELECT
+            (CASE WHEN x.`account_type_id` = 1 OR x.account_type_id=5 THEN
+            ((x.dr_amount) - (x.cr_amount))
+            ELSE
+            ((x.cr_amount) - (x.dr_amount))
+            END) as Balance
+            FROM
+            (SELECT
+            petty_cash_account_id,
+            ja.journal_id,
+            ac.account_type_id,
+            SUM(ja.dr_amount) AS dr_amount,
+            SUM(ja.cr_amount) AS cr_amount,
+            ji.date_txn
+            FROM `account_integration` AS ai
+            LEFT JOIN journal_accounts AS ja ON ja.account_id=ai.petty_cash_account_id
+            LEFT JOIN account_titles AS atitles ON atitles.account_id=ai.petty_cash_account_id
+            LEFT JOIN account_classes AS ac ON ac.`account_class_id`=atitles.`account_class_id`
+            LEFT JOIN journal_info AS ji ON ji.journal_id=ja.`journal_id`
+            WHERE date_txn <= '$asOfDate') AS x ";
+
+        return $this->db->query($sql)->result();
+    }
 
 }
 

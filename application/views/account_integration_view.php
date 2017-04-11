@@ -284,6 +284,22 @@
                             </div>
                         </div>
 
+                        <br >
+                        <h4><span style="margin-left: 1%"><strong><i class="fa fa-gear"></i> Petty Cash Account</strong></span></h4>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> * Petty Cash :</label>
+                            <div class="col-md-7">
+                                <select name="petty_cash_account_id" class="cbo_accounts" data-error-msg="Petty Cash account is required." required>
+
+                                    <?php foreach($accounts as $account){ ?>
+                                        <option value="<?php echo $account->account_id; ?>" <?php echo ($current_accounts->petty_cash_account_id==$account->account_id?'selected':''); ?>><?php echo $account->account_title; ?></option>
+                                    <?php } ?>
+                                </select>
+
+                                <span class="help-block m-b-none">Please select the account where petty cash will be forwarded.</span>
+                            </div>
+                        </div>
+
 
                         <hr />
 

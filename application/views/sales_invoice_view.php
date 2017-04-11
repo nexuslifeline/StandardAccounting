@@ -1191,15 +1191,15 @@ $(document).ready(function(){
             var tr = $(this).closest('tr');
             var row = dt.row(tr);
             var d=row.data();
-                $.ajax({
-                    "dataType":"html",
-                    "type":"POST",
-                    "url":"Templates/layout/sales-invoice/"+ d.sales_invoice_id+"?type=fullview"
-                }).done(function(response){
-                    $("#sales_invoice").html(response);
-                    $("#modal_sales_invoice").modal('show');
-                });
-        
+            //     $.ajax({
+            //         "dataType":"html",
+            //         "type":"POST",
+            //         "url":"Templates/layout/sales-invoice/"+ d.sales_invoice_id+"?type=contentview"
+            //     }).done(function(response){
+            //         $("#sales_invoice").html(response);
+            //         $("#modal_sales_invoice").modal('show');
+            //     });
+            window.open('Templates/layout/sales-invoice/'+ d.sales_invoice_id+'?type=contentview');
         } );
 
         $('#link_browse').click(function(){

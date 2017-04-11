@@ -214,7 +214,6 @@ $(document).ready(function(){
             "ajax": {
                 "url":"Depreciation_expense/transaction/gdr-list",
                 "bDestroy":true,
-
                 "data": function (d) {
                     return $.extend({}, d, {
                         "m":_cboMonth.val(),
@@ -267,6 +266,8 @@ $(document).ready(function(){
                 }
             ]
         });
+
+        dt.order([ 1, 'asc' ]).draw();
     };
 
     var bindEventHandlers=function(){

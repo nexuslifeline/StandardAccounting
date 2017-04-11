@@ -518,6 +518,53 @@ class Sales_invoice extends CORE_Controller
                 echo json_encode($response);
                 break;
 
+            case 'si-report':
+                $m_sales_invoice=$this->Sales_invoice_model;
+                $m_sales_invoice_items=$this->Sales_invoice_item_model;
+                $m_company=$this->Company_model;
+
+                $company_info=$m_company->get_list();
+                $info=$m_sales_invoice->get_list(
+                    $id_filter,
+                    array(
+                        'sales_invoice.sales_invoice_id',
+                        'sales_invoice.sales_inv_no',
+                        'sales_invoice.remarks', 
+                        'sales_invoice.date_created',
+                        'sales_invoice.customer_id',
+                        'sales_invoice.inv_type',
+                        'DATE_FORMAT(sales_invoice.date_invoice,"%m/%d/%Y") as date_invoice',
+                        'DATE_FORMAT(sales_invoice.date_due,"%m/%d/%Y") as date_due',
+                        'departments.department_id',
+                        'departments.department_name',
+                        'customers.customer_name',
+                        'sales_invoice.salesperson_id',
+                        'sales_invoice.address',
+                        'sales_order.so_no',
+                        'CONCAT(salesperson.firstname," ",salesperson.lastname) AS salesperson_name'
+                    ),
+                    array(
+                        array('departments','departments.department_id=sales_invoice.department_id','left'),
+                        array('salesperson','salesperson.salesperson_id=sales_invoice.salesperson_id','left'),
+                        array('customers','customers.customer_id=sales_invoice.customer_id','left'),
+                        array('sales_order','sales_order.sales_order_id=sales_invoice.sales_order_id','left'),
+                    )
+                );
+
+                $data['company_info']=$company_info[0];
+                $data['sales_info']=$info[0];
+                $data['sales_invoice_items']=$m_sales_invoice_items->get_list(
+                    array('sales_invoice_items.sales_invoice_id'=>$id_filter),
+                    'sales_invoice_items.*,products.product_desc,products.size,units.unit_name',
+                    array(
+                        array('products','products.product_id=sales_invoice_items.product_id','left'),
+                        array('units','units.unit_id=sales_invoice_items.unit_id','left')
+                    )
+                );
+
+                $this->load->view('template\sales_invoice_content_standard',$data);
+            break;  
+
             case 'per-customer-sales':
                 $m_sales_invoice=$this->Sales_invoice_model;
                 $response['data']=$m_sales_invoice->get_customers_sales_summary();
@@ -554,7 +601,7 @@ class Sales_invoice extends CORE_Controller
             array(
                 array('departments','departments.department_id=sales_invoice.department_id','left'),
                 array('customers','customers.customer_id=sales_invoice.customer_id','left'),
-                array('sales_order','sales_order.sales_order_id=sales_invoice.sales_order_id','left')
+                array('sales_order','sales_order.sales_order_id=sales_invoice.sales_order_id','left'),
             ),
             'sales_invoice.sales_invoice_id DESC'
         );

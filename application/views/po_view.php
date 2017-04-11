@@ -28,10 +28,6 @@
     <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
 
 
-
-
-
-
     <style>
         html{
             zoom: 0.8;
@@ -171,12 +167,12 @@
 <div class="page-content"><!-- #page-content -->
 
 <ol class="breadcrumb"  style="margin-bottom: 10px;">
-    <li><a href="Dashboard">Dashboard</a> > </li>
+    <li><a href="Dashboard">Dashboard</a> </li>
     <li><a href="Purchases">Purchase Order</a></li>
 </ol>
 
 
-<div class="container-fluid"">
+<div class="container-fluid">
     <div data-widget-group="group1">
         <div class="row">
             <div class="col-md-12">
