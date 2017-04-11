@@ -368,16 +368,57 @@ class Templates extends CORE_Controller {
             case 'sales-invoice': //delivery invoice
                 $m_sales_invoice=$this->Sales_invoice_model;
                 $m_sales_invoice_items=$this->Sales_invoice_item_model;
+                $m_company_info=$this->Company_model;
                 $type=$this->input->get('type',TRUE);
+
+                // $info=$m_sales_invoice->get_list(
+                //     $filter_value,
+                //     'sales_invoice.*,departments.department_name,customers.customer_name, sales_invoice.address,sales_order.so_no,salesperson.*',
+                //     array(
+                //         array('departments','departments.department_id=sales_invoice.issue_to_department','left'),
+                //         array('customers','customers.customer_id=sales_invoice.customer_id','left'),
+                //         array('sales_order','sales_order.sales_order_id=sales_invoice.sales_order_id','left'),
+                //         array('salesperson','salesperson.salesperson_id=sales_invoice.salesperson_id','left')
+                //     )
+                // );
+
+                // $data['sales_info']=$info[0];
+                // $data['sales_invoice_items']=$m_sales_invoice_items->get_list(
+                //     array('sales_invoice_items.sales_invoice_id'=>$filter_value),
+                //     'sales_invoice_items.*,products.product_desc,products.size,units.unit_name',
+                //     array(
+                //         array('products','products.product_id=sales_invoice_items.product_id','left'),
+                //         array('units','units.unit_id=sales_invoice_items.unit_id','left')
+                //     )
+                // );
+                $company_info=$m_company_info->get_list();
+                $data['company_info']=$company_info[0];
 
                 $info=$m_sales_invoice->get_list(
                     $filter_value,
-                    'sales_invoice.*,departments.department_name,customers.customer_name, sales_invoice.address,sales_order.so_no,salesperson.*',
                     array(
-                        array('departments','departments.department_id=sales_invoice.issue_to_department','left'),
+                        'sales_invoice.sales_invoice_id',
+                        'sales_invoice.sales_inv_no',
+                        'sales_invoice.remarks', 
+                        'sales_invoice.date_created',
+                        'sales_invoice.customer_id',
+                        'sales_invoice.inv_type',
+                        'sales_invoice.*',
+                        'DATE_FORMAT(sales_invoice.date_invoice,"%m/%d/%Y") as date_invoice',
+                        'DATE_FORMAT(sales_invoice.date_due,"%m/%d/%Y") as date_due',
+                        'departments.department_id',
+                        'departments.department_name',
+                        'customers.customer_name',
+                        'sales_invoice.salesperson_id',
+                        'sales_invoice.address',
+                        'sales_order.so_no',
+                        'CONCAT(salesperson.firstname," ",salesperson.lastname) AS salesperson_name'
+                    ),
+                    array(
+                        array('departments','departments.department_id=sales_invoice.department_id','left'),
+                        array('salesperson','salesperson.salesperson_id=sales_invoice.salesperson_id','left'),
                         array('customers','customers.customer_id=sales_invoice.customer_id','left'),
                         array('sales_order','sales_order.sales_order_id=sales_invoice.sales_order_id','left'),
-                        array('salesperson','salesperson.salesperson_id=sales_invoice.salesperson_id','left')
                     )
                 );
 
@@ -399,12 +440,12 @@ class Templates extends CORE_Controller {
 
                 //show only inside grid with menu button
                 if($type=='html'){
-                    $this->load->view('template/sales_invoice_content_html',$data);
+                    echo $this->load->view('template/sales_invoice_content_standard',$data);
                 }
 
                 //show only inside grid without menu button
                 if($type=='contentview'){
-                    echo $this->load->view('template/sales_invoice_content',$data,TRUE);
+                    echo $this->load->view('template/sales_invoice_content_standard',$data,TRUE);
                 }
 
                 if($type=='dr'){
