@@ -513,6 +513,147 @@ class Products_model extends CORE_Model {
         return $this->db->query($sql)->result();
     }
 
+    //function to get the Merchandise Inventory on COST OF GOODS SOLD REPORt
+    function get_inventory_costing($as_of_date,$department=null){
+        $sql="SELECT n.*,FORMAT((n.BalanceQty*n.AvgCost),4)as TotalAvgCost
+                FROM
+                (SELECT
+
+                m.*,
+
+                (m.ReceiveQty+m.AdjInQty-m.AdjOutQty-m.IssueQty-m.SalesQty) as BalanceQty
+
+                FROM
+
+                (SELECT
+
+                p.product_id,p.`product_desc`,
+                FORMAT(IFNULL(recQuery.AvgCost,0),4) as AvgCost,
+                IFNULL(recQuery.ReceiveQty,0)as ReceiveQty,
+                IFNULL(adjInQuery.AdjInQty,0) as AdjInQty,
+                IFNULL(adjOutQuery.AdjOutQty,0) as AdjOutQty,
+                IFNULL(issQuery.IssueQty,0) as IssueQty,
+                IFNULL(salesQuery.SalesQty,0) as SalesQty
+
+
+                FROM products as p LEFT JOIN
+
+                (
+
+                SELECT
+
+                dii.product_id,
+                SUM(dii.dr_qty) as ReceiveQty,
+
+                /***get the average cost of all price, if 0 this means it is free***/
+                AVG(IF(dii.dr_price>0,dii.dr_price,NULL)) as AvgCost
+
+                FROM `delivery_invoice_items` as dii
+                INNER JOIN `delivery_invoice` as di
+                ON di.`dr_invoice_id`=dii.`dr_invoice_id`
+
+                WHERE di.is_active=1 AND di.is_deleted=0 AND di.date_delivered<='$as_of_date'
+
+                ".($department==1||$department==null?"":" AND di.department_id=$department")."
+
+                GROUP BY dii.product_id
+
+                ) as recQuery ON recQuery.product_id=p.product_id
+
+                LEFT JOIN
+
+                (
+
+                SELECT
+
+                aii.product_id,
+                SUM(aii.adjust_qty)as AdjInQty
+
+                FROM adjustment_items as aii
+                INNER JOIN adjustment_info as ai
+                ON ai.`adjustment_id`=aii.`adjustment_id`
+                WHERE ai.is_active=1
+                AND ai.is_deleted=0
+                AND ai.`adjustment_type`='IN' AND ai.date_adjusted<='$as_of_date'
+                ".($department==1||$department==null?"":" AND ai.department_id=$department")."
+                GROUP BY aii.product_id
+
+                ) as adjInQuery ON adjInQuery.product_id=p.product_id
+
+
+                LEFT JOIN
+
+
+                (
+
+                SELECT
+
+                aii.product_id,
+                SUM(aii.adjust_qty)as AdjOutQty
+
+                FROM adjustment_items as aii
+                INNER JOIN adjustment_info as ai
+                ON ai.`adjustment_id`=aii.`adjustment_id`
+                WHERE ai.is_active=1
+                AND ai.is_deleted=0
+                AND ai.`adjustment_type`='OUT' AND ai.date_adjusted<='$as_of_date'
+                ".($department==1||$department==null?"":" AND ai.department_id=$department")."
+                GROUP BY aii.product_id
+
+
+                )as adjOutQuery ON adjOutQuery.product_id=p.product_id
+
+
+                LEFT JOIN
+
+
+                (
+
+                SELECT
+
+                iii.product_id,
+                SUM(iii.`issue_qty`)as IssueQty
+
+                FROM `issuance_items` as iii
+                INNER JOIN `issuance_info` as ii
+                ON ii.`issuance_id`=iii.`issuance_id`
+                WHERE ii.`is_active`=1 AND ii.date_issued<='$as_of_date'
+                ".($department==1||$department==null?"":" AND ii.issued_department_id=$department")."
+                AND ii.`is_deleted`=0
+
+
+                GROUP BY iii.product_id
+
+                ) as issQuery ON issQuery.product_id=p.product_id
+
+
+                LEFT JOIN
+
+
+
+                (
+
+                SELECT
+                sii.product_id,
+                SUM(sii.`inv_qty`)as SalesQty
+
+                FROM `sales_invoice_items` as sii
+                INNER JOIN `sales_invoice` as si
+                ON si.`sales_invoice_id`=sii.`sales_invoice_id`
+                WHERE si.is_active=1 AND si.`is_deleted`=0 AND si.date_invoice<='$as_of_date'
+                ".($department==1||$department==null?"":" AND si.department_id=$department")."
+
+                GROUP BY sii.product_id
+
+                ) as salesQuery ON salesQuery.product_id=p.product_id
+
+
+                WHERE p.is_deleted=0) as m)as n ORDER BY product_desc";
+
+            return $this->db->query($sql)->result();
+
+    }
+
 
 
 

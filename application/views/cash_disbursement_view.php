@@ -155,6 +155,10 @@
           -webkit-transform: scale(1.5); /* Safari and Chrome */
           -o-transform: scale(1.5); /* Opera */
         }
+
+        #tbl_check_list td:nth-child(6),#tbl_check_list th:nth-child(6){
+            text-align: center;
+        }
         
     </style>
 
@@ -222,33 +226,63 @@
 
 
         <div class="panel panel-default" style="border-radius:6px;">
-          <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Cash Disbursement Journal</b></div></a>
-            <div id="collapseOne" class="collapse in">
-                <div class="panel-body" style="min-height: 400px;">
+              <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Cash Disbursement Journal</b></div></a>
+                <div id="collapseOne" class="collapse in">
+                    <div class="panel-body" style="min-height: 400px;">
 
-                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
-                        <table id="tbl_cash_disbursement_list" class="custom-design table-striped" cellspacing="0" width="100%">
-                            <thead class="">
-                            <tr>
-                                <th></th>
-                                <th>Txn #</th>
-                                <th>Particular</th>
-                                <th>Method</th>
-                                <th>Txn Date</th>
-                                <th>Posted</th>
-                                <th>Status</th>
-                                <th><center>Action</center></th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                        <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
+                            <table id="tbl_cash_disbursement_list" class="custom-design table-striped" cellspacing="0" width="100%">
+                                <thead class="">
+                                <tr>
+                                    <th></th>
+                                    <th>Txn #</th>
+                                    <th>Voucher #</th>
+                                    <th>Particular</th>
+                                    <th>Method</th>
+                                    <th>Txn Date</th>
+                                    <th>Posted</th>
+                                    <th>Status</th>
+                                    <th><center>Action</center></th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
+        </div>
 
-    </div>
+        <div class="panel panel-default" style="border-radius:6px;">
+            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Check Summary</b></div></a>
+                <div id="collapseOne" class="collapse in">
+                    <div class="panel-body" style="min-height: 400px;">
+
+                        <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
+
+                            <table id="tbl_check_list" class="custom-design table-striped" cellspacing="0" width="100%">
+                                <thead style="display:none;">
+                                <tr>
+                                    <th>Bank</th>
+                                    <th>Check #</th>
+                                    <th>Amount</th>
+                                    <th>Check Date</th>
+                                    <th>Voucher #</th>
+                                    <th>Particular</th>
+                                    <th>Remarks</th>
+                                    <th>Issued</th>
+                                    <th><center>Action</center></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
 
     </div>
 
@@ -586,6 +620,49 @@
     </div>
 </div><!---modal-->
 
+<div id="modal_print_check_list_option" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Print Options - Check List</h4>
+            </div>
+
+            <div class="modal-body">
+                Filter by Bank * :<br />
+                <select id="cbo_banks" class="form-control">
+                    <option value="0">All Banks</option>
+                    <?php foreach($banks as $bank){ ?>
+                        <option value='<?php echo $bank->bank; ?>'><?php echo $bank->bank; ?></option>
+                    <?php } ?>
+                </select>
+
+                Period Start * :<br />
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                    <input type="text" id="txt_start" class="date-picker form-control" value="<?php echo date('m/d/Y'); ?>">
+                </div>
+
+                Period End * :<br />
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                    <input type="text" id="txt_end" class="date-picker form-control" value="<?php echo date('m/d/Y'); ?>">
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button id="btn_print_list" type="button" class="btn btn-primary" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"> <i class="fa fa-print"></i> Print List </button>
+                <button id="" type="button" class="btn btn-danger" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
+            </div>
+        </div><!---content---->
+    </div>
+</div><!---modal-->
+
 
 
 
@@ -870,7 +947,7 @@
 <script>
 $(document).ready(function(){
     var _txnMode; var _cboSuppliers; var _cboMethods; var _selectRowObj; var _selectedID; var _txnMode, _cboBranches, _cboPaymentMethod;
-    var dtReview; var cbo_refType; var _cboLayouts;
+    var dtReview; var cbo_refType; var _cboLayouts; var dtRecurring; var dtCheckList; var _attribute;
 
 
     var oTBJournal={
@@ -926,12 +1003,13 @@ $(document).ready(function(){
                     "defaultContent": ""
                 },
                 { targets:[1],data: "txn_no" },
-                { targets:[2],data: "particular" },
-                { targets:[3],data: "payment_method" },
-                { targets:[4],data: "date_txn" },
-                { targets:[4],data: "posted_by" },
+                { targets:[2],data: "ref_no" },
+                { targets:[3],data: "particular" },
+                { targets:[4],data: "payment_method" },
+                { targets:[5],data: "date_txn" },
+                { targets:[6],data: "posted_by" },
                 {
-                    targets:[6],data: null,
+                    targets:[7],data: null,
                     render: function (data, type, full, meta){
                         var _attribute='';
                         //console.log(data.is_email_sent);
@@ -943,7 +1021,6 @@ $(document).ready(function(){
 
                         return '<center><i '+_attribute+'></i></center>';
                     }
-
 
                 },
                 {
@@ -959,8 +1036,7 @@ $(document).ready(function(){
                 }
             ]
         });
-
-
+        
         dtReview=$('#tbl_expense_for_review').DataTable({
             "bLengthChange":false,
             "ajax" : "Payable_payments/transaction/expense-for-review",
@@ -991,6 +1067,72 @@ $(document).ready(function(){
             ]
         });
 
+        dtCheckList=$('#tbl_check_list').DataTable({
+            "dom": '<"print">frtip',
+            "bLengthChange":false,
+            "pageLength" : 7,
+            "ajax" : "Cash_disbursement/transaction/get-check-list",
+            "columnDefs": [
+                { "visible": false, "targets": 0 }
+            ],
+            "columns": [
+
+                { targets:[0],data: "bank" },
+                { targets:[1],data: "check_no" },
+                { targets:[2],data: "amount",
+                    render: function(data, type, full, meta){
+                        return accounting.formatNumber(data,2);
+                    }
+                },
+                { targets:[3],data: "check_date" },
+                { targets:[4],data: "ref_no" },
+                { targets:[5],data: "supplier_name" },
+                { targets:[6],data: "remarks" },
+                { targets:[7],data: "check_status",
+                    render: function (data, type, full, meta){
+                        //alert(data.check_status);
+                        if(data=="1"){
+                            _attribute=' class="fa fa-check-circle" style="color:green;" ';
+                        }else{
+                            _attribute=' class="fa fa-times-circle" style="color:red;" ';
+                        }
+
+                        return '<center><i '+_attribute+'></i></center>';
+                    }
+                },
+                {  targets:[8],
+                    render: function (data, type, full, meta){
+                        var btn_check_print='<button class="btn btn-success btn-sm" name="print_check" style="margin-right:0px;text-transform: none;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-print"></i> Print Check</button>';
+                        return '<center>'+btn_check_print+'</center>';
+                    } }
+            ],
+            "drawCallback": function ( settings ) {
+                var api = this.api();
+                var rows = api.rows( {page:'current'} ).nodes();
+                var last=null;
+
+                api.column(0, {page:'current'} ).data().each( function ( group, i ) {
+                    if ( last!== group ) {
+                        $(rows).eq( i ).before(
+                            '<tr class="group" style="background-color: #7add58;"><td colspan="8" align="left"><b style="text-transform: capitalize;font-size: 15px;color:white;"><i class="fa fa-bars"></i> '+group+'</b></td></tr>' +
+                            '<tr class="group">'+
+                                    '<td><b>Check #</b></td>'+
+                            '<td><b>Amount</b></td>'+
+                                    '<td><b>Check Date</b></td>'+
+                                    '<td><b>Voucher #</b></td>'+
+                                    '<td><b>Particular</b></td>'+
+                                    '<td><b>Remarks</b></td>'+
+                                    '<td align="center"><b>Issued</b></td>'+
+                                    '<td><center>Action</center></td>'+
+                            '</tr>'
+                        );
+
+                        last = group;
+                    }
+                } );
+            }
+        });
+
         reInitializeNumeric();
         reInitializeDropDownAccounts($('#tbl_entries'),false);
 
@@ -1008,6 +1150,15 @@ $(document).ready(function(){
             var _btnNew='<button class="btn btn-green" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Journal" >'+
                 '<i class="fa fa-plus"></i> New Cash Disbursement Journal</button>';
             $("div.toolbar").html(_btnNew);
+
+            var _btnPrint='<button class="btn btn-primary" id="btn_print_check_list" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Print Check list" >'+
+                '<i class="fa fa-print"></i> Print Check list</button>';
+
+            var _refresh='<button class="btn btn-green" id="btn_refresh_check_list" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Refresh" >'+
+                '<i class="fa fa-refresh"></i> Refresh</button>';
+
+            $("div.print").html(_btnPrint+" "+_refresh);
+
         }();
 
         _cboSuppliers=$('#cbo_suppliers').select2({
@@ -1125,6 +1276,14 @@ $(document).ready(function(){
             $('#modal_recurring').modal('hide');    
         });
 
+        $('#btn_refresh_check_list').click(function(){
+            //dtCheckList.destroy();
+            dtCheckList.ajax.reload();
+        });
+
+        $('#btn_print_check_list').on('click',function(){
+            $('#modal_print_check_list_option').modal('show');
+        });
 
 
         $('#tbl_purchase_review tbody').on( 'click', 'tr td.details-control', function () {
@@ -1353,6 +1512,16 @@ $(document).ready(function(){
             $('#modal_check_layout').modal('show');
         });
 
+        $('#tbl_check_list').on('click','button[name="print_check"]',function(){
+
+
+            _selectRowObj=$(this).closest('tr');
+            var data=dtCheckList.row(_selectRowObj).data();
+            _selectedID=data.journal_id;
+            //alert(_selectedID);
+            $('#modal_check_layout').modal('show');
+        });
+
 
         $('#tbl_cash_disbursement_list').on('click','button[name="cancel_info"]',function(){
             _selectRowObj=$(this).closest('tr');
@@ -1361,6 +1530,9 @@ $(document).ready(function(){
             $('#modal_confirmation').modal('show');
         });
 
+        $('#btn_print_list').click(function(){
+            window.open('Cash_disbursement/transaction/print-check-list?bank='+$('#cbo_banks').val()+'&start='+$('#txt_start').val()+"&end="+$('#txt_end').val());
+        });
 
         $('#btn_yes').click(function(){
             $.ajax({
@@ -1377,8 +1549,6 @@ $(document).ready(function(){
                 }
             });
         });
-
-
 
         $('#tbl_cash_disbursement_list').on('click','button[name="edit_info"]',function(){
             _txnMode="edit";
@@ -1468,9 +1638,15 @@ $(document).ready(function(){
                     createJournal().done(function(response){
                         showNotification(response);
                         if(response.stat=="success"){
+
+
                             dt.row.add(response.row_added[0]).draw();
                             clearFields(f);
                             showList(true);
+
+                            //dtCheckList.destroy();
+                            dtCheckList.ajax.reload();
+
                         }
 
                     }).always(function(){
@@ -1483,6 +1659,8 @@ $(document).ready(function(){
                             dt.row(_selectRowObj).data(response.row_updated[0]).draw();
                             clearFields(f);
                             showList(true);
+
+                            dtCheckList.ajax.reload();
                         }
 
                     }).always(function(){

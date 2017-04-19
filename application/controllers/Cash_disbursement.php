@@ -24,7 +24,8 @@ class Cash_disbursement extends CORE_Controller
                 'Payable_payment_model',
                 'Accounting_period_model',
                 'Journal_template_info_model',
-                'Journal_template_entry_model'
+                'Journal_template_entry_model',
+                'Company_model'
             )
         );
 
@@ -45,6 +46,7 @@ class Cash_disbursement extends CORE_Controller
         $data['tax_types']=$this->Tax_types_model->get_list('is_deleted=0');
         $data['payment_methods']=$this->Payment_method_model->get_list('is_deleted=0');
         $data['layouts']=$this->Check_layout_model->get_list('is_deleted=0');
+        $data['banks']=$this->Journal_info_model->get_list('is_active=1 AND is_deleted=0 AND payment_method_id=2',null,null,null,'bank');
 
         $data['title'] = 'Disbursement Journal';
         $this->load->view('cash_disbursement_view', $data);
@@ -58,7 +60,55 @@ class Cash_disbursement extends CORE_Controller
                 $response['data']=$this->get_response_rows();
                 echo json_encode($response);
                 break;
+            case 'print-check-list':
+                $m_journal=$data['banks']=$this->Journal_info_model;
 
+                $bank=$this->input->get('bank');
+                $start=date('Y-m-d',strtotime($this->input->get('start')));
+                $end=date('Y-m-d',strtotime($this->input->get('end')));
+
+                $data['checks']=$m_journal->get_list(
+                    "journal_info.is_active=1 AND journal_info.is_deleted=0 AND journal_info.payment_method_id=2 AND journal_info.date_txn BETWEEN '".$start."' AND '".$end."'".($bank=="0"?"":" AND bank='".$bank."'"),
+
+                    array(
+                        'journal_info.*',
+                        's.supplier_name'
+                    ),
+
+                    array(
+                        array('suppliers as s','s.supplier_id=journal_info.supplier_id','left')
+                    ),
+
+                    'bank,check_no'
+
+                );
+
+                $company_info=$this->Company_model->get_list();
+                $params['company_info']=$company_info[0];
+
+                $data['bank']=($bank==0?"All Bank":$bank);
+                $data['start']=date('m/d/Y',strtotime($this->input->get('start')));
+                $data['end']=date('m/d/Y',strtotime($this->input->get('end')));
+                $data['company_header']=$this->load->view('template/company_header',$params,TRUE);
+                $this->load->view('template/check_list_report',$data);
+                break;
+            case 'get-check-list':
+                $m_journal=$this->Journal_info_model;
+                $response['data']=$m_journal->get_list(
+                    "journal_info.is_active=1 AND journal_info.is_deleted=0 AND journal_info.book_type='CDJ' AND journal_info.payment_method_id=2",
+                    array(
+                        'journal_info.*',
+                        'IF(journal_info.check_status=1,"Yes","No") as status',
+                        's.supplier_name',
+                        'UPPER(journal_info.bank)as bank',
+                        'DATE_FORMAT(journal_info.check_date,"%m/%d/%Y")as check_date'
+                    ),
+                    array(
+                        array('suppliers as s','s.supplier_id=journal_info.supplier_id','left')
+                    )
+                );
+                echo json_encode($response);
+                break;
             case 'get-entries':
                 $journal_id=$this->input->get('id');
                 $m_accounts=$this->Account_title_model;
@@ -69,7 +119,6 @@ class Cash_disbursement extends CORE_Controller
 
                 $this->load->view('template/journal_entries', $data);
                 break;
-
             case 'create-template':
                 $m_journal_temp_info=$this->Journal_template_info_model;
                 $m_journal_temp_entry=$this->Journal_template_entry_model;
@@ -77,7 +126,7 @@ class Cash_disbursement extends CORE_Controller
                 $m_journal_temp_info->supplier_id=$this->input->post('supplier_id',TRUE);
                 $m_journal_temp_info->template_code=$this->input->post('template_code',TRUE);
                 $m_journal_temp_info->template_description=$this->input->post('template_description',TRUE);
-                $m_journal_temp_info->remarks=$this->input->post('remarks',TRUE);                
+                $m_journal_temp_info->remarks=$this->input->post('remarks',TRUE);
                 $m_journal_temp_info->book_type=$this->input->post('book_type',TRUE);
                 $m_journal_temp_info->posted_by=$this->session->user_id;
                 $m_journal_temp_info->save();

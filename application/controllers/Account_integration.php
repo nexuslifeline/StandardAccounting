@@ -15,7 +15,8 @@ class Account_integration extends CORE_Controller
                 'Invoice_counter_model',
                 'Accounting_period_model',
                 'Journal_info_model',
-                'Sales_invoice_model'
+                'Sales_invoice_model',
+                'Sched_expense_integration'
             )
 
         );
@@ -33,6 +34,23 @@ class Account_integration extends CORE_Controller
         $current_accounts= $this->Account_integration_model->get_list();
         $data['current_accounts'] =$current_accounts[0];
         $data['users_counter']=$this->Users_model->get_user_invoice_counter();
+
+        //grand parent account only
+        $data['expenses']=$this->Account_title_model->get_list(
+            'account_titles.is_active=1 AND account_titles.is_deleted=0 AND at.account_type_id=5 AND account_titles.account_id IN(SELECT x.grand_parent_id FROM account_titles as x WHERE x.parent_account_id=0)',
+            array(
+                'account_titles.*',
+                'ac.account_class',
+                'at.account_type',
+                'IF(ISNULL(sei.account_id),1,2)as group_id'
+            ),
+            array(
+                array( 'account_classes as ac','ac.account_class_id=account_titles.account_class_id','left'),
+                array( 'account_types as at','at.account_type_id=ac.account_type_id','left'),
+                array( 'sched_expense_integration as sei','sei.account_id=account_titles.account_id','left')
+            ),
+            'account_title,account_no'
+        );
 
         $this->load->view('account_integration_view', $data);
 

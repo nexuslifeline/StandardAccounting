@@ -32,7 +32,14 @@
 	    }
 
 	    .login-background {
-	    	background: #28353b;
+	    	background: rgba(222,149,199,1);
+			background: -moz-linear-gradient(left, rgba(222,149,199,1) 0%, rgba(207,116,168,1) 0%, rgba(117,82,109,1) 54%, rgba(40,53,59,1) 100%);
+			background: -webkit-gradient(left top, right top, color-stop(0%, rgba(222,149,199,1)), color-stop(0%, rgba(207,116,168,1)), color-stop(54%, rgba(117,82,109,1)), color-stop(100%, rgba(40,53,59,1)));
+			background: -webkit-linear-gradient(left, rgba(222,149,199,1) 0%, rgba(207,116,168,1) 0%, rgba(117,82,109,1) 54%, rgba(40,53,59,1) 100%);
+			background: -o-linear-gradient(left, rgba(222,149,199,1) 0%, rgba(207,116,168,1) 0%, rgba(117,82,109,1) 54%, rgba(40,53,59,1) 100%);
+			background: -ms-linear-gradient(left, rgba(222,149,199,1) 0%, rgba(207,116,168,1) 0%, rgba(117,82,109,1) 54%, rgba(40,53,59,1) 100%);
+			background: linear-gradient(to right, rgba(222,149,199,1) 0%, rgba(207,116,168,1) 0%, rgba(117,82,109,1) 54%, rgba(40,53,59,1) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#de95c7', endColorstr='#28353b', GradientType=1 );
 	    }
 
 	    .form-control {
@@ -41,13 +48,37 @@
 	    	color: white;
 	    }
 
-	    .form-control:focus {
+	    /*.form-control:focus {
+	    	color: #28353b;
+	    	background: #e9eef0;
+	    }*/
+
+	    #login {
+	    	margin-top: 150px;
+	    	border-radius: 20px;
+			-webkit-box-shadow: 0px 0px 300px 0px rgba(255,255,255,1);
+			-moz-box-shadow: 0px 0px 300px 0px rgba(255,255,255,1);
+			box-shadow: 0px 0px 300px 0px rgba(255,255,255,1);
+	    }
+
+	    #title {
+	    	margin-top: 100px;
+	    }
+
+	    /*.login_border_color {
+	    	border-radius: 20px;
+			-webkit-box-shadow: 0px 0px 160px 0px rgba(255,255,255,1);
+			-moz-box-shadow: 0px 0px 160px 0px rgba(255,255,255,1);
+			box-shadow: 0px 0px 160px 0px rgba(255,255,255,1);
+	    }*/
+
+	    /*.form-control:focus {
 	    	background: transparent!important;
 	    }
 
 	    .btn-custom-jk {
 	    	background: transparent!important;
-	    }
+	    }*/
 
 
     </style>
@@ -60,69 +91,71 @@
 <div class="container" id="login-form">
 	<a href="Login" class="login-logo"></a>
 		<div class="row">
-			<div class="hidden-xs hidden-sm col-md-8">
+			<div class="hidden-xs hidden-sm col-md-8" id="title">
 				<span class="text-center" style="position: absolute; top: 10000%; left: 11%; font-size: 40px; font-family: 'Segoe UI', sans-serif; color: white; font-weight: 200;"><img src="<?php echo base_url($company->logo_path); ?>" style="max-width: 150px;max-height: 100px;"><br><b><i>J</i>CORE</b> ACCOUNTING SYSTEM</span>
 			</div>
 			<div class="col-md-4">
 				<div style="border:none; margin-top: 15%;">
-					<div class="panel-body">
-						<!-- <h2>Login Form</h2> -->
-						<div class="col-xs-12 text-center" style="margin-bottom: 20px;">
-							<H4 style="color: white;"><strong>SIGN IN</strong> <span style="font-weight: 200;">TO YOUR ACCOUNT</span></H4>
-						</div>
-						<form action="#" class="form-horizontal" id="validate-form">
-							<div class="form-group mb-md" id="userdiv">
-		                        <div class="col-xs-12">
-		                        	<div class="input-group">
-		                        		<div class="input-group-addon">
-		                        			<i class="fa fa-user"></i>
-		                        		</div>
-		                        		<input name="user_name" id="user" type="text" class="form-control " placeholder="Username" data-parsley-minlength="20" placeholder="At least 6 characters" required>
-		                        	</div>
-									
-		                        </div>
+					<div id="login">
+						<div class="panel-body">
+							<!-- <h2>Login Form</h2> -->
+							<div class="col-xs-12 text-center" style="margin-bottom: 20px;">
+								<H4 style="color: white;"><strong>SIGN IN</strong> <span style="font-weight: 200;">TO YOUR ACCOUNT</span></H4>
 							</div>
+							<form action="#" class="form-horizontal" id="validate-form">
+								<div class="form-group mb-md" id="userdiv">
+			                        <div class="col-xs-12">
+			                        	<div class="input-group">
+			                        		<div class="input-group-addon">
+			                        			<i class="fa fa-user"></i>
+			                        		</div>
+			                        		<input name="user_name" id="user" type="text" class="form-control " placeholder="Username" data-parsley-minlength="20" placeholder="At least 6 characters" required>
+			                        	</div>
+										
+			                        </div>
+								</div>
 
-							<div class="form-group mb-md" id="passdiv">
-		                        <div class="col-xs-12">
-		                        	<div class="input-group">
-		                        		<div class="input-group-addon">
-		                        			<i class="fa fa-key"></i>
-		                        		</div>
-									<input name="user_pword" id="pass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+								<div class="form-group mb-md" id="passdiv">
+			                        <div class="col-xs-12">
+			                        	<div class="input-group">
+			                        		<div class="input-group-addon">
+			                        			<i class="fa fa-key"></i>
+			                        		</div>
+										<input name="user_pword" id="pass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+										</div>
+			                        </div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12 col-sm-6 hidden " style="margin-bottom: 10px;">
+										<button id="btn_register" class="btn btn-info btn-block">Register</button>
 									</div>
-		                        </div>
-							</div>
-							<!-- <div class="form-group mb-n">
-								<div class="col-xs-12">
-									<a href="#" class="pull-left">Forgot password?</a>
-									<div class="checkbox-inline icheck pull-right p-n">
-										<label for="">
-											<input type="checkbox"></input>
-											Remember me
-										</label>
+									<div class="col-sm-offset-6"></div>								
+									<div class="col-xs-12 col-sm-12">
+										<button id="btn_login" class="btn btn-primary btn-block btn-custom-jk" data-style="expand-left" data-spinner-color="white" data-size="s" style="margin-bottom: 50px;">
+										<span class=""></span> Login
+										</button>
 									</div>
 								</div>
-							</div> -->
-						</form>
-					</div>
-					<div class="clearfix">
-						<div class="row">
-							<div class="container-fluid">
-								<div class="col-xs-12 col-sm-6 hidden " style="margin-bottom: 10px;">
-									<button id="btn_register" class="btn btn-info btn-block">Register</button>
-								</div>
-								<div class="col-sm-offset-6"></div>								
-								<div class="col-xs-12 col-sm-12">
-									<button id="btn_login" class="btn btn-primary btn-block btn-custom-jk" data-style="expand-left" data-spinner-color="white" data-size="s" style="margin-bottom: 50px;">
-									<span class=""></span> Login
-									</button>
-								</div>
-							</div>
+								<!-- <div class="form-group mb-n">
+									<div class="col-xs-12">
+										<a href="#" class="pull-left">Forgot password?</a>
+										<div class="checkbox-inline icheck pull-right p-n">
+											<label for="">
+												<input type="checkbox"></input>
+												Remember me
+											</label>
+										</div>
+									</div>
+								</div> -->
+							</form>
 						</div>
 					</div>
 				</div>
-
+				<div class="clearfix">
+					
+				</div>
+				
 				<span style="font-size: 12px; color: white; font-weight: 200; position: absolute; top: 130%; left: 60%;">Powered by : <img src="assets/img/jdev-logo-white.png" height="30" width="70"></span>
 <!--
 				<div class="text-center">
@@ -207,40 +240,65 @@
 
 	        $('#user').focus(function()
 			{ 
-			$(this).animate({
-			    height: '60px',
-			    'font-size': '20px',
-			  }, 500, function() {
-			    // Animation complete.
-			  });
+				//$('#login').addClass('login_border_color');
+				$(this).attr('placeholder','');
+				$(this).animate({
+				    height: '40px',
+				    'font-size': '18px'
+				  }, 100, function() {
+				    // Animation complete.
+				  });
 			}).blur(function()
 			{
-			$(this).animate({
-			    height: '33px',
-			    'font-size': '14px',
-			  }, 500, function() {
-			    // Animation complete.
-			  });	
+				//$('#login').removeClass();
+				$(this).attr('placeholder','Username');
+				$(this).animate({
+				    height: '33px',
+				    'font-size': '14px'
+				  }, 100, function() {
+				    // Animation complete.
+				  });	
 			});
 
 			$('#pass').focus(function()
 			{ 
-			$(this).animate({
-			    height: '60px',
-			    'font-size': '20px',
-			  }, 500, function() {
-			    // Animation complete.
-			  });
+				//$('#login').addClass('login_border_color');
+				$(this).attr('placeholder','');
+				$(this).animate({
+				    height: '40px',
+				    'font-size': '18px'
+				  }, 100, function() {
+				    // Animation complete.
+				  });
 			}).blur(function()
 			{
-			$(this).animate({
-			    height: '33px',
-			    'font-size': '14px',
-			  }, 500, function() {
-			    // Animation complete.
-			  });	
+				//$('#login').removeClass();
+				$(this).attr('placeholder','Password');
+				$(this).animate({
+				    height: '33px',
+				    'font-size': '14px',
+				  }, 100, function() {
+				    // Animation complete.
+				  });	
 			});
 
+			$('#btn_login').focus(function()
+			{ 
+				$(this).animate({
+				    height: '60px',
+				    'font-size': '18px'
+				  }, 100, function() {
+				    // Animation complete.
+				  });
+			}).blur(function()
+			{
+				$(this).animate({
+				    height: '33px',
+				    'font-size': '14px',
+				  }, 100, function() {
+				    // Animation complete.
+				  });	
+			});
         });
     </script>
 
