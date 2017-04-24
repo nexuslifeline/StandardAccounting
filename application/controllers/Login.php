@@ -24,6 +24,7 @@ class Login extends CORE_Controller {
         $this->load->model('Journal_info_model');
         $this->load->model('Asset_property_status_model');
         $this->load->model('Company_model');
+        $this->load->model('Suppliers_model');
     }
 
 
@@ -379,7 +380,8 @@ class Login extends CORE_Controller {
         $m_account_title=$this->Account_title_model;
         $m_account_title->create_default_account_title();
 
-
+        $m_suppliers=$this->Suppliers_model;
+        $m_suppliers->create_default_supplier();
 
 
     }

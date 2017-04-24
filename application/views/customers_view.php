@@ -87,11 +87,14 @@
             dt=$('#tbl_customers').DataTable({
                 "fnInitComplete": function (oSettings, json) {
                     $.unblockUI();
-                    },
+                },
                 "dom": '<"toolbar">frtip',
-                "bLengthChange":false,
-                "pageLength":15,
+                "bLengthChange": false,
+                "pageLength": 15,
                 "ajax" : "Customers/transaction/list",
+                "language": {
+                    searchPlaceholder: "Search Customer Name"
+                },
                 "columns": [
                     {
                         "targets": [0],
@@ -113,19 +116,7 @@
                             return '<center>'+btn_edit+'&nbsp;'+btn_trash+'</center>';
                         }
                     }
-                ],
-
-                language: {
-                             searchPlaceholder: "Search Customer Name"
-                         },
-                "rowCallback":function( row, data, index ){
-
-                    $(row).find('td').eq(5).attr({
-                        "align": "left"
-                    });
-                }
-
-
+                ]
             });
         
             $('.numeric').autoNumeric('init');

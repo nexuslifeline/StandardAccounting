@@ -9,6 +9,36 @@ class Suppliers_model extends CORE_Model {
         parent::__construct();
     }
 
+    function create_default_supplier(){
+        //return;
+        $sql="INSERT IGNORE INTO suppliers
+                  (supplier_id,
+                  supplier_code,
+                  supplier_name,
+                  contact_name,
+                  contact_person,
+                  address,
+                  email_address,
+                  contact_no,
+                  tin_no,
+                  term,
+                  tax_type_id)
+              VALUES
+                  (1,
+                  'N/A',
+                  'N/A',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  1)
+        ";
+        $this->db->query($sql);
+    }
+
     function get_supplier_list($supplier_id=null) {
         $sql="  SELECT
                   a.*,b.photo_path
