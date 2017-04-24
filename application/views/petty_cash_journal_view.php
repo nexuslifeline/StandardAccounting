@@ -114,25 +114,6 @@
                                             <div id="div_pcf_list">
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
-                                                        <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Petty Cash (Replenished)</b>
-                                                    </div>
-                                                    <div class="panel-body">
-                                                        <table id="tbl_replenished" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                                            <thead class="thead-bg">
-                                                                <th>Petty Cash Code</th>
-                                                                <th>Period Covered</th>
-                                                                <th>Txn #</th>
-                                                                <th>Date Replenished</th>
-                                                                <th>Status</th>
-                                                                <th>Amount</th>
-                                                            </thead>
-                                                            <tbody></tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="panel-footer"></div>
-                                                </div>
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Petty Cash Journal</b>
                                                     </div>
                                                     <div class="panel-body table-responsive">
@@ -194,6 +175,25 @@
                                                             </button>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Petty Cash (Replenished)</b>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <table id="tbl_replenished" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                            <thead class="thead-bg">
+                                                                <th>Petty Cash Code</th>
+                                                                <th>Period Covered</th>
+                                                                <th>Txn #</th>
+                                                                <th>Date Replenished</th>
+                                                                <th>Status</th>
+                                                                <th>Amount</th>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="panel-footer"></div>
                                                 </div>
                                             </div>
                                         </div>
