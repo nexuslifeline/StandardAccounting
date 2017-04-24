@@ -62,7 +62,8 @@ class Rights_link_model extends CORE_Model{
                                           (45,'9','9-9','Depreciation Expense'),
                                           (46,'6','6-8','Recurring Template'),
                                           (47,'9','9-10','VAT Relief Report'),
-                                          (48,'1','1-6','Petty Cash Journal')
+                                          (48,'1','1-6','Petty Cash Journal'),
+                                          (49,'9','9-13','Replenishment Report')
                                           ON DUPLICATE KEY UPDATE
 
                                           rights_links.parent_code=VALUES(rights_links.parent_code),
