@@ -114,6 +114,8 @@
                                 <li class="<?php echo (in_array('9-10',$this->session->user_rights)?'':'hidden'); ?>"><a href="Vat_relief_report">Vat Relief Report</a></li>
                                 <li class="<?php echo (in_array('9-11',$this->session->user_rights)?'':'hidden'); ?>"><a href="Schedule_expense">Schedule of Expense</a></li>
                                 <li class="<?php echo (in_array('9-12',$this->session->user_rights)?'':'hidden'); ?>"><a href="Cogs">Cost of Goods</a></li>
+                                <li class="<?php echo (in_array('9-13',$this->session->user_rights)?'':'hidden'); ?>"><a href="Replenishment_report">Replenishment Report</a></li>
+
                             </ul>
                         </li>
 

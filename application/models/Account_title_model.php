@@ -22,6 +22,7 @@ class Account_title_model extends CORE_Model{
                   (2,'120','Account Receivable',1,0,2),
                   (3,'140','Inventory',1,0,3),
                   (10,'150','Input Tax',1,0,10),
+                  (13,'160','Petty Cash',1,0,1),
 
                   (4,'210','Accounts Payable',3,0,4),
                   (11,'220','Output Tax',3,0,4),
