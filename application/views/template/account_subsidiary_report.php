@@ -22,6 +22,8 @@
 
         .align-center {
             text-align: center;
+            padding-left: -50px !important;
+            margin-left: -50px !important;
         }
 
         .report-header {
@@ -31,18 +33,29 @@
         hr {
             border-top: 3px solid #404040;
         }
+
+        body p {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        h1 {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
     </style>
 </head>
 <body>
 	<table width="100%">
         <tr>
             <td width="5%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
-            <td width="95%" class="align-center">
+            <td width="95%" class="align-center"><center>
                 <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
                 <p><?php echo $company_info->company_address; ?></p>
                 <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p><br>
                 <h3>PERIOD : <?php echo '<strong>'.$_GET['startDate'].'</strong> to <strong>'.$_GET['endDate'].'</strong>'; ?></h3>
-            </td>
+            </center></td>
         </tr>
     </table><hr>
     <div class="">
@@ -84,3 +97,7 @@
         </tbody>
     </table>
 </html>
+
+<script>
+    window.print();
+</script>

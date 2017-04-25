@@ -130,6 +130,7 @@
         <div class="tab-container tab-top tab-primary">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#accounts_integration_setting" data-toggle="tab" style="font-family: tahoma;"><i class="fa fa-gear"></i> Accounts</a></li>
+                <li class=""><a href="#sched_expense_setting" data-toggle="tab" style="font-family: tahoma;"><i class="fa fa-gear"></i> Expense Group (Schedule of Expense)</a></li>
                 <li class=""><a href="#account_year_setting" data-toggle="tab" style="font-family: tahoma;"><i class="fa fa-calendar"></i> Accounting Period</a></li>
                 <!-- <li class=""><a href="#invoice_counter_setting" data-toggle="tab" style="font-family: tahoma;"><i class="fa fa-code"></i> Invoice Number</a></li> -->
 
@@ -310,6 +311,43 @@
 
                     </form>
 
+                </div>
+
+                <div class="tab-pane" id="sched_expense_setting" style="min-height: 300px;">
+                    <br />
+                    Please specify the group of each account :<br />
+                    <table class="custom-design table-striped">
+                        <thead>
+                            <tr>
+                                <th width="10%">Account #</th>
+                                <th width="35%">Account</th>
+                                <th width="12%">Type</th>
+                                <th width="20%">Classification</th>
+                                <th width="17%">Group</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($expenses as $expense){ ?>
+                            <tr data-account-id="<?php echo $expense->account_id; ?>">
+                                <td><?php echo $expense->account_no; ?></td>
+                                <td><?php echo $expense->account_title; ?></td>
+                                <td><?php echo $expense->account_type; ?></td>
+                                <td><?php echo $expense->account_class; ?></td>
+                                <td>
+                                    <div class="div_account_group">
+                                        <select class="account_group form-control">
+                                            <option value="1" <?php echo ($expense->group_id==1?"selected":""); ?>   >General and Administrative</option>
+                                            <option value="2" <?php echo ($expense->group_id==2?"selected":""); ?>   >Selling Expense</option>
+                                        </select>
+                                    </div>
+                                    <div class="div_account_spinner" style="display: none;">
+                                        <center><img src="assets/img/loader/facebook.gif" /></center>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table><br /><br />
                 </div>
 
 

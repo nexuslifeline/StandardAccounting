@@ -1750,6 +1750,42 @@ class Templates extends CORE_Controller {
 
                 break;
 
+            /*case 'print-check':
+                $check_layout_id=$this->input->get('id',TRUE);
+                $journal_id=$this->input->get('jid',TRUE);
+
+                $m_layout=$this->Check_layout_model;
+                $layout_info=$m_layout->get_list(array('check_layout_id'=>$check_layout_id));
+                $layouts=$layout_info[0];
+
+                $data['layouts']=$layouts;
+                $data['title']="Print Check";
+
+                $m_journal_info=$this->Journal_info_model;
+                $check_info=$m_journal_info->get_list($journal_id,
+
+                    array(
+                        'journal_info.*',
+                        'suppliers.supplier_name'
+                    )
+
+                    ,
+                    array(
+                        array('suppliers','suppliers.supplier_id=journal_info.supplier_id','left')
+                    )
+                );
+
+                $data['num_words']=$this->convertDecimalToWords($check_info[0]->amount);
+                $data['check_info']=$check_info[0];
+
+
+                $this->load->view('template/check_view',$data); //load the template
+
+
+
+
+                break;*/
+
             case 'print-check':
                 $check_layout_id=$this->input->get('id',TRUE);
                 $journal_id=$this->input->get('jid',TRUE);
@@ -1762,6 +1798,10 @@ class Templates extends CORE_Controller {
                 $data['title']="Print Check";
 
                 $m_journal_info=$this->Journal_info_model;
+
+                $m_journal_info->check_status=1; //mark as issued
+                $m_journal_info->modify($journal_id);
+
                 $check_info=$m_journal_info->get_list($journal_id,
 
                     array(
@@ -1889,14 +1929,16 @@ class Templates extends CORE_Controller {
                 $data['subsidiary_info']=$journal_info[0];
                 $data['supplier_subsidiary']=$m_journal_info->get_account_subsidiary($account_Id,$start_Date,$end_Date);
 
-                if ($type == 'preview' || $type == null) {
+                /*if ($type == 'preview' || $type == null) {
                     $pdf = $this->m_pdf->load("A4-L");
                     $content=$this->load->view('template/account_subsidiary_report',$data,TRUE);
                 }
 
                 $pdf->setFooter('{PAGENO}');
                 $pdf->WriteHTML($content);
-                $pdf->Output();
+                $pdf->Output();*/
+
+                 $this->load->view('template/account_subsidiary_report',$data);
             break;
 
             case 'account-receivable-schedule':

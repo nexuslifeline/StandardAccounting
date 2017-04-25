@@ -57,7 +57,7 @@ class Journal_info_model extends CORE_Model{
             return $this->db->query($sql)->result();
     }
 
-    function get_account_subsidiary($account_id, $startDate, $endDate) {
+    function get_account_subsidiary($account_id, $startDate, $endDate,$includeChild=0) {
         $this->db->query("SET @balance:=0.00;");
         $sql="SELECT m.*,
         (CASE
@@ -67,11 +67,13 @@ class Journal_info_model extends CORE_Model{
                 CONVERT((@balance:=@balance +(m.credit-m.debit)), DECIMAL(20,2))
         END) AS balance
         FROM
-        (SELECT
-            date_txn,
+
+        (SELECT 
+            DATE_FORMAT(ji.date_txn, '%m/%d/%Y')as date_txn,
+
             DATE_FORMAT(ji.date_created, '%Y-%m-%d') AS date_created,
             txn_no,
-            account_title,
+            at.account_title,par.account_title as parent_title,
             account_type,
             memo,
             remarks,
@@ -89,7 +91,7 @@ class Journal_info_model extends CORE_Model{
                 LEFT JOIN
             journal_info AS ji ON ji.journal_id = ja.journal_id
                 LEFT JOIN
-            account_titles AS at ON at.account_id = ja.account_id
+            (account_titles AS at LEFT JOIN account_titles as par ON par.account_id=at.grand_parent_id) ON at.account_id = ja.account_id
                 LEFT JOIN
             account_classes AS ac ON ac.account_class_id = at.account_class_id
                 LEFT JOIN
@@ -100,7 +102,15 @@ class Journal_info_model extends CORE_Model{
             suppliers AS s ON s.supplier_id = ji.supplier_id
                 LEFT JOIN
             customers AS c ON c.customer_id = ji.customer_id
-            WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE AND ja.account_id=$account_id
+
+            WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+
+            ".($includeChild==0?
+                " AND ja.account_id=$account_id ":
+                " AND at.grand_parent_id IN(SELECT atx.grand_parent_id FROM account_titles as atx WHERE atx.account_id=$account_id)"
+            )."
+
+
             AND date_txn BETWEEN '$startDate' AND '$endDate'
             ORDER BY date_txn) as m";
 
@@ -137,6 +147,7 @@ class Journal_info_model extends CORE_Model{
 
     }
 
+
     function get_petty_cash_list($asOfDate=null,$department_id=null) {
         $sql="SELECT
             ji.txn_no,
@@ -164,8 +175,29 @@ class Journal_info_model extends CORE_Model{
             ji.is_replenished=FALSE AND
             ji.`date_txn` <= '$asOfDate'".
             ($department_id==1 ? "" : " AND ji.department_id = $department_id");
+       return $this->db->query($sql)->result();
+    }
 
-        return $this->db->query($sql)->result();
+
+    function get_grand_parent_account_subsidiary($start,$end){
+        $sql="SELECT ji.date_txn,ji.txn_no,
+
+                IF(ji.supplier_id>0,s.supplier_name,c.customer_name) as particular,
+                ja.memo,ji.remarks,ja.dr_amount,ja.cr_amount,ja.account_id
+
+                FROM (journal_info as ji
+                LEFT JOIN customers as c ON c.customer_id=ji.customer_id
+                LEFT JOIN suppliers as s ON s.supplier_id=ji.supplier_id
+                )
+                INNER JOIN (journal_accounts as ja
+                INNER JOIN account_titles as at ON at.account_id=ja.account_id
+                ) ON ja.journal_id=ji.journal_id
+
+                WHERE ji.date_txn BETWEEN '$start' AND '$end'
+
+                ORDER BY ji.date_txn";
+      
+      return $this->db->query($sql)->result();
     }
 
     function get_remaining_amount($asOfDate=null, $department_id=null) {
@@ -191,8 +223,13 @@ class Journal_info_model extends CORE_Model{
             LEFT JOIN journal_info AS ji ON ji.journal_id=ja.`journal_id` AND ji.is_active=TRUE AND ji.is_deleted=FALSE
             WHERE is_replenished=FALSE AND date_txn <= '$asOfDate' ".($department_id == 1 ? ") as x" : " AND ji.department_id=".$department_id.") AS x ");
 
+
         return $this->db->query($sql)->result();
+
     }
+
+
+
 
 }
 

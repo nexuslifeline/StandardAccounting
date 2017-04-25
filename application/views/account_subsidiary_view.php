@@ -35,19 +35,19 @@
 
     <style>
         html{
-            zoom: 0.8;
-            zoom: 80%;
+            zoom: 0.75;
+            zoom: 75%;
         }
 
         .toolbar{
             float: left;
         }
 
-        td:nth-child(5),td:nth-child(6){
+        td:nth-child(7),td:nth-child(8){
             text-align: right;
         }
 
-        td:nth-child(7){
+        td:nth-child(9){
             text-align: right;
             font-weight: bolder;
         }
@@ -84,13 +84,14 @@
                                         <div class="panel-group panel-default" id="accordionA">
 
 
-                                            <div class="panel panel-default">
+                                            <div class="panel panel-default" style="border-radius: 6px;border: 1px solid lightgrey;min-height: 670px;">
                                                 <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Per Account Subsidiary</b></div></a>
                                                 <div id="collapseTwo" class="collapse in">
                                                     <div class="panel-body">
                                                         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
                                                             <div class="row">
-                                                                <div class="col-lg-6">
+
+                                                                <div class="col-lg-5">
                                                                     Account * : <br />
                                                                     <select id="cbo_accounts" class="form-control">
                                                                         <?php foreach($account_titles as $account){ ?>
@@ -99,7 +100,16 @@
                                                                     </select>
 
                                                                 </div>
+
                                                                 <div class="col-lg-3">
+                                                                    Transactions : <br />
+                                                                    <select id="cbo_options" class="form-control">
+                                                                        <option value="0">Selected Account only</option>
+                                                                        <option value="1">Include Transactions of Main Account</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="col-lg-2">
                                                                     Period Start * :<br />
                                                                     <div class="input-group">
                                                                         <input type="text" id="txt_date" name="date_from" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>">
@@ -109,7 +119,7 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col-lg-3">
+                                                                <div class="col-lg-2">
                                                                     Period End * :<br />
                                                                     <div class="input-group">
                                                                         <input type="text" id="txt_date" name="date_to" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>">
@@ -129,6 +139,8 @@
                                                                 <tr>
                                                                     <th>Date</th>
                                                                     <th>Txn #</th>
+                                                                    <th>Account</th>
+                                                                    <th>Main</th>
                                                                     <th>Particular</th>
                                                                     <th>Memo</th>
 
@@ -206,7 +218,7 @@
 
 <script>
     $(document).ready(function(){
-        var _cboAccounts; var dt;
+        var _cboAccounts; var dt; var _cboOptions;
         var _date_from = $('input[name="date_from"]');
         var _date_to = $('input[name="date_to"]');
 
@@ -217,6 +229,12 @@
                 placeholder: "Please select customer.",
                 allowClear: true
             });
+
+            _cboOptions=$("#cbo_options").select2({
+                allowClear: false
+            });
+
+            _cboOptions.select2('val',0);
 
             $('.date-picker').datepicker({
                 todayBtn: "linked",
@@ -242,6 +260,12 @@
                 createToolBarButton();
             });
 
+            _cboOptions.on("select2:select", function (e) {
+                dt.destroy();
+                reloadList();
+                createToolBarButton();
+            });
+
             $('.date-picker').on('change',function(){
                 dt.destroy();
                 reloadList();
@@ -249,7 +273,7 @@
             });
 
             $(document).on('click','#btn_print',function(){
-                window.open('Templates/layout/account-subsidiary?type=preview&accountId='+_cboAccounts.val()+'&startDate='+_date_from.val()+'&endDate='+_date_to.val());
+                window.open('Templates/layout/account-subsidiary?type=preview&accountId='+_cboAccounts.val()+'&startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&includeChild='+_cboOptions.val());
 
             });
 
@@ -292,31 +316,34 @@
                         return $.extend( {}, d, {
                             "accountId": _cboAccounts.select2('val'),
                             "startDate":_date_from.val(),
-                            "endDate":_date_to.val()
+                            "endDate":_date_to.val(),
+                            "includeChild":_cboOptions.select2('val')
                         });
                     }
                 },
                 "columns": [
                     { targets:[0],data: "date_txn" },
                     { targets:[1],data: "txn_no" },
-                    { targets:[2],data: "particular" },
-                    { targets:[3],data: "memo" },
+                    { targets:[2],data: "account_title" },
+                    { targets:[3],data: "parent_title" },
+                    { targets:[4],data: "particular" },
+                    { targets:[5],data: "memo" },
 
 
                     {
-                        targets:[4],data: "debit",
+                        targets:[6],data: "debit",
                         render: function(data, type, full, meta){
                             return accounting.formatNumber(data,2);
                         }
                     },
                     {
-                        targets:[5],data: "credit",
+                        targets:[7],data: "credit",
                         render: function(data, type, full, meta){
                             return accounting.formatNumber(data,2);
                         }
                     },
                     {
-                        targets:[6],data: "balance",
+                        targets:[8],data: "balance",
                         render: function(data, type, full, meta){
                             return accounting.formatNumber(data,2);
                         }}

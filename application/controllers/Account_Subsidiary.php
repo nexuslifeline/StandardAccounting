@@ -41,9 +41,11 @@
 					$account_Id=$this->input->get('accountId',TRUE);
 					$start_Date=date('Y-m-d',strtotime($this->input->get('startDate',TRUE)));
 					$end_Date=date('Y-m-d',strtotime($this->input->get('endDate',TRUE)));
+                    $includeChild=$this->input->get('includeChild',TRUE);
+
 					$m_journal_info=$this->Journal_info_model;
 
-					$response['data']=$m_journal_info->get_account_subsidiary($account_Id,$start_Date,$end_Date);
+					$response['data']=$m_journal_info->get_account_subsidiary($account_Id,$start_Date,$end_Date,$includeChild);
 					echo json_encode($response);
 
 				break;
