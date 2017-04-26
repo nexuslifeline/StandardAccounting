@@ -6,6 +6,7 @@ class Login extends CORE_Controller {
     function __construct()
     {
         parent::__construct('');
+
         $this->load->model('Users_model');
         $this->load->model('User_groups_model');
         $this->load->model('Tax_types_model');
@@ -30,6 +31,8 @@ class Login extends CORE_Controller {
 
     public function index()
     {
+        $data['company_info']=$this->Company_model->get_list(array('company_info'));
+        
         $this->create_required_default_data();
 
         $data['_def_css_files']=$this->load->view('template/assets/css_files','',TRUE);
@@ -218,7 +221,6 @@ class Login extends CORE_Controller {
                 null
             );
             $data['total_last_year_client']=$info[0]->total_clients;
-
 
             /**
              * get total number of clients this year
@@ -416,7 +418,6 @@ class Login extends CORE_Controller {
                             $parent_links[]=$main[0];
                         }
 
-
                         //set session data here and response data
                         $this->session->set_userdata(
                             array(
@@ -431,7 +432,7 @@ class Login extends CORE_Controller {
                             )
                         );
 
-                        $response['title']='Success';
+                        $response['title']='Success!';
                         $response['stat']='success';
                         $response['msg']='User successfully authenticated.';
 
@@ -439,8 +440,10 @@ class Login extends CORE_Controller {
 
                     }else{ //not valid
 
+                        $response['title']='Cannot authenticate user!';
                         $response['stat']='error';
                         $response['msg']='Invalid username or password.';
+                        
                         echo json_encode($response);
 
                     }

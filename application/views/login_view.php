@@ -48,38 +48,17 @@
 	    	color: white;
 	    }
 
-	    /*.form-control:focus {
+	    .form-control:focus {
 	    	color: #28353b;
 	    	background: #e9eef0;
-	    }*/
+	    }
 
 	    #login {
-	    	margin-top: 150px;
 	    	border-radius: 20px;
-			-webkit-box-shadow: 0px 0px 300px 0px rgba(255,255,255,1);
-			-moz-box-shadow: 0px 0px 300px 0px rgba(255,255,255,1);
-			box-shadow: 0px 0px 300px 0px rgba(255,255,255,1);
+			-webkit-box-shadow: 0px 0px 220px 0px rgba(255,255,255,1);
+			-moz-box-shadow: 0px 0px 220px 0px rgba(255,255,255,1);
+			box-shadow: 0px 0px 220px 0px rgba(255,255,255,1);
 	    }
-
-	    #title {
-	    	margin-top: 100px;
-	    }
-
-	    /*.login_border_color {
-	    	border-radius: 20px;
-			-webkit-box-shadow: 0px 0px 160px 0px rgba(255,255,255,1);
-			-moz-box-shadow: 0px 0px 160px 0px rgba(255,255,255,1);
-			box-shadow: 0px 0px 160px 0px rgba(255,255,255,1);
-	    }*/
-
-	    /*.form-control:focus {
-	    	background: transparent!important;
-	    }
-
-	    .btn-custom-jk {
-	    	background: transparent!important;
-	    }*/
-
 
     </style>
 
@@ -91,8 +70,15 @@
 <div class="container" id="login-form">
 	<a href="Login" class="login-logo"></a>
 		<div class="row">
-			<div class="hidden-xs hidden-sm col-md-8" id="title">
-				<span class="text-center" style="position: absolute; top: 10000%; left: 11%; font-size: 40px; font-family: 'Segoe UI', sans-serif; color: white; font-weight: 200;"><img src="<?php echo base_url($company->logo_path); ?>" style="max-width: 150px;max-height: 100px;"><br><b><i>J</i>CORE</b> ACCOUNTING SYSTEM</span>
+			<div class="hidden-xs hidden-sm col-md-8">
+				<span class="text-center" style="position: absolute; top: 10000%; left: 11%; font-size: 40px; font-family: 'Segoe UI', sans-serif; color: white; font-weight: 200;"><img src="<?php echo base_url($company->logo_path); ?>" style="max-width: 150px;max-height: 100px;"><br><b><i>J</i>CORE</b> ACCOUNTING SYSTEM
+				<br>
+					<span style="padding-right:15px;">
+						<?php foreach($company_info as $company_info){ ?>
+	                        <?php echo $company_info->company_name; ?>
+	                    <?php } ?>
+                    </span>
+				</span>
 			</div>
 			<div class="col-md-4">
 				<div style="border:none; margin-top: 15%;">
@@ -173,8 +159,6 @@
 <script src="assets/plugins/spinner/dist/spin.min.js"></script>
 <script src="assets/plugins/spinner/dist/ladda.min.js"></script>
 
-
-
     <script>
         $(document).ready(function(){
 
@@ -204,17 +188,16 @@
 
                 });
 
-
                 $('input').keypress(function(evt){
-                    if(evt.keyCode==13){ $('#btn_login').click(); }
+                    if(evt.keyCode==13){
+                    	evt.preventDefault();
+                    	$('#btn_login').click();
+                    }
                 });
-
 
             })();
 
-
-
-            var validateUser=(function(){
+            var validateUser=function(){
                 var _data={uname : $('input[name="user_name"]').val() , pword : $('input[name="user_pword"]').val()};
 
                 return $.ajax({
@@ -223,11 +206,9 @@
                     "url":"Login/transaction/validate",
                     "data" : _data,
                     "beforeSend": function(){
-
                     }
                 });
-            });
-
+            };
 
             var showNotification=function(obj){
                 PNotify.removeAll(); //remove all notifications
@@ -240,7 +221,6 @@
 
 	        $('#user').focus(function()
 			{ 
-				//$('#login').addClass('login_border_color');
 				$(this).attr('placeholder','');
 				$(this).animate({
 				    height: '40px',
@@ -250,7 +230,6 @@
 				  });
 			}).blur(function()
 			{
-				//$('#login').removeClass();
 				$(this).attr('placeholder','Username');
 				$(this).animate({
 				    height: '33px',
@@ -262,7 +241,6 @@
 
 			$('#pass').focus(function()
 			{ 
-				//$('#login').addClass('login_border_color');
 				$(this).attr('placeholder','');
 				$(this).animate({
 				    height: '40px',
@@ -272,7 +250,6 @@
 				  });
 			}).blur(function()
 			{
-				//$('#login').removeClass();
 				$(this).attr('placeholder','Password');
 				$(this).animate({
 				    height: '33px',
