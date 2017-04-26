@@ -232,7 +232,7 @@
 			{
 				$(this).attr('placeholder','Username');
 				$(this).animate({
-				    height: '33px',
+				    height: '32px',
 				    'font-size': '14px'
 				  }, 100, function() {
 				    // Animation complete.
@@ -252,7 +252,7 @@
 			{
 				$(this).attr('placeholder','Password');
 				$(this).animate({
-				    height: '33px',
+				    height: '32px',
 				    'font-size': '14px',
 				  }, 100, function() {
 				    // Animation complete.
