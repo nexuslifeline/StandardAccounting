@@ -9,7 +9,8 @@ class Dashboard extends CORE_Controller {
         $this->validate_session();
         $this->load->model(array(
             'Journal_info_model',
-            'Journal_account_model'
+            'Journal_account_model',
+            'Users_model'
         ));
 
     }
@@ -230,6 +231,14 @@ class Dashboard extends CORE_Controller {
         $data['previous_year_income_monthly']=$previous_year_income_monthly;
         $data['expense_monthly']=$expense_monthly;
 
+        $m_users=$this->Users_model;
+        
+        $online_count=$m_users->get_list(
+            'is_online=TRUE',
+            'COUNT(is_online) AS count_online'
+        );
+
+        $data['online_count']=$online_count[0]->count_online;
 
         $this->load->view('dashboard_view',$data);
     }
