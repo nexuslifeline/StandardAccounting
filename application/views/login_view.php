@@ -32,14 +32,14 @@
 	    }
 
 	    .login-background {
-	    	background: rgba(222,149,199,1);
-			background: -moz-linear-gradient(left, rgba(222,149,199,1) 0%, rgba(207,116,168,1) 0%, rgba(117,82,109,1) 54%, rgba(40,53,59,1) 100%);
-			background: -webkit-gradient(left top, right top, color-stop(0%, rgba(222,149,199,1)), color-stop(0%, rgba(207,116,168,1)), color-stop(54%, rgba(117,82,109,1)), color-stop(100%, rgba(40,53,59,1)));
-			background: -webkit-linear-gradient(left, rgba(222,149,199,1) 0%, rgba(207,116,168,1) 0%, rgba(117,82,109,1) 54%, rgba(40,53,59,1) 100%);
-			background: -o-linear-gradient(left, rgba(222,149,199,1) 0%, rgba(207,116,168,1) 0%, rgba(117,82,109,1) 54%, rgba(40,53,59,1) 100%);
-			background: -ms-linear-gradient(left, rgba(222,149,199,1) 0%, rgba(207,116,168,1) 0%, rgba(117,82,109,1) 54%, rgba(40,53,59,1) 100%);
-			background: linear-gradient(to right, rgba(222,149,199,1) 0%, rgba(207,116,168,1) 0%, rgba(117,82,109,1) 54%, rgba(40,53,59,1) 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#de95c7', endColorstr='#28353b', GradientType=1 );
+	    	background: rgba(145,45,45,1);
+			background: -moz-linear-gradient(left, rgba(145,45,45,1) 0%, rgba(2,5,0,1) 100%);
+			background: -webkit-gradient(left top, right top, color-stop(0%, rgba(145,45,45,1)), color-stop(100%, rgba(2,5,0,1)));
+			background: -webkit-linear-gradient(left, rgba(145,45,45,1) 0%, rgba(2,5,0,1) 100%);
+			background: -o-linear-gradient(left, rgba(145,45,45,1) 0%, rgba(2,5,0,1) 100%);
+			background: -ms-linear-gradient(left, rgba(145,45,45,1) 0%, rgba(2,5,0,1) 100%);
+			background: linear-gradient(to right, rgba(145,45,45,1) 0%, rgba(2,5,0,1) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#912d2d', endColorstr='#020500', GradientType=1 );
 	    }
 
 	    .form-control {
@@ -55,9 +55,9 @@
 
 	    #login {
 	    	border-radius: 20px;
-			-webkit-box-shadow: 0px 0px 220px 0px rgba(255,255,255,1);
-			-moz-box-shadow: 0px 0px 220px 0px rgba(255,255,255,1);
-			box-shadow: 0px 0px 220px 0px rgba(255,255,255,1);
+			-webkit-box-shadow: 0px 0px 140px 0px rgba(255,255,255,1);
+			-moz-box-shadow: 0px 0px 140px 0px rgba(255,255,255,1);
+			box-shadow: 0px 0px 140px 0px rgba(255,255,255,1);
 	    }
 
     </style>
@@ -232,7 +232,7 @@
 			{
 				$(this).attr('placeholder','Username');
 				$(this).animate({
-				    height: '33px',
+				    height: '32px',
 				    'font-size': '14px'
 				  }, 100, function() {
 				    // Animation complete.
@@ -252,7 +252,7 @@
 			{
 				$(this).attr('placeholder','Password');
 				$(this).animate({
-				    height: '33px',
+				    height: '32px',
 				    'font-size': '14px',
 				  }, 100, function() {
 				    // Animation complete.
