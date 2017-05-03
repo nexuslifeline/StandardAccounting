@@ -20,10 +20,85 @@
 
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
+    html{
+        zoom: 0.8;
+        zoom: 80%;
+    }
+
+    .chat-box {
+        position: fixed;
+        width: 25%;
+        z-index: 9999999;
+        bottom: -30px;
+        right: 100px;
+    }
+
+    .label {
+        max-width: 250px;
+        word-wrap:break-word;
+        white-space:normal;
+        text-align: left;
+        border-radius: 10px;
+        margin: 5px;
+        padding: 10px;
+        font-size: 14px;
+        text-transform: none;
+    }
+
+    .send-link {
+        font-size: 20px;
+        color: #2196f3;
+    }
+
+    .message-wrapper {
+        padding-left: 0;
+    }
+
+    .ti-close {
+        transition: .25s ease-in-out;;
+    }
+
+    .chat-title {
+        font-weight: 600;
+        color: white;
+    }
+
+    .chat-box-button {
+        -webkit-box-shadow: 0px 0px 18px 0px rgba(158,152,152,1);
+        -moz-box-shadow: 0px 0px 18px 0px rgba(158,152,152,1);
+        box-shadow: 0px 0px 18px 0px rgba(158,152,152,1);
+        padding: 10px 15px 5px 15px;
+        font-size: 40px;
+        border-radius: 50%;
+    }
+
+    #chat_msg {
+        border: none!important;
+        background-color: transparent!important;
+    }
+
+    #chat_msg:focus {
+        -webkit-box-shadow: 0px 0px 18px 0px rgba(158,152,152,0)!important;
+        -moz-box-shadow: 0px 0px 18px 0px rgba(158,152,152,0)!important;
+        box-shadow: 0px 0px 18px 0px rgba(158,152,152,0)!important;
+    }
+
+    .chat-box-button-wrapper {
+        position: fixed;
+        bottom: 30px;
+        right: 15px;
+        z-index: 9999999;
+    }
+
+    .chat-box-body {
+        height: 400px!important;
+        max-height: 400px;
+        overflow-y: scroll;
+    }
+
+    .chat-box-footer {
+        background-color: white!important;
+    }
 
     .toolbar{
         float: left;
@@ -81,6 +156,26 @@
             <div class="static-content"  >
                     <div class="page-content"><!-- #page-content -->
 
+                        <div class="chat-box-button-wrapper">
+                            <button id="btn_open_chat" class="btn btn-warning chat-box-button">
+                                <span class="ti ti-comments"></span>
+                            </button>
+                        </div>
+                        <div id="chat_box" class="panel panel-default chat-box hidden">
+                            <div class="panel-heading">
+                                <span class="chat-title"><strong style="color: #9bcb64;">&bull;</strong> Active <span id="active_count"></span></span>
+                            </div>
+                            <div id="chat_body" class="panel-body chat-box-body">
+                            </div>
+                            <div class="panel-footer chat-box-footer">
+                                <div class="col-xs-10 message-wrapper">
+                                    <input id="chat_msg" class="form-control" type="text" name="chat_message" placeholder="Enter Message Here">
+                                </div>
+                                <div class="col-xs-2">
+                                    <a id="btn_send" class="send-link"><span class="fa fa-paper-plane"></span></a>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="container-fluid" style="margin-top: 10px;">
                             <div data-widget-group="group1">
@@ -492,6 +587,8 @@
         var dt; var _selectedID; var _selectRowObj;
 
         var initializeControls=(function(){
+
+
             dt=$('#tbl_po_list').DataTable({
                 "dom": '<"toolbar">frtip',
                 "bLengthChange":false,
@@ -536,6 +633,65 @@
 
 
             var detailRows = [];
+
+            $('#btn_open_chat').on('click',function() {
+                $('#active_count').html('<?php echo "(".$online_count.")"; ?>');
+                $('#chat_box').toggleClass('hidden');
+                $(this).find('span').toggleClass("ti ti-comments ti ti-close", 500, "linear");
+            });
+
+            $('#btn_send').click(function() {
+                $('#chat_body').append(
+                    '<div class="row">'+
+                        '<div class="container-fluid">'+
+                            '<div class="label label-info pull-left">'
+                                +$('#chat_msg').val()+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'+
+                    '<br>'
+                );
+
+                $('#chat_body').append(
+                    '<div class="row">'+
+                        '<div class="container-fluid">'+
+                            '<div class="label label-success pull-right">'
+                                +$('#chat_msg').val()+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'+
+                    '<br>'
+                );
+
+                $('#chat_msg').val('');
+            });
+
+            $('#chat_msg').keydown(function(e){
+                if (e.keyCode == 13) {
+                    $('#chat_body').append(
+                        '<div class="row">'+
+                            '<div class="container-fluid">'+
+                                '<div class="label label-info pull-left">'
+                                    +$('#chat_msg').val()+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                        '<br>'
+                    );
+                    
+                    $('#chat_body').append(
+                        '<div class="row">'+
+                            '<div class="container-fluid">'+
+                                '<div class="label label-success pull-right">'
+                                    +$('#chat_msg').val()+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                        '<br>'
+                    );
+                    $(this).val('');
+                }
+            });
 
             $('#tbl_po_list tbody').on( 'click', 'tr td.details-control', function () {
                 var tr = $(this).closest('tr');
