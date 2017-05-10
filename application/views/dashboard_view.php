@@ -25,12 +25,20 @@
         zoom: 80%;
     }
 
-    .chat-box {
+    #chat_box {
         position: fixed;
-        width: 25%;
+        width: 325px;
+        z-index: 999999999999999999999;
+        bottom: -3em;
+        right: 31.50em;
+    }
+
+    .chat-users {
+        position: fixed;
+        width: 325px;
         z-index: 9999999;
-        bottom: -30px;
-        right: 100px;
+        bottom: -3em;
+        right: 7em;
     }
 
     .label {
@@ -45,6 +53,15 @@
         text-transform: none;
     }
 
+    .label-others {
+        color: black;
+        background-color: #d9d9d9;
+    }
+
+    .label-user {
+        background-color: #00acc1;
+    }
+
     .send-link {
         font-size: 20px;
         color: #2196f3;
@@ -54,29 +71,39 @@
         padding-left: 0;
     }
 
-    .ti-close {
-        transition: .25s ease-in-out;;
+    .chat-title {
+        font-family: 'Arial', sans-serif;
+        font-size: 14px;
+        font-weight: bolder;
+        color: white;
     }
 
-    .chat-title {
-        font-weight: 600;
-        color: white;
+    .chat-users-body {
+        height: 350px!important;
+        max-height: 400px;
+        overflow-y: scroll;
     }
 
     .chat-box-button {
         -webkit-box-shadow: 0px 0px 18px 0px rgba(158,152,152,1);
         -moz-box-shadow: 0px 0px 18px 0px rgba(158,152,152,1);
         box-shadow: 0px 0px 18px 0px rgba(158,152,152,1);
-        padding: 10px 15px 5px 15px;
+        padding: 10px 17px 5px 17px;
         font-size: 40px;
         border-radius: 50%;
     }
 
+    #search_user,
     #chat_msg {
         border: none!important;
         background-color: transparent!important;
     }
 
+    .chat-heading {
+        background-color: #4caf50!important;
+    }
+
+    #search_user:focus,
     #chat_msg:focus {
         -webkit-box-shadow: 0px 0px 18px 0px rgba(158,152,152,0)!important;
         -moz-box-shadow: 0px 0px 18px 0px rgba(158,152,152,0)!important;
@@ -91,7 +118,7 @@
     }
 
     .chat-box-body {
-        height: 400px!important;
+        height: 350px!important;
         max-height: 400px;
         overflow-y: scroll;
     }
@@ -158,18 +185,60 @@
 
                         <div class="chat-box-button-wrapper">
                             <button id="btn_open_chat" class="btn btn-warning chat-box-button">
-                                <span class="ti ti-comments"></span>
+                                <span class="fa fa-comments"></span>
                             </button>
                         </div>
-                        <div id="chat_box" class="panel panel-default chat-box hidden">
-                            <div class="panel-heading">
-                                <span class="chat-title"><strong style="color: #9bcb64;">&bull;</strong> Active <span id="active_count"></span></span>
+
+                        <div id="chat_user_box" class="panel panel-success chat-users hidden">
+                            <div class="panel-heading chat-heading">
+                                <span class="chat-title">
+                                    <strong style="font-size: 20px;" class="fa fa-comments"></strong>&nbsp;&nbsp; JCORE CHAT 
+                                </span>
                             </div>
-                            <div id="chat_body" class="panel-body chat-box-body">
+                            <div class="panel-body chat-users-body">
+                                <div class="row">
+                                    <div class="container-fluid">
+                                        <span>
+                                            <strong>Active <span id="active_count"></span></strong>
+                                        </span>
+                                        <div class="col-xs-12 online-list">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="container-fluid">
+                                        <span>
+                                            <strong>Offline <span id="offline_count"></span></strong>
+                                        </span>
+                                        <div class="col-xs-12 offline-list">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="panel-footer chat-box-footer">
                                 <div class="col-xs-10 message-wrapper">
-                                    <input id="chat_msg" class="form-control" type="text" name="chat_message" placeholder="Enter Message Here">
+                                    <input id="search_user" class="form-control" type="text" maxlength="160" name="message" placeholder="Search User or Groups...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="chat_box" class="panel panel-success chat-box hidden">
+                            <div class="panel-heading chat-heading">
+                                <span class="chat-title">
+                                    <strong class="fa fa-user"></strong>&nbsp;Message to <span class="chat-user"></span>
+                                </span>
+                            </div>
+                            <div id="chat_body" class="panel-body chat-box-body">
+                                <div class="row">
+                                    <div class="container-fluid text-center show-more">
+                                </div>
+                                </div>
+                                <div id="chat_message_body">
+                                </div>
+                             </div>
+                             <div class="panel-footer chat-box-footer">
+                                <div class="col-xs-10 message-wrapper">
+                                    <input id="chat_msg" class="form-control" type="text" maxlength="160" name="message" placeholder="Enter Message Here">
                                 </div>
                                 <div class="col-xs-2">
                                     <a id="btn_send" class="send-link"><span class="fa fa-paper-plane"></span></a>
@@ -371,7 +440,7 @@
             <footer role="contentinfo">
                 <div class="clearfix">
                     <ul class="list-unstyled list-inline pull-left">
-                        <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+                        <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTIONS</h6></li>
                     </ul>
                     <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
                 </div>
@@ -585,9 +654,12 @@
 
     $(document).ready(function(){
         var dt; var _selectedID; var _selectRowObj;
+        var _mateUserId=0;var _chatCode; var _session_id=<?php echo $this->session->user_id; ?>;;
+        var isOpen=0; var _revChatCode;
+
+        var _isScrolled=0;
 
         var initializeControls=(function(){
-
 
             dt=$('#tbl_po_list').DataTable({
                 "dom": '<"toolbar">frtip',
@@ -626,70 +698,89 @@
                     }
                 ]
             });
+
+
+            
         })();
 
 
         var bindEventHandlers=(function(){
-
-
             var detailRows = [];
 
             $('#btn_open_chat').on('click',function() {
-                $('#active_count').html('<?php echo "(".$online_count.")"; ?>');
-                $('#chat_box').toggleClass('hidden');
-                $(this).find('span').toggleClass("ti ti-comments ti ti-close", 500, "linear");
+                $('#chat_user_box').toggleClass('hidden');
+                $('#chat_box').addClass('hidden');
+                $(this).find('span').toggleClass("fa fa-comments ti ti-close");
+
+                //flag
+                if (isOpen == 0) {
+                    isOpen=1;
+                    startInterval();
+                }
+                else {
+                    isOpen=0;
+                    clearInterval(startInterval());
+                }
             });
 
-            $('#btn_send').click(function() {
-                $('#chat_body').append(
-                    '<div class="row">'+
-                        '<div class="container-fluid">'+
-                            '<div class="label label-info pull-left">'
-                                +$('#chat_msg').val()+
-                            '</div>'+
-                        '</div>'+
-                    '</div>'+
-                    '<br>'
-                );
+            var position = $('#chat_body').scrollTop();
 
-                $('#chat_body').append(
-                    '<div class="row">'+
-                        '<div class="container-fluid">'+
-                            '<div class="label label-success pull-right">'
-                                +$('#chat_msg').val()+
-                            '</div>'+
-                        '</div>'+
-                    '</div>'+
-                    '<br>'
-                );
+            $('#chat_body').scroll(function(){
+                var scroll = $('#chat_body').scrollTop();
 
-                $('#chat_msg').val('');
+                if (scroll < position)  {
+                    _isScrolled=1;
+                } else {
+                    _isScrolled=0;
+                }
+                position = scroll;
+            });
+
+            $('#btn_send').on('click',function() {
+                if ($('#chat_msg').val() == '' || $('#chat_msg').val() == ' ') {
+                    showNotification({title: 'Error', msg: 'Please Enter a Message!', stat: 'error' })
+                } else {
+                    sendChat().done(function(response){
+                        $('#chat_body').html('');
+
+                        $.each(response.retrieve_messages, function(i,data) {
+                            if (data.user_id == _session_id) {
+                                $('#chat_body').append(
+                                    '<div class="row">'+
+                                        '<div class="container-fluid pull-right">'+
+                                            '<div class="label label-user pull-right">'
+                                                +data.message+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'
+                                );
+                            } else {
+                                $('#chat_body').append(
+                                    '<div class="row">'+
+                                        '<div class="container-fluid pull-left">'+
+                                            '<div class="pull-left">'+
+                                                '<img style="margin-top:10px; height: 30px; width: 30px; border-radius: 50%;" src="'+ data.photo_path +'"/>'+
+                                            '</div>'+
+                                            '<div class="label label-others pull-left">'
+                                                +data.message+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'
+                                );
+                            }
+                        });
+                    
+                        var objDiv = document.getElementById("chat_body");
+                        objDiv.scrollTop = objDiv.scrollHeight;
+                        $('#chat_msg').val('');
+                    });
+                }
             });
 
             $('#chat_msg').keydown(function(e){
                 if (e.keyCode == 13) {
-                    $('#chat_body').append(
-                        '<div class="row">'+
-                            '<div class="container-fluid">'+
-                                '<div class="label label-info pull-left">'
-                                    +$('#chat_msg').val()+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'+
-                        '<br>'
-                    );
-                    
-                    $('#chat_body').append(
-                        '<div class="row">'+
-                            '<div class="container-fluid">'+
-                                '<div class="label label-success pull-right">'
-                                    +$('#chat_msg').val()+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'+
-                        '<br>'
-                    );
-                    $(this).val('');
+                    e.preventDefault();
+                    $('#btn_send').click();
                 }
             });
 
@@ -724,10 +815,6 @@
                             detailRows.push( tr.attr('id') );
                         }
                     });
-
-
-
-
                 }
             } );
 
@@ -763,15 +850,110 @@
                 _selectRowObj.find('#link_conversation').trigger("click");
                 //alert(_selectRowObj.find('a[id="link_conversation"]').length);
             });
-
-
-
-
         })();
 
+        function startInterval() {
+            setInterval(function() {
+                _chatCode='User'+_session_id+':'+'User'+_mateUserId;
+                _revChatCode='User'+_mateUserId+':'+'User'+_session_id;
 
+                retrieveMessages().done(function(response){
+                    $('#chat_body').html('');
+                    $('#active_count').html('('+response.status_info[0].online_count+')');
+                    $('#offline_count').html('('+response.status_info[0].offline_count+')');
 
+                    $('.online-list').html('');
+                    $('.offline-list').html('');
 
+                    $.each(response.users_status, function(i,data) {
+                        if (data.is_online == 1) {
+                            $('.online-list').append(
+                            '<div class="row">'+
+                                '<div class="col-xs-2">'+
+                                    '<img style="margin-top:10px; height: 30px; width: 30px; border-radius: 50%;" src="'+ data.photo_path +'"/>'+
+                                '</div>'+
+                                '<div class="col-xs-8" style="margin-top: 15px;">'+
+                                    '<span><a class="chat_box_'+ data.user_id +'" style="color: #404040;">'+ data.user_fname + ' ' + data.user_lname + '</a></span>'+
+                                '</div>'+
+                            '</div>'
+                            );
+                        } else {
+                            $('.offline-list').append(
+                                '<div class="row">'+
+                                    '<div class="col-xs-2">'+
+                                        '<img style="margin-top:10px; height: 30px; width: 30px; border-radius: 50%;" src="'+ data.photo_path +'"/>'+
+                                    '</div>'+
+                                    '<div class="col-xs-8" style="margin-top: 15px;">'+
+                                        '<span><a class="chat_box_'+ data.user_id +'" style="color: #404040;">'+ data.user_fname + ' ' + data.user_lname + '</a></span>'+
+                                    '</div>'+
+                                '</div>'
+                            );
+                        }
+
+                        $('.chat_box_' + data.user_id).click(function(){
+                            _mateUserId=data.user_id;
+
+                            $('.chat-user').html(data.user_fname + ' ' + data.user_lname);
+                            $('#chat_box').removeClass('hidden');
+                        });
+                    });
+                    
+                    if (response.messages.length >= 30) {
+                        $('#chat_body').append('<div class="text-center see-more"><a class="see-more">See more messages...</a></div>');
+                    }
+
+                    $.each(response.messages, function(i,data) {
+                        if (data.user_id == _session_id) {
+                            $('#chat_body').append(
+                                '<div class="row">'+
+                                    '<div class="container-fluid pull-right">'+
+                                        '<div class="label label-user pull-right">'
+                                            +data.message+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'
+                            );  
+                        } else {
+                            $('#chat_body').append(
+                                '<div class="row">'+
+                                    '<div class="container-fluid pull-left">'+
+                                        '<div class="pull-left">'+
+                                            '<img style="margin-top:10px; height: 30px; width: 30px; border-radius: 50%;" src="'+ data.photo_path +'"/>'+
+                                        '</div>'+
+                                        '<div class="label label-others pull-left">'
+                                            +data.message+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'
+                            );
+                        }
+                    });
+
+                    if (_isScrolled == 0) {
+                        var objDiv = document.getElementById("chat_body");
+                        objDiv.scrollTop = objDiv.scrollHeight;
+                    }
+                });
+            },1500);
+        };
+
+        var retrieveMessages=function(){
+            return $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Chat/transaction/retrieve",
+                "data": { chat_code : _chatCode, rev_chat_code : _revChatCode }
+            });
+        };
+
+        var sendChat=function() {
+            return $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Chat/transaction/send",
+                "data": { message : $('#chat_msg').val(), chat_code : _chatCode, rev_chat_code : _revChatCode }
+            });
+        };  
 
 
         //functions called on bindEventHandlers
