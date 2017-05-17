@@ -10,7 +10,8 @@ class Dashboard extends CORE_Controller {
         $this->load->model(array(
             'Journal_info_model',
             'Journal_account_model',
-            'Users_model'
+            'Users_model',
+            'Company_model'
         ));
 
     }
@@ -23,6 +24,8 @@ class Dashboard extends CORE_Controller {
         $data['_side_bar_navigation']=$this->load->view('template/elements/side_bar_navigation','',TRUE);
         $data['_top_navigation']=$this->load->view('template/elements/top_navigation','',TRUE);
 
+        $data['company_info']=$this->Company_model->get_list(array('company_info'));
+        
         $m_journal=$this->Journal_account_model;
         $m_journal_info=$this->Journal_info_model;
 
