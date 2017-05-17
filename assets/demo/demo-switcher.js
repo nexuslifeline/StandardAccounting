@@ -124,6 +124,10 @@ $(function() {
                     $('div.panel-heading b').css('color','white');
                 }
 
+			} else if (navColor == null) {
+				$('#topnav').removeClass(headerColors).addClass('navbar-midnightblue');
+                $('div.panel-heading').css('background-color',$('#topnav').css('background-color'));
+                $('div.modal-header').css('background-color',$('#topnav').css('background-color'));
 			}
 
 			var sideColor = localStorage.getItem('sidebar-color');
@@ -132,6 +136,9 @@ $(function() {
 				$('#headernav').removeClass(sidebarColors).addClass('navbar-' + sideColor);
                 $('div.panel').css('border-color',$('.static-sidebar-wrapper, .fixed-sidebar-wrapper').css('background-color'));
 
+			} else if (navColor == null) {
+				$('.static-sidebar-wrapper, .fixed-sidebar-wrapper').removeClass(sidebarColors).addClass('sidebar-midnightblue');
+				$('#wrapper>nav.navbar').removeClass(sidebarColors).addClass('navbar-midnightblue');
 			}
 
 		});

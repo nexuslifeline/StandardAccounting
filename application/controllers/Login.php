@@ -396,7 +396,7 @@ class Login extends CORE_Controller {
                 //****************************************************************************
                 case 'validate' :
                     $uname=$this->input->post('uname');
-                    $pword=$this->input->post('pword');
+                    $pword=$this->input->post('pword'); 
 
                     $users=$this->Users_model;
                     $result=$users->authenticate_user($uname,$pword);
@@ -432,7 +432,11 @@ class Login extends CORE_Controller {
                             )
                         );
 
-                        $response['title']='Success!';
+                        $m_users=$this->Users_model;
+                        $m_users->is_online=1;
+                        $m_users->modify($result->row()->user_id);
+
+                        $response['title']='Success';
                         $response['stat']='success';
                         $response['msg']='User successfully authenticated.';
 
@@ -451,10 +455,12 @@ class Login extends CORE_Controller {
                     break;
                 //****************************************************************************
                 case 'logout' :
+                    $m_users=$this->Users_model;
+                    $m_users->is_online=0;
+                    $m_users->modify($this->session->user_id);
+                    
                     $this->end_session();
                 //****************************************************************************
-
-
                 break;
 
                 default:

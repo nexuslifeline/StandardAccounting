@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from avenxo.kaijuthemes.com/ui-typography.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Jun 2016 12:09:25 GMT -->
@@ -1205,6 +1204,5 @@
 
 
 </body>
-
 
 </html>
