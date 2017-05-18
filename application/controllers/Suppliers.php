@@ -200,7 +200,9 @@ class Suppliers extends CORE_Controller {
                         echo json_encode($response);
                     }
                 }
+
                 break;
+                
             case 'payables':
                 $supplier_id=$this->input->get('id',TRUE);
                 $m_suppliers=$this->Suppliers_model;

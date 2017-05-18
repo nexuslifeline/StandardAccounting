@@ -93,7 +93,7 @@
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Categories</b>
                                                     </div>
                                                     <div class="panel-body table-responsive">
-                                                        <table id="tbl_categories" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                        <table id="tbl_categories" class="custom-design table-striped" cellspacing="0" width="100%">
                                                             <thead class="table-erp">
                                                             <tr>
                                                                 <th>Category Name</th>

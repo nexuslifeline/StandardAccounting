@@ -14,7 +14,7 @@ class Issuances extends CORE_Controller
         $this->load->model('Departments_model');
         $this->load->model('Tax_types_model');
         $this->load->model('Products_model');
-        $this->load->model('Customers_model');
+        //$this->load->model('Customers_model');
         $this->load->model('Refproduct_model');
 
     }
@@ -34,9 +34,9 @@ class Issuances extends CORE_Controller
             array('departments.is_active'=>TRUE,'departments.is_deleted'=>FALSE)
         );
 
-        $data['customers']=$this->Customers_model->get_list(
+        /*$data['customers']=$this->Customers_model->get_list(
             array('customers.is_active'=>TRUE, 'customers.is_deleted'=>FALSE)
-        );
+        );*/
 
         $data['refproducts']=$this->Refproduct_model->get_list(
             'is_deleted=FALSE',null,null,'refproduct.refproduct_id'
@@ -108,10 +108,10 @@ class Issuances extends CORE_Controller
 
                 $m_issuance->set('date_created','NOW()'); //treat NOW() as function and not string
                 $m_issuance->issued_department_id=$this->input->post('department',TRUE);
-                $m_issuance->issued_to_person=$this->input->post('issued_to_person',TRUE);
+                //$m_issuance->issued_to_person=$this->input->post('issued_to_person',TRUE);
                 $m_issuance->remarks=$this->input->post('remarks',TRUE);
                 $m_issuance->date_issued=date('Y-m-d',strtotime($this->input->post('date_issued',TRUE)));
-                $m_issuance->customer_id=$this->input->post('customer_id',TRUE);
+                //$m_issuance->customer_id=$this->input->post('customer_id',TRUE);
                 $m_issuance->address=$this->input->post('address',TRUE);
                 $m_issuance->terms=$this->input->post('terms',TRUE);
                 $m_issuance->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
@@ -209,10 +209,10 @@ class Issuances extends CORE_Controller
                 $m_issuance->begin();
 
                 $m_issuance->issued_department_id=$this->input->post('department',TRUE);
-                $m_issuance->issued_to_person=$this->input->post('issued_to_person',TRUE);
+                //$m_issuance->issued_to_person=$this->input->post('issued_to_person',TRUE);
                 $m_issuance->remarks=$this->input->post('remarks',TRUE);
                 $m_issuance->date_issued=date('Y-m-d',strtotime($this->input->post('date_issued',TRUE)));
-                $m_issuance->customer_id=$this->input->post('customer_id',TRUE);
+                //$m_issuance->customer_id=$this->input->post('customer_id',TRUE);
                 $m_issuance->address=$this->input->post('address',TRUE);
                 $m_issuance->terms=$this->input->post('terms',TRUE);
                 $m_issuance->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
@@ -340,7 +340,7 @@ class Issuances extends CORE_Controller
                 'issuance_info.slip_no',
                 'issuance_info.remarks',
                 'issuance_info.issued_to_person',
-                'customers.customer_name',
+                //'customers.customer_name',
                 'issuance_info.date_created',
                 'DATE_FORMAT(issuance_info.date_issued,"%m/%d/%Y") as date_issued',
                 'issuance_info.terms',
@@ -348,8 +348,8 @@ class Issuances extends CORE_Controller
                 'departments.department_name'
             ),
             array(
-                array('departments','departments.department_id=issuance_info.issued_department_id','left'),
-                array('customers','customers.customer_id=issuance_info.issued_to_person','left')
+                array('departments','departments.department_id=issuance_info.issued_department_id','left')
+                //array('customers','customers.customer_id=issuance_info.issued_to_person','left')
             ),
             'issuance_info.issuance_id DESC'
         );
