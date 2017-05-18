@@ -180,6 +180,7 @@ $(document).ready(function(){
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.supplier_id;
+            
             if(data.photo_path==""){
                  $('img[name="img_user"]').attr('src','assets/img/anonymous-icon.png');
             }
