@@ -171,7 +171,7 @@
                 <tr>
                     <th></th>
                     <th>#</th>
-                    <th>Department</th>
+                    <th>Branch</th>
                     <th>Remarks</th>
                     <th>Adjustment</th>
                     <th><center>Action</center></th>
@@ -213,9 +213,9 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            Department * : <br />
+                            Branch * : <br />
                             <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
-                                <option value="0">[ Create New Department ]</option>
+                                <option value="0">[ Create New Branch ]</option>
                                 <?php foreach($departments as $department){ ?>
                                     <option value="<?php echo $department->department_id; ?>" data-tax-type="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
                                 <?php } ?>
@@ -430,7 +430,7 @@
         <div class="modal-content"><!---content--->
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>New Department</h4>
+                <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>New Branch</h4>
 
             </div>
 
@@ -438,12 +438,12 @@
                 <form id="frm_department_new">
 
                     <div class="form-group">
-                        <label>* Department :</label>
+                        <label>* Branch :</label>
                         <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-users"></i>
                                                 </span>
-                            <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
+                            <input type="text" name="department_name" class="form-control" placeholder="Branch" data-error-msg="Department name is required." required>
                         </div>
                     </div>
 
@@ -596,7 +596,7 @@ $(document).ready(function(){
 
 
         _cboDepartments=$("#cbo_departments").select2({
-            placeholder: "Issue item to Department.",
+            placeholder: "Issue item to Branch.",
             allowClear: true
         });
 

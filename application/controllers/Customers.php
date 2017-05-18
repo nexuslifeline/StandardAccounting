@@ -1,5 +1,4 @@
-<?php
-
+s<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Customers extends CORE_Controller {
@@ -17,7 +16,7 @@ class Customers extends CORE_Controller {
         $this->load->model('Sales_invoice_model');
         $this->load->model('Receivable_payment_model');
     }
- 
+
     public function index()
     {
         $data['_def_css_files']=$this->load->view('template/assets/css_files','',TRUE);
@@ -158,7 +157,6 @@ class Customers extends CORE_Controller {
                 }
 
                 break;
-                
             //****************************************************************************************************************
             case 'update':
                 $m_customers=$this->Customers_model;
@@ -203,6 +201,7 @@ class Customers extends CORE_Controller {
                 $files=array();
                 $directory='assets/img/customer/';
 
+
                 foreach($_FILES as $file){
 
                     $server_file_name=uniqid('');
@@ -224,7 +223,9 @@ class Customers extends CORE_Controller {
                         $response['path']=$file_path;
                         echo json_encode($response);
                     }
+
                 }
+
 
                 break;
 

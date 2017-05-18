@@ -93,7 +93,7 @@
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Units</b>
                                             </div>
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_units" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                <table id="tbl_units" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                     <thead class="table-erp">
                                                     <tr>
                                                         <th>Unit Name</th>

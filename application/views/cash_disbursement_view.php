@@ -74,7 +74,6 @@
             background: url('assets/img/Folder_Closed.png') no-repeat center center;
             cursor: pointer;
         }
-
         tr.details td.details-control {
             background: url('assets/img/Folder_Opened.png') no-repeat center center;
         }
@@ -399,7 +398,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         Department * :<br />
-                        <select id="cbo_branch" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
+                        <select id="cbo_branch" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Branch is required." required>
                             <option value="0">[ Create New Department ]</option>
                             <?php foreach($departments as $department){ ?>
                                 <option value='<?php echo $department->department_id; ?>'><?php echo $department->department_name; ?></option>
@@ -1089,7 +1088,7 @@ $(document).ready(function(){
                 { targets:[4],data: "ref_no" },
                 { targets:[5],data: "supplier_name" },
                 { targets:[6],data: "remarks" },
-                {  targets:[7],data: "check_status",
+                { targets:[7],data: "check_status",
                     render: function (data, type, full, meta){
                         //alert(data.check_status);
                         if(data=="1"){

@@ -450,49 +450,75 @@
     </div>
 </div><!---modal-->
 
-<div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-    <div class="modal-dialog modal-md">
+<div id="modal_new_department" class="modal fade" role="dialog">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
-
+            <div class="modal-header" style="background: #2ecc71">
+                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+                 <h2 id="department_title" class="modal-title" style="color:white;">New Department</h2>
             </div>
-
             <div class="modal-body">
-                <form id="frm_department">
-                    <div class="row">
-                        <div class="col-md-12" style="margin-left: 10px;">
-                            
-                                <div class="form-group">
-                                    <label>* Department :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-users"></i>
-                                        </span>
-                                        <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
-                                    </div>
+                <form id="frm_department" role="form" class="form-horizontal">
+                    <div class="row" style="margin: 2%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <label>* Department :</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-users"></i>
+                                    </span>
+                                    <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
                                 </div>
-
-                                <div class="form-group">
-                                    <label>Department Description :</label>
-                                    <textarea name="department_desc" class="form-control" placeholder="Department Description"></textarea>
-                                </div>
-                            
+                            </div>
                         </div>
                     </div>
+
+
+                    <div class="row" style="margin: 2%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                    <label class="">Department Description :</label>
+                                    <textarea name="department_desc" class="form-control" placeholder="Department Description"></textarea>
+
+                            </div>
+                        </div>
+                    </div><!-- 
+
+                    <div class="row" style="margin: 1%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <label class="">Delivery Address :</label>
+                                <textarea name="delivery_address" class="form-control" placeholder="Delivery Address"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row" style="margin: 1%;">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="margin-bottom:0px;">
+                                <label class="">Please specify the default cost of this Branch when purchasing items (Optional) :</label>
+                                <select name="default_cost" id="cbo_default_cost" class="form-control" data-error-msg="Item type is required." required>
+                                    <option value="1">Purchase Cost 1 (Luzon Area)</option>
+                                    <option value="2">Purchase Cost 2 (Viz-Min Area)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div><br /><br /> -->
+
+
+
                 </form>
-
-
             </div>
-
             <div class="modal-footer">
-                <button id="btn_create_new_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
-                <button id="btn_close_new_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
+                <button id="btn_create_new_department" class="btn btn-primary">Save</button>
+                <button id="btn_close_new_department" class="btn btn-default">Cancel</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
-</div><!---modal-->
+</div>
 
 <div id="modal_new_supplier" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-lg">
@@ -1088,7 +1114,6 @@ $(document).ready(function(){
                     $('#cbo_departments').append('<option value="'+_department.department_id+'" data-tax-type="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
                     $('#cbo_departments').select2('val',_department.department_id);
                     $('#cbo_tax_type').select2('val',_department.tax_type_id);
-                    clearFields($('#modal_new_department'));
 
                 }).always(function(){
                     showSpinningProgress(btn);

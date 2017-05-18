@@ -286,7 +286,7 @@
                                                             </div>
 
                                                             <br /><br />
-                                                            <label class="col-lg-2"> * Department :</label>
+                                                            <label class="col-lg-2"> * Branch :</label>
                                                             <div class="col-lg-10">
                                                                 <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
                                                                     <option value="0">[ Create New Department ]</option>
@@ -636,35 +636,31 @@
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-content"><!---content--->
+            <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
+                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Branch</h4>
 
             </div>
 
-            <div class="modal-body">
+            <div class="modal-body" style="padding: 2%;">
                 <form id="frm_department_new">
-                    <div class="row">
-                        <div class="col-md-12" style="margin-left: 10px;">
-                            
-                                <div class="form-group">
-                                    <label>* Department :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-users"></i>
-                                        </span>
-                                        <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Department Description :</label>
-                                    <textarea name="department_desc" class="form-control"></textarea>
-                                </div>
-                            
+                    <div class="form-group">
+                        <label>* Branch :</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-users"></i>
+                            </span>
+                            <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label>Branch Description :</label>
+                        <textarea name="department_desc" class="form-control"></textarea>
+                    </div>
+
                 </form>
 
 
@@ -985,6 +981,7 @@
 
                 var i=$(this).select2('val');
                 if(i==0){ //new department
+                    clearFields($('#modal_new_department').find('form'));
                     _cboDepartments.select2('val',null);
                     $('#modal_new_department').modal('show');
                 }
@@ -1013,8 +1010,6 @@
                         var _department=response.row_added[0];
                         $('#cbo_departments').append('<option value="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
                         $('#cbo_departments').select2('val',_department.department_id);
-
-                        clearFields($('#modal_new_department'));
 
                     }).always(function(){
                         showSpinningProgress(btn);
@@ -1308,6 +1303,7 @@
 
             });
         };
+
 
         var updateJournal=function(){
             var _data=$('#frm_journal').serializeArray();

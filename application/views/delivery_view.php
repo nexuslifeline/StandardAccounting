@@ -1414,8 +1414,6 @@ $(document).ready(function(){
                     $('#cbo_departments').select2('val',_department.department_id);
                     $('#cbo_tax_type').select2('val',_department.tax_type_id);
 
-                    clearFields($('#modal_new_department'));
-
                 }).always(function(){
                     showSpinningProgress(btn);
                 });

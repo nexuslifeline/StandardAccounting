@@ -166,7 +166,7 @@
                                                 </div>
                                                 <div class="panel-body" style="min-height: 400px;">
                                                     <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
-                                                        <table id="tbl_check_layouts" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                        <table id="tbl_check_layouts" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                             <thead class="table-erp">
                                                             <tr>
 

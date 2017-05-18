@@ -444,7 +444,7 @@
         <div class="modal-content"><!---content-->
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
+                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Branch</h4>
 
             </div>
 
@@ -452,7 +452,7 @@
                 <form id="frm_department_new">
 
                     <div class="form-group">
-                        <label>* Department :</label>
+                        <label>* Branch :</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-users"></i>
@@ -462,7 +462,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Department Description :</label>
+                        <label>Branch Description :</label>
                         <textarea name="department_desc" class="form-control"></textarea>
                     </div>
 
@@ -590,6 +590,8 @@ $(document).ready(function(){
 
                         return '<center><i '+_attribute+'></i></center>';
                     }
+
+
                 },
                 {
                     targets:[7],
@@ -603,11 +605,17 @@ $(document).ready(function(){
             ]
         });
 
-        _cboParticulars=$('#cbo_particulars').select2({
-            placeholder: "Please select particular.",
+
+
+
+
+        $('#cbo_particular').select2();
+
+        _cboDepartments=$('#cbo_departments').select2({
+            placeholder: "Please select department.",
             allowClear: true
         });
-        _cboParticulars.select2('val',null);
+        _cboDepartments.select2('val',null);
 
         reInitializeNumeric();
         reInitializeDropDownAccounts($('#tbl_entries'));
@@ -629,17 +637,14 @@ $(document).ready(function(){
             $("div.toolbar").html(_btnNew);
         }();
 
-        _cboDepartments=$('#cbo_departments').select2({
-            placeholder: "Please select department.",
-            allowClear: true
-        });
-        _cboDepartments.select2('val',null);
+
 
         _cboParticulars=$('#cbo_particulars').select2({
             placeholder: "Please select particular.",
             allowClear: true
         });
         _cboParticulars.select2('val',null);
+        _cboDepartments.select2('val',null);
 
 
 
@@ -793,15 +798,18 @@ $(document).ready(function(){
             //$('#modal_journal_entry').modal('show');
         });
 
-        _cboDepartments.on("select2:select", function (e) {
-            var i=$(this).select2('val');
-            if(i==0){ //new customer
-                _cboDepartments.select2('val',null)
-                $('#modal_new_department').modal('show');
-                //clearFields($('#modal_new_customer'));
-            }
 
+        //loads modal to create new department
+        _cboDepartments.on("select2:select", function (e) {
+
+            var i=$(this).select2('val');
+            if(i==0){ //new department
+                clearFields($('#modal_new_department').find('form'));
+                _cboDepartments.select2('val',null);
+                $('#modal_new_department').modal('show');
+            }
         });
+
 
         //create new department
         $('#btn_create_department').click(function(){
@@ -1080,7 +1088,7 @@ $(document).ready(function(){
     var clearFields=function(f){
         $('input,textarea',f).val('');
         $(f).find('select').select2('val',null); 
-        //_cboDepartments.select2('val',null);
+        _cboDepartments.select2('val',null);
         $(f).find('input:first').focus();
         $('#tbl_entries > tbody tr').slice(2).remove();
 

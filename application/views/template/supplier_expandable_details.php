@@ -5,12 +5,12 @@
             <td>
                 <br />
 
-                <div class="tab-container tab-top tab-default" style="height: auto;">
+                <div class="tab-container tab-top tab-default">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#supplier_info" data-toggle="tab"><i class="fa fa-users"></i> Information</a></li>
 
                     </ul>
-                    <div class="tab-content" style="height: auto;">
+                    <div class="tab-content">
                         <div class="tab-pane active" id="supplier_info" style="min-height: 300px;">
 
 
@@ -45,41 +45,39 @@
                                     <i class="fa fa-calendar"></i> Reference : <?php echo (is_array($recent_payment)?$recent_payment[0]->receipt_no:'none'); ?><br />
                                     <i class="fa fa-money"></i> Amount : <?php echo (is_array($recent_payment)?number_format($recent_payment[0]->total_paid_amount,2):'none'); ?><br /><br /><br />
 
-                                    <i class="fa fa-star-o"></i> Total Unpaid : <b><?php echo number_format($supplier_info->total_payable_amount,2); ?></b>
-                                </div>
-
-                                <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Purchase Order of <?php echo $supplier_info->supplier_name; ?></b> (Open and partially received)</span>
-                                <hr />
-                                <div class="col-lg-12 table-responsive">
-                                    <table id="tbl_po_<?php echo $supplier_info->supplier_id; ?>" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                        <thead>
-                                        <tr>
-                                            <th>PO #</th>
-                                            <th>Terms</th>
-                                            <th>Remarks</th>
-                                            <th>Delivery Address</th>
-                                            <th>Approved</th>
-                                            <th>Status</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach($purchases as $item){ ?>
-                                            <tr>
-                                                <td><?php echo $item->po_no; ?></td>
-                                                <td><?php echo $item->term_description; ?></td>
-                                                <td><?php echo $item->remarks; ?></td>
-                                                <td><?php echo $item->deliver_to_address; ?></td>
-                                                <td><?php echo $item->approval_status; ?></td>
-                                                <td><?php echo $item->order_status; ?></td>
-                                            </tr>
-                                        <?php } ?>
-                                        </tbody>
-                                    </table>
+                                    <i class="fa fa-star-o"></i> Total Unpaid : <b><?php echo number_format($supplier_info->total_payable_amount,2); ?></b><br /><br /><br /><br /><br />
                                 </div>
                             </div>
 
 
-                            
+                            <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Purchase Order of <?php echo $supplier_info->supplier_name; ?></b> (Open and partially received)</span>
+                            <hr />
+                            <div class="col-lg-12 table-responsive">
+                                <table id="tbl_po_<?php echo $supplier_info->supplier_id; ?>" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>PO #</th>
+                                        <th>Terms</th>
+                                        <th>Remarks</th>
+                                        <th>Delivery Address</th>
+                                        <th>Approved</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($purchases as $item){ ?>
+                                        <tr>
+                                            <td><?php echo $item->po_no; ?></td>
+                                            <td><?php echo $item->term_description; ?></td>
+                                            <td><?php echo $item->remarks; ?></td>
+                                            <td><?php echo $item->deliver_to_address; ?></td>
+                                            <td><?php echo $item->approval_status; ?></td>
+                                            <td><?php echo $item->order_status; ?></td>
+                                        </tr>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
 

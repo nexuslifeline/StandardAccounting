@@ -101,7 +101,7 @@
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Sales Person</b>
                                                     </div>
                                                     <div class="panel-body table-responsive">
-                                                        <table id="tbl_salesperson" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                        <table id="tbl_salesperson" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                             <thead class="">
                                                             <tr>
                                                                 <!-- <th>Acronym Name</th> -->

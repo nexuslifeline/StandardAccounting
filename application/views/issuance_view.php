@@ -158,6 +158,7 @@ echo $_side_bar_navigation;
                     <th></th>
                     <th>Slip #</th>
                     <th>Department</th>
+                    <th>Issued to person</th>
                     <th>Remarks</th>
                     <th><center>Action</center></th>
                 </tr>
@@ -210,7 +211,7 @@ echo $_side_bar_navigation;
                     </div>
                 </div>
                 <div class="row">
-                    <!-- <div class="col-xs-12 col-lg-4">
+                    <div class="col-xs-12 col-lg-4">
                         * Issue to : <br />
                         <select name="issued_to_person" id="cbo_customers" data-error-msg="Customer is required." required>
                             <option value="0">[ Create New Customer ]</option>
@@ -218,11 +219,8 @@ echo $_side_bar_navigation;
                                 <option data-address="<?php echo $customer->address; ?>" value="<?php echo $customer->customer_id; ?>"><?php echo $customer->customer_name; ?></option>
                             <?php } ?>
                         </select>
-                    </div> -->
+                    </div>
                     <div class="col-lg-4"></div>
-                    
-                </div>
-                <div class="row">
                     <div class="col-xs-12 col-lg-4">
                         * Address : <br />
                         <div class="input-group">
@@ -232,7 +230,8 @@ echo $_side_bar_navigation;
                             <input type="text" name="address" id="txt_address" class="form-control">
                         </div>
                     </div>
-                    <div class="col-lg-4"></div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12 col-lg-4">
                         * Terms :<br />
                         <div class="input-group">
@@ -242,6 +241,7 @@ echo $_side_bar_navigation;
                             <input type="text" name="terms" class="form-control">
                         </div>
                     </div>
+                    <div class="col-lg-4"></div>
                     <div class="col-xs-12 col-lg-4">
                         Date issued : <br />
                         <div class="input-group">
@@ -411,6 +411,7 @@ echo $_side_bar_navigation;
                             <th></th>
                             <th>Invoice #</th>
                             <th>Invoice Date</th>
+                            <th>Customer</th>
                             <th>Department</th>
                             <th>Remarks</th>
                             <th><center>Action</center></th>
@@ -782,7 +783,7 @@ $(document).ready(function(){
 
                 $('input[name="issued_to_person"]').val(data.customer_name);
                 $('#cbo_departments').select2('val',data.department_id);
-                //$('#cbo_customers').select2('val',data.customer_id);
+                $('#cbo_customers').select2('val',data.customer_id);
 
             });
 
@@ -856,10 +857,11 @@ dt_si = $('#tbl_si_list').DataTable({
         },
         { targets:[1], data: "sales_inv_no" },
         { targets:[2], data: "date_invoice" },
-        { targets:[3], data: "department_name"},
-        { targets:[4], data: "remarks"},
+        { targets:[3], data: "customer_name"},
+        { targets:[4], data: "department_name"},
+        { targets:[5], data: "remarks"},
         { 
-            targets:[5], 
+            targets:[6], 
             render: function (data, type, full, meta){
                 var btn_accept='<button class="btn btn-success btn-sm" name="accept_si"  style="margin-left:-15px;text-transform: none;" data-toggle="tooltip" data-placement="top" title="Create Sales Invoice on SO"><i class="fa fa-check"></i> Accept SI</button>';
                 return '<center>'+btn_accept+'</center>';
@@ -884,9 +886,10 @@ dt_si = $('#tbl_si_list').DataTable({
                 },
                 { targets:[1],data: "slip_no" },
                 { targets:[2],data: "department_name" },
-                { targets:[3],data: "remarks" },
+                { targets:[3],data: "customer_name" },
+                { targets:[4],data: "remarks" },
                 {
-                    targets:[4],
+                    targets:[5],
                     render: function (data, type, full, meta){
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                         var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
@@ -909,10 +912,10 @@ dt_si = $('#tbl_si_list').DataTable({
             $("div.toolbar").html(_btnNew);
         }();
 
-        /*_cboCustomers = $("#cbo_customers").select2({
+        _cboCustomers = $("#cbo_customers").select2({
             placeholder: "Please select customer.",
             allowClear: true
-        });*/
+        });
 
         _cboDepartments=$("#cbo_departments").select2({
             placeholder: "Issue item to Department.",
@@ -1031,7 +1034,7 @@ dt_si = $('#tbl_si_list').DataTable({
     //     $('#txt_address').val(obj_customers.data('address'));
     // });
 
-    /*_cboCustomers.on("select2:select", function (e) {
+    _cboCustomers.on("select2:select", function (e) {
         if (_cboCustomers.val() == 0) {
             clearFields($('#frm_customer'));
             $('#modal_create_customer').modal('show');
@@ -1039,7 +1042,7 @@ dt_si = $('#tbl_si_list').DataTable({
         var i=$(this).select2('val');
         var obj_customers=$('#cbo_customers').find('option[value="' + i + '"]');
         $('#txt_address').val(obj_customers.data('address'));
-    });*/
+    });
 
     var bindEventHandlers=(function(){
         var detailRows = [];
@@ -1106,7 +1109,7 @@ dt_si = $('#tbl_si_list').DataTable({
 
         });
 
-        /*$('#btn_save_customer').click(function(){
+        $('#btn_save_customer').click(function(){
             if(validateRequiredFields($('#frm_customer'))){
                 var _dataCustomer=$('#frm_customer').serializeArray();
 
@@ -1125,13 +1128,13 @@ dt_si = $('#tbl_si_list').DataTable({
                     $('#txt_address').val(_customer.address);
                 });
             }
-        });*/
+        });
 
-        /*$('#btn_cancel_customer').click(function(){
+        $('#btn_cancel_customer').click(function(){
             clearFields($('#frm_customer'));
             $('#cbo_customers').select2('val',null);
             $('#modal_create_customer').modal('hide');
-        });*/
+        });
 
         //create new department
         $('#btn_create_department').click(function(){
@@ -1193,7 +1196,7 @@ dt_si = $('#tbl_si_list').DataTable({
             $('#item_issuance_title').html('Record Item to Issue');
             //$('.toggle-fullscreen').click();
             clearFields($('#frm_issuances'));
-            //_cboCustomers.select2('val',null);
+            _cboCustomers.select2('val',null);
             showList(false);
             reComputeTotal();
         });
@@ -1236,7 +1239,7 @@ dt_si = $('#tbl_si_list').DataTable({
             });
 
             $('#cbo_departments').select2('val',data.department_id);
-            //$('#cbo_customers').select2('val',data.issued_to_person);
+            $('#cbo_customers').select2('val',data.issued_to_person);
             $('textarea[name="remarks"]').val(data.remarks);
 
             $.ajax({
