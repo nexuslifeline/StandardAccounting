@@ -94,7 +94,7 @@
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Account Classification</b>
                                             </div>
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_account_class" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                <table id="tbl_account_class" class="custom-design table-striped" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>
                                                         <th>Account Class</th>
