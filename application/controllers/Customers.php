@@ -1,4 +1,4 @@
-s<?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Customers extends CORE_Controller {

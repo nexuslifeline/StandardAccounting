@@ -511,7 +511,7 @@ class Sales_invoice extends CORE_Controller
                     array(
                         array('customers','customers.customer_id=sales_invoice.customer_id','left')
                     ),
-                    'Sales_invoice.sales_invoice_id DESC'
+                    'sales_invoice.sales_invoice_id DESC'
                 );
 
 

@@ -668,7 +668,7 @@
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
-        <div class="modal-content"><!---content--->
+        <div class="modal-content">
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
@@ -832,7 +832,7 @@
                                         <span class="input-group-addon">
                                             <i class="fa fa-code"></i>
                                         </span>
-                                        <select name="tax_type_id" id="cbo_tax_group">
+                                        <select name="tax_type_id" id="cbo_tax_group" class="form-control" data-error-msg="Tax type is required!" required="">
                                             <option value="">Please select tax type...</option>
                                             <?php foreach($tax_types as $tax_type){ ?>
                                                 <option value="<?php echo $tax_type->tax_type_id; ?>" data-tax-rate="<?php echo $tax_type->tax_rate; ?>"><?php echo $tax_type->tax_type; ?></option>
@@ -1404,7 +1404,6 @@ $(document).ready(function(){
 
             var i=$(this).select2('val');
             if(i==0){ //new department
-                clearFields($('#modal_new_department').find('form'));
                 _cboBranches.select2('val',null);
                 $('#modal_new_department').modal('show');
             }
@@ -1433,6 +1432,8 @@ $(document).ready(function(){
                     var _department=response.row_added[0];
                     $('#cbo_branch').append('<option value="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
                     $('#cbo_branch').select2('val',_department.department_id);
+
+                    clearFields($('#modal_new_department'));
 
                 }).always(function(){
                     showSpinningProgress(btn);
@@ -1814,7 +1815,7 @@ $(document).ready(function(){
 
     var clearFields=function(f){
         $('input,textarea',f).val('');
-        //$(f).find('select').select2('val',null);
+        $(f).find('select').select2('val',null);
 
 
 

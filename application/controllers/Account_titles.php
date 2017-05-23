@@ -281,6 +281,6 @@ class Account_titles extends CORE_Controller
             'account_titles.account_id DESC'
         );
     }
-
+ 
 
 }

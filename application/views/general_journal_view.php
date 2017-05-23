@@ -444,7 +444,7 @@
         <div class="modal-content"><!---content-->
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Branch</h4>
+                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
 
             </div>
 
@@ -452,7 +452,7 @@
                 <form id="frm_department_new">
 
                     <div class="form-group">
-                        <label>* Branch :</label>
+                        <label>* Department :</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-users"></i>
@@ -462,7 +462,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Branch Description :</label>
+                        <label>Department Description :</label>
                         <textarea name="department_desc" class="form-control"></textarea>
                     </div>
 
@@ -610,13 +610,7 @@ $(document).ready(function(){
 
 
         $('#cbo_particular').select2();
-
-        _cboDepartments=$('#cbo_departments').select2({
-            placeholder: "Please select department.",
-            allowClear: true
-        });
-        _cboDepartments.select2('val',null);
-
+        
         reInitializeNumeric();
         reInitializeDropDownAccounts($('#tbl_entries'));
 
@@ -637,7 +631,11 @@ $(document).ready(function(){
             $("div.toolbar").html(_btnNew);
         }();
 
-
+        _cboDepartments=$('#cbo_departments').select2({
+            placeholder: "Please select department.",
+            allowClear: true
+        });
+        _cboDepartments.select2('val',null);
 
         _cboParticulars=$('#cbo_particulars').select2({
             placeholder: "Please select particular.",
@@ -804,7 +802,6 @@ $(document).ready(function(){
 
             var i=$(this).select2('val');
             if(i==0){ //new department
-                clearFields($('#modal_new_department').find('form'));
                 _cboDepartments.select2('val',null);
                 $('#modal_new_department').modal('show');
             }
@@ -833,6 +830,8 @@ $(document).ready(function(){
                     var _department=response.row_added[0];
                     $('#cbo_departments').append('<option value="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
                     $('#cbo_departments').select2('val',_department.department_id);
+
+                    clearFields($('#modal_new_department'));
 
                 }).always(function(){
                     showSpinningProgress(btn);

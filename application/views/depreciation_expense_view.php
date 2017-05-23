@@ -126,7 +126,7 @@
                                         <br>
                                         <div class="container-fluid group-box">
                                             <button class="btn btn-primary pull-left" id="btn_print"><i class="fa fa-print"></i>&nbsp; Print Report</button>
-                                            <table id="tbl_depreciation" width="100%" class="table table-bordered table-striped">
+                                            <table id="tbl_depreciation" width="100%" class="custom-design table-striped">
                                                 <thead>
                                                     <tr>
                                                        <th>Asset Code</th>

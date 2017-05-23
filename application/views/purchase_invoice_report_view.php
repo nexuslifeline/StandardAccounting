@@ -137,7 +137,7 @@
                                                                 <div class="tab-content">
                                                                     <div id="summary" class="tab-pane fade in active">
                                                                         <button class="btn btn-primary pull-left" id="btn_print_summary"><i class="fa fa-print"></i>&nbsp; Print Report</button>
-                                                                        <table id="tbl_pi_summary" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                                        <table id="tbl_pi_summary" class="custom-design table-striped" cellspacing="0" width="100%">
                                                                             <thead class="">
                                                                             <tr>
                                                                                 <th>Ref #</th>
