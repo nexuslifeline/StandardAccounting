@@ -238,6 +238,7 @@ echo $_side_bar_navigation;
                             <input type="text" name="date_issued" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date issued" data-error-msg="Please set the date this items are issued!" required>
                         </div>
                     </div>
+
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-lg-4">

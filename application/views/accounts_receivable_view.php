@@ -655,15 +655,18 @@
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
         <div class="modal-content">
+
             <div class="modal-header ">
+
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
 
             </div>
 
-            <div class="modal-body" style="padding: 2%;">
+            <div class="modal-body">
                 <form id="frm_department_new">
                     <div class="row">
+
                         <div class="col-md-12" style="padding-left: 30px;">
                             <div class="form-group">
                                 <label>* Department :</label>
@@ -991,6 +994,7 @@ $(document).ready(function(){
         });
 
 
+
         //loads modal to create new department
         _cboDepartments.on("select2:select", function (e) {
 
@@ -1000,6 +1004,7 @@ $(document).ready(function(){
                 $('#modal_new_department').modal('show');
             }
         });
+
 
 
         //create new department
@@ -1024,6 +1029,7 @@ $(document).ready(function(){
                     var _department=response.row_added[0];
                     $('#cbo_departments').append('<option value="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
                     $('#cbo_departments').select2('val',_department.department_id);
+                    clearFields($('#modal_new_department'));
 
                     clearFields($('#modal_new_department'));
 
@@ -1141,12 +1147,23 @@ $(document).ready(function(){
 
         });
 
+        //loads modal to create new department
+        _cboDepartments.on("select2:select", function (e) {
+
+            var i=$(this).select2('val');
+            if(i==0){ //new department
+                //clearFields($('#modal_new_department'));
+                _cboDepartments.select2('val',null);
+                $('#modal_new_department').modal('show');
+            }
+        });
 
         _cboCustomers.on("select2:select", function (e) {
             var i=$(this).select2('val');
             if(i==0){ //new customer
                 _cboCustomers.select2('val',null)
                 $('#modal_new_customer').modal('show');
+
             }
 
         });
@@ -1214,14 +1231,20 @@ $(document).ready(function(){
 
             if(validateRequiredFields($('#frm_customer'))){
                 var data=$('#frm_customer').serializeArray();
-                /*_data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});*/
                 createCustomer().done(function(response){
                     showNotification(response);
-                    $('#modal_new_customer').modal('hide');
-                    var _customers=response.row_added[0];
-                    $('#cbo_customers').append('<option value="'+_customers.customer_id+'" selected>'+_customers.customer_name+'</option>');
-                    $('#cbo_customers').select2('val',_customers.customer_id);
-                    clearFields($('#modal_new_customer'));
+
+                    //$('#btn_create_customer').attr('disabled',true);
+                    if(response.stat=="success"){
+                        $('#modal_new_customer').modal('hide');
+                        var _customers=response.row_added[0];
+                        $('#cbo_customers').append('<option value="'+_customers.customer_id+'" selected>'+_customers.customer_name+'</option>');
+                        $('#cbo_customers').select2('val',_customers.customer_id);
+                        clearFields($('#modal_new_customer'));
+                        showList(true);
+                        //$('#btn_create_customer').attr('disabled',false);
+                    }
+
                 }).always(function(){
                     showSpinningProgress(btn);
                 });
@@ -1332,9 +1355,9 @@ $(document).ready(function(){
         $(f).find('select').select2('val',null);
         $(f).find('input:first').focus();
         $('#tbl_entries > tbody tr').slice(2).remove();
-        $('#cbo_departments').select2('val',null);
         $('#tbl_entries > tfoot tr').find(oTFSummary.dr).html('<b>0.00</b>');
         $('#tbl_entries > tfoot tr').find(oTFSummary.cr).html('<b>0.00</b>');
+        $('#img_user').attr('src','assets/img/anonymous-icon.png');
     };
 
     //initialize numeric text

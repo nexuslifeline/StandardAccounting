@@ -470,10 +470,9 @@
                                         <i class="fa fa-users"></i>
                                     </span>
                                     <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
+
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+
 
                     <div class="row">
                         <div class="col-md-12" style="padding-left: 30px;">
@@ -483,6 +482,7 @@
                             </div>
                         </div>
                     </div>
+                </form>
 
                 </form>
 
@@ -490,8 +490,9 @@
             </div>
 
             <div class="modal-footer">
-                <button id="btn_create_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
-                <button id="btn_close_close_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
+                <button id="btn_create_new_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
+                <button id="btn_close_new_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
+
             </div>
         </div><!---content---->
     </div>
@@ -1091,6 +1092,7 @@ $(document).ready(function(){
                     $('#cbo_departments').append('<option value="'+_department.department_id+'" data-tax-type="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
                     $('#cbo_departments').select2('val',_department.department_id);
                     $('#cbo_tax_type').select2('val',_department.tax_type_id);
+                    clearFields($('#modal_new_department'));
 
                 }).always(function(){
                     showSpinningProgress(btn);
