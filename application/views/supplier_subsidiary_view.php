@@ -134,7 +134,7 @@
                                                         <br />
 
                                                         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
-                                                            <table id="tbl_supplier_subsidiary" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                            <table id="tbl_supplier_subsidiary" class="custom-design table-striped" cellspacing="0" width="100%">
                                                                 <thead class="table-erp">
                                                                 <tr>
                                                                     <th>Date</th>

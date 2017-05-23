@@ -675,7 +675,7 @@
                                                                         <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Income (current year) vs Income (previous year)
                                                                     </div>
                                                                 </div><br><br><br>
-                                                                <div class="col-md-12" id="panelbody4">
+                                                                <div class="col-md-12" id="panelbody4" style="padding-bottom: 5px;">
                                                                     <div>
                                                                         <canvas id="lineChart" height="140"></canvas>
                                                                     </div>

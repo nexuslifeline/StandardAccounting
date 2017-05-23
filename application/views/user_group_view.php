@@ -128,7 +128,7 @@
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; User Group</b>
         </div>
         <div class="panel-body table-responsive">
-            <table id="tbl_user_group_list" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <table id="tbl_user_group_list" class="custom-design table-striped" cellspacing="0" width="100%">
                 <thead class="table-erp">
                 <tr>
                     <th></th>

@@ -603,11 +603,8 @@ $(document).ready(function(){
             ]
         });
 
-        _cboParticulars=$('#cbo_particulars').select2({
-            placeholder: "Please select particular.",
-            allowClear: true
-        });
-        _cboParticulars.select2('val',null);
+
+        $('#cbo_particular').select2();
 
         reInitializeNumeric();
         reInitializeDropDownAccounts($('#tbl_entries'));
@@ -795,8 +792,9 @@ $(document).ready(function(){
 
         _cboDepartments.on("select2:select", function (e) {
             var i=$(this).select2('val');
-            if(i==0){ //new customer
-                _cboDepartments.select2('val',null)
+
+            if(i==0){ //new department
+                _cboDepartments.select2('val',null);
                 $('#modal_new_department').modal('show');
                 //clearFields($('#modal_new_customer'));
             }
@@ -825,6 +823,8 @@ $(document).ready(function(){
                     var _department=response.row_added[0];
                     $('#cbo_departments').append('<option value="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
                     $('#cbo_departments').select2('val',_department.department_id);
+
+                    clearFields($('#modal_new_department'));
 
                 }).always(function(){
                     showSpinningProgress(btn);

@@ -332,6 +332,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 Department :<br />
+
                                 <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true">
                                     <?php foreach($departments as $department){ ?>
                                         <option value='<?php echo $department->department_id; ?>'><?php echo $department->department_name; ?></option>

@@ -94,7 +94,7 @@
                             <div class="panel-body">
                                 <div id="panel_list">
                                     <button id="btn_create" class="btn btn-green pull-left" style="text-transform: capitalize;"><i class="fa fa-plus"></i>&nbsp; Create New Template</button>
-                                    <table id="tbl_recurring_templates" class="table table-striped table-bordered" width="100%">
+                                    <table id="tbl_recurring_templates" class="custom-design table-striped" width="100%">
                                         <thead>
                                             <th>Book Type</th>
                                             <th>Template Code</th>

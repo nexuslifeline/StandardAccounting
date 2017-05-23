@@ -219,10 +219,6 @@ echo $_side_bar_navigation;
                             <?php } ?>
                         </select>
                     </div> -->
-                    <div class="col-lg-4"></div>
-                    
-                </div>
-                <div class="row">
                     <div class="col-xs-12 col-lg-4">
                         * Address : <br />
                         <div class="input-group">
@@ -234,15 +230,6 @@ echo $_side_bar_navigation;
                     </div>
                     <div class="col-lg-4"></div>
                     <div class="col-xs-12 col-lg-4">
-                        * Terms :<br />
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-code"></i>
-                            </span>
-                            <input type="text" name="terms" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-lg-4">
                         Date issued : <br />
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -251,6 +238,20 @@ echo $_side_bar_navigation;
                             <input type="text" name="date_issued" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date issued" data-error-msg="Please set the date this items are issued!" required>
                         </div>
                     </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-lg-4">
+                        * Terms :<br />
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-code"></i>
+                            </span>
+                            <input type="text" name="terms" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-4"></div>
+                    
                 </div>
             </div>
         </form>
@@ -1193,7 +1194,6 @@ dt_si = $('#tbl_si_list').DataTable({
             $('#item_issuance_title').html('Record Item to Issue');
             //$('.toggle-fullscreen').click();
             clearFields($('#frm_issuances'));
-            //_cboCustomers.select2('val',null);
             showList(false);
             reComputeTotal();
         });

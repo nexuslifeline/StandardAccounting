@@ -122,7 +122,7 @@
                                             <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 0; margin-bottom: 10px;" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; ">
                                                 <i class="fa fa-print"></i> Print Report
                                             </button>
-                                            <table id="tbl_replenishment" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                                            <table id="tbl_replenishment" class="custom-design table-striped" width="100%" cellspacing="0">
                                                 <thead class="thead-bg">
                                                     <th></th>
                                                     <th>Document # / PCV #</th>

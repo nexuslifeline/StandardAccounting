@@ -333,7 +333,7 @@
 
                                     <br /><br />
 
-                                    <label class="col-lg-2"> * Branch :</label>
+                                    <label class="col-lg-2"> * Department :</label>
                                     <div class="col-lg-10">
                                         <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
                                             <option value="0">[ Create New Department ]</option>
@@ -652,15 +652,12 @@
     </div>
 </div><!---modal-->
 
-
-
-
-
-
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
         <div class="modal-content">
-            <div class="modal-header">
+
+            <div class="modal-header ">
+
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
 
@@ -669,25 +666,29 @@
             <div class="modal-body">
                 <form id="frm_department_new">
                     <div class="row">
-                        <div class="col-md-12" style="margin-left: 10px;">
-                            
-                                <div class="form-group">
-                                    <label>* Department :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-users"></i>
-                                        </span>
-                                        <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Department Description :</label>
-                                    <textarea name="department_desc" class="form-control"></textarea>
+                        <div class="col-md-12" style="padding-left: 30px;">
+                            <div class="form-group">
+                                <label>* Department :</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-users"></i>
+                                    </span>
+                                    <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
                                 </div>
-                            
+                            </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12" style="padding-left: 30px;">
+                            <div class="form-group">
+                                <label>Department Description :</label>
+                                <textarea name="department_desc" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
                 </form>
 
 
@@ -993,7 +994,17 @@ $(document).ready(function(){
         });
 
 
-        
+
+        //loads modal to create new department
+        _cboDepartments.on("select2:select", function (e) {
+
+            var i=$(this).select2('val');
+            if(i==0){ //new department
+                _cboDepartments.select2('val',null);
+                $('#modal_new_department').modal('show');
+            }
+        });
+
 
 
         //create new department
@@ -1018,6 +1029,8 @@ $(document).ready(function(){
                     var _department=response.row_added[0];
                     $('#cbo_departments').append('<option value="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
                     $('#cbo_departments').select2('val',_department.department_id);
+                    clearFields($('#modal_new_department'));
+
                     clearFields($('#modal_new_department'));
 
                 }).always(function(){
@@ -1150,8 +1163,7 @@ $(document).ready(function(){
             if(i==0){ //new customer
                 _cboCustomers.select2('val',null)
                 $('#modal_new_customer').modal('show');
-                //clearFields($('#modal_new_customer'));
-                $('#img_user').attr('src','assets/img/anonymous-icon.png');
+
             }
 
         });
@@ -1221,6 +1233,7 @@ $(document).ready(function(){
                 var data=$('#frm_customer').serializeArray();
                 createCustomer().done(function(response){
                     showNotification(response);
+
                     //$('#btn_create_customer').attr('disabled',true);
                     if(response.stat=="success"){
                         $('#modal_new_customer').modal('hide');
@@ -1231,6 +1244,7 @@ $(document).ready(function(){
                         showList(true);
                         //$('#btn_create_customer').attr('disabled',false);
                     }
+
                 }).always(function(){
                     showSpinningProgress(btn);
                 });

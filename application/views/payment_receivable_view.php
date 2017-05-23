@@ -226,7 +226,7 @@
 
                                                         <div class="row">
                                                             <div class="col-lg-12">
-                                                                Branch * : <br />
+                                                                Department * : <br />
                                                                 <select id="cbo_branch" name="department" class="form-control">
                                                                     <?php foreach($departments as $department){ ?>
                                                                         <option value="<?php echo $department->department_id; ?>" selected><?php echo $department->department_name; ?></option>
@@ -625,7 +625,7 @@
             });
 
             _cboBranch = $('#cbo_branch').select2({
-                placeholder: "Please select branch.",
+                placeholder: "Please select Department.",
                 allowClear: false
             });
 

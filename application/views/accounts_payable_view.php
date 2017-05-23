@@ -637,34 +637,37 @@
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+            <div class="modal-header ">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: #FFF;">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
-
             </div>
 
             <div class="modal-body">
                 <form id="frm_department_new">
                     <div class="row">
-                        <div class="col-md-12" style="margin-left: 10px;">
-                            
-                                <div class="form-group">
-                                    <label>* Department :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-users"></i>
-                                        </span>
-                                        <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Department Description :</label>
-                                    <textarea name="department_desc" class="form-control"></textarea>
+                        <div class="col-md-12" style="padding-left: 30px;">
+                            <div class="form-group">
+                                <label>* Department :</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-users"></i>
+                                    </span>
+                                    <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
                                 </div>
-                            
+                            </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12" style="padding-left: 30px;">
+                            <div class="form-group">
+                                <label>Department Description :</label>
+                                <textarea name="department_desc" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </form>
 
 

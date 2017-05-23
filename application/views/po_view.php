@@ -453,34 +453,37 @@
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
 
             </div>
 
-            <div class="modal-body">
-                <form id="frm_department">
+            <div class="modal-body" style="padding: 2%;">
+                <form id="frm_department_new">
                     <div class="row">
-                        <div class="col-md-12" style="margin-left: 10px;">
-                            
-                                <div class="form-group">
-                                    <label>* Department :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-users"></i>
-                                        </span>
-                                        <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
-                                    </div>
+                        <div class="col-md-12" style="padding-left: 30px;">
+                            <div class="form-group">
+                                <label>* Department :</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-users"></i>
+                                    </span>
+                                    <input type="text" name="department_name" class="form-control" placeholder="Department" data-error-msg="Department name is required." required>
+
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Department Description :</label>
-                                    <textarea name="department_desc" class="form-control" placeholder="Department Description"></textarea>
-                                </div>
-                            
+
+                    <div class="row">
+                        <div class="col-md-12" style="padding-left: 30px;">
+                            <div class="form-group">
+                                <label>Department Description :</label>
+                                <textarea name="department_desc" class="form-control"></textarea>
+                            </div>
                         </div>
                     </div>
+                </form>
+
                 </form>
 
 
@@ -489,6 +492,7 @@
             <div class="modal-footer">
                 <button id="btn_create_new_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
                 <button id="btn_close_new_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
+
             </div>
         </div><!---content---->
     </div>
