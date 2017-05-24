@@ -593,6 +593,16 @@ $(document).ready(function(){
             $("div.toolbar").html(_btnNew);
         }();
 
+        $('.date-picker').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+
+        });
+
+
 
 
         _cboDepartments=$("#cbo_departments").select2({
@@ -645,7 +655,7 @@ $(document).ready(function(){
             //console.log(suggestion);
 
 
-            var tax_rate=0;
+            var tax_rate=suggestion.tax_rate;
 
             var total=getFloat(suggestion.purchase_cost);
             var net_vat=0;
