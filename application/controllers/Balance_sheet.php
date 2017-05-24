@@ -134,7 +134,7 @@ class Balance_sheet extends CORE_Controller
                 $data['dep_info']=$dep_info[0];
 
                 if($type==null|$type=='preview'){
-                    $this->load->view('Template/balance_sheet_report',$data);
+                    $this->load->view('template/balance_sheet_report',$data);
                 }
 
 
