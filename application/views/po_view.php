@@ -1479,8 +1479,16 @@ $(document).ready(function(){
         $('input,textarea',f).val('');
         $(f).find('input:first').focus();
         $('#tbl_items > tbody').html('');
+
+        $('#td_before_tax').html(accounting.formatNumber(0,4));
+        $('#td_after_tax').html('<b>'+accounting.formatNumber(0,4)+'</b>');
+        $('#td_discount').html(accounting.formatNumber(0,4));
+        $('#td_tax').html(accounting.formatNumber(0,4));
+
         $('#cbo_tax_type').select2('val',null);
         $('#cbo_suppliers').select2('val',null);
+        $('#cbo_departments').select2('val',null);
+        $('textarea[name="remarks"]').val('');
 
     };
 
