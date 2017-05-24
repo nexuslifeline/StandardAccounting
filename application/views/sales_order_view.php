@@ -369,14 +369,14 @@
                             </tr>
                             <tr>
                                 <td colspan="2" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Discount :</strong></td>
-                                <td align="right" colspan="2" id="td_discount color="red">0.00</td>
+                                <td align="right" colspan="2" id="td_discount" color="red">0.00</td>
                                 <td colspan="1" id="" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total Before Tax :</strong></td>
                                 <td align="right" colspan="1" id="td_before_tax" color="red">0.00</td>
                             </tr>
                             <tr>
                                 <td colspan="2" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Tax :</strong></td>
                                 <td align="right" colspan="2" id="td_tax" color="red">0.00</td>
-                                <td colspan="1" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total After Tax :</strong></td>
+                                <td colspan="1"  style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total After Tax :</strong></td>
                                 <td align="right" colspan="1" id="td_after_tax" color="red">0.00</td>
                             </tr>
                         </tfoot>
@@ -867,13 +867,13 @@ $(document).ready(function(){
 
     var oTableItems={
         qty : 'td:eq(0)',
-        unit_price : 'td:eq(4)',
-        discount : 'td:eq(5)',
-        total_line_discount : 'td:eq(6)',
-        tax : 'td:eq(7)',
-        total : 'td:eq(8)', //Total
-        vat_input : 'td:eq(9)',
-        net_vat : 'td:eq(10)' //Before Tax
+        unit_price : 'td:eq(3)',
+        discount : 'td:eq(4)',
+        total_line_discount : 'td:eq(5)',
+        tax : 'td:eq(6)',
+        total : 'td:eq(7)', //Total
+        vat_input : 'td:eq(8)',
+        net_vat : 'td:eq(9)' //Before Tax
 
     };
 
