@@ -640,12 +640,12 @@
             <div class="modal-header ">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: #FFF;">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
-
             </div>
 
-            <div class="modal-body" style="padding: 2%;">
+            <div class="modal-body">
                 <form id="frm_department_new">
                     <div class="row">
+
                         <div class="col-md-12" style="padding-left: 30px;">
                             <div class="form-group">
                                 <label>* Department :</label>
@@ -666,6 +666,7 @@
                             </div>
                         </div>
                     </div>
+
 
                 </form>
 
@@ -1312,7 +1313,6 @@
 
             });
         };
-
 
         var updateJournal=function(){
             var _data=$('#frm_journal').serializeArray();

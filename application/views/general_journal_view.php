@@ -590,8 +590,6 @@ $(document).ready(function(){
 
                         return '<center><i '+_attribute+'></i></center>';
                     }
-
-
                 },
                 {
                     targets:[7],
@@ -606,11 +604,8 @@ $(document).ready(function(){
         });
 
 
-
-
-
         $('#cbo_particular').select2();
-        
+
         reInitializeNumeric();
         reInitializeDropDownAccounts($('#tbl_entries'));
 
@@ -642,7 +637,6 @@ $(document).ready(function(){
             allowClear: true
         });
         _cboParticulars.select2('val',null);
-        _cboDepartments.select2('val',null);
 
 
 
@@ -796,17 +790,16 @@ $(document).ready(function(){
             //$('#modal_journal_entry').modal('show');
         });
 
-
-        //loads modal to create new department
         _cboDepartments.on("select2:select", function (e) {
-
             var i=$(this).select2('val');
+
             if(i==0){ //new department
                 _cboDepartments.select2('val',null);
                 $('#modal_new_department').modal('show');
+                //clearFields($('#modal_new_customer'));
             }
-        });
 
+        });
 
         //create new department
         $('#btn_create_department').click(function(){
@@ -1087,7 +1080,7 @@ $(document).ready(function(){
     var clearFields=function(f){
         $('input,textarea',f).val('');
         $(f).find('select').select2('val',null); 
-        _cboDepartments.select2('val',null);
+        //_cboDepartments.select2('val',null);
         $(f).find('input:first').focus();
         $('#tbl_entries > tbody tr').slice(2).remove();
 

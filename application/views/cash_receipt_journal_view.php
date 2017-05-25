@@ -332,7 +332,8 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 Department :<br />
-                                <select id="cbo_branches" name="department_id" class="selectpicker show-tick form-control" data-live-search="true">
+
+                                <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true">
                                     <?php foreach($departments as $department){ ?>
                                         <option value='<?php echo $department->department_id; ?>'><?php echo $department->department_name; ?></option>
                                     <?php } ?>
@@ -699,7 +700,7 @@
 <script>
 $(document).ready(function(){
     var _txnMode; var _cboCustomers; var _cboMethods; var _selectRowObj; var _selectedID; var _txnMode;
-    var dtReview; var _cbo_paymentMethod; var _cbo_branches; var dt;
+    var dtReview; var _cbo_paymentMethod; var _cbo_departments; var dt;
 
 
     var oTBJournal={
@@ -839,11 +840,11 @@ $(document).ready(function(){
         });
         _cbo_paymentMethod.select2('val',null);
 
-        _cbo_branches = $('#cbo_branches').select2({
-            placeholder: "Please select Branch.",
+        _cbo_departments = $('#cbo_departments').select2({
+            placeholder: "Please select Department.",
             allowClear: true
         });
-        _cbo_branches.select2('val',null);
+        _cbo_departments.select2('val',null);
         // _cboMethods=$('#cbo_methods').select2({
         //placeholder: "Please select method of payment.",
         //allowClear: true
@@ -1054,7 +1055,7 @@ $(document).ready(function(){
             });
 
             $('#cbo_customers').select2('val',data.customer_id);
-            $('#cbo_branches').select2('val',data.department_id);
+            $('#cbo_departments').select2('val',data.department_id);
             $('#cbo_payment_method').select2('val',data.payment_method_id);
 
             $.ajax({
@@ -1263,7 +1264,7 @@ $(document).ready(function(){
         $('input,textarea',f).val('');
 
         $('#cbo_customers').select2('val',null);
-        $('#cbo_branches').select2('val',null);
+        $('#cbo_departments').select2('val',null);
         $('#cbo_payment_method').select2('val',null);
 
         $(f).find('input:first').focus();
@@ -1272,6 +1273,8 @@ $(document).ready(function(){
 
         $('#tbl_entries > tfoot tr').find(oTFSummary.dr).html('<b>0.00</b>');
         $('#tbl_entries > tfoot tr').find(oTFSummary.cr).html('<b>0.00</b>');
+
+        $('#img_user').attr('src','assets/img/anonymous-icon.png');
     };
 
     //initialize numeric text

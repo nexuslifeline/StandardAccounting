@@ -50,12 +50,14 @@ class Adjustments extends CORE_Controller
                 'FORMAT(products.sale_price,2)as sale_price',
                 'FORMAT(products.purchase_cost,2)as purchase_cost',
                 'products.unit_id',
-                'units.unit_name'
+                'units.unit_name',
+                'tax_types.tax_rate'
             ),
             array(
                 // parameter (table to join(left) , the reference field)
                 array('units','units.unit_id=products.unit_id','left'),
-                array('categories','categories.category_id=products.category_id','left')
+                array('categories','categories.category_id=products.category_id','left'),
+                array('tax_types','tax_types.tax_type_id=products.tax_type_id','left')
 
             )
 

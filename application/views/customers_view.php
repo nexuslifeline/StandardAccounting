@@ -756,8 +756,8 @@
                                                            <div class="input-group">
                                                                <div class="" style="border:1px solid black;height: 230px;width: 210px;vertical-align: middle;">
 
-                                                                   <div id="div_img_user" style="position:relative;">
-                                                                       <img name="img_user" src="assets/img/anonymous-icon.png" style="object-fit: fill; !important; height: 100%;width: 100%;" />
+                                                                   <div id="div_img_users" style="position:relative;">
+                                                                       <img name="img_users" src="assets/img/anonymous-icon.png" style="object-fit: fill; !important; height: 100%;width: 100%;" />
                                                                        <input type="file" name="file_upload[]" class="hidden">
                                                                    </div>
 
