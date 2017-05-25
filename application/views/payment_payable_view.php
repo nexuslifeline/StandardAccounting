@@ -579,16 +579,19 @@ $(document).ready(function(){
                             _attribute='class="fa fa-check-circle" style="color:green;"';
                         }else{
                             _attribute='class="fa fa-times-circle" style="color:red;"';
-                        }
+                         }
                         return '<center><i '+_attribute+'></i></center>';
                     }
                 },
                 {
-                    targets:[8],data: null,
+                    targets:[8],data: "is_active",
                     render: function (data, type, full, meta){
-                        return '<center><button type="button" class="btn btn-default btn_cancel_or"><i class="fa fa-times-circle"></i></button></center>';
+                        if(data=='1'){
+                            return '<center><button type="button" class="btn btn-default btn_cancel_or"><i class="fa fa-times-circle"></i></button></center>';
+                        } else {
+                            return '<center><button type="button" class="btn btn-default btn_cancel_or" disabled><i class="fa fa-times-circle"></i></button></center>';
+                        }
                     }
-
                 }
             ],
             "createdRow": function ( row, data, index ) {
