@@ -10,9 +10,6 @@
                     <td style="border: 1px solid lightgrey;padding: 5px;"><b>Reference</b></td>
                     <td style="border: 1px solid lightgrey;padding: 5px;"><b>Txn Type</b></td>
                     <td style="border: 1px solid lightgrey;padding: 5px;"><b>Description</b></td>
-
-                    <td style="border: 1px solid lightgrey;padding: 5px;"><b>Exp Date</b></td>
-                    <td style="border: 1px solid lightgrey;padding: 5px;"><b>Batch #</b></td>
                     <td style="border: 1px solid lightgrey;padding: 5px;text-align: right;"><b>In</b></td>
                     <td style="border: 1px solid lightgrey;padding: 5px;text-align: right;"><b>Out</b></td>
                     <td style="border: 1px solid lightgrey;padding: 5px;text-align: right;"><b>Balance</b></td>
@@ -32,9 +29,6 @@
                    <td style="border: 1px solid lightgrey;padding: 5px;"><?php echo $product->ref_no; ?></td>
                    <td style="border: 1px solid lightgrey;padding: 5px;"><?php echo $product->type; ?></td>
                    <td style="border: 1px solid lightgrey;padding: 5px;"><?php echo $product->Description; ?></td>
-
-                   <td style="border: 1px solid lightgrey;padding: 5px;"><?php echo $product->exp_date; ?></td>
-                   <td style="border: 1px solid lightgrey;padding: 5px;"><?php echo $product->batch_no; ?></td>
                    <td style="border: 1px solid lightgrey;padding: 5px;text-align: right;"><?php echo number_format($product->in_qty,0); ?></td>
                    <td style="border: 1px solid lightgrey;padding: 5px;text-align: right;"><?php echo number_format($product->out_qty,0); ?></td>
                    <td style="border: 1px solid lightgrey;padding: 5px;text-align: right;font-weight: bolder;"><?php echo number_format($product->balance,0); ?></td>

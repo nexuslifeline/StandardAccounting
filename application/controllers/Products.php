@@ -314,12 +314,21 @@ class Products extends CORE_Controller
 
             case 'product-history':
                 $product_id=$this->input->get('id');
-                $m_products=$this->Products_model;
+                $department_id=($this->input->get('depid')==null||$this->input->get('depid')==0?0:$this->input->get('depid'));
+                $as_of_date=$this->input->get('date');
 
-                $data['products']=$m_products->get_product_history($product_id);
+                if($as_of_date==null){
+                    $date = null;
+                }else{
+                    $date = date('Y-m-d',strtotime($as_of_date));
+                }
+
+                $m_products=$this->Products_model;
+                $data['products']=$m_products->get_product_history($product_id,$department_id,$date);
                 $data['product_id']=$product_id;
-                $this->load->view('Template/product_history_menus',$data);
-                $this->load->view('Template/product_history',$data);
+                //$this->load->view('Template/product_history_menus',$data);
+
+                $this->load->view('template/product_history',$data);
                 break;
                 
             case 'export-product-history':

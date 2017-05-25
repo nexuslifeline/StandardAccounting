@@ -10,7 +10,8 @@ class Inventory extends CORE_Controller
         $this->load->model(
             array
             (
-                'Departments_model'
+                'Departments_model',
+                'Products_model'
             )
         );
     }
@@ -27,5 +28,40 @@ class Inventory extends CORE_Controller
         $this->load->view('inventory_report_view',$data);
 
     }
+
+
+
+    public function transaction($txn=null){
+        switch($txn){
+            case 'get-inventory':
+                $m_products = $this->Products_model;
+                $date = date('Y-m-d',strtotime($this->input->post('date',TRUE)));
+                $depid = $this->input->post('depid',TRUE);
+
+                $response['data'] = $m_products->get_product_list_inventory($date,$depid);
+                echo json_encode($response);
+                break;
+            case 'preview-inventory':
+                $m_products = $this->Products_model;
+                $m_department = $this->Departments_model;
+
+                $date = date('Y-m-d',strtotime($this->input->get('date',TRUE)));
+                $depid = $this->input->get('depid',TRUE);
+                $info = $m_department->get_list($depid);
+
+                $data['products'] = $m_products->get_product_list_inventory($date,$depid);
+                $data['date'] = date('m/d/Y',strtotime($date));
+                $data['department'] =$info[0]->department_name;
+                $this->load->view('template/batch_inventory_report',$data);
+                break;
+        }
+    }
+
+
+
+
+
+
+
 }
 ?>

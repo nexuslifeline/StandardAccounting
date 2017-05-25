@@ -61,7 +61,7 @@
 
 <div style="">
 
-    <h3 style="margin-bottom: 0px;">Inventory Report</h3>
+    <h3 style="margin-bottom: 0px;">Inventory Report - <?php echo $department; ?></h3>
     <i>As of <?php echo $date; ?></i>
 
 
@@ -72,12 +72,9 @@
             <tr>
                 <td width="10%">PLU</td>
                 <td width="30%">Description</td>
-                <td width="5%">Size</td>
-                <!-- <td width="5%">Type</td> -->
                 <td width="10%">Category</td>
-                <!-- <td width="10%">Batch #</td>
-                <td width="10%">Expiration</td> -->
-                <td width="10%" align="right">On Hand</td>
+                <td width="5%">Unit</td>
+                <td width="10%" align="right">Current Qty</td>
             </tr>
         </thead>
         <tbody>
@@ -85,25 +82,22 @@
             <tr>
                 <td><?php echo $product->product_code; ?></td>
                 <td><?php echo $product->product_desc; ?></td>
-                <td><?php echo $product->size; ?></td>
-                <!-- <td><?php echo $product->product_type; ?></td> -->
                 <td><?php echo $product->category_name; ?></td>
-                <!-- <td><?php echo $product->batch_no; ?></td>
-                <td><?php echo $product->expiration; ?></td> -->
-                <td align="right"><?php echo $product->on_hand_per_batch; ?></td>
+                <td><?php echo $product->unit_name; ?></td>
+                <td align="right"><?php echo number_format($product->CurrentQty,2); ?></td>
             </tr>
             <?php } ?>
 
 
             <?php if(count($products)==0){ ?>
                 <tr>
-                    <td colspan="8" style="height: 40px;"><center>No records found.</center></td>
+                    <td colspan="5" style="height: 40px;"><center>No records found.</center></td>
                 </tr>
             <?php } ?>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="8">&nbsp;</td>
+                <td colspan="5">&nbsp;</td>
 
             </tr>
         </tfoot>
