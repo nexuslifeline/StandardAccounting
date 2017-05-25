@@ -220,12 +220,12 @@ echo $_side_bar_navigation;
                         </select>
                     </div> -->
                     <div class="col-xs-12 col-lg-4">
-                        * Address : <br />
+                        * Terms :<br />
                         <div class="input-group">
                             <span class="input-group-addon">
-                                <i class="fa fa-home"></i>
+                                <i class="fa fa-code"></i>
                             </span>
-                            <input type="text" name="address" id="txt_address" class="form-control">
+                            <input type="text" name="terms" class="form-control">
                         </div>
                     </div>
                     <div class="col-lg-4"></div>
@@ -242,13 +242,7 @@ echo $_side_bar_navigation;
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-lg-4">
-                        * Terms :<br />
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-code"></i>
-                            </span>
-                            <input type="text" name="terms" class="form-control">
-                        </div>
+
                     </div>
                     <div class="col-lg-4"></div>
                     
@@ -1539,9 +1533,11 @@ dt_si = $('#tbl_si_list').DataTable({
     };
 
     var clearFields=function(f){
+        var dDate = <?php echo json_encode(date('m/d/Y')); ?>;
         $('input,textarea,select,input:not(.date-picker)',f).val('');
         $('#remarks').val('');
         $(f).find('input:first').focus();
+        $('.date-picker').val(dDate);
         $('#tbl_items > tbody').html('');
         $('#cbo_departments').select2('val', null);
         $('#td_before_tax, #td_after_tax, #td_discount, #td_tax').val('');
