@@ -195,7 +195,31 @@ class Account_payables extends CORE_Controller
                     $response['title']='<b>Journal is Locked!</b>';
                     $response['msg']='Sorry, you cannot cancel journal that is already closed!<br />';
                     die(json_encode($response));
-                }
+                }                
+
+                /*//check if the transaction is cancelled or not
+                $is_active=$m_journal->get_list('is_active>0 AND journal_id='.$journal_id);
+                if(count($is_active)>0) {
+                    $m_journal->is_active=0;
+                    $m_journal->cancelled_by_user=$this->session->user_id;//user that cancelled the record
+                    $m_journal->modify($journal_id);
+
+                    $response['title']='Cancelled!';
+                    $response['stat']='error';
+                    $response['msg']='Journal successfully cancelled.';
+                    $response['row_updated']=$this->get_response_rows($journal_id);
+                    echo json_encode($response);
+                } else {
+                    $m_journal->is_active=1;
+                    $m_journal->cancelled_by_user=$this->session->user_id;//user that opened the record
+                    $m_journal->modify($journal_id);
+
+                    $response['title']='Opened!';
+                    $response['stat']='success';
+                    $response['msg']='Journal successfully opened.';
+                    $response['row_updated']=$this->get_response_rows($journal_id);
+                    echo json_encode($response);
+                }*/
 
                 //mark Items as deleted
                 $m_journal->set('date_cancelled','NOW()'); //treat NOW() as function and not string
@@ -203,14 +227,27 @@ class Account_payables extends CORE_Controller
                 $m_journal->set('is_active','NOT is_active');
                 $m_journal->modify($journal_id);
 
-
-
-                $response['title']='Cancelled!';
+                /*$response['title']='Cancelled!';
                 $response['stat']='success';
                 $response['msg']='Journal successfully cancelled.';
-                $response['row_updated']=$this->get_response_rows($journal_id);
+                $response['row_updated']=$this->get_response_rows($journal_id);*/
 
-                echo json_encode($response);
+                $is_active=$m_journal->get_list('is_active>0 AND journal_id='.$journal_id);
+                if(count($is_active)>0) {
+                    $response['title']='Opened!';
+                    $response['stat']='success';
+                    $response['msg']='Journal successfully opened.';
+                    $response['row_updated']=$this->get_response_rows($journal_id);
+                    echo json_encode($response);
+                } else {   
+                    $response['title']='Cancelled!';
+                    $response['stat']='error';
+                    $response['msg']='Journal successfully cancelled.';
+                    $response['row_updated']=$this->get_response_rows($journal_id);
+                    echo json_encode($response);
+                }
+
+                //echo json_encode($response);
 
                 break;
         };

@@ -218,12 +218,30 @@ class General_journal extends CORE_Controller
 
 
 
-                $response['title']='Cancelled!';
+                /*$response['title']='Cancelled!';
                 $response['stat']='success';
                 $response['msg']='Journal successfully cancelled.';
-                $response['row_updated']=$this->get_response_rows($journal_id);
+                $response['row_updated']=$this->get_response_rows($journal_id);*/
 
-                echo json_encode($response);
+
+
+
+                $is_active=$m_journal->get_list('is_active>0 AND journal_id='.$journal_id);
+                if(count($is_active)>0) {
+                    $response['title']='Opened!';
+                    $response['stat']='success';
+                    $response['msg']='Journal successfully opened.';
+                    $response['row_updated']=$this->get_response_rows($journal_id);
+                    echo json_encode($response);
+                } else {   
+                    $response['title']='Cancelled!';
+                    $response['stat']='error';
+                    $response['msg']='Journal successfully cancelled.';
+                    $response['row_updated']=$this->get_response_rows($journal_id);
+                    echo json_encode($response);
+                }
+
+                //echo json_encode($response);
 
                 break;
 

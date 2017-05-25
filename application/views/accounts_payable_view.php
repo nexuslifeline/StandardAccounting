@@ -447,12 +447,12 @@
         <div class="modal-content"><!---content--->
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Cancellation</h4>
+                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Action</h4>
 
             </div>
 
             <div class="modal-body">
-                <p id="modal-body-message">Are you sure you want to cancel this journal?</p>
+                <p id="modal-body-message">Are you sure you want to perform this action?</p>
             </div>
 
             <div class="modal-footer">
@@ -779,7 +779,7 @@
                         targets:[6],
                         render: function (data, type, full, meta){
                             var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
-                            var btn_cancel='<button class="btn btn-red btn-sm" name="cancel_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel Journal"><i class="fa fa-times"></i> </button>';
+                            var btn_cancel='<button class="btn btn-red btn-sm" name="cancel_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel and Open Journal"><i class="fa fa-times"></i> </button>';
 
                             /*return '<center>'+btn_edit+'&nbsp;'+btn_trash+'</center>';*/
 
@@ -1080,6 +1080,8 @@
                     "success": function(response){
                         showNotification(response);
                         if(response.stat=="success"){
+                            dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                        } else {
                             dt.row(_selectRowObj).data(response.row_updated[0]).draw();
                         }
 

@@ -507,7 +507,7 @@
 
 
         <div class="static-content-wrapper">
-            <div class="static-content">
+            <div class="static-content" style="overflow-x:hidden;">
                     <div class="page-content"><!-- #page-content -->
 
                         <div class="chat-box-button-wrapper">

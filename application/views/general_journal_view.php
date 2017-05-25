@@ -128,39 +128,32 @@
 <div class="row">
 <div class="col-md-12">
 
-<div id="div_payable_list">
-
-    <div class="panel panel-default">
-
+    <div id="div_payable_list">
 
         <div class="panel panel-default">
-                <div class="panel-heading">
-                    <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; General Journal </b>
-                </div>
-                <div class="panel-body table-responsive">
-                    <table id="tbl_accounts_receivable" class="custom-design table-striped" cellspacing="0" width="100%">
-                        <thead class="">
-                        <tr>
-                            <th></th>
-                            <th>Txn #</th>
-                            <th>Particular</th>
-                            <th>Remarks</th>
-                            <th>Txn Date</th>
-                            <th>Posted</th>
-                            <th>Status</th>
-                            <th><center>Action</center></th>
-                        </tr>
-                        </thead>
-                        <tbody>
 
-                        </tbody>
-                    </table>
+            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> General Journal</b></div></a>
 
+            <div class="panel-body table-responsive">
+                <table id="tbl_accounts_receivable" class="custom-design table-striped" cellspacing="0" width="100%">
+                    <thead class="">
+                    <tr>
+                        <th></th>
+                        <th>Txn #</th>
+                        <th>Particular</th>
+                        <th>Remarks</th>
+                        <th>Txn Date</th>
+                        <th>Posted</th>
+                        <th>Status</th>
+                        <th><center>Action</center></th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
-
     </div>
 
 
@@ -420,12 +413,12 @@
         <div class="modal-content"><!---content-->
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Action</h4>
 
             </div>
 
             <div class="modal-body">
-                <p id="modal-body-message">Are you sure you want to cancel this journal?</p>
+                <p id="modal-body-message">Are you sure you want to perform this action?</p>
             </div>
 
             <div class="modal-footer">
@@ -595,7 +588,7 @@ $(document).ready(function(){
                     targets:[7],
                     render: function (data, type, full, meta){
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
-                        var btn_cancel='<button class="btn btn-red btn-sm" name="cancel_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel Journal"><i class="fa fa-times"></i> </button>';
+                        var btn_cancel='<button class="btn btn-red btn-sm" name="cancel_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel and Open Journal"><i class="fa fa-times"></i> </button>';
 
                         return '<center>'+btn_edit+"&nbsp;"+btn_cancel+'</center>';
                     }
@@ -884,6 +877,8 @@ $(document).ready(function(){
                 "success": function(response){
                     showNotification(response);
                     if(response.stat=="success"){
+                        dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                    } else {
                         dt.row(_selectRowObj).data(response.row_updated[0]).draw();
                     }
 
