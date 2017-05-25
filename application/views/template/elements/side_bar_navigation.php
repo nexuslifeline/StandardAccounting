@@ -52,7 +52,7 @@
                                 <li class="<?php echo (in_array('3-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Sales_invoice">Sales Invoice</a></li>
                                 <!-- <li><a href="Sales_invoice_other">Other Sales Invoice</a></li> -->
                                 <li class="<?php echo (in_array('3-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Receivable_payments">Collection Entry</a></li>
-                                <li><a href="AR_Receivable">AR Receivable Report</a></li>
+                                <li><a href="AR_Receivable">Accounts Receivable Report</a></li>
                             </ul>
                         </li>
 

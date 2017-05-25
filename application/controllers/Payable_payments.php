@@ -143,7 +143,7 @@ class Payable_payments extends CORE_Controller
                 $m_payment->begin();
 
                 $m_payment->set('date_cancelled','NOW()');
-                $m_payment->is_active=1;
+                $m_payment->is_active=0;
                 $m_payment->cancelled_by_user=$this->session->user_id;
                 $m_payment->modify($payment_id);
 

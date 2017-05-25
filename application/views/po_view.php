@@ -291,6 +291,7 @@
     </div>
 
 
+
     <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;"><br />
 
         <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
@@ -345,7 +346,9 @@
         </form>
 
 
+
     </div>
+
 
 
     <br />
@@ -355,6 +358,7 @@
             <div class="col-lg-12" style="padding: 0%;">
                 <textarea name="remarks" class="form-control" placeholder="Remarks"></textarea>
             </div>
+
 
 
 
@@ -459,7 +463,9 @@
 
             </div>
 
+
             <div class="modal-body">
+
                 <form id="frm_department">
                     <div class="row">
                         <div class="col-md-12" style="margin-left: 10px;">
@@ -488,7 +494,9 @@
 
             <div class="modal-footer">
                 <button id="btn_create_new_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
+
                 <button id="btn_close_new_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
+
             </div>
         </div><!---content---->
     </div>
@@ -1468,8 +1476,6 @@ $(document).ready(function(){
         });
     };
 
-
-
     var showSpinningProgress=function(e){
         $(e).toggleClass('disabled');
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
@@ -1478,6 +1484,7 @@ $(document).ready(function(){
     var clearFields=function(f){
         $('input,textarea',f).val('');
         $(f).find('input:first').focus();
+
         $('#tbl_items > tbody').html('');
 
         $('#td_before_tax').html(accounting.formatNumber(0,4));
@@ -1489,6 +1496,7 @@ $(document).ready(function(){
         $('#cbo_suppliers').select2('val',null);
         $('#cbo_departments').select2('val',null);
         $('textarea[name="remarks"]').val('');
+
 
     };
 

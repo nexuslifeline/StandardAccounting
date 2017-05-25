@@ -1847,12 +1847,17 @@ $(document).ready(function(){
 
     var clearFields=function(f){
         $('input,textarea,select,input:not(.date-picker)',f).val('');
+        $('input,textarea',f).val('');
         $('#remarks').val('');
         $(f).find('input:first').focus();
-        $('#tbl_items > tbody').html('');
+        //$('#tbl_items > tbody').html('');
         $('#cbo_departments').select2('val', null);
         $('#cbo_suppliers').select2('val', null);
         $('#img_user').attr('src','assets/img/anonymous-icon.png');
+        $('#td_discount').html('0.00');
+        $('#td_before_tax').html('0.00');
+        $('#td_tax').html('0.00');
+        $('#td_after_tax').html('0.00');
     };
 
 

@@ -865,7 +865,7 @@ $(document).ready(function(){
     var dt; var _txnMode; var _selectedID; var _selectRowObj;
     var _cboDepartments; var _cboDepartment; var _cboSalesperson; var _cboCustomers; var _lookUpPrice;
 
-    var oTableItems={
+    /*var oTableItems={
         qty : 'td:eq(0)',
         unit_price : 'td:eq(3)',
         discount : 'td:eq(4)',
@@ -883,8 +883,26 @@ $(document).ready(function(){
         before_tax : 'tr:eq(1) > td:eq(1)',
         so_tax_amount : 'tr:eq(2) > td:eq(1)',
         after_tax : 'tr:eq(3) > td:eq(1)'
+    };*/
+
+    var oTableItems={
+        qty : 'td:eq(0)',
+        unit_price : 'td:eq(3)',
+        discount : 'td:eq(4)',
+        total_line_discount : 'td:eq(5)',
+        tax : 'td:eq(6)',
+        total : 'td:eq(7)',
+        vat_input : 'td:eq(8)',
+        net_vat : 'td:eq(9)'
+
     };
 
+    var oTableDetails={
+        discount : 'tr:eq(0) > td:eq(1)',
+        before_tax : 'tr:eq(1) > td:eq(1)',
+        so_tax_amount : 'tr:eq(2) > td:eq(1)',
+        after_tax : 'tr:eq(3) > td:eq(1)'
+    };
 
     var initializeControls=function(){
 
@@ -1741,13 +1759,17 @@ $(document).ready(function(){
     var clearFields=function(f){
         $('input,textarea,select',f).val('');
         $(f).find('input:first').focus();
-        $('#tbl_items > tbody').html('');
+        //$('#tbl_items > tbody').html('');
         $('#cbo_departments').select2('val', null);
         $('#cbo_department').select2('val', null);
         $('#cbo_customers').select2('val', null);
         //$('#cbo_prodType').select2('val', 3);
         $('#img_user').attr('src','assets/img/anonymous-icon.png');
         $('#order_default').datepicker('setDate', 'today');
+        $('#td_discount').html('0.00');
+        $('#td_before_tax').html('0.00');
+        $('#td_tax').html('0.00');
+        $('#td_after_tax').html('0.00');
     };
 
 
@@ -1820,8 +1842,13 @@ $(document).ready(function(){
         tbl_summary.find(oTableDetails.so_tax_amount).html(accounting.formatNumber(so_tax_amount,4));
         tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
 
-        $('#td_before_tax').html(accounting.formatNumber(before_tax,4));
+        /*$('#td_before_tax').html(accounting.formatNumber(before_tax,4));
         $('#td_after_tax').html(accounting.formatNumber(after_tax,4));
+        $('#td_discount').html(accounting.formatNumber(discounts,4));
+        $('#td_tax').html(accounting.formatNumber(so_tax_amount,4));*/
+
+        $('#td_before_tax').html(accounting.formatNumber(before_tax,4));
+        $('#td_after_tax').html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');
         $('#td_discount').html(accounting.formatNumber(discounts,4));
         $('#td_tax').html(accounting.formatNumber(so_tax_amount,4));
     };

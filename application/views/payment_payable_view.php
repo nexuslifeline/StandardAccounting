@@ -579,6 +579,7 @@ $(document).ready(function(){
                             _attribute='class="fa fa-check-circle" style="color:green;"';
                         }else{
                             _attribute='class="fa fa-times-circle" style="color:red;"';
+                            $('.btn_cancel_or').attr('disabled','disabled');
                         }
                         return '<center><i '+_attribute+'></i></center>';
                     }
