@@ -327,7 +327,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td colspan="2" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Discount :</strong></td>
-                                                        <td align="right" colspan="1" id="td_discount color="red">0.00</td>
+                                                        <td align="right" colspan="1" id="td_discount" color="red">0.00</td>
                                                         <td colspan="2" id="" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total Before Tax :</strong></td>
                                                         <td align="right" colspan="1" id="td_before_tax" color="red">0.00</td>
                                                     </tr>
@@ -342,7 +342,7 @@
 
                                             </table>
                                         </div>
-                                    </form>
+                                    
 
 
                                 </div>
@@ -355,7 +355,7 @@
                                         <div class="col-lg-12" style="padding: 0%;">
                                               <textarea name="remarks" class="form-control" placeholder="Remarks"></textarea>
                                         </div>
-
+                                </form>      
 
 
 
@@ -460,7 +460,7 @@
             </div>
 
             <div class="modal-body" style="padding: 2%;">
-                <form id="frm_department_new">
+                <form id="frm_department">
                     <div class="row">
                         <div class="col-md-12" style="padding-left: 30px;">
                             <div class="form-group">
@@ -490,7 +490,7 @@
             </div>
 
             <div class="modal-footer">
-                <button id="btn_create_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
+                <button id="btn_create_new_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
                 <button id="btn_close_close_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
             </div>
         </div><!---content---->
@@ -1470,8 +1470,6 @@ $(document).ready(function(){
         });
     };
 
-
-
     var showSpinningProgress=function(e){
         $(e).toggleClass('disabled');
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
@@ -1480,9 +1478,13 @@ $(document).ready(function(){
     var clearFields=function(f){
         $('input,textarea',f).val('');
         $(f).find('input:first').focus();
-        $('#tbl_items > tbody').html('');
+        //$('#tbl_items > tbody').html('0.00');
         $('#cbo_tax_type').select2('val',null);
         $('#cbo_suppliers').select2('val',null);
+        $('#td_discount').html('0.00');
+        $('#td_before_tax').html('0.00');
+        $('#td_tax').html('0.00');
+        $('#td_after_tax').html('0.00');
 
     };
 

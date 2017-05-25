@@ -10,8 +10,8 @@
 <table class="table" style="width:100%;">
 	<thead style="background-color:#2980b9;color:white;">
 	<tr>
-		<th style="width:40%;text-align:left;">Remarks</th>
 		<th style="width:30%;text-align:left;">Invoice</th>
+		<th style="width:40%;text-align:left;">Remarks</th>
 		<th style="width:30%;text-align:left;">Amount Due</th>
 	</tr>
 	</thead>

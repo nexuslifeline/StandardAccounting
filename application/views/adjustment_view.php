@@ -554,6 +554,26 @@ $(document).ready(function(){
         after_tax : 'tr:eq(3) > td:eq(1)'
     };
 
+    /*var oTableItems={
+        qty : 'td:eq(0)',
+        unit_price : 'td:eq(4)',
+        discount : 'td:eq(5)',
+        total_line_discount : 'td:eq(6)',
+        tax : 'td:eq(7)',
+        total : 'td:eq(8)', //Total
+        vat_input : 'td:eq(9)',
+        net_vat : 'td:eq(10)' //Before Tax
+
+    };
+
+
+    var oTableDetails={
+        discount : 'tr:eq(0) > td:eq(1)',
+        before_tax : 'tr:eq(1) > td:eq(1)',
+        adjust_tax_amount : 'tr:eq(2) > td:eq(1)',
+        after_tax : 'tr:eq(3) > td:eq(1)'
+    };*/
+
 
     var initializeControls=function(){
 
@@ -1215,11 +1235,11 @@ $(document).ready(function(){
             after_tax+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
         });
 
-        /*var tbl_summary=$('#tbl_adjustment_summary');
+        var tbl_summary=$('#tbl_adjustment_summary');
         tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,2));
         tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,2));
         tbl_summary.find(oTableDetails.adjust_tax_amount).html(accounting.formatNumber(adjust_tax_amount,2));
-        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,2)+'</b>');*/
+        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,2)+'</b>');
 
         $('#td_before_tax').html(accounting.formatNumber(before_tax,4));
         $('#td_after_tax').html('<b>'+accounting.formatNumber(after_tax,4)+'</b>');

@@ -1950,6 +1950,10 @@ $(document).ready(function(){
         $('#cbo_customers').select2('val', null);
         $('#cbo_salesperson').select2('val', null);
         $('#img_user').attr('src','assets/img/anonymous-icon.png');
+        $('#td_discount').html('0.00');
+        $('#td_before_tax').html('0.00');
+        $('#td_tax').html('0.00');
+        $('#td_after_tax').html('0.00');
     };
 
 
