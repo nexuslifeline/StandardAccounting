@@ -31,6 +31,7 @@ class Journal_account_model extends CORE_Model{
         return $this->db->query($sql)->result();
     }
 
+
     function get_bs_parent_account_balances($date,$department_id=null){
         $sql="SELECT m.*,mQat.account_title
                 FROM
@@ -115,10 +116,6 @@ class Journal_account_model extends CORE_Model{
 
 
     }
-
-
-
-
 
 
     function get_account_schedule($account_id,$as_of_date,$particular_tye='C'){
@@ -253,6 +250,26 @@ class Journal_account_model extends CORE_Model{
     }
 
 
+    function get_t_account($book,$start,$end){
+        $sql="SELECT DATE_FORMAT(ji.date_txn,'%m/%d/%Y')as date_txn,ji.txn_no,
+                CONCAT(
+                  IFNULL(s.supplier_name,''),
+                  IFNULL(c.customer_name,'')
+                )as description,
+                ji.remarks,
+                at.account_title,
+                ja.dr_amount,ja.cr_amount
+
+                FROM ((`journal_info` as ji
+                LEFT JOIN customers as c ON c.customer_id=ji.customer_id)
+                LEFT JOIN suppliers as s ON s.supplier_id=ji.supplier_id)
+                INNER JOIN (`journal_accounts` as ja
+                INNER JOIN account_titles as at ON at.account_id=ja.account_id)
+                ON ja.journal_id=ji.journal_id WHERE ji.book_type='$book' AND ji.date_txn BETWEEN '$start' AND '$end'
+                ORDER BY ji.date_txn ASC";
+
+        return $this->db->query($sql)->result();
+    }
 
 }
 
