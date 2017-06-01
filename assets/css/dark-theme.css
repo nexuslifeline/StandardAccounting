@@ -4,6 +4,10 @@
 
 .welcome-msg {color: #c0c0c0!important;}
 
+.po_title {
+    color: #ffad33;
+}
+
 .data-container {
     padding: 10px;
     padding-bottom: 20px;
@@ -153,7 +157,7 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
     background: #303030!important;
 }
 
-.form-control:not(.general-search) {
+.form-control:not(.general-search):not(.dash_search_field) {
     color: white;
     font-size: 18px;
     border-width: 2px!important;
@@ -170,6 +174,12 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
     -webkit-box-shadow: none!important;
     -moz-box-shadow: none!important;
     box-shadow: none!important;
+}
+
+.dash_search_field {
+    background: rgba(255, 255, 255, .1);
+    border: none;
+    border-radius: 5px;
 }
 
 label {
@@ -338,9 +348,6 @@ table#tbl_so_list tbody tr.no-padding:nth-child(even) {
     background-color: #414141 !important;
     color: white !important;
 }
-
-
-
 
 /* tbl_sales_order - sales order */
 

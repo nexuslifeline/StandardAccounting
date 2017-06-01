@@ -79,12 +79,8 @@
         }
 
         th {
-          background: transparent!important;
+          background: rgba(255, 255, 255, .2)!important;
           border-bottom: 1px solid #525252;
-        }
-
-        tr {
-          border-color: transparent!important; 
         }
 
         @media (min-width: 768px){
@@ -113,6 +109,184 @@
             *width: 14.285714285714285714285714285714%;
           }
         }
+    </style>
+
+    <style>
+      .v-timeline {
+          position: relative;
+          padding: 0;
+          margin-top: 2em;
+          margin-bottom: 2em;
+      }
+      .vertical-container {
+          width: 98%;
+          margin: 0 auto;
+      }
+
+      .v-timeline::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 18px;
+          height: 100%;
+          width: 4px;
+          background: #525252;
+      }
+
+      .vertical-timeline-block:first-child {
+        margin-top: 0;
+      }
+
+      .vertical-timeline-block {
+          position: relative;
+          margin: 2em 0;
+      }
+
+      .vertical-timeline-icon {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          font-size: 16px;
+          border: 1px solid #525252;
+          text-align: center;
+          background: #525252;
+          color: #ffffff;
+      }
+
+      .vertical-timeline-icon i {
+          display: block;
+          width: 24px;
+          height: 24px;
+          position: relative;
+          left: 50%;
+          top: 50%;
+          margin-left: -12px;
+          margin-top: -9px;
+      }
+
+      .c-accent {
+          color: #f6a821;
+      }
+
+      .vertical-timeline-content {
+          position: relative;
+          margin-left: 60px;
+          background-color: rgba(68, 70, 79, 0.5);
+          border-radius: 0.25em;
+          border: 1px solid #3d404c;
+      }
+
+      .vertical-timeline-content:before {
+          border-color: transparent;
+          border-right-color: #3d404c;
+          border-width: 11px;
+          margin-top: -11px;
+      }
+
+      .vertical-timeline-content:after, .vertical-timeline-content:before {
+          right: 100%;
+          top: 20px;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+      }
+
+      .p-sm {
+          padding: 15px !important;
+      }
+
+      .vertical-timeline-content .vertical-date {
+          font-weight: 500;
+          text-align: right;
+      }
+
+      .vertical-timeline-content p {
+          margin: 1em 0 0 0;
+          line-height: 1.6;
+      }
+
+      .vertical-timeline-content:after {
+          border-color: transparent;
+          border-right-color: #3d404c;
+          border-width: 10px;
+          margin-top: -10px;
+      }
+
+      .vertical-timeline-content:after, .vertical-timeline-content:before {
+          right: 100%;
+          top: 20px;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+      }
+
+      .vertical-timeline-content:after {
+          content: "";
+          display: table;
+          clear: both;
+      }
+
+      .vertical-timeline-content {
+          position: relative;
+          margin-left: 60px;
+          background-color: rgba(68, 70, 79, 0.5);
+          border-radius: 0.25em;
+          border: 1px solid #3d404c;
+      }
+
+      .vertical-timeline-block:after {
+          content: "";
+          display: table;
+          clear: both;
+      }
+
+      .vertical-container::after {
+          content: '';
+          display: table;
+          clear: both;
+      }
+
+      .v-timeline {
+          position: relative;
+          padding: 0;
+          margin-top: 2em;
+          margin-bottom: 2em;
+      }
+
+      .vertical-container {
+          width: 98%;
+          margin: 0 auto;
+      }
+
+      #style-1::-webkit-scrollbar-track
+      {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: transparent;
+      }
+
+      #style-1::-webkit-scrollbar
+      {
+        width: 10px;
+        border-radius: 11px;
+        background-color: transparent;
+      }
+
+      #style-1::-webkit-scrollbar-thumb
+      {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #555;
+      }
     </style>
 
 </head>
@@ -204,10 +378,11 @@
                                                 </div>
                                                 <div class="row" style="margin-top: 20px;">
                                                     <div class="col-xs-12 col-sm-8 <?php echo (in_array('7-1',$this->session->user_rights)?'':'hidden'); ?>">
-                                                            <h3 class="hidden-xs hidden-sm" style="position: absolute; top: -15px">PURCHASE ORDER FOR APPROVAL</h2>
+                                                      <div class="data-container table-responsive" style="padding: 20px 15px 20px 15px; min-height: 700px; max-height: 700px;">
+                                                            <h6 class="visible-xs hidden-sm hidden-md hidden-lg po_title" style="position: absolute; top: 5px"><i class="fa fa-file-text-o"></i> <span style="color: white;">PURCHASE ORDER</span></h6>
+                                                            <h3 class="hidden-xs po_title" style="position: absolute; top: 5px"><i class="fa fa-file-text-o"></i> <span style="color: white;">PURCHASE ORDER FOR APPROVAL</span></h2>
                                                             <table id="tbl_po_list" cellspacing="0" width="100%">
-                                                                <thead class="thead">
-                                                                <tr>
+                                                                <thead>
                                                                     <th></th>
                                                                     <th>PO #</th>
                                                                     <th>Vendor</th>
@@ -215,11 +390,83 @@
                                                                     <th>Posted by </th>
                                                                     <th style="text-align: center;"> <i class="fa fa-paperclip"></i></th>
                                                                     <th><center>Action</center></th>
-                                                                </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                 </tbody>
                                                             </table>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4">
+                                                      <div id="style-1" class="data-container" style="min-height: 700px; max-height: 700px; overflow-y: scroll;">
+                                                        <h3><i class="fa fa-rss" style="color: #ffad33;"></i> ACTIVITY FEED</h3>
+                                                        <div class="v-timeline vertical-container">
+                                                            <div class="vertical-timeline-block">
+                                                                <div class="vertical-timeline-icon">
+                                                                    <i class="fa fa-calendar c-accent"></i>
+                                                                </div>
+                                                                <div class="vertical-timeline-content">
+                                                                    <div class="p-sm">
+                                                                        <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
+                                                                        <h4>Purchase Order
+                                                                        </h4>
+                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-block">
+                                                                <div class="vertical-timeline-icon ">
+                                                                    <i class="fa fa-briefcase c-accent"></i>
+                                                                </div>
+                                                                <div class="vertical-timeline-content">
+                                                                    <div class="p-sm">
+                                                                         <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
+                                                                        <h4>Purchase Order
+                                                                        </h4>
+                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-block">
+                                                                <div class="vertical-timeline-icon">
+                                                                    <i class="fa fa-coffee c-accent"></i>
+                                                                </div>
+                                                                <div class="vertical-timeline-content">
+                                                                    <div class="p-sm">
+                                                                         <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
+                                                                        <h4>Purchase Order
+                                                                        </h4>
+                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-block">
+                                                                <div class="vertical-timeline-icon">
+                                                                    <i class="fa fa-calendar c-accent"></i>
+                                                                </div>
+                                                                <div class="vertical-timeline-content">
+                                                                    <div class="p-sm">
+                                                                         <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
+                                                                        <h4>Purchase Order
+                                                                        </h4>
+                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-block">
+                                                                <div class="vertical-timeline-icon">
+                                                                    <i class="fa fa-calendar c-accent"></i>
+                                                                </div>
+                                                                <div class="vertical-timeline-content">
+                                                                    <div class="p-sm">
+                                                                        <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
+                                                                        <h4>Purchase Order
+                                                                        </h4>
+                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                      </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -437,6 +684,9 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
                 "dom": '<"toolbar">frtip',
                 "bLengthChange":false,
                 "ajax" : "Purchases/transaction/po-for-approved",
+                "language": {
+                  "searchPlaceholder":"Search Purchase Order"
+                },
                 "columns": [
                     {
                         "targets": [0],
@@ -453,7 +703,7 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
                         targets:[5],data: "attachment",
                         render: function (data, type, full, meta){
 
-                            return '<center>'+ data +' <i class="fa fa-paperclip"></i></center>';
+                            return '<center>'+ data +' <i class="fa fa-paperclip"></i></classenter>';
                         }
 
                     },
@@ -470,6 +720,8 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
                     }
                 ]
             });
+
+             $('div.dataTables_filter input').addClass('dash_search_field');
         })();
 
 
