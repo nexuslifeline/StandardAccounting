@@ -20,6 +20,7 @@
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
 
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
@@ -207,7 +208,7 @@
         </div>
         <div class="panel-body table-responsive">
 
-            <table id="tbl_sales_invoice" class="custom-design table-striped" cellspacing="0" width="100%" style="">
+            <table id="tbl_sales_invoice" class="" cellspacing="0" width="100%" style="">
                 <thead class="">
                 <tr>
                     <th></th>
@@ -346,7 +347,7 @@
 
             <form id="frm_items">
                 <div class="table-responsive">
-                    <table id="tbl_items" class="custom-design table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
+                    <table id="tbl_items" class="" cellspacing="0" width="100%" style="font-font:tahoma;">
 
                         <thead class="">    
                         <tr>
@@ -546,7 +547,7 @@
             </div>
 
             <div class="modal-body">
-                <table id="tbl_so_list" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <table id="tbl_so_list" class="" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
                         <th></th>
@@ -570,6 +571,7 @@
             </div>
         </div><!---content---->
     </div>
+<div class="clearfix"></div>
 </div><!---modal-->
 
 <div id="modal_sales_invoice" class="modal fade" role="dialog">
@@ -1041,7 +1043,7 @@ $(document).ready(function(){
         $('#contact_no').keypress(validateNumber);
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Record Sales Invoice" >'+
+            var _btnNew='<button class="btn btn-primary" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Record Sales Invoice" >'+
                 '<i class="fa fa-plus"></i> Record Sales Invoice</button>';
             $("div.toolbar").html(_btnNew);
         }();
@@ -1100,7 +1102,7 @@ $(document).ready(function(){
                 '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="left" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
             ].join('\n'),
 
-            suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="10%" align="left" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
+            suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%;">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="10%" align="left" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
 
         }
         }).on('keyup', this, function (event) {
@@ -1257,6 +1259,7 @@ $(document).ready(function(){
             else {
                 tr.addClass( 'details' );
                 //console.log(row.data());
+                //console.log(tr);
                 _selectRowObj=$(this).closest('tr');
                 var d=dt_so.row(_selectRowObj).data();
 
@@ -1268,7 +1271,8 @@ $(document).ready(function(){
                         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                     }
                 }).done(function(response){
-                    row.child( response ).show();
+                    row.child( response,'no-padding' ).show();
+                    tr.addClass( 'details' );
                     // Add to the 'open' array
                     if ( idx === -1 ) {
                         detailRows.push( tr.attr('id') );
@@ -2048,7 +2052,20 @@ $(document).ready(function(){
 
 
 
+    setInterval(function(){
 
+    //console.log('test');
+
+      if(!$("body").hasClass("modal-open")) return;
+
+      var modalDialog = $(".modal.in > .modal-dialog");
+      var backdrop = $(".modal.in > .modal-backdrop");
+      var backdropHeight = backdrop.height();
+      var modalDialogHeight = modalDialog.height();
+
+      if(modalDialogHeight > backdropHeight) backdrop.height(modalDialogHeight+100);
+
+    }, 500)
 
 
 
