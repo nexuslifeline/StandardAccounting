@@ -20,6 +20,7 @@
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
 
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
@@ -36,6 +37,7 @@
         html{
             zoom: 0.8;
             zoom: 80%;
+            overflow-x: hidden;
         }
 
         #tbl_items td,#tbl_items tr,#tbl_items th{
@@ -223,7 +225,7 @@
 
         <div class="panel-body table-responsive" >
 
-            <table id="tbl_sales_order" class="custom-design table-striped" cellspacing="0" width="100%">
+            <table id="tbl_sales_order" class="" cellspacing="0" width="100%">
                 <thead class="">
                 <tr>
                     <th>&nbsp;&nbsp;</th>
@@ -340,7 +342,7 @@
 
             <form id="frm_items">
                 <div class="table-responsive">
-                        <table id="tbl_items" class="custom-design table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
+                        <table id="tbl_items" class="" cellspacing="0" width="100%" style="font-font:tahoma;">
 
                         <thead class="">
                         <tr>
@@ -938,7 +940,7 @@ $(document).ready(function(){
         }); 
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Sales Order" >'+
+            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Sales Order" >'+
                 '<i class="fa fa-plus"></i> New Sales Order</button>';
                 $("div.toolbar").html(_btnNew);
         }();
@@ -1240,7 +1242,7 @@ $(document).ready(function(){
                         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                     }
                 }).done(function(response){
-                    row.child( response ).show();
+                    row.child( response,'no-padding' ).show();
                     // Add to the 'open' array
                     if ( idx === -1 ) {
                         detailRows.push( tr.attr('id') );
@@ -1859,11 +1861,6 @@ $(document).ready(function(){
         $('.numeric').autoNumeric('init', {mDec:4});
         $('.number').autoNumeric('init', {mDec:0});
     };
-
-
-
-
-
 
 
 

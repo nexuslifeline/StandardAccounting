@@ -15,7 +15,7 @@
         <div class="toolbar-icon-bg hidden-xs" id="toolbar-search">
             <div class="input-group">
                 <span class="input-group-btn"><button class="btn" type="button"><i class="ti ti-search"></i></button></span>
-                <input type="text" class="form-control" placeholder="Search..." style="border: none!important;">
+                <input type="text" class="form-control general-search" placeholder="Search..." style="border: none!important;">
                 <span class="input-group-btn"><button class="btn" type="button"><i class="ti ti-close"></i></button></span>
             </div>
         </div>
