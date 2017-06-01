@@ -21,6 +21,7 @@
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
+    <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
 
     <style>
         html{
@@ -93,7 +94,7 @@
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Units</b>
                                             </div>
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_units" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                <table id="tbl_units" cellspacing="0" width="100%">
                                                     <thead class="table-erp">
                                                     <tr>
                                                         <th>Unit Name</th>
@@ -250,6 +251,9 @@ $(document).ready(function(){
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
             "ajax" : "Units/transaction/list",
+            "language": {
+                "searchPlaceholder":"Search Unit"
+            },
             "columns": [
                 { targets:[0],data: "unit_name" },
                 { targets:[1],data: "unit_desc" },

@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="assets/plugins/pace/themes/blue/pace-theme-loading-bar.css" /><!-- progress bar -->
 
 
-<style>
+<!-- <style>
     table.custom-design{
         width: 100%;
     }
@@ -75,4 +75,4 @@
         border-color: transparent;
     }
 
-</style>
+</style> -->

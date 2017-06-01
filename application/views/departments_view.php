@@ -21,6 +21,7 @@
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
+    <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
 
     <style>
         body{
@@ -73,11 +74,11 @@
 
         <?php echo $_side_bar_navigation;?>
 
-        <div class="static-content-wrapper white-bg">
+        <div class="static-content-wrapper white-bg custom-background">
             <div class="static-content"  >
                 <div class="page-content"><!-- #page-content -->
 
-                    <ol class="breadcrumb" style="margin: 0;">
+                    <ol class="breadcrumb transparent-background" style="margin: 0;">
                         <li><a href="dashboard">Dashboard</a></li>
                         <li><a href="departments">Departments</a></li>
                     </ol>
@@ -89,11 +90,12 @@
                                     <div id="div_department_list">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
-                                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Department</b>
+                                                <!-- <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; <h1>Department</h1></b> -->
+                                                <b style="color: white; font-size: 12pt;"><i style="color: #ffce3a;" class="ti ti-layout-accordion-merged"></i>&nbsp; Departments</b>
                                             </div>
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_departments" class="custom-design table-striped" cellspacing="0" width="100%">
-                                                    <thead class="table-erp">
+                                                <table id="tbl_departments" cellspacing="0" width="100%">
+                                                    <thead>
                                                     <tr>
                                                         <th>Department Name</th>
                                                         <th>Department Description</th>
@@ -101,11 +103,9 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <div class="panel-footer"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -235,6 +235,9 @@ $(document).ready(function(){
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
             "ajax" : "Departments/transaction/list",
+            "language" : {
+                "searchPlaceholder": "Search Department"
+            },
             "columns": [
                 { targets:[0],data: "department_name" },
                 { targets:[1],data: "department_desc" },
@@ -251,7 +254,7 @@ $(document).ready(function(){
         });
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Department" >'+
+            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: uppercase;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Department" >'+
                 '<i class="fa fa-plus"></i> New Department</button>';
             $("div.toolbar").html(_btnNew);
         }();
@@ -354,7 +357,6 @@ $(document).ready(function(){
         $('#btn_cancel').click(function(){
             clearFields();
             $('#modal_new_department').modal('hide');
-            //showList(true);
         });
 
         $('#btn_save').click(function(){

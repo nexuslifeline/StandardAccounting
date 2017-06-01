@@ -21,6 +21,7 @@
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
+    <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
 
     <style>
 
@@ -98,7 +99,7 @@
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Locations Management</b>
                                             </div>
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_locations" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                <table id="tbl_locations" cellspacing="0" width="100%">
                                                     <thead>
                                                     <tr>
                                                         <th>Location Name</th>
@@ -213,6 +214,9 @@ $(document).ready(function(){
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
             "ajax" : "Locations/transaction/list",
+            "language": {
+                "searchPlaceholder":"Search Location"
+            },
             "columns": [
 
                 { targets:[0],data: "location_name" },
