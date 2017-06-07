@@ -11,7 +11,9 @@ class Dashboard extends CORE_Controller {
             'Journal_info_model',
             'Journal_account_model',
             'Users_model',
-            'Company_model'
+            'Company_model',
+            'Customers_model',
+            'Suppliers_model'
         ));
 
     }
@@ -29,6 +31,22 @@ class Dashboard extends CORE_Controller {
         $m_journal=$this->Journal_account_model;
         $m_journal_info=$this->Journal_info_model;
 
+        $customer_count=$this->Customers_model->get_list(
+          'is_deleted=false AND is_active=true',
+          'COUNT(*) as count'
+        );
+
+        $data['receivables']=$m_journal->get_receivable_balance()[0];
+        $data['payables']=$m_journal->get_payable_balance()[0];
+
+        $data['customer_count']=$customer_count[0]->count;
+
+        $suppliers_count=$this->Suppliers_model->get_list(
+          'is_deleted=false AND is_active=true',
+          'COUNT(*) as count'
+        );
+
+        $data['suppliers_count']=$suppliers_count[0]->count;
 
         $info=$m_journal->get_list(
 
@@ -81,7 +99,6 @@ class Dashboard extends CORE_Controller {
                 array('account_titles','account_titles.account_id=journal_accounts.account_id','inner'),
                 array('account_classes','account_classes.account_class_id=account_titles.account_class_id','inner')
             )
-
         );
         $income_last_week=$info[0]->income_amount;
         $data['income_last_week']=$income_last_week;
@@ -245,8 +262,6 @@ class Dashboard extends CORE_Controller {
 
         $this->load->view('dashboard_view',$data);
     }
-
-
 
 
     function get_current_year_income($month){

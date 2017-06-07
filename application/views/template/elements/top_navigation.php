@@ -10,7 +10,7 @@
                     </a>
                 </span>
 
-        <a class="navbar-brand" href="#">JCore</a>
+        <a class="navbar-brand" href="#">JCORE</a>
 
         <div class="toolbar-icon-bg hidden-xs" id="toolbar-search">
             <div class="input-group">

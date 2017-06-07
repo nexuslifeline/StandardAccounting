@@ -321,27 +321,25 @@
                                                 <div class="row">
                                                     <div class="col-xs-12 col-sm-2">
                                                         <div class="data-container text-center">
-                                                            <h1><strong>206</strong> <b class="fa fa-caret-up"></b>
-                                                            <small>0%</small></h1>
+                                                            <h2><strong><?php echo number_format($receivables->Balance,2); ?></strong></h2>
                                                             <h4><b>Accounts Receivables</b></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-2">
                                                         <div class="data-container text-center">
-                                                            <h1><strong>500</strong> <b class="fa fa-caret-up"></b>
-                                                            <small>0%</small></h1>
+                                                            <h2><strong><?php echo number_format($payables->Balance,2); ?></strong></h2>
                                                             <h4><b>Accounts Payables</b></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-2">
                                                         <div class="data-container text-center">
-                                                            <h1><strong>120</strong></h1>
+                                                            <h2><strong><?php echo $customer_count; ?></strong></h2>
                                                             <h4><b>Customers</b></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-2">
                                                         <div class="data-container text-center">
-                                                            <h1><strong>10</strong></h1>
+                                                            <h2><strong><?php echo $suppliers_count; ?></strong></h2>
                                                             <h4><b>Suppliers</b></h4>
                                                         </div>
                                                     </div>
@@ -523,8 +521,8 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
           labels: ["Jan","Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"],
           datasets: [
             {
-              label: 'Income (Current Year)',
-              data: [12, 19, 3, 5, 2, 3, 20, 19, 3, 5, 2, 3],
+              label: 'Income (Last Year)',
+              data: <?php echo json_encode($previous_year_income_monthly); ?>,
               backgroundColor: [
                   'rgba(255, 152, 0, .1)'
               ],
@@ -535,7 +533,7 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
             },
             {
               label: 'Income (Current Year)',
-              data: [19, 3, 12, 32, 5, 23, 30, 3, 12, 32, 5, 20],
+              data: <?php echo json_encode($current_year_income_monthly); ?>,
               backgroundColor: [
                   'rgba(255, 255, 255, .1)'
               ],
@@ -564,7 +562,7 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
           datasets: [
             {
               label: 'Income (Current Year)',
-              data: [12, 19, 3, 5, 2, 3, 20, 19, 3, 5, 2, 3],
+              data: <?php echo json_encode($current_year_income_monthly); ?>,
               backgroundColor: [
                   'rgba(255, 152, 0, .2)',
                   'rgba(255, 152, 0, .2)',
@@ -596,8 +594,8 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
               borderWidth: 2
             },
             {
-              label: 'Income (Current Year)',
-              data: [19, 3, 12, 32, 5, 23, 30, 3, 12, 32, 5, 20],
+              label: 'Expense (Current Year)',
+              data: <?php echo json_encode($expense_monthly); ?>,
               backgroundColor: [
                   'rgba(255, 255, 255, .1)',
                   'rgba(255, 255, 255, .1)',
@@ -648,7 +646,7 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
             $("#sparkline1").sparkline([10,30,20,20,30,40,50], {
                 type: 'line',
                 width: '100%',
-                height: '50',
+                height: '40',
                 lineColor: '#ff9800',
                 fillColor: 'rgba(255, 152, 0, .1)',
                 lineWidth: '3',
