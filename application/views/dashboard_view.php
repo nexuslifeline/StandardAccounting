@@ -24,81 +24,6 @@
         zoom: 80%;
     }
 
-    .chat-box {
-        position: fixed;
-        width: 25%;
-        z-index: 9999999;
-        bottom: -30px;
-        right: 100px;
-    }
-
-    .label {
-        max-width: 250px;
-        word-wrap:break-word;
-        white-space:normal;
-        text-align: left;
-        border-radius: 10px;
-        margin: 5px;
-        padding: 10px;
-        font-size: 14px;
-        text-transform: none;
-    }
-
-    .send-link {
-        font-size: 20px;
-        color: #2196f3;
-    }
-
-    .message-wrapper {
-        padding-left: 0;
-    }
-
-    .ti-close {
-        transition: .25s ease-in-out;;
-    }
-
-    .chat-title {
-        font-weight: 600;
-        color: white;
-    }
-
-    .chat-box-button {
-        -webkit-box-shadow: 0px 0px 18px 0px rgba(158,152,152,1);
-        -moz-box-shadow: 0px 0px 18px 0px rgba(158,152,152,1);
-        box-shadow: 0px 0px 18px 0px rgba(158,152,152,1);
-        padding: 10px 15px 5px 15px;
-        font-size: 40px;
-        border-radius: 50%;
-    }
-
-    #chat_msg {
-        border: none!important;
-        background-color: transparent!important;
-    }
-
-    #chat_msg:focus {
-        -webkit-box-shadow: 0px 0px 18px 0px rgba(158,152,152,0)!important;
-        -moz-box-shadow: 0px 0px 18px 0px rgba(158,152,152,0)!important;
-        box-shadow: 0px 0px 18px 0px rgba(158,152,152,0)!important;
-    }
-
-    .chat-box-button-wrapper {
-        position: fixed;
-        bottom: 30px;
-        right: 15px;
-        z-index: 9999999;
-    }
-
-    .chat-box-body {
-        height: 400px!important;
-        max-height: 400px;
-        overflow-y: scroll;
-    }
-
-    .chat-box-footer {
-        background-color: white!important;
-    }
-
     .toolbar{
         float: left;
     }
@@ -138,361 +63,230 @@
         to { -webkit-transform: rotate(360deg); }
     }
 
-    h4 {
-        color:white;
-    }
+    </style>
 
-    h3 {
-        font-weight: 200;
-    }
+    <link rel="stylesheet" type="text/css" href="assets/css/dark-theme.css">
 
-    h2 {
-        color:white;
-    }
+    <style>
 
-    #panel1 {
-        background: #f4efed;
-        height: auto;
-        color: white;
-        font-size: 20px;
-        margin-bottom: 30px;
-        padding: 0;
-        height: 250px;
-        -webkit-box-shadow: 0px 10px 10px 0px #607d8b !important;
-        -moz-box-shadow: 0px 10px 10px 0px #607d8b !important;
-        box-shadow: 0px 10px 10px 0px #607d8b !important;
-    }
+        .page-content {
+            overflow-x: hidden!important;
+        }
 
-    #panel2 {
-        background: #fff8ee;
-        height: auto;
-        color: white;
-        font-size: 20px;
-        margin-bottom: 30px;
-        padding: 0;
-        height: 250px;
-        -webkit-box-shadow: 0px 10px 10px 0px #607d8b !important;
-        -moz-box-shadow: 0px 10px 10px 0px #607d8b !important;
-        box-shadow: 0px 10px 10px 0px #607d8b !important;
-    }
+        #tbl_po_list {
+            color: white!important;
+            border: none!important;
+        }
 
-    #panel3 {
-        background: #f4efed;
-        height: auto;
-        color: white;
-        font-size: 20px;
-        margin-bottom: 30px;
-        padding: 0;
-        height: 250px;
-        -webkit-box-shadow: 0px 10px 10px 0px #607d8b !important;
-        -moz-box-shadow: 0px 10px 10px 0px #607d8b !important;
-        box-shadow: 0px 10px 10px 0px #607d8b !important;
-    }
+        th {
+          background: rgba(255, 255, 255, .2)!important;
+          border-bottom: 1px solid #525252;
+        }
 
-    #panel4 {
-        background: #f4efed;
-        height: auto;
-        color: white;
-        font-size: 20px;
-        margin-bottom: 30px;
-        padding: 0;
-        height: auto;
-        -webkit-box-shadow: 0px 10px 10px 0px #607d8b !important;
-        -moz-box-shadow: 0px 10px 10px 0px #607d8b !important;
-        box-shadow: 0px 10px 10px 0px #607d8b !important;
-    }
+        @media (min-width: 768px){
+          .seven-cols .col-md-1,
+          .seven-cols .col-sm-1,
+          .seven-cols .col-lg-1  {
+            width: 100%;
+            *width: 100%;
+          }
+        }
 
-    #panel5 {
-        background: #f4efed;
-        height: auto;
-        color: white;
-        font-size: 20px;
-        margin-bottom: 30px;
-        padding: 0;
-        height: auto;
-        -webkit-box-shadow: 0px 10px 10px 0px #607d8b !important;
-        -moz-box-shadow: 0px 10px 10px 0px #607d8b !important;
-        box-shadow: 0px 10px 10px 0px #607d8b !important;
-    }
+        @media (min-width: 992px) {
+          .seven-cols .col-md-1,
+          .seven-cols .col-sm-1,
+          .seven-cols .col-lg-1 {
+            width: 14.285714285714285714285714285714%;
+            *width: 14.285714285714285714285714285714%;
+          }
+        }
+         
+        @media (min-width: 1200px) {
+          .seven-cols .col-md-1,
+          .seven-cols .col-sm-1,
+          .seven-cols .col-lg-1 {
+            width: 14.285714285714285714285714285714%;
+            *width: 14.285714285714285714285714285714%;
+          }
+        }
+    </style>
 
-    #panel1:hover {
-        /*background: #d5c0b8;*/
-    }
+    <style>
+      .v-timeline {
+          position: relative;
+          padding: 0;
+          margin-top: 2em;
+          margin-bottom: 2em;
+      }
+      .vertical-container {
+          width: 98%;
+          margin: 0 auto;
+      }
 
-    #panel1:hover #panelheader1 {
-        background: #ff5722;
-    }
+      .v-timeline::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 18px;
+          height: 100%;
+          width: 4px;
+          background: #525252;
+      }
 
-    #panel1:hover #panelfooter1 {
-        background: #00626e;
-    }
+      .vertical-timeline-block:first-child {
+        margin-top: 0;
+      }
 
-    #panel2:hover {
-        /*background: rgba(198,201,10,1);*/
-    }
+      .vertical-timeline-block {
+          position: relative;
+          margin: 2em 0;
+      }
 
-    #panel2:hover #panelheader2 {
-        background: #00a797;
-    }
+      .vertical-timeline-icon {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          font-size: 16px;
+          border: 1px solid #525252;
+          text-align: center;
+          background: #525252;
+          color: #ffffff;
+      }
 
-    #panel2:hover #panelfooter2 {
-        background: #00626e;
-    }
+      .vertical-timeline-icon i {
+          display: block;
+          width: 24px;
+          height: 24px;
+          position: relative;
+          left: 50%;
+          top: 50%;
+          margin-left: -12px;
+          margin-top: -9px;
+      }
 
-    #panel3:hover {
-        /*background: rgba(169,3,41,1);*/
-    }
+      .c-accent {
+          color: #f6a821;
+      }
 
-    #panel3:hover #panelheader3 {
-        background: #2196f3;
-    }
+      .vertical-timeline-content {
+          position: relative;
+          margin-left: 60px;
+          background-color: rgba(68, 70, 79, 0.5);
+          border-radius: 0.25em;
+          border: 1px solid #3d404c;
+      }
 
-    #panel3:hover #panelfooter3 {
-        background: #00626e;
-    }
+      .vertical-timeline-content:before {
+          border-color: transparent;
+          border-right-color: #3d404c;
+          border-width: 11px;
+          margin-top: -11px;
+      }
 
-    #panel4:hover {
-        /*background: rgba(242,186,186,1);*/
-    }
+      .vertical-timeline-content:after, .vertical-timeline-content:before {
+          right: 100%;
+          top: 20px;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+      }
 
-    #panel4:hover #panelheader4 {
-        background: #795548;
-    }
+      .p-sm {
+          padding: 15px !important;
+      }
 
-    #panel5:hover {
-        /*background: rgba(242,186,186,1);*/
-    }
+      .vertical-timeline-content .vertical-date {
+          font-weight: 500;
+          text-align: right;
+      }
 
-    #panel5:hover #panelheader5 {
-        background: #607d8b;
-    }
+      .vertical-timeline-content p {
+          margin: 1em 0 0 0;
+          line-height: 1.6;
+      }
 
-    #panelheader1 {
-        background: #ff7e55;
-        height: 50px;
-    }
+      .vertical-timeline-content:after {
+          border-color: transparent;
+          border-right-color: #3d404c;
+          border-width: 10px;
+          margin-top: -10px;
+      }
 
-    #paneltitle1 {
-        color: #FFF;
-        padding-top: 10px;
-        font-size: 18px;
-        text-transform: uppercase;
-        font-family: calibri;
-        font-weight: bold;
-    }
+      .vertical-timeline-content:after, .vertical-timeline-content:before {
+          right: 100%;
+          top: 20px;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+      }
 
-    #paneltitle1 i {
-        font-size: 25px;
-    }
+      .vertical-timeline-content:after {
+          content: "";
+          display: table;
+          clear: both;
+      }
 
-    #panelbody1 {
-        padding-left: 16px;
-        padding-right: 16px;
-    }
+      .vertical-timeline-content {
+          position: relative;
+          margin-left: 60px;
+          background-color: rgba(68, 70, 79, 0.5);
+          border-radius: 0.25em;
+          border: 1px solid #3d404c;
+      }
 
-    #panelbody1 h2 {
-        color: #ff7e55;
-        font-weight: bold;
-    }
+      .vertical-timeline-block:after {
+          content: "";
+          display: table;
+          clear: both;
+      }
 
-    #panelfooter1 {
-        background: #008fa1;
-        margin: 0;
-        padding: 0;
-        height: 70px;
-    }
+      .vertical-container::after {
+          content: '';
+          display: table;
+          clear: both;
+      }
 
-    #panelfooter1 small {
-        color: #90f2ff;
-    }
+      .v-timeline {
+          position: relative;
+          padding: 0;
+          margin-top: 2em;
+          margin-bottom: 2em;
+      }
 
-    #panelfooter1 h4 {
-        color: #90f2ff;
-        font-weight: bold;
-    }
+      .vertical-container {
+          width: 98%;
+          margin: 0 auto;
+      }
 
-    #panelheader2 {
-        background: #00c9b6;
-        height: 50px;
-    }
+      #style-1::-webkit-scrollbar-track
+      {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: transparent;
+      }
 
-    #paneltitle2 {
-        color: #FFF;
-        padding-top: 10px;
-        font-size: 18px;
-        text-transform: uppercase;
-        font-family: calibri;
-        font-weight: bold;
-    }
+      #style-1::-webkit-scrollbar
+      {
+        width: 10px;
+        border-radius: 11px;
+        background-color: transparent;
+      }
 
-    #paneltitle2 i {
-        font-size: 25px;
-    }
-
-    #panelbody2 {
-        padding-left: 16px;
-        padding-right: 16px;
-    }
-
-    #panelbody2 h2 {
-        color: #00c9b6;
-        font-weight: bold;
-    }
-
-    #panelfooter2 {
-        background: #008fa1;
-        margin: 0;
-        padding: 0;
-        height: 70px;
-    }
-
-    #panelfooter2 small {
-        color: #90f2ff;
-    }
-
-    #panelfooter2 h4 {
-        color: #90f2ff;
-        font-weight: bold;
-    }
-
-    #panelheader3 {
-        background: #51adf6;
-        height: 50px;
-    }
-
-    #paneltitle3 {
-        color: #FFF;
-        padding-top: 10px;
-        font-size: 15px;
-        text-transform: uppercase;
-        font-family: calibri;
-        font-weight: bold;
-    }
-
-    #paneltitle3 i {
-        font-size: 25px;
-    }
-
-    #panelbody3 {
-        padding-left: 16px;
-        padding-right: 16px;
-        height: auto;
-    }
-
-    #panelbody3 h2 {
-        color: #51adf6;
-        font-weight: bold;
-        margin-top: 0px;
-        padding-bottom: 35px;
-    }
-
-    #panelbody3 h3 {
-        color: #00bcd4;
-    }
-
-    #panelfooter3 {
-        background: #008fa1;
-        margin: 0;
-        padding-top: 5px;
-        padding-left: 0px;
-        height: 70px;
-    }
-
-    #panelfooter3 small {
-        color: #90f2ff;
-    }
-
-    #panelfooter3 h4 {
-        color: #90f2ff;
-        font-weight: bold;
-        margin: 0;
-    }
-
-    #panelheader4 {
-        background: #996b5b;
-        height: 50px;
-    }
-
-    #paneltitle4 {
-        color: #FFF;
-        padding-top: 10px;
-        font-size: 18px;
-        text-transform: uppercase;
-        font-family: calibri;
-        font-weight: bold;
-    }
-
-    #paneltitle4 i {
-        font-size: 25px;
-    }
-
-    #panelheader5 {
-        background: #7a96a3;
-        height: 50px;
-    }
-
-    #paneltitle5 {
-        color: #FFF;
-        padding-top: 10px;
-        font-size: 18px;
-        text-transform: uppercase;
-        font-family: calibri;
-        font-weight: bold;
-    }
-
-    #paneltitle5 i {
-        font-size: 25px;
-    }
-
-    /*.panel-body {
-        background: rgba(250,247,215,1);
-        background: -moz-linear-gradient(left, rgba(250,247,215,1) 0%, rgba(255,255,255,1) 72%, rgba(255,255,255,1) 100%);
-        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(250,247,215,1)), color-stop(72%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,1)));
-        background: -webkit-linear-gradient(left, rgba(250,247,215,1) 0%, rgba(255,255,255,1) 72%, rgba(255,255,255,1) 100%);
-        background: -o-linear-gradient(left, rgba(250,247,215,1) 0%, rgba(255,255,255,1) 72%, rgba(255,255,255,1) 100%);
-        background: -ms-linear-gradient(left, rgba(250,247,215,1) 0%, rgba(255,255,255,1) 72%, rgba(255,255,255,1) 100%);
-        background: linear-gradient(to right, rgba(250,247,215,1) 0%, rgba(255,255,255,1) 72%, rgba(255,255,255,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faf7d7', endColorstr='#ffffff', GradientType=1 );
-    }
-
-    .static-content-wrapper {
-        background: rgba(250,247,215,1);
-        background: -moz-linear-gradient(left, rgba(250,247,215,1) 0%, rgba(255,255,255,1) 72%, rgba(255,255,255,1) 100%);
-        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(250,247,215,1)), color-stop(72%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,1)));
-        background: -webkit-linear-gradient(left, rgba(250,247,215,1) 0%, rgba(255,255,255,1) 72%, rgba(255,255,255,1) 100%);
-        background: -o-linear-gradient(left, rgba(250,247,215,1) 0%, rgba(255,255,255,1) 72%, rgba(255,255,255,1) 100%);
-        background: -ms-linear-gradient(left, rgba(250,247,215,1) 0%, rgba(255,255,255,1) 72%, rgba(255,255,255,1) 100%);
-        background: linear-gradient(to right, rgba(250,247,215,1) 0%, rgba(255,255,255,1) 72%, rgba(255,255,255,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faf7d7', endColorstr='#ffffff', GradientType=1 );
-    }*/
-
-    .panel-body p {
-        font-size: 45px;
-        font-family: source sans pro, segoe ui, droid sans, tahoma, arial, sans-serif;
-        font-weight: 200;
-    }
-
-    #intro h3 {
-        font-family: source sans pro, segoe ui, droid sans, tahoma, arial, sans-serif;
-        font-weight: 200;
-    }
-
-    #intro b {
-        font-weight: 500;
-    }
-
-    #line {
-        height: 5px;
-        background: rgba(71,46,2,1);
-        background: -moz-linear-gradient(left, rgba(71,46,2,1) 0%, rgba(255,255,255,1) 62%, rgba(255,255,255,1) 100%);
-        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(71,46,2,1)), color-stop(62%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,1)));
-        background: -webkit-linear-gradient(left, rgba(71,46,2,1) 0%, rgba(255,255,255,1) 62%, rgba(255,255,255,1) 100%);
-        background: -o-linear-gradient(left, rgba(71,46,2,1) 0%, rgba(255,255,255,1) 62%, rgba(255,255,255,1) 100%);
-        background: -ms-linear-gradient(left, rgba(71,46,2,1) 0%, rgba(255,255,255,1) 62%, rgba(255,255,255,1) 100%);
-        background: linear-gradient(to right, rgba(71,46,2,1) 0%, rgba(255,255,255,1) 62%, rgba(255,255,255,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#472e02', endColorstr='#ffffff', GradientType=1 );
-    }
-
+      #style-1::-webkit-scrollbar-thumb
+      {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #555;
+      }
     </style>
 
 </head>
@@ -504,198 +298,173 @@
 <div id="wrapper">
         <div id="layout-static">
         <?php echo $_side_bar_navigation; ?>
-
-
         <div class="static-content-wrapper">
             <div class="static-content">
                     <div class="page-content"><!-- #page-content -->
-
-                        <div class="chat-box-button-wrapper">
-                            <button id="btn_open_chat" class="btn btn-warning chat-box-button">
-                                <span class="ti ti-comments"></span>
-                            </button>
-                        </div>
-                        <div id="chat_box" class="panel panel-default chat-box hidden">
-                            <div class="panel-heading">
-                                <span class="chat-title"><strong style="color: #9bcb64;">&bull;</strong> Active <span id="active_count"></span></span>
-                            </div>
-                            <div id="chat_body" class="panel-body chat-box-body">
-                            </div>
-                            <div class="panel-footer chat-box-footer">
-                                <div class="col-xs-10 message-wrapper">
-                                    <input id="chat_msg" class="form-control" type="text" name="chat_message" placeholder="Enter Message Here">
-                                </div>
-                                <div class="col-xs-2">
-                                    <a id="btn_send" class="send-link"><span class="fa fa-paper-plane"></span></a>
-                                </div>
-                            </div>
-                        </div>
-
                             <div data-widget-group="group1">
                                 <div class="row">
                                     <div class="col-md-12">
-
-                                    <div class="panel panel-default">
-
+                                        <div class="panel panel-default" style="overflow-x: hidden!important;"> 
                                             <div class="panel-body table-responsive">
-                                            <p>Overview</p>
-                                            <div id="intro">
-                                                <h3>Hi
-                                                    <b>
-                                                        <?php foreach($company_info as $company_info){ ?>
-                                                            <?php echo $company_info->company_name; ?>
-                                                        <?php } ?>
-                                                    </b>
-                                                    !, here is a rundown of your business' performance<br>and how your collections are doing individually. 
-                                                </h3>
-                                                <div id="line"></div>
-                                            </div>
-                                            <br>
-                                            <h3>Company Snapshot</h3>
+                                                <h1><b class="ti ti-bar-chart-alt"></b> <strong>JCORE</strong> Standard Accounting</h1>
+                                                <div id="intro">
+                                                    <h4 class="welcome-msg">Hi
+                                                        <b>
+                                                            <?php 
+                                                                echo $this->session->user_fullname;
+                                                            ?>
+                                                        </b>, here is a rundown of your business' performance<br>and how your collections are doing individually. 
+                                                    </h4>
+                                                    <hr>
+                                                </div>
+                                                <h3><b class="fa fa-dashboard"></b> DASHBOARD</h3>
                                                 <div class="row">
-
-                                                    <div class="col-md-4">
-                                                        <div class="col-md-12" id="panel1">
-                                                            <div class="col-md-12" id="panelheader1">
-                                                                <div id="paneltitle1">
-                                                                    <i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Income (Current Month)
-                                                                </div>
-                                                            </div>
-                                                            <div id="panelbody1">
-                                                                <h2 class="m-b-xs">
-                                                                    <?php echo number_format($income_current_month,2); ?>
-                                                                </h2><br>
-                                                                <div id="sparkline1" class="m-b-sm"></div>
-                                                            </div>
-                                                            <div class="col-md-12" id="panelfooter1">
-                                                                <div class="col-xs-4">
-                                                                    <small class="stats-label">This Day</small>
-                                                                    <h4><?php echo number_format($income_this_day,2); ?></h4>
-                                                                </div>
-                                                                <div class="col-xs-4">
-                                                                    <small class="stats-label">Yesterday</small>
-                                                                    <h4><?php echo number_format($income_yesterday,2); ?></h4>
-                                                                </div>
-                                                                <div class="col-xs-4">
-                                                                    <small class="stats-label">Last week</small>
-                                                                    <h4><?php echo number_format($income_last_week,2); ?></h4>
-                                                                </div>
-                                                            </div>
+                                                    <div class="col-xs-12 col-sm-2">
+                                                        <div class="data-container text-center">
+                                                            <h2><strong><?php echo number_format($receivables->Balance,2); ?></strong></h2>
+                                                            <h4><b>Accounts Receivables</b></h4>
                                                         </div>
                                                     </div>
-
-                                                    <div class="col-md-4">
-                                                        <div class="col-md-12" id="panel2">
-                                                            <div class="col-md-12" id="panelheader2">
-                                                                <div id="paneltitle2">
-                                                                    <i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Income (Last Month)
-                                                                </div>
-                                                            </div>
-                                                            <div id="panelbody2">
-                                                                <h2 class="m-b-xs">
-                                                                    <?php echo number_format($income_last_month,2); ?>
-                                                                </h2><br>
-                                                                <div id="sparkline2" class="m-b-sm"></div>
-                                                            </div>
-                                                            <div class="col-md-12" id="panelfooter2">
-                                                                <div class="col-xs-4">
-                                                                    <small class="stats-label">This Day</small>
-                                                                    <h4><?php echo number_format($this_day_percentage,0); ?>%</h4>
-                                                                </div>
-
-                                                                <div class="col-xs-4">
-                                                                    <small class="stats-label">Yesterday</small>
-                                                                    <h4><?php echo number_format($yesterday_percentage,0); ?>%
-                                                                    </h4>
-                                                                </div>
-                                                                <div class="col-xs-4">
-                                                                    <small class="stats-label">Last week</small>
-                                                                    <h4><?php echo number_format($last_week_percentage,0); ?>%</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div> 
+                                                    <div class="col-xs-12 col-sm-2">
+                                                        <div class="data-container text-center">
+                                                            <h2><strong><?php echo number_format($payables->Balance,2); ?></strong></h2>
+                                                            <h4><b>Accounts Payables</b></h4>
+                                                        </div>
                                                     </div>
-
-                                                    <div class="col-md-4">
-                                                        <div class="col-md-12" id="panel3">
-                                                            <div class="col-md-6" id="panelheader3">
-                                                                <div id="paneltitle3">
-                                                                    <i class="fa fa-bolt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Income (Last Year)
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6" id="panelheader3">
-                                                                <div id="paneltitle3">
-                                                                    <i class="fa fa-bolt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Income (Current Year)
-                                                                </div>
-                                                            </div>
-                                                            <div id="panelbody3">
-                                                                <div class="col-sm-6" style="padding: 0;margin: 0;">
-                                                                    <h2><?php echo number_format($income_last_year,2); ?></h2>
-                                                                    
-                                                                    <h3><?php echo $last_year_income_percentage; ?>% <i class="fa fa-bolt"></i></h3>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <h2><?php echo number_format($income_this_year,2); ?></h2>
-                                                                    
-                                                                    <h3><?php echo $this_year_income_percentage; ?>% <i class="fa fa-bolt"></i></h3>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12" id="panelfooter3">
-                                                                <!-- <table class="table small m-t-sm">
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <h4><?php echo number_format($total_last_year_client,0); ?> Clients</h4>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h4><?php echo number_format($total_current_year_client,0); ?> Clients</h4>
-                                                                        </td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table> -->
-                                                                <div class="col-sm-6">
-                                                                    <h4><?php echo number_format($total_last_year_client,0); ?> Clients</h4>
-                                                                </div>
-                                                                <div class="col-sm-6" style="padding-left: 25px;">
-                                                                    <h4><?php echo number_format($total_current_year_client,0); ?> Clients</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div> 
+                                                    <div class="col-xs-12 col-sm-2">
+                                                        <div class="data-container text-center">
+                                                            <h2><strong><?php echo $customer_count; ?></strong></h2>
+                                                            <h4><b>Customers</b></h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-2">
+                                                        <div class="data-container text-center">
+                                                            <h2><strong><?php echo $suppliers_count; ?></strong></h2>
+                                                            <h4><b>Suppliers</b></h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4">
+                                                        <div class="data-container">
+                                                            <strong>Sales for this Week</strong>
+                                                            <div id="sparkline1" class="m-b-md"></div>
+                                                            <br>
+                                                            <div class="row seven-cols">
+                                                                <div class="col-sm-1 col-md-1">Sun</div>
+                                                                <div class="col-sm-1 col-md-1">Mon</div>
+                                                                <div class="col-sm-1 col-md-1">Tues</div>
+                                                                <div class="col-sm-1 col-md-1">Wed</div>
+                                                                <div class="col-sm-1 col-md-1">Thurs</div>
+                                                                <div class="col-sm-1 col-md-1">Fri</div>
+                                                                <div class="col-sm-1 col-md-1">Sat</div>
+                                                              </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-
-                                                <br />
-
-                                                <div class="col-md-12" style="margin: 0;padding: 0;">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="col-md-12" id="panel4">
-                                                                <div class="col-md-12" id="panelheader4">
-                                                                    <div id="paneltitle4">
-                                                                        <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Income (current year) vs Income (previous year)
+                                                <div class="row" style="margin-top: 20px;">
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <div class="data-container text-center">
+                                                            <canvas id="salesChart"></canvas>
+                                                            <span>Income (Last Year) vs Income (Current Year)</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <div class="data-container text-center">
+                                                            <canvas id="testChart"></canvas>
+                                                            <span>Income vs Expense (Current Year)</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="margin-top: 20px;">
+                                                    <div class="col-xs-12 col-sm-8 <?php echo (in_array('7-1',$this->session->user_rights)?'':'hidden'); ?>">
+                                                      <div class="data-container table-responsive" style="padding: 20px 15px 20px 15px; min-height: 700px; max-height: 700px;">
+                                                            <h6 class="visible-xs hidden-sm hidden-md hidden-lg po_title" style="position: absolute; top: 5px"><i class="fa fa-file-text-o"></i> <span style="color: white;">PURCHASE ORDER</span></h6>
+                                                            <h3 class="hidden-xs po_title" style="position: absolute; top: 5px"><i class="fa fa-file-text-o"></i> <span style="color: white;">PURCHASE ORDER FOR APPROVAL</span></h2>
+                                                            <table id="tbl_po_list" cellspacing="0" width="100%">
+                                                                <thead>
+                                                                    <th></th>
+                                                                    <th>PO #</th>
+                                                                    <th>Vendor</th>
+                                                                    <th>Terms </th>
+                                                                    <th>Posted by </th>
+                                                                    <th style="text-align: center;"> <i class="fa fa-paperclip"></i></th>
+                                                                    <th><center>Action</center></th>
+                                                                </thead>
+                                                                <tbody>
+                                                                </tbody>
+                                                            </table>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4">
+                                                      <div id="style-1" class="data-container" style="min-height: 700px; max-height: 700px; overflow-y: scroll;">
+                                                        <h3><i class="fa fa-rss" style="color: #ffad33;"></i> ACTIVITY FEED</h3>
+                                                        <div class="v-timeline vertical-container">
+                                                            <div class="vertical-timeline-block">
+                                                                <div class="vertical-timeline-icon">
+                                                                    <i class="fa fa-calendar c-accent"></i>
+                                                                </div>
+                                                                <div class="vertical-timeline-content">
+                                                                    <div class="p-sm">
+                                                                        <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
+                                                                        <h4>Purchase Order
+                                                                        </h4>
+                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
                                                                     </div>
-                                                                </div><br><br><br>
-                                                                <div class="col-md-12" id="panelbody4" style="padding-bottom: 5px;">
-                                                                    <div>
-                                                                        <canvas id="lineChart" height="140"></canvas>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-block">
+                                                                <div class="vertical-timeline-icon ">
+                                                                    <i class="fa fa-briefcase c-accent"></i>
+                                                                </div>
+                                                                <div class="vertical-timeline-content">
+                                                                    <div class="p-sm">
+                                                                         <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
+                                                                        <h4>Purchase Order
+                                                                        </h4>
+                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-block">
+                                                                <div class="vertical-timeline-icon">
+                                                                    <i class="fa fa-coffee c-accent"></i>
+                                                                </div>
+                                                                <div class="vertical-timeline-content">
+                                                                    <div class="p-sm">
+                                                                         <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
+                                                                        <h4>Purchase Order
+                                                                        </h4>
+                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-block">
+                                                                <div class="vertical-timeline-icon">
+                                                                    <i class="fa fa-calendar c-accent"></i>
+                                                                </div>
+                                                                <div class="vertical-timeline-content">
+                                                                    <div class="p-sm">
+                                                                         <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
+                                                                        <h4>Purchase Order
+                                                                        </h4>
+                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-timeline-block">
+                                                                <div class="vertical-timeline-icon">
+                                                                    <i class="fa fa-calendar c-accent"></i>
+                                                                </div>
+                                                                <div class="vertical-timeline-content">
+                                                                    <div class="p-sm">
+                                                                        <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
+                                                                        <h4>Purchase Order
+                                                                        </h4>
+                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <div class="col-md-12" id="panel5">
-                                                                <div class="col-md-12" id="panelheader5">
-                                                                    <div id="paneltitle5">
-                                                                        <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Income vs Expense (current year)
-                                                                    </div>
-                                                                </div><br><br><br>
-                                                                <div class="col-md-12" id="panelbody5" style="padding-top: 5px;">
-                                                                    <div>
-                                                                        <canvas id="barChart" height="140"></canvas>
-                                                                    </div>
-                                                                </div>
-                                                            </div> 
-                                                        </div>
+                                                      </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -703,47 +472,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                        <div data-widget-group="group1">
-                            <div class="row">
-                                <div class="col-md-12">
-
-                                    <div class="panel panel-default <?php echo (in_array('7-1',$this->session->user_rights)?'':'hidden'); ?>">
-                                        <!-- <div class="panel-heading">
-                                            <h2>Purchase Order for Approval</h2>
-                                        </div> -->
-
-
-                                        <div class="panel-body table-responsive">
-                                        <h3>Purchase Order for Approval</h2>
-                                            <table id="tbl_po_list" class="custom-design table-striped" cellspacing="0" width="100%" style="background: white;">
-                                                <thead class="">
-                                                <tr>
-                                                    <th></th>
-                                                    <th><i class="fa fa-code"></i> PO#</th>
-                                                    <th><i class="fa fa-users"></i> Vendor</th>
-                                                    <th><i class="fa fa-calendar"></i> Terms </th>
-                                                    <th><i class="fa fa-users"></i> Posted by </th>
-                                                    <th style="text-align: center;"> <i class="fa fa-paperclip"></i></th>
-                                                    <th><center>Action</center></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-
-
-
-                                                </tbody>
-                                            </table>
-
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div> <!-- #page-content -->
             </div>
 
@@ -751,7 +479,7 @@
             <footer role="contentinfo">
                 <div class="clearfix">
                     <ul class="list-unstyled list-inline pull-left">
-                        <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+                        <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTION</h6></li>
                     </ul>
                     <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
                 </div>
@@ -781,200 +509,165 @@
 <!-- DATATABLE -->
 <script type="text/javascript" src="assets/plugins/datatables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
-
-
-
 <script>
-    (function() {
+var ctx = document.getElementById("salesChart").getContext('2d');
+var ctxIE = document.getElementById("testChart").getContext('2d');
 
-        var sparklineCharts = function(){
-            $("#sparkline1").sparkline([124, 43, 43, 35, 44, 32, 44, 52,134, 43, 43, 35, 44, 32, 44, 52,124, 43, 43, 35, 44, 32, 44, 52,134, 43, 43, 35, 44, 32, 44, 52], {
-                type: 'line',
-                width: '100%',
-                height: '50',
-                lineColor: '#00bcd4',
-                fillColor: '#00bcd4',
-                lineWidth: '2',
-                spotColor: '#f44336',
-                maxSpotColor: '#f44336',
-                minSpotColor: '#f44336',
-                highlightSpotColor: '#00007f',
-                highlightLineColor: '#7f007f',
-                normalRangeColor: '#0000bf',
-                spotRadius: '4'
-            });
+Chart.defaults.global.defaultFontColor = "#b7b7b7";
 
-            $("#sparkline2").sparkline([32, 11, 25, 37, 41, 32, 34, 42], {
-                type: 'line',
-                width: '100%',
-                height: '50',
-                lineColor: '#00bcd4',
-                fillColor: '#00bcd4',
-                lineWidth: '2',
-                spotColor: '#f44336',
-                maxSpotColor: '#f44336',
-                minSpotColor: '#f44336',
-                highlightSpotColor: '#00007f',
-                highlightLineColor: '#7f007f',
-                normalRangeColor: '#0000bf',
-                spotRadius: '4'
-            });
-
-            $("#sparkline3").sparkline([34, 22, 24, 41, 10, 18, 16,8], {
-                type: 'line',
-                width: '100%',
-                height: '50',
-                lineColor: '#FFF',
-                fillColor: "#FFF"
-            });
-        };
-
-        var sparkResize;
-
-        $(window).resize(function(e) {
-            clearTimeout(sparkResize);
-            sparkResize = setTimeout(sparklineCharts, 500);
-        });
-
-        sparklineCharts();
-
-
-
-
-        var data1 = [
-            [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,20],[11,10],[12,13],[13,4],[14,7],[15,8],[16,12]
-        ];
-        var data2 = [
-            [0,0],[1,2],[2,7],[3,4],[4,11],[5,4],[6,2],[7,5],[8,11],[9,5],[10,4],[11,1],[12,5],[13,2],[14,5],[15,2],[16,0]
-        ];
-        $("#flot-dashboard5-chart").length && $.plot($("#flot-dashboard5-chart"), [
-                data1,  data2
-            ],
+  var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: ["Jan","Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"],
+          datasets: [
             {
-                series: {
-                    lines: {
-                        show: false,
-                        fill: true
-                    },
-                    splines: {
-                        show: true,
-                        tension: 0.4,
-                        lineWidth: 1,
-                        fill: 0.4
-                    },
-                    points: {
-                        radius: 0,
-                        show: true
-                    },
-                    shadowSize: 2
-                },
-                grid: {
-                    hoverable: true,
-                    clickable: true,
-
-                    borderWidth: 2,
-                    color: 'transparent'
-                },
-                colors: ["#FFF", "#FFF"],
-                xaxis:{
-                },
-                yaxis: {
-                },
-                tooltip: false
+              label: 'Income (Last Year)',
+              data: <?php echo json_encode($previous_year_income_monthly); ?>,
+              backgroundColor: [
+                  'rgba(255, 152, 0, .1)'
+              ],
+              borderColor: [
+                  'rgb(255, 152, 0)'
+              ],
+              borderWidth: 2
+            },
+            {
+              label: 'Income (Current Year)',
+              data: <?php echo json_encode($current_year_income_monthly); ?>,
+              backgroundColor: [
+                  'rgba(255, 255, 255, .1)'
+              ],
+              borderColor: [
+                  'rgb(255, 255, 255)'
+              ],
+              borderWidth: 2
             }
-        );
+          ]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
+  });
 
+  var iEChart = new Chart(ctxIE, {
+      type: 'bar',
+      data: {
+          labels: ["Jan","Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"],
+          datasets: [
+            {
+              label: 'Income (Current Year)',
+              data: <?php echo json_encode($current_year_income_monthly); ?>,
+              backgroundColor: [
+                  'rgba(255, 152, 0, .2)',
+                  'rgba(255, 152, 0, .2)',
+                  'rgba(255, 152, 0, .2)',
+                  'rgba(255, 152, 0, .2)',
+                  'rgba(255, 152, 0, .2)',
+                  'rgba(255, 152, 0, .2)',
+                  'rgba(255, 152, 0, .2)',
+                  'rgba(255, 152, 0, .2)',
+                  'rgba(255, 152, 0, .2)',
+                  'rgba(255, 152, 0, .2)',
+                  'rgba(255, 152, 0, .2)',
+                  'rgba(255, 152, 0, .2)'
+              ],
+              borderColor: [
+                  'rgb(255, 152, 0)',
+                  'rgb(255, 152, 0)',
+                  'rgb(255, 152, 0)',
+                  'rgb(255, 152, 0)',
+                  'rgb(255, 152, 0)',
+                  'rgb(255, 152, 0)',
+                  'rgb(255, 152, 0)',
+                  'rgb(255, 152, 0)',
+                  'rgb(255, 152, 0)',
+                  'rgb(255, 152, 0)',
+                  'rgb(255, 152, 0)',
+                  'rgb(255, 152, 0)'              
+              ],
+              borderWidth: 2
+            },
+            {
+              label: 'Expense (Current Year)',
+              data: <?php echo json_encode($expense_monthly); ?>,
+              backgroundColor: [
+                  'rgba(255, 255, 255, .1)',
+                  'rgba(255, 255, 255, .1)',
+                  'rgba(255, 255, 255, .1)',
+                  'rgba(255, 255, 255, .1)',
+                  'rgba(255, 255, 255, .1)',
+                  'rgba(255, 255, 255, .1)',
+                  'rgba(255, 255, 255, .1)',
+                  'rgba(255, 255, 255, .1)',
+                  'rgba(255, 255, 255, .1)',
+                  'rgba(255, 255, 255, .1)',
+                  'rgba(255, 255, 255, .1)',
+                  'rgba(255, 255, 255, .1)'
+              ],
+              borderColor: [
+                  'rgb(255, 255, 255)',
+                  'rgb(255, 255, 255)',
+                  'rgb(255, 255, 255)',
+                  'rgb(255, 255, 255)',
+                  'rgb(255, 255, 255)',
+                  'rgb(255, 255, 255)',
+                  'rgb(255, 255, 255)',
+                  'rgb(255, 255, 255)',
+                  'rgb(255, 255, 255)',
+                  'rgb(255, 255, 255)',
+                  'rgb(255, 255, 255)',
+                  'rgb(255, 255, 255)'
+              ],
+              borderWidth: 2
+            }
+          ]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
+  });
 
-
-        var lineData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July","August","September","October","November","December"],
-            datasets: [
-                {
-                    label: "Example dataset",
-                    fillColor: "rgba(255,255,255,1)",
-                    strokeColor: "rgba(255,255,255,1)",
-                    pointColor: "rgba(255,255,255,1)",
-                    pointStrokeColor: "rgba(255,255,255,1)",
-                    pointHighlightFill: "rgba(255,255,255,1)",
-                    pointHighlightStroke: "rgba(255,255,255,1)",
-                    data: <?php echo json_encode($previous_year_income_monthly); ?>
-                },
-                {
-                    label: "Example dataset",
-                    fillColor: "rgba(26,179,148,0.5)",
-                    strokeColor: "rgba(26,179,148,0.7)",
-                    pointColor: "rgba(26,179,148,1)",
-                    pointStrokeColor: "rgba(255,255,255,1)",
-                    pointHighlightFill: "rgba(255,255,255,1)",
-                    pointHighlightStroke: "rgba(26,179,148,1)",
-                    data: <?php echo json_encode($current_year_income_monthly); ?>
-                }
-            ]
-        };
-
-        var lineOptions = {
-            scaleShowGridLines: true,
-            scaleGridLineColor: "rgba(0,0,0,.05)",
-            scaleGridLineWidth: 1,
-            bezierCurve: true,
-            bezierCurveTension: 0.4,
-            pointDot: true,
-            pointDotRadius: 4,
-            pointDotStrokeWidth: 1,
-            pointHitDetectionRadius: 20,
-            datasetStroke: true,
-            datasetStrokeWidth: 2,
-            datasetFill: true,
-            responsive: true,
-        };
-
-
-        var ctx = document.getElementById("lineChart").getContext("2d");
-        var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
-
-
-
-    })();
 </script>
 
 <script>
-    var barData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July","August","September","October","November","December"],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(255,102,0,1)",
-                strokeColor: "rgba(255,102,0,1)",
-                highlightFill: "rgba(255,102,0,1)",
-                highlightStroke: "rgba(255,102,0,1)",
-                data: <?php echo json_encode($expense_monthly); ?>
-            },
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(26,179,148,0.5)",
-                strokeColor: "rgba(26,179,148,0.8)",
-                highlightFill: "rgba(26,179,148,0.75)",
-                highlightStroke: "rgba(26,179,148,1)",
-                data: <?php echo json_encode($current_year_income_monthly); ?>
-            }
-        ]
+    var sparklineCharts = function(){
+            $("#sparkline1").sparkline([10,30,20,20,30,40,50], {
+                type: 'line',
+                width: '100%',
+                height: '40',
+                lineColor: '#ff9800',
+                fillColor: 'rgba(255, 152, 0, .1)',
+                lineWidth: '3',
+                spotColor: '#f44336',
+                maxSpotColor: '#f44336',
+                minSpotColor: '#f44336',
+                highlightSpotColor: '#00007f',
+                highlightLineColor: '#7f007f',
+                normalRangeColor: '#0000bf',
+                spotRadius: '0'
+            });
     };
 
-    var barOptions = {
-        scaleBeginAtZero: true,
-        scaleShowGridLines: true,
-        scaleGridLineColor: "rgba(0,0,0,.05)",
-        scaleGridLineWidth: 1,
-        barShowStroke: true,
-        barStrokeWidth: 2,
-        barValueSpacing: 5,
-        barDatasetSpacing: 1,
-        responsive: true
-    }
+    var sparkResize;
 
+    $(window).resize(function(e) {
+        clearTimeout(sparkResize);
+        sparkResize = setTimeout(sparklineCharts, 500);
+    });
 
-    var ctx = document.getElementById("barChart").getContext("2d");
-    var myNewChart = new Chart(ctx).Bar(barData, barOptions);
+    sparklineCharts();
 </script>
 
 <script>
@@ -989,6 +682,9 @@
                 "dom": '<"toolbar">frtip',
                 "bLengthChange":false,
                 "ajax" : "Purchases/transaction/po-for-approved",
+                "language": {
+                  "searchPlaceholder":"Search Purchase Order"
+                },
                 "columns": [
                     {
                         "targets": [0],
@@ -1005,7 +701,7 @@
                         targets:[5],data: "attachment",
                         render: function (data, type, full, meta){
 
-                            return '<center>'+ data +' <i class="fa fa-paperclip"></i></center>';
+                            return '<center>'+ data +' <i class="fa fa-paperclip"></i></classenter>';
                         }
 
                     },
@@ -1022,6 +718,8 @@
                     }
                 ]
             });
+
+             $('div.dataTables_filter input').addClass('dash_search_field');
         })();
 
 
@@ -1030,65 +728,7 @@
 
             var detailRows = [];
 
-            $('#btn_open_chat').on('click',function() {
-                $('#active_count').html('<?php echo "(".$online_count.")"; ?>');
-                $('#chat_box').toggleClass('hidden');
-                $(this).find('span').toggleClass("ti ti-comments ti ti-close", 500, "linear");
-            });
-
-            $('#btn_send').click(function() {
-                $('#chat_body').append(
-                    '<div class="row">'+
-                        '<div class="container-fluid">'+
-                            '<div class="label label-info pull-left">'
-                                +$('#chat_msg').val()+
-                            '</div>'+
-                        '</div>'+
-                    '</div>'+
-                    '<br>'
-                );
-
-                $('#chat_body').append(
-                    '<div class="row">'+
-                        '<div class="container-fluid">'+
-                            '<div class="label label-success pull-right">'
-                                +$('#chat_msg').val()+
-                            '</div>'+
-                        '</div>'+
-                    '</div>'+
-                    '<br>'
-                );
-
-                $('#chat_msg').val('');
-            });
-
-            $('#chat_msg').keydown(function(e){
-                if (e.keyCode == 13) {
-                    $('#chat_body').append(
-                        '<div class="row">'+
-                            '<div class="container-fluid">'+
-                                '<div class="label label-info pull-left">'
-                                    +$('#chat_msg').val()+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'+
-                        '<br>'
-                    );
-                    
-                    $('#chat_body').append(
-                        '<div class="row">'+
-                            '<div class="container-fluid">'+
-                                '<div class="label label-success pull-right">'
-                                    +$('#chat_msg').val()+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'+
-                        '<br>'
-                    );
-                    $(this).val('');
-                }
-            });
-
+           
             $('#tbl_po_list tbody').on( 'click', 'tr td.details-control', function () {
                 var tr = $(this).closest('tr');
                 var row = dt.row( tr );

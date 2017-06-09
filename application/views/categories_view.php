@@ -28,7 +28,71 @@
                 zoom: 0.8;
                 zoom: 80%;
             }
+             
+            .bg-color {
+                background-image: url('assets/img/main-bg.jpg');
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
 
+            .modal-backdrop {
+                opacity:0.5 !important;
+            }
+
+            .form-control {
+                border-width: 3px!important;
+                border-color: #afafaf!important;
+                background: transparent!important;
+            }
+
+            .form-control:focus {
+                transition: .3s;
+                font-size: 20px;
+                -webkit-box-shadow: none!important;
+                -moz-box-shadow: none!important;
+                box-shadow: none!important;
+                background-color: transparent!important;
+                border-color: white!important;
+                font-weight: bolder;
+                color: white;
+            }
+
+            .panel {
+                -webkit-box-shadow: none!important;
+                -moz-box-shadow: none!important;
+                box-shadow: none!important;
+                background-color: transparent!important;
+                color: white;
+            }
+
+            .modal-header,
+            .panel-heading {
+                background-color: rgba(64, 64, 64, .8)!important;
+            }
+
+            .panel-body {
+                background-color: rgba(64, 64, 64, .5)!important;
+            }
+
+            tr:nth-child(even) {
+                background-color: rgba(64, 64, 64, .3)!important;
+            }
+
+            th {
+                background-color: rgba(64, 64, 64, .7)!important;
+                padding: 10px;
+                border: 1px solid #afafaf;
+            }
+
+            td {
+                padding:10px;
+                border: 1px solid #afafaf;
+            }
+
+            table {
+                color: white;
+            }
+              
             .toolbar{
                 float: left;
             }
@@ -74,11 +138,11 @@
 
             <?php echo $_side_bar_navigation;?>
 
-                <div class="static-content-wrapper white-bg">
+                <div class="static-content-wrapper white-bg bg-color">
                     <div class="static-content"  >
                         <div class="page-content"><!-- #page-content -->
 
-                            <ol class="breadcrumb" style="margin:0;">
+                            <ol class="breadcrumb" style="margin:0; background: transparent;">
                                 <li><a href="dashboard">Dashboard</a></li>
                                 <li><a href="categories">Categories</a></li>
                             </ol>
@@ -94,8 +158,10 @@
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Categories</b>
                                                     </div>
                                                     <div class="panel-body table-responsive">
+
                                                         <table id="tbl_categories" class="" cellspacing="0" width="100%">
                                                             <thead class="table-erp">
+
                                                             <tr>
                                                                 <th>Category Name</th>
                                                                 <th>Category Description</th>
@@ -256,6 +322,9 @@
                 "dom": '<"toolbar">frtip',
                 "bLengthChange":false,
                 "ajax" : "Categories/transaction/list",
+                "language": {
+                    "searchPlaceholder": "Search Category"
+                },
                 "columns": [
 
                     { targets:[0],data: "category_name" },

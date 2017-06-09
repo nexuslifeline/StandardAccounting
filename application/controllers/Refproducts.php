@@ -5,7 +5,9 @@ class Refproducts extends CORE_Controller {
     function __construct() {
         parent::__construct('');
         $this->validate_session();
-        $this->load->model('Refproduct_model');
+        $this->load->model(
+            'Refproduct_model'
+        );
     }
 
     public function index() {

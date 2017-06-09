@@ -13,7 +13,55 @@ class Journal_account_model extends CORE_Model{
         parent::__construct();
     }
 
+    function get_payable_balance() {
+        $sql="SELECT 
+            IF(ac.account_type_id = 1
+                    OR ac.account_type_id = 5,
+                (SUM(ja.dr_amount) - SUM(ja.cr_amount)),
+                (SUM(ja.cr_amount) - SUM(ja.dr_amount))) AS Balance
+        FROM
+            journal_accounts ja
+                INNER JOIN
+            journal_info ji ON ji.journal_id = ja.journal_id
+                LEFT JOIN
+            account_titles at ON at.account_id = ja.account_id
+                LEFT JOIN
+            account_classes ac ON ac.account_class_id = at.account_class_id
+        WHERE
+            ja.account_id IN (SELECT 
+                    payable_account_id
+                FROM
+                    account_integration)
+                AND ji.is_deleted = FALSE
+                AND ji.is_active = TRUE";
 
+        return $this->db->query($sql)->result();
+    }
+
+    function get_receivable_balance() {
+        $sql="SELECT 
+            IF(ac.account_type_id = 1
+                    OR ac.account_type_id = 5,
+                (SUM(ja.dr_amount) - SUM(ja.cr_amount)),
+                (SUM(ja.cr_amount) - SUM(ja.dr_amount))) AS Balance
+        FROM
+            journal_accounts ja
+                INNER JOIN
+            journal_info ji ON ji.journal_id = ja.journal_id
+                LEFT JOIN
+            account_titles at ON at.account_id = ja.account_id
+                LEFT JOIN
+            account_classes ac ON ac.account_class_id = at.account_class_id
+        WHERE
+            ja.account_id IN (SELECT 
+                    receivable_account_id
+                FROM
+                    account_integration)
+                AND ji.is_deleted = FALSE
+                AND ji.is_active = TRUE";
+
+        return $this->db->query($sql)->result();
+    }
 
     function get_bs_account_classes($date,$department_id=null){
         $sql="SELECT ac.account_type_id,ac.account_class_id,ac.account_class
