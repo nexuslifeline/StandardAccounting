@@ -225,7 +225,7 @@ class Templates extends CORE_Controller {
 
 
             //****************************************************
-            /*case 'issuance': //delivery invoice
+            case 'issuance': //delivery invoice
                 $m_issuance=$this->Issuance_model;
                 $m_dr_items=$this->Issuance_item_model;
                 $m_company=$this->Company_model;
@@ -233,9 +233,10 @@ class Templates extends CORE_Controller {
 
                 $info=$m_issuance->get_list(
                     $filter_value,
-                    'issuance_info.*,departments.department_name',
+                    'issuance_info.*,departments.department_name,customers.customer_name',
                     array(
-                        array('departments','departments.department_id=issuance_info.issued_department_id','left')
+                        array('departments','departments.department_id=issuance_info.issued_department_id','left'),
+                        array('customers','customers.customer_id=issuance_info.issued_to_person','left')
                     )
                 );
 
@@ -291,7 +292,7 @@ class Templates extends CORE_Controller {
                     $pdf->Output();
                 }
 
-                break;*/
+                break;
 
 
             //****************************************************

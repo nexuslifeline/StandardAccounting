@@ -570,7 +570,7 @@
                 "columns": [
                     {
                         "targets": [0],
-                        "class":          "details-control",
+                        "class":          "details-control hidden",
                         "orderable":      false,
                         "data":           null,
                         "defaultContent": ""
