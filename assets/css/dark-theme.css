@@ -1,19 +1,6 @@
+
 .static-content-wrapper {
     background: #161616!important;
-}
-
-.welcome-msg {color: #c0c0c0!important;}
-
-.po_title {
-    color: #ffad33;
-}
-
-.data-container {
-    padding: 10px;
-    padding-bottom: 20px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, .1)!important;
 }
 
 .input-group-addon {
@@ -27,20 +14,59 @@ b {
 }
 
 .typeahead {
-    background: black;
+    /*background-color: #1f1f1f !important;*/
+    background: #000 !important;
     font-weight: bolder;
     font-size: 18px;
+    border-color: #aaa !important;
 }
+
+
+
+
+
+
+
+
+
+.tt-menu {
+    background: #212121;
+    font-weight: bolder;
+    font-size: 18px;
+    padding: 0 !important;
+    border-radius: 5px !important;
+    border-color: #1f1f1f !important;
+}
+
+/* column name */
+.tt-dataset {
+    background: #1f1f1f !important;
+}
+
+/* results */
+.tt-suggestion {
+    background: #303030 !important;
+    border: 1px red !important;
+}
+
+.tt-dataset td {
+    border: 0px !important;
+}
+
+
+
+
+
+
+
+
+
+
 
 .typeahead:focus {
     background-color: #ffd65c!important;
     border-color: #ffad33!important;
     color: black;
-}
-
-.tt-menu {
-    background: #212121;
-    font-weight: bolder;
     font-size: 18px;
 }
 
@@ -84,7 +110,7 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
 .panel-body {
     border-top: none!important;
     background: #303030!important;
-    color: white;   
+    color: white;
 }
 
 .panel-footer,
@@ -141,25 +167,40 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
 .select2-selection {
     padding-bottom: 10px!important;
     background-color: #1f1f1f !important;
-    color: white!important;
-    font-size: 18px;
+    color: white !important;
+    font-size: 15px;
     border-width: 2px!important;
     border-radius: 0!important;
 }
 
+.select2-container{
+    min-width: 100%;
+}
+
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: white;
+    color: white !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #aaa !important;
+    color: #000 !important;
+    font-weight: bolder !important;
+    font-size: 18px;
+}
+
+.select2-results__option {
+    background: #1f1f1f !important;
 }
 
 .select2-results {
-    color: white;
+    color: white !important;
     border-width: 2px!important;
     background: #303030!important;
 }
 
-.form-control:not(.general-search):not(.dash_search_field) {
+.form-control:not(.general-search) {
     color: white;
-    font-size: 18px;
+    font-size: 15px;
     border-width: 2px!important;
     border-radius: 0!important;
     background: #1f1f1f!important;
@@ -167,6 +208,7 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
 
 .form-control:not(.general-search):focus {
     transition: .2s;
+    font-size: 18px;
     font-weight: bolder!important;
     color: black;
     background-color: #ffd65c!important;
@@ -176,10 +218,8 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
     box-shadow: none!important;
 }
 
-.dash_search_field {
-    background: rgba(255, 255, 255, .1);
-    border: none;
-    border-radius: 5px;
+.form-control:focus:not(.general-search)::placeholder {
+    color: #ffd65c;
 }
 
 label {
@@ -192,13 +232,13 @@ tr {
 }
 
 tr:nth-child(even){
-    background: #414141!important;
+    background: #414141 !important;
     border: none!important;
 }
 
 tr:hover {
     transition: .4s;
-    background: #ffce3a!important;
+    background: #ffce3a !important;
     color: black;
 }
 
@@ -234,7 +274,7 @@ td {
     background-color: #404040!important;
     color: white!important;
 }
-
+ 
 .datepicker table tr:hover {
     background-color: #ffce3a!important;
     color: black!important;
@@ -249,86 +289,22 @@ tbody {
     border-top: none!important;
 }
 
-.typeahead {
-    /*background-color: #1f1f1f !important;*/
-    background: #000 !important;
-    font-weight: bolder;
-    font-size: 18px;
-    border-color: #aaa !important;
-}
-
-.tt-menu {
-    background: #212121;
-    font-weight: bolder;
-    font-size: 18px;
-    padding: 0 !important;
-    border-radius: 5px !important;
-    border-color: #1f1f1f !important;
-}
-
-/* column name */
-.tt-dataset {
-    background: #1f1f1f !important;
-}
-
-/* results */
-.tt-suggestion {
-    background: #303030 !important;
-    border: 1px red !important;
-}
-
-.tt-dataset td {
-    border: 0px !important;
-}
 
 
-.typeahead:focus {
-    background-color: #ffd65c!important;
-    border-color: #ffad33!important;
-    color: black;
-    font-size: 18px;
-}
 
-.select2-selection {
-    padding-bottom: 10px!important;
-    background-color: #1f1f1f !important;
-    color: white !important;
-    font-size: 15px;
-    border-width: 2px!important;
-    border-radius: 0!important;
-}
 
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: white !important;
-}
 
-.select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #aaa !important;
-    color: #000 !important;
-    font-weight: bolder !important;
-    font-size: 18px;
-}
 
-.select2-results {
-    color: white !important;
-    border-width: 2px!important;
-    background: #303030!important;
-}
 
-.form-control:focus:not(.general-search)::placeholder {
-    color: #ffd65c;
-}
 
-tr:nth-child(even){
-    background: #414141 !important;
-    border: none!important;
-}
 
-tr:hover {
-    transition: .4s;
-    background: #ffce3a !important;
-    color: black;
-}
+
+
+
+
+
+
+
 
 /* TABLES */
 
@@ -348,6 +324,9 @@ table#tbl_so_list tbody tr.no-padding:nth-child(even) {
     background-color: #414141 !important;
     color: white !important;
 }
+
+
+
 
 /* tbl_sales_order - sales order */
 
@@ -384,14 +363,99 @@ table#tbl_payments tbody tr.no-padding:nth-child(even) {
     color: white !important;
 }
 
-hr {border-top-color: #636363!important;}
 
-b {color: #ffad33;}
+/* tbl_products - products */
 
-.form-group {border-top: none!important;}
+.row_child_tbl_products:hover {
+    background: transparent !important;
+    color: white !important;
+}
 
-.breadcrumb {background: transparent!important;}
+table#tbl_products tbody tr.no-padding:nth-child(odd) {
+    background-color: #303030 !important;
+    color: white !important;
+}
 
-.page-content > .breadcrumb > li > a {color: #ffce3a!important;}
+table#tbl_products tbody tr.no-padding:nth-child(even) {
+    background-color: #414141 !important;
+    color: white !important;
+}
 
-.btn {border-radius: 5px!important;}
+
+/* tbl_suppliers - supplier */
+
+.row_child_tbl_suppliers:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_suppliers tbody tr.no-padding:nth-child(odd) {
+    background-color: #303030 !important;
+    color: white !important;
+}
+
+table#tbl_suppliers tbody tr.no-padding:nth-child(even) {
+    background-color: #414141 !important;
+    color: white !important;
+}
+
+table.supplier_content tbody tr:hover {
+    background: transparent !important;
+    color: #FFF;
+}
+
+.tab-content {
+    border: 1px solid white !important;
+    background: #414141 !important;
+}
+
+.tab-label {
+    background: #414141 !important;
+    color: white !important;
+    border-top: 1px solid white !important;
+    border-left: 1px solid white !important;
+    border-right: 1px solid white !important;
+    border-bottom: 0px !important;
+}
+
+
+/* tbl_customers - customer */
+
+.row_child_tbl_customers:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_customers tbody tr.no-padding:nth-child(odd) {
+    background-color: #303030 !important;
+    color: white !important;
+}
+
+table#tbl_customers tbody tr.no-padding:nth-child(even) {
+    background-color: #414141 !important;
+    color: white !important;
+}
+
+table.customers_content tbody tr:hover {
+    background: transparent !important;
+    color: #FFF;
+}
+
+
+/* tbl_fixed_management - fixed asset */
+
+.row_child_tbl_fixed_management:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_fixed_management tbody tr.no-padding:nth-child(odd) {
+    background-color: #303030 !important;
+    color: white !important;
+}
+
+table#tbl_fixed_management tbody tr.no-padding:nth-child(even) {
+    background-color: #414141 !important;
+    color: white !important;
+}
+

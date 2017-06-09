@@ -1,22 +1,22 @@
 <center>
-    <table width="100%" style="font-family: tahoma;">
+    <table class="customers_content" width="100%" style="font-family: tahoma;">
         <tbody>
         <tr>
-            <td>
+            <td style="border: 0px !important;" class="supplier_tab">
                 <br />
 
-                <div class="tab-container tab-top tab-default">
+                <div class="tab-container tab-top tab-default" style="height: auto;border-left: 0px!important;">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#customer_info" data-toggle="tab"><i class="fa fa-users"></i> Information</a></li>
+                        <li class="active"><a href="#customer_info" data-toggle="tab" class="tab-label"><i class="fa fa-users"></i> Information</a></li>
 
                     </ul>
-                    <div class="tab-content">
+                    <div class="tab-content" style="height: auto;">
                         <div class="tab-pane active" id="customer_info" style="min-height: 300px;">
 
 
                             <div class="row">
                                 <div class="col-lg-7">
-                                    <h4><span style="margin-left: 1%"><strong><i class="fa fa-user"></i> <?php echo $customer_info->customer_name; ?></strong></span></h4>
+                                    <h4><span style="margin-left: 1%;color: #FFF;"><strong><i class="fa fa-user"></i> <?php echo $customer_info->customer_name; ?></strong></span></h4>
                                     <hr />
 
                                     <div style="margin-left: 10%">
@@ -49,7 +49,7 @@
                             <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Sales Order of <?php echo $customer_info->customer_name; ?></b> (Open and partially received)</span>
                             <hr />
                             <div class="col-lg-12 table-responsive">
-                                <table id="tbl_so_<?php echo $customer_info->customer_id; ?>" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                <table id="tbl_so_<?php echo $customer_info->customer_id; ?>" class="" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
 

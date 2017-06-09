@@ -5,7 +5,7 @@
    <center>
        <table width="100%"  style="border-collapse: collapse;">
            <thead>
-                <tr>
+                <tr class="row_child_tbl_products">
                     <td style="border: 1px solid lightgrey;padding: 5px;"><b>Txn Date</b></td>
                     <td style="border: 1px solid lightgrey;padding: 5px;"><b>Reference</b></td>
                     <td style="border: 1px solid lightgrey;padding: 5px;"><b>Txn Type</b></td>

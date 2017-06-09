@@ -18,6 +18,7 @@
         <?php echo $_def_css_files; ?>
 
         <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
+        <link href="assets/css/dark-theme.css" rel="stylesheet">
         <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
@@ -101,7 +102,7 @@
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Sales Person</b>
                                                     </div>
                                                     <div class="panel-body table-responsive">
-                                                        <table id="tbl_salesperson" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                        <table id="tbl_salesperson" class="" cellspacing="0" width="100%">
                                                             <thead class="">
                                                             <tr>
                                                                 <!-- <th>Acronym Name</th> -->
@@ -364,7 +365,7 @@
             _cboDepartment.select2('val',null);
 
             var createToolBarButton=function(){
-                var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New category" >'+
+                var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New category" >'+
                     '<i class="fa fa-plus"></i> New Sales person</button>';
                 $("div.toolbar").html(_btnNew);
             }();

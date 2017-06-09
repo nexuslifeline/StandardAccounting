@@ -5,7 +5,12 @@
 </style>
 <div class="static-sidebar-wrapper sidebar-default">
     <div class="static-sidebar">
+
+
+
         <div class="sidebar">
+
+        
             <div class="widget">
                 <div class="widget-body">
                     <div class="userinfo">

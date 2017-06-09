@@ -16,6 +16,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
@@ -159,7 +160,7 @@
                             row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                         }
                     }).done(function(response){
-                        row.child( response ).show();
+                        row.child( response,'no-padding' ).show();
                         reInitializeDatatable($('#tbl_so_'+ d.customer_id));
                         if ( idx === -1 ) {
                             detailRows.push( tr.attr('id') );
@@ -660,8 +661,8 @@
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Customers</b>
                                             </div>                                  
                                             <div class="panel-body table-responsive">
-                                                <button class="btn btn-green" id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;margin-bottom: 0px !important; float: left;" data-toggle="modal" data-target="" data-placement="left" title=" New product" ><i class="fa fa-plus"></i>  New Customer</button>
-                                                <table id="tbl_customers" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                <button class="btn btn-primary" id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;margin-bottom: 0px !important; float: left;" data-toggle="modal" data-target="" data-placement="left" title=" New product" ><i class="fa fa-plus"></i>  New Customer</button>
+                                                <table id="tbl_customers" class="" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>
                                                         <th>&nbsp;&nbsp;</th>

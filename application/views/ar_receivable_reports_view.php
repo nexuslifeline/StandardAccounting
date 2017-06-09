@@ -21,8 +21,11 @@
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
 	
 	<link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
+    <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
     <style>
 
@@ -98,14 +101,14 @@
                                             <div class="panel-body table-responsive">
 												<div class="col-md-4">
 													<div class="form-group">
-													  <label for="customer" style="font-weight:bold;">Customer:</label>
-													  <select class="form-control" id="customer_id_filter">
-														<option value="all">All</option>
-														<?php foreach($customers as $row){
-															echo "<option value=".$row->customer_id.">".$row->customer_name."</option>";
-														  }
-														?>
-													  </select>
+													    <label for="customer" style="font-weight:bold;">Customer:</label>
+													    <select id="customer_id_filter">
+    														<option value="all">All</option>
+    														<?php foreach($customers as $row){
+    															echo "<option value=".$row->customer_id.">".$row->customer_name."</option>";
+    														  }
+    														?>
+													    </select>
 													</div>
 												</div>
 												<div class="col-md-4">
@@ -163,10 +166,17 @@
 <script type="text/javascript" src="assets/plugins/datatables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
 
+<!-- Select2 -->
+<script src="assets/plugins/select2/select2.full.min.js"></script>
+
 <script>
 var customer_id="all";
 
 $(document).ready(function(){
+
+        var _cboCustomer;
+
+
         //Get ALL 
 		customer_id=$('#customer_id_filter').val();
 		fromdate_filter=$('#fromdate_filter').val();
@@ -272,6 +282,11 @@ $(document).ready(function(){
             calendarWeeks: true,
             autoclose: true
 
+        });
+
+        _cboCustomer=$('#customer_id_filter').select2({
+            //placeholder: "Please select Customer.",
+            allowClear: false
         });
 });
 
