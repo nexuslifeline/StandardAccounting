@@ -18,9 +18,12 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
+
+    <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
     <style>
 
@@ -61,6 +64,10 @@
             to { -webkit-transform: rotate(360deg); }
         }
 
+        #account_type_id {
+            z-index:  !important;
+        }
+
     </style>
 
 </head>
@@ -94,7 +101,7 @@
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Account Classification</b>
                                             </div>
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_account_class" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                <table id="tbl_account_class" class="" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>
                                                         <th>Account Class</th>
@@ -208,7 +215,7 @@
                                 <div class="form-group">
                                     <label class="col-md-3 col-md-offset-1 control-label"><strong>* Account Type :</strong></label>
                                     <div class="col-md-7">
-                                        <select name="account_type_id" class="form-control" data-error-msg="Account Type is required!" placeholder="Account Type" required>
+                                        <select name="account_type_id" id="account_type_id" data-error-msg="Account Type is required!" placeholder="Account Type" required>
                                             <option value="" disabled selected>Select Account Type</option>
                                         	<?php foreach ($account_types as $account_type) { ?>
                                         		<option value="<?php echo $account_type->account_type_id; ?>"><?php echo $account_type->account_type; ?></option>
@@ -246,6 +253,8 @@
 <script src="assets/plugins/spinner/dist/spin.min.js"></script>
 <script src="assets/plugins/spinner/dist/ladda.min.js"></script>
 
+<!-- Select2 -->
+<script src="assets/plugins/select2/select2.full.min.js"></script>
 
 <script type="text/javascript" src="assets/plugins/datatables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
@@ -253,7 +262,7 @@
 <script>
 
 $(document).ready(function(){
-    var dt; var _txnMode; var _selectedID; var _selectRowObj;
+    var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboAccountType;
 
     var initializeControls=function(){
         dt=$('#tbl_account_class').DataTable({
@@ -283,10 +292,15 @@ $(document).ready(function(){
         });
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New unit" >'+
+            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New unit" >'+
                 '<i class="fa fa-plus"></i> New Account Classification</button>';
             $("div.toolbar").html(_btnNew);
         }();
+
+        _cboAccountType = $('#account_type_id').select2({
+            placeholder: "Please select account type.",
+            allowClear: false
+        });
     }();
 
     var bindEventHandlers=(function(){
@@ -349,6 +363,10 @@ $(document).ready(function(){
                 showNotification(response);
                 dt.row(_selectRowObj).remove().draw();
             });
+        });
+
+        $('#account_type_id').select2({
+            dropdownParent: $('#modal_account_class')
         });
 
         $('#btn_cancel').click(function(){

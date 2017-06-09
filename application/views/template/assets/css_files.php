@@ -34,8 +34,7 @@
         margin-bottom: 0!important;
     }
 
-    select:focus,
-    textarea:focus,
+    
     .form-control:focus{
         border-color: #03a9f4!important;
         -webkit-box-shadow: 0px 0px 22px 2px #03a9f4!important;
@@ -60,6 +59,10 @@
 
     }
 
+    /*.fade {
+        height: 100% !important;
+    }*/
+
     .custom-design-header{
         background-color: #4f9f63;
     }
@@ -74,5 +77,37 @@
     .panel.panel-default .panel-heading {
         border-color: transparent;
     }
+
+    /*input[type="text"]:focus {
+        height: 50px;
+        color: #FFF !important;
+        font-size: 20px;
+        font-weight: bold;
+        background: #03a9f4;
+        transition: 0.2s;
+    }
+
+    textarea:focus {
+        height: 80px;
+        color: #616161;
+        font-size: 20px;
+        font-weight: bold;
+        background: #ffed4c !important;
+        transition: 0.8s;
+
+        border-color: #03a9f4 !important;
+        -webkit-box-shadow: 0px 0px 220px 220px #03a9f4!important;
+        -moz-box-shadow: 0px 0px 220px 220px #03a9f4!important;
+        box-shadow: 0px 0px 220px 220px #03a9f4!important;
+
+
+    }
+
+    select:focus {
+        color: #616161;
+        font-weight: bold;
+        background: #ffed4c !important;
+        transition: 0.1s;
+    }*/
 
 </style>

@@ -302,6 +302,7 @@
 <script type="text/javascript" src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
 
 <script>
+
     $(document).ready(function(){
         var dt; var _txnMode; var _selectedID; var _selectRowObj;
 

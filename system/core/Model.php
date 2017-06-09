@@ -48,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class CI_Model {
 
-	/**
+	/** 
 	 * Class constructor
 	 *
 	 * @return	void

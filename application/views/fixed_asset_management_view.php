@@ -18,6 +18,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
 
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
@@ -96,6 +97,16 @@
             z-index: 999999;
         }
 
+        table#fix_extend tr:nth-child(odd) {
+            background: #303030 !important;
+            color: #FFF !important;
+        }
+
+        table#fix_extend tr:nth-child(even) {
+            background: #414141 !important;
+            color: #FFF !important;
+        }
+
     </style>
 
 </head>
@@ -129,7 +140,7 @@
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Fixed Asset Management</b>
                                             </div>
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_fixed_management" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                <table id="tbl_fixed_management" class="" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>
                                                         <th></th>
@@ -263,7 +274,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button id="btn_save" type="button" class="btn"  style="background-color:#2ecc71;color:white;"><span class=""></span>  Save</button>
+                                    <button id="btn_save" type="button" class="btn btn-primary"  style="background-color:#2ecc71;color:white;"><span class=""></span>  Save</button>
                                     <button id="btn_cancel_assets" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                 </div>
                             </form>
@@ -502,7 +513,7 @@ $(document).ready(function(){
         _cboDepartments.select2('val',null);
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New unit" >'+
+            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New unit" >'+
                 '<i class="fa fa-plus"></i> New Asset</button>';
             $("div.toolbar").html(_btnNew);
         }();
@@ -566,7 +577,7 @@ $(document).ready(function(){
             else {
                 tr.addClass( 'details' );
 
-                row.child( format( row.data() ) ).show();
+                row.child( format( row.data(),'no-padding' ) ).show();
 
                 if ( idx === -1 ) {
                     detailRows.push( tr.attr('id') );
@@ -873,7 +884,7 @@ $(document).ready(function(){
     };
 
     function format ( d ) {
-        return '<table style="width: 80%;">' +
+        return '<table style="width: 80%;" id="fix_extend">' +
             '<tbody>' +
                 '<tr>' +
                     '<td width="15%"><b>Asset Code :</b></td><td>'+ d.asset_code +'</td>' +

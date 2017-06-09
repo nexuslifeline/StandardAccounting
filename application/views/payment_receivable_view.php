@@ -18,7 +18,7 @@
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
 
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
 
@@ -164,7 +164,7 @@
                                             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Collection Entry</b>
                                         </div>
                                         <div class="panel-body table-responsive">
-                                            <table id="tbl_payments" class="custom-design table-striped" cellspacing="0" width="100%">
+                                            <table id="tbl_payments" class="" cellspacing="0" width="100%">
                                                 <thead class="">
                                                 <tr>
                                                     <th></th>
@@ -216,7 +216,7 @@
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 Receipt type * : <br />
-                                                                <select id="cbo_receipt_type" name="receipt_type" class="form-control">
+                                                                <select id="cbo_receipt_type" name="receipt_type">
                                                                     <option value="1" selected>Official Receipt</option>
                                                                     <option value="2">Acknowledgement Receipt</option>
                                                                 </select>
@@ -227,7 +227,7 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 Department * : <br />
-                                                                <select id="cbo_branch" name="department" class="form-control">
+                                                                <select id="cbo_branch" name="department">
                                                                     <?php foreach($departments as $department){ ?>
                                                                         <option value="<?php echo $department->department_id; ?>" selected><?php echo $department->department_name; ?></option>
                                                                     <?php } ?>
@@ -239,9 +239,9 @@
                                                             <div class="col-lg-6">
                                                                 Receipt # * : <br />
                                                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-code"></i>
-                                    </span>
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-code"></i>
+                                                                </span>
                                                                     <input type="text" name="receipt_no" class="form-control" placeholder="Receipt #" data-error-msg="Receipt number is required!" required>
                                                                 </div>
                                                             </div>
@@ -339,7 +339,7 @@
                                                 <br />
                                                 
                                                 <div class="table-responsive">
-                                                    <table id="tbl_items" class="custom-design table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
+                                                    <table id="tbl_items" class="" cellspacing="0" width="100%" style="font-font:tahoma;">
 
                                                         <thead class="">    
                                                         <tr>        
@@ -586,18 +586,24 @@
                         targets:[8],data: "is_active",
                         render: function (data, type, full, meta){
                             if(data=="1"){
-                                _attribute='class="fa fa-check-circle" style="color:green;"';
+                                _attribute='class="fa fa-check" style="color:#4caf50;font-size:30px;"';
                             }else{
-                                _attribute='class="fa fa-times-circle" style="color:red;"';
-                                $('.btn_cancel_or').attr('disabled','disabled');
+                                _attribute='class="fa fa-times" style="color:#f55246;font-size:30px;"';
                             }
                             return '<center><i '+_attribute+'></i></center>';
                         }
                     },
                     {
-                        targets:[8],data: null,
+                        targets:[8],data: "is_active",
                         render: function (data, type, full, meta){
-                            return '<center><button type="button" class="btn btn-default btn_cancel_or"><i class="fa fa-times-circle"></i></button></center>';
+
+                            if(data=="1"){
+                                return '<center><button type="button" class="btn btn-default btn_cancel_or"><i class="fa fa-times-circle"></i></button></center>';
+                            } else {
+                                return '<center><button type="button" class="btn btn-default btn_cancel_or" disabled><i class="fa fa-times-circle"></i></button></center>';
+                            }
+
+                            
                         }
 
                     }
@@ -609,7 +615,7 @@
 
 
             var createToolBarButton=function(){
-                var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Payment" >'+
+                var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Payment" >'+
                     '<i class="fa fa-plus"></i>  New Payment</button>';
                 $("div.toolbar").html(_btnNew);
             }();
@@ -683,7 +689,7 @@
                             row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                         }
                     }).done(function(response){
-                        row.child( response ).show();
+                        row.child( response,'no-padding' ).show();
                         // Add to the 'open' array
                         if ( idx === -1 ) {
                             detailRows.push( tr.attr('id') );

@@ -18,6 +18,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
@@ -81,7 +82,7 @@
 
     <script>
 $(document).ready(function(){
-    var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboItemTypes;
+    var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboItemTypes; var _cboTaxGroup;
 
     var initializeControls=function(){
         var initializeControls=function() {
@@ -114,7 +115,7 @@ $(document).ready(function(){
                 ]
             });
             var createToolBarButton=function() {
-                var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New supplier" >'+
+                var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New supplier" >'+
                     '<i class="fa fa-plus"></i> New Supplier</button>';
                 $("div.toolbar").html(_btnNew);
             }();
@@ -123,6 +124,14 @@ $(document).ready(function(){
         $('.numeric').autoNumeric('init');
 
         $('#contact_no').keypress(validateNumber);
+
+        _cboTaxGroup=$('#cbo_tax_type').select2({
+            allowClear: false
+        });
+
+        $('#cbo_tax_type').select2({
+            dropdownParent: $('#modal_create_suppliers')
+        });
 
     }();
 
@@ -149,7 +158,7 @@ $(document).ready(function(){
                         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                     }
                 }).done(function(response){
-                    row.child( response ).show();
+                    row.child( response,'no-padding' ).show();
                     reInitializeDatatable($('#tbl_po_'+ d.supplier_id));
                     if ( idx === -1 ) {
                         detailRows.push( tr.attr('id') );
@@ -556,7 +565,7 @@ $(document).ready(function(){
                                             </div>
                                             <div class="panel-body table-responsive">
 
-                                                <table id="tbl_suppliers" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                <table id="tbl_suppliers" class="" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>
                                                         <th>&nbsp;&nbsp;</th>
@@ -706,7 +715,7 @@ $(document).ready(function(){
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-code"></i>
                                                     </span>
-                                                    <select name="tax_type_id" id="cbo_tax_type" class="form-control" data-error-msg="Tax type is required!" required="">
+                                                    <select name="tax_type_id" id="cbo_tax_type" data-error-msg="Tax type is required!" required="">
                                                         <option value="">Please select tax type...</option>
                                                         <?php foreach($tax_types as $tax_type){ ?>
                                                             <option value="<?php echo $tax_type->tax_type_id; ?>" data-tax-rate="<?php echo $tax_type->tax_rate; ?>"><?php echo $tax_type->tax_type; ?></option>

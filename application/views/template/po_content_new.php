@@ -31,7 +31,7 @@
 </head>
 <body>
 	<table width="100%">
-        <tr>
+        <tr class="row_child_tbl_sales_order">
             <td width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 100px; width: 100px; text-align: left;"></td>
             <td width="90%" class="align-center">
                 <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>

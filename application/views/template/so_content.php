@@ -1,6 +1,7 @@
 
 <div>
-    <center><table width="95%" cellpadding="5" style="font-family: tahoma;font-size: 11;">
+    <center>
+        <table width="95%" cellpadding="5" style="font-family: tahoma;font-size: 11;">
             <tr class="row_child_tbl_so_list">
                 <td width="45%" valign="top" style="border: 0px !important;"><br />
                     <span>Department :</span><br />
@@ -19,13 +20,10 @@
                 <td width="50%" align="right" style="border: 0px !important;">
                     <p>Sales Order No.</p><br />
                     <h4 class="text-navy" style="color:#FFF;"><?php echo $sales_order->so_no; ?></h4><br />
-
-
-
-
                 </td>
             </tr>
-        </table></center>
+        </table>
+    </center>
 
     <br /><br />
 

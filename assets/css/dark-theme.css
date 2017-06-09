@@ -26,6 +26,8 @@ b {
 
 
 
+
+
 .tt-menu {
     background: #212121;
     font-weight: bolder;
@@ -170,6 +172,10 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
     border-radius: 0!important;
 }
 
+.select2-container{
+    min-width: 100%;
+}
+
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: white !important;
 }
@@ -179,6 +185,10 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
     color: #000 !important;
     font-weight: bolder !important;
     font-size: 18px;
+}
+
+.select2-results__option {
+    background: #1f1f1f !important;
 }
 
 .select2-results {
@@ -263,7 +273,7 @@ td {
     background-color: #404040!important;
     color: white!important;
 }
-
+ 
 .datepicker table tr:hover {
     background-color: #ffce3a!important;
     color: black!important;
@@ -277,6 +287,13 @@ table:not(.datepicker table) {
 tbody {
     border-top: none!important;
 }
+
+
+
+
+
+
+
 
 
 
@@ -345,3 +362,98 @@ table#tbl_payments tbody tr.no-padding:nth-child(even) {
     color: white !important;
 }
 
+
+/* tbl_products - products */
+
+.row_child_tbl_products:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_products tbody tr.no-padding:nth-child(odd) {
+    background-color: #303030 !important;
+    color: white !important;
+}
+
+table#tbl_products tbody tr.no-padding:nth-child(even) {
+    background-color: #414141 !important;
+    color: white !important;
+}
+
+
+/* tbl_suppliers - supplier */
+
+.row_child_tbl_suppliers:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_suppliers tbody tr.no-padding:nth-child(odd) {
+    background-color: #303030 !important;
+    color: white !important;
+}
+
+table#tbl_suppliers tbody tr.no-padding:nth-child(even) {
+    background-color: #414141 !important;
+    color: white !important;
+}
+
+table.supplier_content tbody tr:hover {
+    background: transparent !important;
+    color: #FFF;
+}
+
+.tab-content {
+    border: 1px solid white !important;
+    background: #414141 !important;
+}
+
+.tab-label {
+    background: #414141 !important;
+    color: white !important;
+    border-top: 1px solid white !important;
+    border-left: 1px solid white !important;
+    border-right: 1px solid white !important;
+    border-bottom: 0px !important;
+}
+
+
+/* tbl_customers - customer */
+
+.row_child_tbl_customers:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_customers tbody tr.no-padding:nth-child(odd) {
+    background-color: #303030 !important;
+    color: white !important;
+}
+
+table#tbl_customers tbody tr.no-padding:nth-child(even) {
+    background-color: #414141 !important;
+    color: white !important;
+}
+
+table.customers_content tbody tr:hover {
+    background: transparent !important;
+    color: #FFF;
+}
+
+
+/* tbl_fixed_management - fixed asset */
+
+.row_child_tbl_fixed_management:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_fixed_management tbody tr.no-padding:nth-child(odd) {
+    background-color: #303030 !important;
+    color: white !important;
+}
+
+table#tbl_fixed_management tbody tr.no-padding:nth-child(even) {
+    background-color: #414141 !important;
+    color: white !important;
+}

@@ -18,6 +18,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
@@ -93,7 +94,7 @@
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Units</b>
                                             </div>
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_units" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                <table id="tbl_units" class="" cellspacing="0" width="100%">
                                                     <thead class="table-erp">
                                                     <tr>
                                                         <th>Unit Name</th>
@@ -266,7 +267,7 @@ $(document).ready(function(){
         });
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New unit" >'+
+            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New unit" >'+
                 '<i class="fa fa-plus"></i> New Unit</button>';
             $("div.toolbar").html(_btnNew);
         }();

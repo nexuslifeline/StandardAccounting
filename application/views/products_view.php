@@ -18,6 +18,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
@@ -26,8 +27,6 @@
 
 
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-    <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
 
     <link href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
@@ -83,6 +82,8 @@
 
 $(document).ready(function(){
     var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboItemTypes; var _selectedProductType; var _isTaxExempt=0;
+    var _cboSupplier; var _cboCategory; var _cboSupplier; var _cboTax; var _cboInventory; var _cboMeasurement; var _cboCredit; var _cboDebit;
+    var _cboTaxGroup;
     
     /*$(document).ready(function(){
         $('#modal_filter').modal('show');
@@ -149,6 +150,39 @@ $(document).ready(function(){
         $('#mobile_no').keypress(validateNumber);
 
         $('#landline').keypress(validateNumber);
+
+        _cboSupplier=$('#new_supplier').select2({
+            placeholder: "Please select.",
+            allowClear: false
+        });
+
+        _cboCategory=$('#product_category').select2({
+            allowClear: false
+        });
+
+        _cboTax=$('#cbo_tax').select2({
+            allowClear: false
+        });
+
+        _cboInventory=$('#cbo_item_type').select2({
+            allowClear: false
+        });
+
+        _cboMeasurement=$('#product_unit').select2({
+            allowClear: false
+        });
+
+        _cboCredit=$('#income_account_id').select2({
+            allowClear: false
+        });
+
+        _cboDebit=$('#expense_account_id').select2({
+            allowClear: false
+        });
+
+        _cboTaxGroup=$('#cbo_tax_group').select2({
+            allowClear: false
+        });
     }();
     
         
@@ -228,7 +262,37 @@ $(document).ready(function(){
         });
         // END HERE
 
-    
+        $('#new_supplier').select2({
+            dropdownParent: $('#modal_create_product')
+        });
+
+        $('#product_category').select2({
+            dropdownParent: $('#modal_create_product')
+        });
+
+        $('#cbo_tax').select2({
+            dropdownParent: $('#modal_create_product')
+        });
+
+        $('#cbo_item_type').select2({
+            dropdownParent: $('#modal_create_product')
+        });
+
+        $('#product_unit').select2({
+            dropdownParent: $('#modal_create_product')
+        });
+
+        $('#income_account_id').select2({
+            dropdownParent: $('#modal_create_product')
+        });
+
+        $('#expense_account_id').select2({
+            dropdownParent: $('#modal_create_product')
+        });
+
+        $('#cbo_tax_group').select2({
+            dropdownParent: $('#modal_new_supplier')
+        });
 
 
         /*_product_unit=$("#product_unit").select2({
@@ -414,7 +478,7 @@ $(document).ready(function(){
                         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                     }
                 }).done(function(response){
-                    row.child( response ).show();
+                    row.child( response,'no-padding' ).show();
 
                     // Add to the 'open' array
                     if ( idx === -1 ) {
@@ -823,6 +887,47 @@ $(document).ready(function(){
     // apply input changes, which were done outside the plugin
     //$('input:radio').iCheck('update');
 
+    /*$("input[type='text']").focus(function()
+    {   
+        $(this).css('font-weight','bold');
+        $(this).animate({
+            height: '50px',
+            color: '#616161',
+            'font-size': '20px',
+            'background-color': '#ffed4c'
+        }, 100, function() {
+            // Animation complete.
+        });
+    }).blur(function()
+    {
+        $(this).css('font-weight','bold');
+        $(this).animate({
+            height: '32px',
+            color: '#616161',
+            'font-size': '14px',
+            'background-color': '#FFF'
+        }, 100, function() {
+            // Animation complete.
+        })
+    })*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 
 </script>
@@ -894,10 +999,6 @@ $(document).ready(function(){
             text-align: right;
         }
 
-        .form-group {
-            padding-bottom: 3px;
-        }
-
         #is_tax_exempt {
             width:23px;
             height:23px;
@@ -963,8 +1064,8 @@ $(document).ready(function(){
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Products</b>
                                             </div>
                                             <div class="panel-body table-responsive">
-                                                <button class="btn btn-green" id="btn_new" style="float: left; text-transform: capitalize;font-family: Tahoma, Georgia, Serif;margin-bottom: 0px !important;" data-toggle="modal" data-target="" data-placement="left" title="Create New product" ><i class="fa fa-plus"></i> Create New Product</button>
-                                                <table id="tbl_products" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                <button class="btn btn-primary" id="btn_new" style="float: left; text-transform: capitalize;font-family: Tahoma, Georgia, Serif;margin-bottom: 0px !important;" data-toggle="modal" data-target="" data-placement="left" title="Create New product" ><i class="fa fa-plus"></i> Create New Product</button>
+                                                <table id="tbl_products" class="" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>    
                                                         <th></th>
@@ -1132,7 +1233,7 @@ $(document).ready(function(){
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color:#ecf0f1 !important;"><span id="modal_mode"> </span>New Supplier</h4>
                         </div>
-                        <div class="modal-body" style="overflow:hidden;margin-left: 20px !important;">
+                        <div class="modal-body" style="overflow:hidden;">
                             <form id="frm_suppliers_new">
                                 <div class="row">
                                     <div class="col-md-8">
@@ -1230,7 +1331,7 @@ $(document).ready(function(){
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-code"></i>
                                                     </span>
-                                                    <select name="tax_type_id" id="cbo_tax_group" class="form-control">
+                                                    <select name="tax_type_id" id="cbo_tax_group" class="">
                                                         <option value="">Please select tax type...</option>
                                                         <?php foreach($tax_types as $tax_type){ ?>
                                                             <option value="<?php echo $tax_type->tax_type_id; ?>" data-tax-rate="<?php echo $tax_type->tax_rate; ?>"><?php echo $tax_type->tax_type; ?></option>
@@ -1268,7 +1369,7 @@ $(document).ready(function(){
                         </div>
 
                         <div class="modal-footer">
-                            <button id="btn_create_new_supplier" type="button" class="btn"  style="background-color:#2ecc71;color:white;"><span class=""></span> Save</button>
+                            <button id="btn_create_new_supplier" type="button" class="btn btn-primary"  style="background-color:#2ecc71;color:white;"><span class=""></span> Save</button>
                             <button id="btn_close_new_supplier" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                         </div>
                     </div><!---content---->
@@ -1293,18 +1394,18 @@ $(document).ready(function(){
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-file-code-o"></i>
                                                     </span>
-                                                    <input type="text" name="product_code" class="form-control" value="" data-error-msg="PLU is required." required>
+                                                    <input type="text" name="product_code" id="product_code" class="form-control" value="" data-error-msg="PLU is required." required>
                                                 </div>
                                         </div>
 
                                         <div class="form-group" style="margin-bottom:0px;">
                                                 <label class="">Product Description * :</label>
-                                                <textarea name="product_desc" class="form-control" data-error-msg="Product Description is required." required></textarea>
+                                                <textarea name="product_desc" id="product_desc"class="form-control" data-error-msg="Product Description is required." required></textarea>
                                         </div>
 
                                         <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Other Description :</label>
-                                            <textarea name="product_desc1" class="form-control"></textarea>
+                                            <textarea name="product_desc1" id="product_desc1" class="form-control"></textarea>
                                         </div>
 
 
@@ -1326,7 +1427,7 @@ $(document).ready(function(){
 
                                         <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Supplier * :</label>
-                                            <select name="supplier_id" id="new_supplier" class="form-control" data-error-msg="Supplier is required." required>
+                                            <select name="supplier_id" id="new_supplier" data-error-msg="Supplier is required." required>
                                                 <option value="">Please Select...</option>
                                                 <option value="sup">[ Create Supplier ]</option>
                                                 <?php
@@ -1340,7 +1441,7 @@ $(document).ready(function(){
 
                                         <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Category * :</label>
-                                            <select name="category_id" id="product_category" class="form-control" data-error-msg="Category is required." required>
+                                            <select name="category_id" id="product_category" data-error-msg="Category is required." required>
                                                 <option value="">Please Select...</option>
                                                 <option value="cat">[ Create Category ]</option>
                                                 <?php
@@ -1355,7 +1456,7 @@ $(document).ready(function(){
 
                                         <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Tax * :</label>
-                                            <select name="tax_type_id" id="cbo_tax" class="form-control" data-error-msg="Tax Type is required." required>
+                                            <select name="tax_type_id" id="cbo_tax" data-error-msg="Tax Type is required." required>
                                                 <option value="">Please Select...</option>
                                                 <?php foreach($tax_types as $tax_type) { ?>
                                                     <option value="<?php echo $tax_type->tax_type_id; ?>"><?php echo $tax_type->tax_type; ?></option>
@@ -1377,7 +1478,7 @@ $(document).ready(function(){
                                         <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Inventory type * :</label>
 
-                                            <select name="item_type_id" id="cbo_item_type" class="form-control" data-error-msg="Item type is required." required>
+                                            <select name="item_type_id" id="cbo_item_type" data-error-msg="Item type is required." required>
                                                 <option value="">None</option>
                                                 <?php foreach($item_types as $item_type){ ?>
                                                     <option value="<?php echo $item_type->item_type_id ?>"><?php echo $item_type->item_type; ?></option>
@@ -1390,7 +1491,7 @@ $(document).ready(function(){
 
                                         <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Unit of Measurement * :</label>
-                                            <select name="unit_id" id="product_unit" class="form-control" data-error-msg="Unit is required." required>
+                                            <select name="unit_id" id="product_unit" data-error-msg="Unit is required." required>
                                                 <option value="">Please Select...</option>
                                                 <option value="unt">[ Create Unit ]</option>
                                                 <?php
@@ -1418,7 +1519,7 @@ $(document).ready(function(){
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-toggle-off"></i>
                                                     </span>
-                                                <input type="text" name="sale_price" class="form-control numeric">
+                                                <input type="text" name="sale_price" id="sale_price" class="form-control numeric">
                                             </div>
                                         </div>
 
@@ -1429,7 +1530,7 @@ $(document).ready(function(){
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-toggle-off"></i>
                                                     </span>
-                                                <input type="text" name="discounted_price" class="form-control numeric">
+                                                <input type="text" name="discounted_price" id="discounted_price" class="form-control numeric">
                                             </div>
                                         </div>
 
@@ -1441,7 +1542,7 @@ $(document).ready(function(){
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-toggle-off"></i>
                                                     </span>
-                                                <input type="text" name="dealer_price" class="form-control numeric">
+                                                <input type="text" name="dealer_price" id="dealer_price" class="form-control numeric">
                                             </div>
                                         </div>
 
@@ -1453,7 +1554,7 @@ $(document).ready(function(){
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-toggle-off"></i>
                                                     </span>
-                                                <input type="text" name="distributor_price" class="form-control numeric">
+                                                <input type="text" name="distributor_price" id="distributor_price" class="form-control numeric">
                                             </div>
                                         </div>
 
@@ -1470,7 +1571,7 @@ $(document).ready(function(){
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-toggle-off"></i>
                                                     </span>
-                                                <input type="text" name="public_price" class="form-control numeric">
+                                                <input type="text" name="public_price" id="public_price" class="form-control numeric">
                                             </div>
                                         </div>
 
@@ -1482,7 +1583,7 @@ $(document).ready(function(){
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-toggle-off"></i>
                                                     </span>
-                                                <input type="text" name="purchase_cost" class="form-control numeric">
+                                                <input type="text" name="purchase_cost" id="purchase_cost" class="form-control numeric">
                                             </div>
 
                                         </div>
@@ -1505,7 +1606,7 @@ $(document).ready(function(){
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-toggle-off"></i>
                                                     </span>
-                                                <input type="text" name="product_warn" class="form-control numeric">
+                                                <input type="text" name="product_warn" id="product_warn" class="form-control numeric">
                                             </div>
                                         </div>
 
@@ -1516,7 +1617,7 @@ $(document).ready(function(){
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-toggle-off"></i>
                                                     </span>
-                                                <input type="text" name="product_ideal" class="form-control numeric">
+                                                <input type="text" name="product_ideal" id="product_ideal" class="form-control numeric">
                                             </div>
                                         </div>
 
@@ -1527,7 +1628,7 @@ $(document).ready(function(){
                                         <div class="form-group" style="margin-bottom:0px;">
                                                     <label class="">Link to Credit Account :</label>
 
-                                                    <select name="income_account_id" id="income_account_id" class="form-control" data-error-msg="Link to Account is required." required>
+                                                    <select name="income_account_id" id="income_account_id" data-error-msg="Link to Account is required." required>
                                                         <optgroup label="Please select NONE if this will not be recorded on Journal."></optgroup>
                                                         <option value="">None</option>
                                                         <?php foreach($accounts as $account){ ?>
@@ -1541,7 +1642,7 @@ $(document).ready(function(){
                                         <div class="form-group" style="margin-bottom:0px;">
                                                     <label class="">Link to Debit Account :</label>
 
-                                                    <select name="expense_account_id" id="expense_account_id" class="form-control" data-error-msg="Link to Account is required." required>
+                                                    <select name="expense_account_id" id="expense_account_id" data-error-msg="Link to Account is required." required>
                                                         <optgroup label="Please select NONE if this will not be recorded on Journal."></optgroup>
                                                         <option value="">None</option>
                                                         <?php foreach($accounts as $account){ ?>
@@ -1571,7 +1672,7 @@ $(document).ready(function(){
                         </div>
 
                         <div class="modal-footer">
-                            <button id="btn_save" type="button" class="btn" style="background-color:#2ecc71;color:white;">Save</button>
+                            <button id="btn_save" type="button" class="btn btn-primary" style="background-color:#2ecc71;color:white;">Save</button>
                             <button id="btn_cancel" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                         </div>
                     </div><!---content---->
