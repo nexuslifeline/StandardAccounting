@@ -1,13 +1,14 @@
+<?php foreach($activities as $activity) { ?>
 <div class="vertical-timeline-block">
     <div class="vertical-timeline-icon">
-        <i class="fa fa-calendar c-accent"></i>
+        <!-- <i class="fa fa-calendar c-accent"></i> -->
+        <img class="img-responsive" src="<?php echo $activity->photo_path; ?>" style="border-radius: 50%; min-height: 40px;" onError="this.onerror=null;this.src='assets/img/default-user-image.png';">
     </div>
     <div class="vertical-timeline-content">
         <div class="p-sm">
-            <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
-            <h4>Purchase Order
-            </h4>
-            <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
+            <span class="vertical-date pull-right"><?php echo $activity->time_description; ?></small></span>
+            <span style="color: #ffad33;"><?php echo $activity->username; ?></span><br><i><?php echo $activity->message; ?></i><br> on <?php echo $activity->date; ?>
         </div>
     </div>
 </div>
+<?php } ?>
