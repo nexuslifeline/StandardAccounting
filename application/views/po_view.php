@@ -18,7 +18,7 @@
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
 
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
 
@@ -184,7 +184,7 @@
 
         <div class="panel-body table-responsive">
 
-            <table id="tbl_purchases" class="custom-design table-striped" cellspacing="0" width="100%">
+            <table id="tbl_purchases" class="" cellspacing="0" width="100%">
                 <thead class="">
                 <tr>
                     <th></th>
@@ -206,7 +206,7 @@
 </div>
 
 <div id="div_user_fields" style="display: none;">
-    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;"">
+    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;background: #303030 !important;">
 
     <div class="panel-body"  style="padding-bottom: 0%;padding-top: 0%;">
 
@@ -229,9 +229,9 @@
                     <div class="col-sm-3 col-sm-offset-3">
                         PO # : <br />
                         <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="fa fa-code"></i>
-                                                        </span>
+                            <span class="input-group-addon">
+                                <i class="fa fa-code"></i>
+                            </span>
                             <input type="text" name="po_no" class="form-control" placeholder="PO-YYYYMMDD-XXX" readonly>
                         </div>
                     </div>
@@ -301,7 +301,7 @@
 
         <form id="frm_items">
             <div class="table-responsive">
-                <table id="tbl_items" class="custom-design table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
+                <table id="tbl_items" class="" cellspacing="0" width="100%" style="font-font:tahoma;">
                     <thead class="">
                     <tr>
                         <th width="10%">Qty</th>
@@ -825,7 +825,7 @@ $(document).ready(function(){
 
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Purcahase Order" >'+
+            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Purcahase Order" >'+
                 '<i class="fa fa-plus"></i> New Purchase Order</button>';
             $("div.toolbar").html(_btnNew);
         }();

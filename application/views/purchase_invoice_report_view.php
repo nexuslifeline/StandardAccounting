@@ -18,7 +18,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
@@ -137,7 +137,7 @@
                                                                 <div class="tab-content">
                                                                     <div id="summary" class="tab-pane fade in active">
                                                                         <button class="btn btn-primary pull-left" id="btn_print_summary"><i class="fa fa-print"></i>&nbsp; Print Report</button>
-                                                                        <table id="tbl_pi_summary" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                                        <table id="tbl_pi_summary" class="" cellspacing="0" width="100%">
                                                                             <thead class="">
                                                                             <tr>
                                                                                 <th>Ref #</th>
@@ -162,7 +162,7 @@
                                                                     </div>
                                                                     <div id="detailed" class="tab-pane fade">
                                                                         <button class="btn btn-primary pull-left" id="btn_print_detailed"><i class="fa fa-print"></i>&nbsp; Print Report</button>
-                                                                        <table id="tbl_pi_detailed" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                                        <table id="tbl_pi_detailed" class="" cellspacing="0" width="100%">
                                                                             <thead class="">
                                                                             <tr>
                                                                                 <th>Ref #</th>
