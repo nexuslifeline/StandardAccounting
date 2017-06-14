@@ -36,8 +36,11 @@ class Dashboard extends CORE_Controller {
           'COUNT(*) as count'
         );
 
-        $data['receivables']=$m_journal->get_receivable_balance()[0];
-        $data['payables']=$m_journal->get_payable_balance()[0];
+        $receivables=$m_journal->get_receivable_balance();
+        $payables=$m_journal->get_payable_balance();
+
+        $data['receivables']=$receivables[0];
+        $data['payables']=$payables[0];
 
         $data['customer_count']=$customer_count[0]->count;
 
