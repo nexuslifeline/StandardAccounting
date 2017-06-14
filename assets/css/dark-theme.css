@@ -316,12 +316,12 @@ tbody {
 }
 
 table#tbl_so_list tbody tr.no-padding:nth-child(odd) {
-    background-color: #303030 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
 table#tbl_so_list tbody tr.no-padding:nth-child(even) {
-    background-color: #414141 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
@@ -336,12 +336,12 @@ table#tbl_so_list tbody tr.no-padding:nth-child(even) {
 }
 
 table#tbl_sales_order tbody tr.no-padding:nth-child(odd) {
-    background-color: #303030 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
 table#tbl_sales_order tbody tr.no-padding:nth-child(even) {
-    background-color: #414141 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
@@ -354,12 +354,12 @@ table#tbl_sales_order tbody tr.no-padding:nth-child(even) {
 }
 
 table#tbl_payments tbody tr.no-padding:nth-child(odd) {
-    background-color: #303030 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
 table#tbl_payments tbody tr.no-padding:nth-child(even) {
-    background-color: #414141 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
@@ -372,12 +372,12 @@ table#tbl_payments tbody tr.no-padding:nth-child(even) {
 }
 
 table#tbl_products tbody tr.no-padding:nth-child(odd) {
-    background-color: #303030 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
 table#tbl_products tbody tr.no-padding:nth-child(even) {
-    background-color: #414141 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
@@ -390,12 +390,12 @@ table#tbl_products tbody tr.no-padding:nth-child(even) {
 }
 
 table#tbl_suppliers tbody tr.no-padding:nth-child(odd) {
-    background-color: #303030 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
 table#tbl_suppliers tbody tr.no-padding:nth-child(even) {
-    background-color: #414141 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
@@ -427,12 +427,12 @@ table.supplier_content tbody tr:hover {
 }
 
 table#tbl_customers tbody tr.no-padding:nth-child(odd) {
-    background-color: #303030 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
 table#tbl_customers tbody tr.no-padding:nth-child(even) {
-    background-color: #414141 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
@@ -450,12 +450,292 @@ table.customers_content tbody tr:hover {
 }
 
 table#tbl_fixed_management tbody tr.no-padding:nth-child(odd) {
-    background-color: #303030 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
 table#tbl_fixed_management tbody tr.no-padding:nth-child(even) {
-    background-color: #414141 !important;
+    background-color: transparent !important;
     color: white !important;
 }
 
+
+/* tbl_tax - tax */
+
+.row_child_tbl_tax:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_tax tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_tax tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+
+/* tbl_accounts - account_titles */
+
+.row_child_tbl_accounts:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_accounts tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_accounts tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+/* TREE LIST */
+
+#treeListWrapper {
+    background: #303030 !important;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+div#zTreeDemoBackground {
+    width: 100%;
+    height: 545px;
+    text-align: left;
+    background: #303030;
+}
+
+div#zTreeDemoBackground ul.ztree {
+    margin-top: 10px;
+    border: 1px #414141;
+    background: #414141;
+    width: 100%;
+    height: 100%;
+    color: #FFF;
+}
+
+div#zTreeDemoBackground ul.ztree li span {
+    color: #FFF !important;
+}
+
+div#zTreeDemoBackground ul.log {
+    border: 1px solid #414141;
+    background: #f0f6e4;
+    width: 300px;
+    height: 100%;
+    overflow: hidden;
+}
+
+div#zTreeDemoBackground ul.log.small {
+    height:45px;
+}
+
+div#zTreeDemoBackground ul.log li {
+    color: #666666;
+    list-style: none;
+    padding-left: 10px;
+}
+
+div#zTreeDemoBackground ul.log li.dark {
+    background-color: #E3E3E3;
+}
+
+
+/* tbl_user_group_list - user_groups */
+
+.row_child_tbl_user_group_list:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_user_group_list tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_user_group_list tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+
+/* tbl_user_list - user */
+
+.row_child_tbl_user_list:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_user_list tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_user_list tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+
+/* tbl_accounts_receivable - general_journal_view */
+
+.row_child_tbl_accounts_receivable:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_accounts_receivable tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_accounts_receivable tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+
+/* tbl_accounts_receivable - cash_disbursement */
+
+.row_child_tbl_cash_disbursement_list:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_cash_disbursement_list tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_cash_disbursement_list tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+/* tbl_expense_for_review */
+
+.row_child_tbl_expense_for_review:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_expense_for_review tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_expense_for_review tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+
+/* tbl_purchase_review - account_payables */
+
+.row_child_tbl_purchase_review:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_purchase_review tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_purchase_review tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+/* tbl_account_payables */
+
+.row_child_tbl_account_payables:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_account_payables tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_account_payables tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+
+/* tbl_accounts_receivable - cash_receipt */
+
+/*.row_child_tbl_accounts_receivable:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_accounts_receivable tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_accounts_receivable tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}*/
+
+/* tbl_collection_for_review - cash_receipt */
+
+.row_child_tbl_collection_for_review:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_collection_for_review tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_collection_for_review tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+
+/* tbl_delivery_invoice - delivery_view */
+
+.row_child_tbl_delivery_invoice:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_delivery_invoice tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_delivery_invoice tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+
+/* tbl_inventory - inventory_report_view */
+
+.row_child_tbl_inventory:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_inventory tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_inventory tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}

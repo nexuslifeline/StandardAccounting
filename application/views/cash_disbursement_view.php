@@ -18,7 +18,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
@@ -201,7 +201,7 @@
                 <div class="panel-body">
 
                     <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
-                        <table id="tbl_expense_for_review" class="custom-design table-striped" cellspacing="0" width="100%">
+                        <table id="tbl_expense_for_review" class="" cellspacing="0" width="100%">
                             <thead class="">
                             <tr>
                                 <th></th>
@@ -232,7 +232,7 @@
                     <div class="panel-body" style="min-height: 400px;">
 
                         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
-                            <table id="tbl_cash_disbursement_list" class="custom-design table-striped" cellspacing="0" width="100%">
+                            <table id="tbl_cash_disbursement_list" class="" cellspacing="0" width="100%">
                                 <thead class="">
                                 <tr>
                                     <th></th>
@@ -262,7 +262,7 @@
 
                         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
 
-                            <table id="tbl_check_list" class="custom-design table-striped" cellspacing="0" width="100%">
+                            <table id="tbl_check_list" class="" cellspacing="0" width="100%">
                                 <thead style="display:none;">
                                 <tr>
                                     <th>Bank</th>
@@ -294,10 +294,10 @@
 <div class="row">
 <div class="col-lg-12">
 
-    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;padding: 1%;margin: 1%;">
+    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;padding: 1%;margin: 1%;background: #303030 !important;color: white !important;">
 
         <b><i class="fa fa-bars"></i> Cash Disbursement Journal</b><hr />
-        <button id="btn_browse_recurring" class="btn btn-green" style="margin-bottom: 15px; text-transform: capitalize;"><i class="fa fa-folder-open-o"></i> Browse Recurring Template</button>
+        <button id="btn_browse_recurring" class="btn btn-primary" style="margin-bottom: 15px; text-transform: capitalize;"><i class="fa fa-folder-open-o"></i> Browse Recurring Template</button>
         <form id="frm_journal" role="form" class="form-horizontal">
 
             <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
@@ -423,7 +423,7 @@
                 <hr />
 
                 <div style="width: 100%;">
-                    <table id="tbl_entries" class="custom-design table-striped">
+                    <table id="tbl_entries" class="">
                         <thead class="">
                         <tr>
                             <th style="width: 30%;">Account</th>
@@ -582,7 +582,7 @@
                 <h4 class="modal-title" style="color: white;"><i class="fa fa-folder-open-o"></i>  Browse Recurring Templates</h4>
             </div>
             <div class="modal-body">
-                <table id="tbl_recurring" class="table-striped custom-design" width="100%">
+                <table id="tbl_recurring" class="" width="100%">
                     <thead>
                         <th>Template Code</th>
                         <th>Template Description</th>
@@ -1148,7 +1148,7 @@ $(document).ready(function(){
         });
 
         var createToolBarButton=function() {
-            var _btnNew='<button class="btn btn-green" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Journal" >'+
+            var _btnNew='<button class="btn btn-primary" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Journal" >'+
                 '<i class="fa fa-plus"></i> New Cash Disbursement Journal</button>';
             $("div.toolbar").html(_btnNew);
 
@@ -1230,7 +1230,7 @@ $(document).ready(function(){
                         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                     }
                 }).done(function(response){
-                    row.child( response ).show();
+                    row.child( response,'no-padding' ).show();
                     // Add to the 'open' array
                     if ( idx === -1 ) {
                         detailRows.push( tr.attr('id') );
@@ -1364,7 +1364,7 @@ $(document).ready(function(){
                         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                     }
                 }).done(function(response){
-                    row.child( response ).show();
+                    row.child( response,'no-padding' ).show();
 
                     reInitializeSpecificDropDown($('.cbo_customer_list'));
                     reInitializeSpecificDropDown($('.cbo_department_list'));

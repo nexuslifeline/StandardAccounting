@@ -17,7 +17,7 @@
 
 
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
@@ -66,19 +66,9 @@
             to { -webkit-transform: rotate(360deg); }
         }
 
-        .zTreeDemoBackground { 
+        #zTreeDemoBackground { 
             overflow: auto;
         }
-
-        div.zTreeDemoBackground {width:100%;height:545px;text-align:left;margin: 2%;}
-
-        ul.ztree {margin-top: 10px;border: 1px solid lightgray;background: white;width:100%;height:100%;}
-        ul.log {border: 1px solid #617775;background: #f0f6e4;width:300px;height:100%;overflow: hidden;}
-        ul.log.small {height:45px;}
-        ul.log li {color: #666666;list-style: none;padding-left: 10px;}
-        ul.log li.dark {background-color: #E3E3E3;}
-
-
 
     </style>
 </head>
@@ -115,15 +105,15 @@
                                 <div class="panel-heading">
                                     <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Chart of Accounts</b>
                                 </div>
-                                <div class="row">
+                                <div class="row" id="treeListWrapper">
                                     <div class="col-xs-12 col-lg-4">
-                                        <div class="zTreeDemoBackground" style="margin:3% 0% 3% 3%;">
+                                        <div id="zTreeDemoBackground" style="margin:3% 0% 3% 3%;">
                                             <ul id="treeDemo" class="ztree"></ul>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-lg-8">
                                         <div class="panel-body table-responsive" style="padding-left: 1px!important;">
-                                            <table id="tbl_accounts" class="custom-design table-striped" cellspacing="0" width="100%">
+                                            <table id="tbl_accounts" class="" cellspacing="0" width="100%">
                                                 <thead class="">
                                                 <tr>
                                                     <th>&nbsp;&nbsp;</th>
@@ -381,7 +371,7 @@ $(document).ready(function(){
 
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Account Title" >'+
+            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Account Title" >'+
                 '<i class="fa fa-plus"></i> New Account Title</button>';
             $("div.toolbar").html(_btnNew);
         }();
@@ -473,7 +463,7 @@ $(document).ready(function(){
                         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                     }
                 }).done(function(response){
-                    row.child( response ).show();
+                    row.child( response,'no-padding' ).show();
                     reInitializeDatatable($('#tbl_so_'+ d.account_id));
                     if ( idx === -1 ) {
                         detailRows.push( tr.attr('id') );

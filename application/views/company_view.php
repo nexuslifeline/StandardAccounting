@@ -16,7 +16,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
@@ -258,7 +258,7 @@
                                                                <div class="" style="border:1px solid black;height: 230px;width: 210px;vertical-align: middle;">
 
                                                                    <div id="div_img_company" style="position:relative;">
-                                                                       <img name="img_company" src="<?php echo $company->logo_path; ?>" style="object-fit: fill; !important; height: 100%;width: 100%;" />
+                                                                       <img name="img_company" src="<?php echo $company->logo_path; ?>" style="object-fit: fill !important; height: 100%;width: 100%;" />
                                                                        <input type="file" name="file_upload[]" class="hidden">
                                                                    </div>
 

@@ -31,6 +31,30 @@
         hr {
             border-top: 3px solid #404040;
         }
+
+        tr {
+            border: none!important;
+        }
+
+        tr:nth-child(even){
+            background: #414141 !important;
+            border: none!important;
+        }
+
+        tr:hover {
+            transition: .4s;
+            background: #414141 !important;
+            color: white;
+        }
+
+        tr:hover .btn {
+            border-color: #494949!important;
+            border-radius: 0!important;
+            -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+        }
+        
     </style>
 </head>
 <body>

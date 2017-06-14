@@ -12,6 +12,7 @@
     <meta name="author" content="">
     <?php echo $_def_css_files; ?>
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
@@ -106,7 +107,7 @@ echo $_side_bar_navigation;
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Issuance</b>
         </div>
         <div class="panel-body table-responsive">
-            <table id="tbl_issuances" class="custom-design table-striped" cellspacing="0" width="100%">
+            <table id="tbl_issuances" class="" cellspacing="0" width="100%">
                 <thead class="">
                 <tr>
                     <th></th>
@@ -754,7 +755,7 @@ dt_si = $('#tbl_si_list').DataTable({
             $('#modal_si_list').modal('show');
         });
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Record item to issue" >'+
+            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Record item to issue" >'+
                 '<i class="fa fa-plus"></i> Record item to issue</button>';
             $("div.toolbar").html(_btnNew);
         }();

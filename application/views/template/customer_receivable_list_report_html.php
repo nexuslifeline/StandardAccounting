@@ -1,4 +1,4 @@
-<table style="font-family: 'Roboto', sans-serif; color: #404040;"">
+<table id="main" style="font-family: 'Roboto', sans-serif; color: #FFF;">
 	<tr>
 		<td style="border: 0px !important;background: #303030 !important;"><h3>Customer Name : <?php echo $customers; ?></h3></td>
 	</tr>
@@ -25,3 +25,9 @@
 		<?php } ?>
 	</tbody>
 </table>
+
+<style>
+	#main td:hover {
+		color:white !important;
+	}
+</style>

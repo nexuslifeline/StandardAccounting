@@ -81,7 +81,7 @@
                                 <h4><span style="margin-left: 1%"><strong><i class="fa fa-gear"></i> Journal Entries</strong></span></h4>
                                 <hr />
 
-                                <table id="tbl_entries_for_review_<?php echo $purchase_info->dr_invoice_id; ?>" class="table table-bordered" style="background-color: white;">
+                                <table id="tbl_entries_for_review_<?php echo $purchase_info->dr_invoice_id; ?>" class="" style="">
                                     <thead>
                                     <tr style="border-bottom:solid gray;">
                                         <th style="width: 30%;">Account</th>
@@ -197,7 +197,7 @@
 
                                     <br /><br />
 
-                                    <table class="table table-bordered" style="background-color: white;">
+                                    <table class="" style="">
                                         <thead>
                                             <tr style="border-bottom: solid gray;">
                                                 <td style="width: 40%;"><strong>Item</strong></td>
@@ -263,6 +263,29 @@
     </table>
 </center>
 
+<style>
+    tr {
+        border: none!important;
+    }
 
+    tr:nth-child(even){
+        background: #414141 !important;
+        border: none!important;
+    }
+
+    tr:hover {
+        transition: .4s;
+        background: transparent !important;
+        color: white;
+    }
+
+    tr:hover .btn {
+        border-color: #494949!important;
+        border-radius: 0!important;
+        -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+    }
+</style>
 
 

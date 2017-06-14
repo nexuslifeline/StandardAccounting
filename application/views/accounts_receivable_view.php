@@ -18,7 +18,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
@@ -203,7 +203,7 @@
             <div id="" class="">
                 <div class="panel-body">
                     <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
-                    <table id="tbl_sales_review" class="custom-design table-striped" cellspacing="0" width="100%">
+                    <table id="tbl_sales_review" class="" cellspacing="0" width="100%">
                         <thead class="">
                         <tr>
                             <th>&nbsp;</th>
@@ -230,7 +230,7 @@
             </a>
                 <div class="panel-body" style="min-height: 400px;">
                     <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
-                    <table id="tbl_accounts_receivable" class="custom-design table-striped" cellspacing="0" width="100%">
+                    <table id="tbl_accounts_receivable" class="" cellspacing="0" width="100%">
                         <thead class="">
                         <tr>
                             <th></th>
@@ -349,7 +349,7 @@
                                     <hr />
 
                                     <div style="width: 100%;">
-                                        <table id="tbl_entries" class="custom-design table-striped">
+                                        <table id="tbl_entries" class="">
                                             <thead class="">
                                             <tr>
                                                 <th style="width: 30%;">Account</th>
@@ -413,7 +413,7 @@
 
                                     <hr />
                                     <label>Remarks :</label><br />
-                                    <textarea name="remarks" class="col-lg-12"></textarea>
+                                    <textarea name="remarks" class="form-control col-lg-12"></textarea>
 
                                 </form>
 
@@ -851,7 +851,7 @@ $(document).ready(function(){
 
 
         var createToolBarButton=function() {
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Sales Journal" >'+
+            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Sales Journal" >'+
                 '<i class="fa fa-plus"></i> New Sales Journal</button>';
             $("div.toolbar").html(_btnNew);
         }();
@@ -916,7 +916,7 @@ $(document).ready(function(){
                         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                     }
                 }).done(function(response){
-                    row.child( response ).show();
+                    row.child( response,'no-padding' ).show();
                     // Add to the 'open' array
                     if ( idx === -1 ) {
                         detailRows.push( tr.attr('id') );
@@ -956,7 +956,7 @@ $(document).ready(function(){
                         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                     }
                 }).done(function(response){
-                    row.child( response ).show();
+                    row.child( response,'no-padding' ).show();
 
                     reInitializeSpecificDropDown($('.cbo_customer_list'));
                     reInitializeSpecificDropDown($('.cbo_department_list'));

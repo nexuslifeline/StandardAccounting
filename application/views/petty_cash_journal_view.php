@@ -19,7 +19,7 @@
 
         <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
         <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
+        <link href="assets/css/dark-theme.css" rel="stylesheet">
         <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
@@ -136,7 +136,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <table id="tbl_pcf" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                        <table id="tbl_pcf" class="" cellspacing="0" width="100%">
                                                             <thead>
                                                             <tr>
                                                                 <th>Txn Date</th>
@@ -167,7 +167,7 @@
                                                     </div>
                                                     <div class="panel-footer">
                                                         <div class="col-xs-12 col-md-4">
-                                                            <button id="btn_new" class="btn btn-green" style="height: 33px;width: 200px; margin-bottom: 10px;">
+                                                            <button id="btn_new" class="btn btn-primary" style="height: 33px;width: 200px; margin-bottom: 10px;">
                                                                 <i class="fa fa-clipboard"></i> Post New Expense
                                                             </button>
                                                             <button id="btn_replenish" class="btn btn-primary" style=" margin-bottom: 10px;">
@@ -181,7 +181,7 @@
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Petty Cash (Replenished)</b>
                                                     </div>
                                                     <div class="panel-body">
-                                                        <table id="tbl_replenished" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                        <table id="tbl_replenished" class="" cellspacing="0" width="100%">
                                                             <thead class="thead-bg">
                                                                 <th>Petty Cash Code</th>
                                                                 <th>Period Covered</th>
@@ -435,7 +435,7 @@
                     api.column(0, {page:'current'} ).data().each( function ( group, i ) {
                         if ( last !== group ) {
                             $(rows).eq( i ).before(
-                                '<tr class="group"><td colspan="5" style="background-color:#eaeaea;"><strong>'+'BATCH #: <i>'+group+'</i></strong></td></tr>'
+                                '<tr class="group"><td colspan="5" style="background-color:orange;"><strong>'+'BATCH #: <i>'+group+'</i></strong></td></tr>'
                             );
          
                             last = group;

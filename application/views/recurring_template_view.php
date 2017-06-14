@@ -18,6 +18,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
@@ -64,6 +65,13 @@
             width: 100% !important; 
         } 
 
+        .select2-close-mask{
+            z-index: 999999;
+        }
+        .select2-dropdown{
+            z-index: 999999;
+        }
+
     </style>
 
 </head>
@@ -93,8 +101,8 @@
                             </div>
                             <div class="panel-body">
                                 <div id="panel_list">
-                                    <button id="btn_create" class="btn btn-green pull-left" style="text-transform: capitalize;"><i class="fa fa-plus"></i>&nbsp; Create New Template</button>
-                                    <table id="tbl_recurring_templates" class="custom-design table-striped" width="100%">
+                                    <button id="btn_create" class="btn btn-primary pull-left" style="text-transform: capitalize;"><i class="fa fa-plus"></i>&nbsp; Create New Template</button>
+                                    <table id="tbl_recurring_templates" class="" width="100%">
                                         <thead>
                                             <th>Book Type</th>
                                             <th>Template Code</th>
@@ -331,7 +339,7 @@
 <script>
 
 $(document).ready(function(){
-    var dt; var _txnMode; var bookType;
+    var dt; var _txnMode; var bookType; var _cboBookType;
  
     var oTBJournal={
         "dr" : "td:eq(2)",
@@ -379,6 +387,14 @@ $(document).ready(function(){
                 }
             ]
         });
+
+        _cboBookType=$('#cboBookType').select2({
+            placeholder: "Please Select Book Type",
+            allowClear: true
+        });
+
+        _cboBookType.select2('val',null);
+
         reInitializeNumeric();
         reInitializeDropDownAccounts($('#tbl_entries'));
         showList(true);
