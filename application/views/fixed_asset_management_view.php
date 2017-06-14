@@ -577,7 +577,7 @@ $(document).ready(function(){
             else {
                 tr.addClass( 'details' );
 
-                row.child( format( row.data(),'no-padding' ) ).show();
+                row.child( format( row.data() ),'no-padding' ).show();
 
                 if ( idx === -1 ) {
                     detailRows.push( tr.attr('id') );

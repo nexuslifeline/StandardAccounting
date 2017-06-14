@@ -19,7 +19,7 @@
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
@@ -122,7 +122,7 @@
                                             <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 0; margin-bottom: 10px;" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; ">
                                                 <i class="fa fa-print"></i> Print Report
                                             </button>
-                                            <table id="tbl_replenishment" class="custom-design table-striped" width="100%" cellspacing="0">
+                                            <table id="tbl_replenishment" class="" width="100%" cellspacing="0">
                                                 <thead class="thead-bg">
                                                     <th></th>
                                                     <th>Document # / PCV #</th>
@@ -241,7 +241,7 @@ $(document).ready(function(){
                 api.column(0, {page:'current'} ).data().each( function ( group, i ) {
                     if ( last !== group ) {
                         $(rows).eq( i ).before(
-                            '<tr class="group"><td colspan="5" style="background-color:#eaeaea;"><strong>'+'BATCH #: <i>'+group+'</i></strong></td></tr>'
+                            '<tr class="group"><td colspan="5" style="background-color:orange;"><strong>'+'BATCH #: <i>'+group+'</i></strong></td></tr>'
                         );
      
                         last = group;

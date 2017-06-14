@@ -18,7 +18,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
@@ -134,7 +134,7 @@
                                                         <br />
 
                                                         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
-                                                            <table id="tbl_supplier_subsidiary" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                            <table id="tbl_supplier_subsidiary" class="" cellspacing="0" width="100%">
                                                                 <thead class="table-erp">
                                                                 <tr>
                                                                     <th>Date</th>

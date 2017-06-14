@@ -16,7 +16,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
@@ -166,7 +166,7 @@
         </div>
         <div class="panel-body table-responsive">
 
-            <table id="tbl_issuances" class="custom-design table-striped" cellspacing="0" width="100%">
+            <table id="tbl_issuances" class="" cellspacing="0" width="100%">
                 <thead class="">
                 <tr>
                     <th></th>
@@ -608,7 +608,7 @@ $(document).ready(function(){
 
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Adjust Inventory" >'+
+            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Adjust Inventory" >'+
                 '<i class="fa fa-plus"></i> Record item adjustment</button>';
             $("div.toolbar").html(_btnNew);
         }();
@@ -765,7 +765,7 @@ $(document).ready(function(){
                         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                     }
                 }).done(function(response){
-                    row.child( response ).show();
+                    row.child( response,'no-padding' ).show();
                     // Add to the 'open' array
                     if ( idx === -1 ) {
                         detailRows.push( tr.attr('id') );

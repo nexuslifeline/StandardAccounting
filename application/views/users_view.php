@@ -16,7 +16,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-
+    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
@@ -69,6 +69,10 @@
         @-webkit-keyframes spin2 {
             from { -webkit-transform: rotate(0deg); }
             to { -webkit-transform: rotate(360deg); }
+        }
+
+        h2 {
+          color: #FFF;
         }
 
 
@@ -128,7 +132,7 @@
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; User Accounts</b>
                                             </div>
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_user_list" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                <table id="tbl_user_list" class="" cellspacing="0" width="100%">
                                                     <thead class="table-erp">
                                                     <tr>
                                                         <th></th>
@@ -320,20 +324,20 @@
                                                        <label class="col-md-2 col-md-offset-1 control-label"><strong>Photo :</strong></label>
                                                        <div class="col-md-5">
                                                            <div class="input-group">
-                                                               <div class="" style="border:1px solid black;height: 230px;width: 210px;vertical-align: middle;">
+                                                               <div class="" style="border:1px solid black;height: 230px;width: 210px;vertical-align: middle;margin-bottom: 20px;">
 
                                                                    <div id="div_img_user" style="position:relative;">
-                                                                       <img name="img_user" src="assets/img/anonymous-icon.png" style="object-fit: fill; !important; height: 100%;width: 100%;" />
+                                                                       <img name="img_user" src="assets/img/anonymous-icon.png" style="padding-bottom: 50px; height: 277px; width: 207px;"/>
                                                                        <input type="file" name="file_upload[]" class="hidden">
                                                                    </div>
 
                                                                    <div id="div_img_loader" style="display: none;">
-                                                                        <img name="img_loader" src="assets/img/loader/ajax-loader-sm.gif" style="display: block;margin:40% auto auto auto; " />
+                                                                        <img name="img_loader" src="assets/img/loader/ajax-loader-sm.gif" style="display: block;margin:40% auto auto auto;" />
                                                                    </div>
                                                                </div>
 
-                                                               <button type="button" id="btn_browse" class="btn btn-green "  style="margin-top: 2%;text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Browse Photo</button>
-                                                               <button type="button" id="btn_remove_photo"  class="btn btn-red" style="margin-top: 2%;text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Remove</button>
+                                                               <button type="button" id="btn_browse" class="btn btn-primary "  style="margin-top: 2%;text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Browse Photo</button>
+                                                               <button type="button" id="btn_remove_photo"  class="btn btn-danger" style="margin-top: 2%;text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Remove</button>
                                                            </div>
                                                        </div>
                                                    </div>
@@ -527,7 +531,7 @@
 
 
             var createToolBarButton=function(){
-                var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Register User Account" >'+
+                var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Register User Account" >'+
                     '<i class="fa fa-plus"></i> Register User Account</button>';
                 $("div.toolbar").html(_btnNew);
             }();
@@ -554,11 +558,6 @@
 
         }();
 
-
-
-
-
-
         var bindEventHandlers=(function(){
             var detailRows = [];
 
@@ -577,7 +576,7 @@
                 else {
                     tr.addClass( 'details' );
                     //console.log(row.data());
-                    row.child( format( row.data() ) ).show();
+                    row.child( format( row.data() ),'no-padding' ).show();
                     // Add to the 'open' array
                     if ( idx === -1 ) {
                         detailRows.push( tr.attr('id') );
