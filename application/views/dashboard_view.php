@@ -24,6 +24,12 @@
         zoom: 80%;
     }
 
+    .data-container {
+          border-radius: 5px;
+        background: rgba(255, 255, 255, .1);
+        padding: 10px;
+    }
+
     .toolbar{
         float: left;
     }
@@ -398,71 +404,7 @@
                                                       <div id="style-1" class="data-container" style="min-height: 700px; max-height: 700px; overflow-y: scroll;">
                                                         <h3><i class="fa fa-rss" style="color: #ffad33;"></i> ACTIVITY FEED</h3>
                                                         <div class="v-timeline vertical-container">
-                                                            <div class="vertical-timeline-block">
-                                                                <div class="vertical-timeline-icon">
-                                                                    <i class="fa fa-calendar c-accent"></i>
-                                                                </div>
-                                                                <div class="vertical-timeline-content">
-                                                                    <div class="p-sm">
-                                                                        <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
-                                                                        <h4>Purchase Order
-                                                                        </h4>
-                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="vertical-timeline-block">
-                                                                <div class="vertical-timeline-icon ">
-                                                                    <i class="fa fa-briefcase c-accent"></i>
-                                                                </div>
-                                                                <div class="vertical-timeline-content">
-                                                                    <div class="p-sm">
-                                                                         <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
-                                                                        <h4>Purchase Order
-                                                                        </h4>
-                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="vertical-timeline-block">
-                                                                <div class="vertical-timeline-icon">
-                                                                    <i class="fa fa-coffee c-accent"></i>
-                                                                </div>
-                                                                <div class="vertical-timeline-content">
-                                                                    <div class="p-sm">
-                                                                         <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
-                                                                        <h4>Purchase Order
-                                                                        </h4>
-                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="vertical-timeline-block">
-                                                                <div class="vertical-timeline-icon">
-                                                                    <i class="fa fa-calendar c-accent"></i>
-                                                                </div>
-                                                                <div class="vertical-timeline-content">
-                                                                    <div class="p-sm">
-                                                                         <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
-                                                                        <h4>Purchase Order
-                                                                        </h4>
-                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="vertical-timeline-block">
-                                                                <div class="vertical-timeline-icon">
-                                                                    <i class="fa fa-calendar c-accent"></i>
-                                                                </div>
-                                                                <div class="vertical-timeline-content">
-                                                                    <div class="p-sm">
-                                                                        <span class="vertical-date pull-right"> 3 Hours ago</small> </span>
-                                                                        <h4>Purchase Order
-                                                                        </h4>
-                                                                        <span style="color: #ffad33;">John Kenneth Tolentino</span> posted PO#1234567<br> on January 1, 2017 @ 12:00PM
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            <?php echo $news_feed; ?>
                                                         </div>
                                                       </div>
                                                     </div>

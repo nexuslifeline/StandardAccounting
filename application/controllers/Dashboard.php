@@ -260,6 +260,11 @@ class Dashboard extends CORE_Controller {
 
         $data['online_count']=$online_count[0]->count_online;
 
+        $params['activities']=$m_users->get_newsfeed();
+        $template_news_feed = $this->load->view('template/activity_feed_content',$params,TRUE);
+
+        $data['news_feed'] = $template_news_feed;
+
         $this->load->view('dashboard_view',$data);
     }
 
