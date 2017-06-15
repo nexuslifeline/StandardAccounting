@@ -99,7 +99,7 @@ class Deliveries extends CORE_Controller
                     array(
                         'delivery_invoice_items.*',
                         'products.product_code',
-                        'products.product_desc',
+                        'products.product_desc',    
                         'units.unit_id',
                         'units.unit_name',
                         'DATE_FORMAT(delivery_invoice_items.exp_date,"%m/%d/%Y")as expiration'
@@ -284,6 +284,11 @@ class Deliveries extends CORE_Controller
 
                 $m_dr_items=$this->Delivery_invoice_item_model;
 
+                $tmp_prod_id = $m_dr_items->get_list(
+                    array('dr_invoice_id'=>$dr_invoice_id),
+                    'product_id'
+                );
+
                 $m_dr_items->delete_via_fk($dr_invoice_id); //delete previous items then insert those new
 
                 $prod_id=$this->input->post('product_id',TRUE);
@@ -302,7 +307,6 @@ class Deliveries extends CORE_Controller
                 $m_products=$this->Products_model;
 
                 for($i=0;$i<count($prod_id);$i++){
-
                     $m_dr_items->dr_invoice_id=$dr_invoice_id;
                     $m_dr_items->product_id=$this->get_numeric_value($prod_id[$i]);
                     $m_dr_items->dr_price=$this->get_numeric_value($dr_price[$i]);
@@ -315,17 +319,20 @@ class Deliveries extends CORE_Controller
                     $m_dr_items->dr_non_tax_amount=$this->get_numeric_value($dr_non_tax_amount[$i]);
                     $m_dr_items->exp_date=date('Y-m-d', strtotime($exp_date[$i]));
                     $m_dr_items->batch_no=$batch_code[$i];
-
                     //$m_dr_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
-
                     //unit id retrieval is change, because of TRIGGER restriction
                     $unit_id=$m_products->get_list(array('product_id'=>$prod_id[$i]));
                     $m_dr_items->unit_id=$unit_id[0]->unit_id;
 
                     $m_dr_items->save();
 
-                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
-                    $m_products->modify($this->get_numeric_value($prod_id[$i]));
+                    //$m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                    //$m_products->modify($this->get_numeric_value($prod_id[$i]));
+                }
+
+                for($i=0;$i<count($tmp_prod_id);$i++) {
+                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($tmp_prod_id[$i]->product_id));
+                    $m_products->modify($this->get_numeric_value($tmp_prod_id[$i]->product_id));
                 }
 
                 //update status of po

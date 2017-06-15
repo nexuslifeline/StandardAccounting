@@ -36,9 +36,6 @@
             zoom: 0.82;
             zoom: 82%;
         }
-
-
-
     </style>
 
 
@@ -494,9 +491,14 @@ $(document).ready(function(){
             _txnMode="new";
             $('#modal_create_product').modal('show');
             clearFields($('#frm_product'));
+            _cboCategory.select2('val',null);
+            _cboSupplier.select2('val',null);
+            _cboTax.select2('val',null);
+            _cboInventory.select2('val',null);
+            _cboMeasurement.select2('val',null);
+            _cboCredit.select2('val',null);
+            _cboDebit.select2('val',null);
             $('#is_tax_exempt').attr('checked', false);
-            $('#income_account_id').val(63);
-            $('#expense_account_id').val(9);
         });
 
         $('#tbl_products tbody').on('click','button[name="edit_info"]',function(){
@@ -507,7 +509,7 @@ $(document).ready(function(){
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.product_id;
 
-
+            clearFields('#frm_product');
              $('input,textarea,select').each(function(){
                 var _elem=$(this);
                 $.each(data,function(name,value){
@@ -517,6 +519,21 @@ $(document).ready(function(){
                 });
             });
 
+             _cboSupplier.select2('val',data.supplier_id);
+
+            _cboCategory.select2('val',data.category_id);
+
+            _cboTax.select2('val',data.tax_type_id);
+
+            _cboInventory.select2('val',data.item_type_id);
+
+            _cboMeasurement.select2('val',data.unit_id);
+
+            _cboCredit.select2('val',data.income_account_id);
+
+            _cboDebit.select2('val',data.expense_account_id);
+
+            _cboTaxGroup.select2('val',data.tax_type_id);
 
             $('#is_tax_exempt').prop('checked', (data.is_tax_exempt==1?true:false));
 
@@ -1752,7 +1769,7 @@ $(document).ready(function(){
             <footer role="contentinfo">
                 <div class="clearfix">
                     <ul class="list-unstyled list-inline pull-left">
-                        <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+                        <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTION</h6></li>
                     </ul>
                     <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
                 </div>

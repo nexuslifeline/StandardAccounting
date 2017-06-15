@@ -223,6 +223,11 @@ class Adjustments extends CORE_Controller
 
                 $m_adjustment_items=$this->Adjustment_item_model;
 
+                $tmp_prod_id = $m_adjustment_items->get_list(
+                    array('adjustment_id'=>$adjustment_id),
+                    'product_id'
+                );
+
                 $m_adjustment_items->delete_via_fk($adjustment_id); //delete previous items then insert those new
 
                 $prod_id=$this->input->post('product_id',TRUE);
@@ -256,11 +261,14 @@ class Adjustments extends CORE_Controller
                     $m_adjustment_items->unit_id=$unit_id[0]->unit_id;
 
                     $m_adjustment_items->save();
-                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
-                    $m_products->modify($this->get_numeric_value($prod_id[$i]));
+                    // $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                    // $m_products->modify($this->get_numeric_value($prod_id[$i]));
                 }
 
-
+                for($i=0;$i<count($tmp_prod_id);$i++) {
+                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($tmp_prod_id[$i]->product_id));
+                    $m_products->modify($this->get_numeric_value($tmp_prod_id[$i]->product_id));
+                }
 
                 $m_adjustment->commit();
 

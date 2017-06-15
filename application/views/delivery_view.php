@@ -928,6 +928,9 @@ $(document).ready(function(){
         dt=$('#tbl_delivery_invoice').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
+            "language": {
+                "searchPlaceholder":"Search Purchase Invoice"
+            },
             "ajax" : "Deliveries/transaction/list",
             "columns": [
                 {
@@ -1255,7 +1258,9 @@ $(document).ready(function(){
         $('#btn_new').click(function(){
             _txnMode="new";
             //$('.toggle-fullscreen').click();
+            $('#span_invoice_no').html('INV-XXXX');
             clearFields($('#frm_deliveries'));
+            $('#tbl_items tbody').html('');
             $('#order_default').datepicker('setDate', 'today');
             $('#due_default').datepicker('setDate', 'today');
             showList(false);

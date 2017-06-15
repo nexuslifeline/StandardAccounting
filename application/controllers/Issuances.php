@@ -187,6 +187,10 @@ class Issuances extends CORE_Controller
                 $m_issuance->modified_by_user=$this->session->user_id;
                 $m_issuance->modify($issuance_id);
                 $m_issue_items=$this->Issuance_item_model;
+                $tmp_prod_id = $m_issue_items->get_list(
+                    array('issuance_id'=>$issuance_id),
+                    'product_id'
+                );
                 $m_issue_items->delete_via_fk($issuance_id); //delete previous items then insert those new
                 $prod_id=$this->input->post('product_id',TRUE);
                 $issue_price=$this->input->post('issue_price',TRUE);
@@ -220,9 +224,16 @@ class Issuances extends CORE_Controller
 
                     //$m_issue_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
                     $m_issue_items->save();
-                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
-                    $m_products->modify($this->get_numeric_value($prod_id[$i]));
+
+                    // $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($prod_id[$i]));
+                    // $m_products->modify($this->get_numeric_value($prod_id[$i]));
                 }
+
+                for($i=0;$i<count($tmp_prod_id);$i++) {
+                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($tmp_prod_id[$i]->product_id));
+                    $m_products->modify($this->get_numeric_value($tmp_prod_id[$i]->product_id));
+                }
+
                 $m_issuance->commit();
                 if($m_issuance->status()===TRUE){
                     $response['title'] = 'Success!';

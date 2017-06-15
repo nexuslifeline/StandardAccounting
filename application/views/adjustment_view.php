@@ -279,7 +279,7 @@
 
                 <form id="frm_items">
                     <div class="table-responsive" style="min-height: 200px;padding: 1px;max-height: 350px;overflow: auto;">
-                        <table id="tbl_items" class="custom-design table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
+                        <table id="tbl_items" class="" cellspacing="0" width="100%" style="font-font:tahoma;">
                             <thead class="">
                             <tr>
                                 <th width="10%">Qty</th>

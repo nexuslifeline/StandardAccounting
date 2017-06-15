@@ -93,8 +93,8 @@
         	<td style="padding: 6px;" align="right"><strong><?php echo number_format($purchase_info->total_tax_amount,2); ?></strong></td>
         </tr>
         <tr>
-        	<td style="padding: 6px;" align="left"><h4 style="color: #616161;"><strong>Total After Tax</strong></h3></td>
-        	<td style="padding: 6px;" align="right"><h4 style="color: #616161;"><strong><?php echo number_format($purchase_info->total_after_tax,2); ?></strong></h4></td>
+        	<td style="padding: 6px;" align="left"><h5><strong>Total After Tax</strong></h5></td>
+        	<td style="padding: 6px;" align="right"><h5><strong><?php echo number_format($purchase_info->total_after_tax,2); ?></strong></h5></td>
         </tr>
 	</table>
 	<table width="100%" border="1" cellspacing="-1" style="border-top: 0;">
