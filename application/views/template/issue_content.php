@@ -1,9 +1,51 @@
+<style>
+
+    #issuance td {
+        border: 0px !important;
+    }
+
+    #report_header td {
+        border: 0px !important;
+    }
+
+    #issuance tr {
+        background: transparent !important;
+    }
+
+    #report_footer th {
+        background: #303030 !important;
+    }
+
+    tr {
+        border: none!important;
+    }
+
+    tr:nth-child(even){
+        background: #414141 !important;
+        border: none!important;
+    }
+
+    tr:hover {
+        transition: .4s;
+        background: #414141 !important;
+        color: white;
+    }
+
+    tr:hover .btn {
+        border-color: #494949!important;
+        border-radius: 0!important;
+        -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+    }
+
+</style>
 
 <div style="width:100%">
 <h3 style="text-align:center;margin:0px;padding:0px;font-weight:bold;font-family:tahoma;"><?php echo $company_info->company_name; ?></h3>
 <p style="text-align:center;margin:0px;padding:0px;font-family:tahoma;"><?php echo $company_info->company_address; ?></p>
 <p style="text-align:center;margin:0px;padding:0px;font-family:tahoma;">Contact # <?php echo $company_info->mobile_no.' '.$company_info->landline; ?></p>
-<table style="font-family:tahoma;">
+<table style="font-family:tahoma;" id="report_header">
     <tbody>
         <tr>
             <td style="width:85%;font-size:21px;font-weight:bold;">ISSUANCE REPORT</td>
@@ -11,7 +53,7 @@
         </tr>
     </tbody>
 </table>
-<table width="100%">
+<table width="100%" id="issuance">
     <thead>
     </thead>
     <tbody>
@@ -62,10 +104,10 @@
     </tbody>
 </table>
 <hr></hr>
-<table>
+<table id="report_footer">
     <tbody>
         <tr>
-            <th style="width:35%;text-align:center"><br></th>
+            <th style="width:35%;text-align:center;"><br></th>
             <th style="width:10%;text-align:center;"></th>
             <th style="width:10%;text-align:center;"></th>
             <th style="width:22%;text-align:center;"></th>

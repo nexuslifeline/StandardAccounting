@@ -277,7 +277,7 @@
 
                     <div class="tab-container tab-top tab-primary">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#supplier_info" data-toggle="tab"><i class="fa fa-bars"></i> Transaction</a></li>
+                            <li class="active"><a href="#supplier_info" data-toggle="tab" style="background: #414141 !important;color: white !important;border-top: 1px solid white;"><i class="fa fa-bars"></i> Transaction</a></li>
 
                         </ul>
                         <div class="tab-content">

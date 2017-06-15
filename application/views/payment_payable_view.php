@@ -341,7 +341,7 @@
 
 
                 <div class="table-responsive">
-                    <table id="tbl_payables" class="custom-design table-striped" cellspacing="0" width="100%" style="font-font:tahoma;border: 1px solid gray;">
+                    <table id="tbl_payables" class="" cellspacing="0" width="100%" style="font-font:tahoma;border: 1px solid gray;">
                         <thead class="">
                         <tr>
                             <th width="12%">Invoice #</th>
