@@ -149,7 +149,7 @@ $(document).ready(function(){
         $('#landline').keypress(validateNumber);
 
         _cboSupplier=$('#new_supplier').select2({
-            placeholder: "Please select.",
+            placeholder: "Please select supplier.",
             allowClear: false
         });
 
@@ -441,6 +441,7 @@ $(document).ready(function(){
 
                 var _suppliers=response.row_added[0];
                 $('#new_supplier').append('<option value="'+_suppliers.supplier_id+'" selected>'+_suppliers.supplier_name+'</option>');
+                _cboSupplier.select2('val',_suppliers.supplier_id);
                 /*$('#cbo_suppliers').select2('val',_suppliers.supplier_id);
                 $('#cbo_tax_type').select2('val',_suppliers.tax_type_id);*/
 
@@ -496,8 +497,8 @@ $(document).ready(function(){
             _cboTax.select2('val',null);
             _cboInventory.select2('val',null);
             _cboMeasurement.select2('val',null);
-            _cboCredit.select2('val',null);
-            _cboDebit.select2('val',null);
+            _cboCredit.select2('val',0);
+            _cboDebit.select2('val',0);
             $('#is_tax_exempt').attr('checked', false);
         });
 
@@ -635,14 +636,13 @@ $(document).ready(function(){
         $('input[required],textarea[required],select[required]',f).each(function(){
 
                 if($(this).is('select')){
-                if($(this).val()==0){
-                    showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
-                    $(this).closest('div.form-group').addClass('has-error');
-                    $(this).focus();
-                    stat=false;
-                    return false;
-                }
-            
+                    if($(this).val()==null || $(this).val()==""){
+                        showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
+                        $(this).closest('div.form-group').addClass('has-error');
+                        $(this).focus();
+                        stat=false;
+                        return false;
+                    }
                 }else{
                 if($(this).val()==""){
                     showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
@@ -1445,7 +1445,7 @@ $(document).ready(function(){
                                         <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Supplier * :</label>
                                             <select name="supplier_id" id="new_supplier" data-error-msg="Supplier is required." required>
-                                                <option value="">Please Select...</option>
+                                                <option value="">Please select supplier</option>
                                                 <option value="sup">[ Create Supplier ]</option>
                                                 <?php
                                                 foreach($suppliers as $row)
@@ -1509,7 +1509,7 @@ $(document).ready(function(){
                                         <div class="form-group" style="margin-bottom:0px;">
                                             <label class="">Unit of Measurement * :</label>
                                             <select name="unit_id" id="product_unit" data-error-msg="Unit is required." required>
-                                                <option value="">Please Select...</option>
+                                                <option value="">Please select unit of measurement</option>
                                                 <option value="unt">[ Create Unit ]</option>
                                                 <?php
                                                 foreach($units as $row)
@@ -1647,7 +1647,7 @@ $(document).ready(function(){
 
                                                     <select name="income_account_id" id="income_account_id" data-error-msg="Link to Account is required." required>
                                                         <optgroup label="Please select NONE if this will not be recorded on Journal."></optgroup>
-                                                        <option value="">None</option>
+                                                        <option value="0">None</option>
                                                         <?php foreach($accounts as $account){ ?>
                                                             <option value="<?php echo $account->account_id; ?>"><?php echo $account->account_title; ?></option>
                                                         <?php } ?>
@@ -1661,7 +1661,7 @@ $(document).ready(function(){
 
                                                     <select name="expense_account_id" id="expense_account_id" data-error-msg="Link to Account is required." required>
                                                         <optgroup label="Please select NONE if this will not be recorded on Journal."></optgroup>
-                                                        <option value="">None</option>
+                                                        <option value="0">None</option>
                                                         <?php foreach($accounts as $account){ ?>
                                                             <option value="<?php echo $account->account_id; ?>"><?php echo $account->account_title; ?></option>
                                                         <?php } ?>
