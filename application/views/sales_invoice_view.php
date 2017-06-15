@@ -1153,10 +1153,18 @@ $(document).ready(function(){
             clearFields($('#div_sales_invoice_fields'));
             $('#span_invoice_no').html('INV-XXXX');
             showList(false);
-            $('#cbo_customers').select2('val', null);
+
+            $('#tbl_items > tbody').html('');
             $('#cbo_departments').select2('val', null);
             $('#cbo_department').select2('val', null);
-            $('#cbo_salesperson').select2('val',null);
+            $('#cbo_customers').select2('val', null);
+            $('#cbo_salesperson').select2('val', null);
+            $('#img_user').attr('src','assets/img/anonymous-icon.png');
+            $('#td_discount').html('0.00');
+            $('#td_before_tax').html('0.00');
+            $('#td_tax').html('0.00');
+            $('#td_after_tax').html('0.00');
+
             $('#invoice_default').datepicker('setDate', 'today');
             $('#due_default').datepicker('setDate', 'today');
             /*$('#cbo_prodType').select2('val', 3);
@@ -1428,22 +1436,22 @@ $(document).ready(function(){
         $('div.form-group').removeClass('has-error');
         $('input[required],textarea[required],select[required]',f).each(function(){
                 if($(this).is('select')){
-                if($(this).val()==0){
-                    showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
-                    $(this).closest('div.form-group').addClass('has-error');
-                    $(this).focus();
-                    stat=false;
-                    return false;
-                }
+                    if($(this).val()==0 || $(this).val()==null || $(this).val()==undefined || $(this).val()==""){
+                        showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
+                        $(this).closest('div.form-group').addClass('has-error');
+                        $(this).focus();
+                        stat=false;
+                        return false;
+                    }
                 }else{
-                if($(this).val()==""){
-                    showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
-                    $(this).closest('div.form-group').addClass('has-error');
-                    $(this).focus();
-                    stat=false;
-                    return false;
+                    if($(this).val()==""){
+                        showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
+                        $(this).closest('div.form-group').addClass('has-error');
+                        $(this).focus();
+                        stat=false;
+                        return false;
+                    }
                 }
-            }
         });
         return stat;
     };
@@ -1527,16 +1535,6 @@ $(document).ready(function(){
         $('input,textarea,select,input:not(.date-picker)',f).val('');
         $('#remarks').val('');
         $(f).find('input:first').focus();
-        $('#tbl_items > tbody').html('');
-        $('#cbo_departments').select2('val', null);
-        $('#cbo_department').select2('val', null);
-        $('#cbo_customers').select2('val', null);
-        $('#cbo_salesperson').select2('val', null);
-        $('#img_user').attr('src','assets/img/anonymous-icon.png');
-        $('#td_discount').html('0.00');
-        $('#td_before_tax').html('0.00');
-        $('#td_tax').html('0.00');
-        $('#td_after_tax').html('0.00');
     };
     function format ( d ) {
         //return
