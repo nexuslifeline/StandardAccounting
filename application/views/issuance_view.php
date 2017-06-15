@@ -212,7 +212,7 @@ echo $_side_bar_navigation;
                     </div><br />
                     <form id="frm_items">
                         <div class="table-responsive" style="min-height: 200px;padding: 1px;max-height: 400px;overflow: auto;">
-                            <table id="tbl_items" class="custom-design table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
+                            <table id="tbl_items" class="" cellspacing="0" width="100%" style="font-font:tahoma;">
                                 <thead class="">
                                     <tr>
                                         <th width="10%">Qty</th>
@@ -889,7 +889,7 @@ dt_si = $('#tbl_si_list').DataTable({
                         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                     }
                 }).done(function(response){
-                    row.child('<div style="padding: 20px;">'+response+'</div>').show();
+                    row.child('<div style="padding: 20px;">'+response+'</div>','no-padding').show();
                     // Add to the 'open' array
                     if ( idx === -1 ) {
                         detailRows.push( tr.attr('id') );

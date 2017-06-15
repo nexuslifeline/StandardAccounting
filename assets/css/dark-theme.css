@@ -739,3 +739,21 @@ table#tbl_inventory tbody tr.no-padding:nth-child(even) {
     background-color: transparent !important;
     color: white !important;
 }
+
+
+/* tbl_issuances - issuance */
+
+.row_child_tbl_issuances:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_issuances tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+table#tbl_issuances tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
