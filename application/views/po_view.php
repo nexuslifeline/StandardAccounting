@@ -690,7 +690,7 @@
 <footer role="contentinfo">
     <div class="clearfix">
         <ul class="list-unstyled list-inline pull-left">
-            <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+            <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTION</h6></li>
         </ul>
         <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
     </div>
@@ -1077,6 +1077,10 @@ $(document).ready(function(){
 
             //$('.toggle-fullscreen').click();
             clearFields($('#frm_purchases'));
+            $('#cbo_tax_type').select2('val',null);
+            $('#cbo_suppliers').select2('val',null);
+            $('#cbo_departments').select2('val',null);
+            $('textarea[name="remarks"]').val('');
             //$('#cbo_prodType').select2('val',3);
             showList(false);
         });
@@ -1419,6 +1423,7 @@ $(document).ready(function(){
         _data.push({name : "summary_before_discount", value :tbl_summary.find(oTableDetails.before_tax).text()});
         _data.push({name : "summary_tax_amount", value : tbl_summary.find(oTableDetails.tax_amount).text()});
         _data.push({name : "summary_after_tax", value : tbl_summary.find(oTableDetails.after_tax).text()});
+        _data.push({name : "remarks", value : $('textarea[name="remarks"]').val() });
 
         return $.ajax({
             "dataType":"json",
@@ -1438,6 +1443,7 @@ $(document).ready(function(){
         _data.push({name : "summary_tax_amount", value : tbl_summary.find(oTableDetails.tax_amount).text()});
         _data.push({name : "summary_after_tax", value : tbl_summary.find(oTableDetails.after_tax).text()});
         _data.push({name : "purchase_order_id" ,value : _selectedID});
+        _data.push({name : "remarks", value : $('textarea[name="remarks"]').val() });
 
         return $.ajax({
             "dataType":"json",
@@ -1491,11 +1497,6 @@ $(document).ready(function(){
         $('#td_after_tax').html('<b>'+accounting.formatNumber(0,4)+'</b>');
         $('#td_discount').html(accounting.formatNumber(0,4));
         $('#td_tax').html(accounting.formatNumber(0,4));
-
-        $('#cbo_tax_type').select2('val',null);
-        $('#cbo_suppliers').select2('val',null);
-        $('#cbo_departments').select2('val',null);
-        $('textarea[name="remarks"]').val('');
 
 
     };
@@ -1584,7 +1585,6 @@ $(document).ready(function(){
         var obj_department=$('#cbo_departments').find('option[value="'+i+'"]');
 
         _defCostType=obj_department.data('default-cost');
-        $('textarea[name="deliver_to_address"]').val(obj_department.data('delivery-address'));
 
 
     });

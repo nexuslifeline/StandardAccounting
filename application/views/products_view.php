@@ -350,7 +350,7 @@ $(document).ready(function(){
 
                 var _group=response.row_added[0];
                 $('#product_category').append('<option value="'+_group.category_id+'" selected>'+_group.category_name+'</option>');
-                // TEMPORARY COMMENT --> $('#product_category').select2('val',_group.category_id);
+                $('#product_category').select2('val',_group.category_id);
 
             }).always(function(){
                 showSpinningProgress(btn);
@@ -380,7 +380,7 @@ $(document).ready(function(){
 
                 var _group=response.row_added[0];
                 $('#product_unit').append('<option value="'+_group.unit_id+'" selected>'+_group.unit_name+'</option>');
-                // TEMPORARY COMMENT --> $('#product_unit').select2('val',_group.unit_id);
+                $('#product_unit').select2('val',_group.unit_id);
 
             }).always(function(){
                 showSpinningProgress(btn);
@@ -1135,7 +1135,7 @@ $(document).ready(function(){
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                            <h4 class="modal-title"><span id="modal_mode"> </span>New Category Group</h4>
+                            <h4 class="modal-title title"><span id="modal_mode"> </span>New Category Group</h4>
 
                         </div>
 

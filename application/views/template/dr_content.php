@@ -24,9 +24,9 @@
 </style>
 
 <div>
-    <center><table width="95%" cellpadding="5" style="font-family: tahoma;font-size: 11">
+    <center><table width="95%" cellpadding="5" style="font-family: tahoma;font-size: 11;">
             <tr>
-                <td width="45%" valign="top">
+                <td width="45%" valign="top" style="border: none;">
                     <span>Supplier :</span><br /><br />
                     <address>
                         <strong><?php echo $delivery_info->supplier_name; ?></strong><br>
@@ -40,7 +40,7 @@
                     <strong><?php echo $delivery_info->contact_person; ?></strong><br>
                 </td>
 
-                <td width="50%" align="right">
+                <td width="50%" align="right" style="border: none;">
                     <h4>Purchase Invoice No.</h4>
                     <h4 class="text-navy"><?php echo $delivery_info->dr_invoice_no; ?></h4>
 

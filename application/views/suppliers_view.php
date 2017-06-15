@@ -171,6 +171,7 @@ $(document).ready(function(){
             _txnMode="new";
             $('#modal_create_suppliers').modal('show');
             clearFields($('#frm_supplier'));
+            _cboTaxGroup.select2('val',null);
         });
 
         $('#btn_browse').click(function(event){
@@ -205,6 +206,8 @@ $(document).ready(function(){
                     }
                 });
             });
+
+            _cboTaxGroup.select2('val',data.tax_type_id);
         });
 
         $('input[name="purchase_cost"],input[name="markup_percent"],input[name="sale_price"]').keyup(function(){

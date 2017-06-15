@@ -538,7 +538,7 @@
             </div>
 
             <div class="modal-body">
-                <table id="tbl_po_list" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <table id="tbl_po_list" class="" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
                         <th></th>
