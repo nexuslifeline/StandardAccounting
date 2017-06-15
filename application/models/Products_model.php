@@ -648,6 +648,7 @@ class Products_model extends CORE_Model {
                 SELECT dii.product_id,SUM(dii.dr_qty) as ReceivedQTY FROM delivery_invoice as di
                 INNER JOIN delivery_invoice_items as dii ON dii.dr_invoice_id=di.dr_invoice_id
                 WHERE di.date_delivered<='$as_of_date' ".($depid==null||$depid==0?"":" AND di.department_id=".$depid)."
+                AND di.is_deleted=0
                 GROUP BY dii.product_id
 
                 )as recQ ON recQ.product_id=pQ.product_id
@@ -662,6 +663,7 @@ class Products_model extends CORE_Model {
                 FROM issuance_info as ii INNER
                 JOIN issuance_items as iii ON iii.issuance_id=ii.issuance_id
                 WHERE ii.date_issued<='$as_of_date' ".($depid==null||$depid==0?"":" AND ii.issued_department_id=".$depid)."
+                AND ii.is_deleted=0
                 GROUP BY iii.product_id
 
                 )as issQ ON issQ.product_id=pQ.product_id
@@ -677,6 +679,7 @@ class Products_model extends CORE_Model {
                 INNER JOIN adjustment_items as aii
                 ON aii.adjustment_id=ai.adjustment_id
                 WHERE ai.adjustment_type='IN' AND ai.date_adjusted<='$as_of_date' ".($depid==null||$depid==0?"":" AND ai.department_id=".$depid)."
+                AND ai.is_deleted=0
                 GROUP BY aii.product_id
 
                 )as aInQ ON aInQ.product_id=pQ.product_id
@@ -692,6 +695,7 @@ class Products_model extends CORE_Model {
                 INNER JOIN adjustment_items as aii
                 ON aii.adjustment_id=ai.adjustment_id
                 WHERE ai.adjustment_type='OUT' AND ai.date_adjusted<='$as_of_date' ".($depid==null||$depid==0?"":" AND ai.department_id=".$depid)."
+                AND ai.is_deleted=0
                 GROUP BY aii.product_id
 
                 )as aOutQ ON aOutQ.product_id=pQ.product_id)as core ORDER BY core.product_desc
