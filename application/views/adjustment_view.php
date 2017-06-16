@@ -849,6 +849,8 @@ $(document).ready(function(){
             _cboAdjustments.select2('val',null);
             _cboDepartments.select2('val',null);
             clearFields($('#frm_adjustments'));
+            $('#tbl_items > tbody').html('');
+            $('#cbo_departments').select2('val', null);
             showList(false);
             reComputeTotal();
         });
@@ -1193,8 +1195,6 @@ $(document).ready(function(){
         $('input:not(.date-picker),textarea,select',f).val('');
         $('#remarks').val('');
         $(f).find('input:first').focus();
-        $('#tbl_items > tbody').html('');
-        $('#cbo_departments').select2('val', null);
     };
 
 

@@ -265,9 +265,9 @@ class Adjustments extends CORE_Controller
                     // $m_products->modify($this->get_numeric_value($prod_id[$i]));
                 }
 
-                for($i=0;$i<count($tmp_prod_id);$i++) {
-                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($tmp_prod_id[$i]->product_id));
-                    $m_products->modify($this->get_numeric_value($tmp_prod_id[$i]->product_id));
+                for($p=0;$p<count($tmp_prod_id);$p++) {
+                    $m_products->on_hand=$m_products->get_product_qty($this->get_numeric_value($tmp_prod_id[$p]->product_id));
+                    $m_products->modify($this->get_numeric_value($tmp_prod_id[$p]->product_id));
                 }
 
                 $m_adjustment->commit();
