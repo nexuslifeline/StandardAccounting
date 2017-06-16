@@ -967,6 +967,11 @@ $(document).ready(function(){
             reInitializeDropDownAccounts($('#tbl_entries'),false);
             $('#date_txn').datepicker('setDate','today');
 
+
+            $('#cbo_customers').select2('val',null);
+            $('#cbo_departments').select2('val',null);
+            $('#cbo_payment_method').select2('val',null);
+
             clearFields($('#frm_journal'));
             showList(false);
 
@@ -1220,7 +1225,7 @@ $(document).ready(function(){
             "type":"POST",
             "url":"Customers/transaction/create",
             "data":_data,
-            "beforeSend": showSpinningProgress($('#btn_save'))
+            "beforeSend": showSpinningProgress($('#btn_create_customer'))
         });
     };
 
@@ -1263,9 +1268,6 @@ $(document).ready(function(){
 
         $('input,textarea',f).val('');
 
-        $('#cbo_customers').select2('val',null);
-        $('#cbo_departments').select2('val',null);
-        $('#cbo_payment_method').select2('val',null);
 
         $(f).find('input:first').focus();
 
