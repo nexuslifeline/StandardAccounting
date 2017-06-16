@@ -976,7 +976,9 @@
 
             $('#btn_new').click(function(){
                 _txnMode="new";
-                clearFields($('#div_payable_fields'))
+                clearFields($('#div_payable_fields'));
+                $('#cbo_departments').select2('val',null);
+                $('#cbo_suppliers').select2('val',null);
                 showList(false);
                 $('#date_txn').datepicker('setDate','today');
                 //$('#modal_journal_entry').modal('show');
@@ -1337,13 +1339,12 @@
         };
 
         var clearFields=function(f){
-            $('input,textarea,select',f).val('');
+            $('input,textarea',f).val('');
             $(f).find('select').select2('val',null);
             $(f).find('input:first').focus();
-            $('#cbo_departments').select2('val',null);
             $('#tbl_entries > tbody tr').slice(2).remove();
             $('#img_user').attr('src','assets/img/anonymous-icon.png');
-            $('#cbo_tax_group').select2('val',null);
+            //$('#cbo_tax_group').select2('val',null);
             $('#tbl_entries > tfoot tr').find(oTFSummary.dr).html('<b>0.00</b>');
             $('#tbl_entries > tfoot tr').find(oTFSummary.cr).html('<b>0.00</b>');
         };

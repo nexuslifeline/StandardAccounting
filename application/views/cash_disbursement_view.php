@@ -828,18 +828,12 @@
                                 <div class="col-md-4" id="label">
                                      <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Tax :</label>
                                 </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-code"></i>
-                                        </span>
-                                        <select name="tax_type_id" id="cbo_tax_group" class="form-control" data-error-msg="Tax type is required!" required="">
-                                            <option value="">Please select tax type...</option>
-                                            <?php foreach($tax_types as $tax_type){ ?>
-                                                <option value="<?php echo $tax_type->tax_type_id; ?>" data-tax-rate="<?php echo $tax_type->tax_rate; ?>"><?php echo $tax_type->tax_type; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
+                                <div class="col-md-8" style="padding: 0; margin-top: 5px;">
+                                    <select name="tax_type_id" id="cbo_tax_group" class="form-control" data-error-msg="Tax type is required!" required>
+                                        <?php foreach($tax_types as $tax_type){ ?>
+                                            <option value="<?php echo $tax_type->tax_type_id; ?>" data-tax-rate="<?php echo $tax_type->tax_rate; ?>"><?php echo $tax_type->tax_type; ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -948,7 +942,7 @@
 <script>
 $(document).ready(function(){
     var _txnMode; var _cboSuppliers; var _cboMethods; var _selectRowObj; var _selectedID; var _txnMode, _cboBranches, _cboPaymentMethod;
-    var dtReview; var cbo_refType; var _cboLayouts; var dtRecurring; var dtCheckList; var _attribute;
+    var dtReview; var cbo_refType; var _cboLayouts; var dtRecurring; var dtCheckList; var _attribute; var _cboTax;
 
 
     var oTBJournal={
@@ -1162,6 +1156,11 @@ $(document).ready(function(){
 
         }();
 
+        _cboTax=$('#cbo_tax_group').select2({
+            placeholder: "Please Select Tax type",
+            allowClear:true
+        });
+
         _cboSuppliers=$('#cbo_suppliers').select2({
             placeholder: "Please select supplier.",
             allowClear: true
@@ -1185,6 +1184,7 @@ $(document).ready(function(){
             allowClear: true
         });
         _cboLayouts.select2('val',null);
+        _cboTax.select2('val',null);
 
 
         cbo_refType=$('#cbo_refType').select2({
