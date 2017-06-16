@@ -786,6 +786,7 @@ $(document).ready(function(){
             clearFields($('#frm_journal'));
             $('#div_check').show();
             $('#div_no_check').hide();
+            _cboDepartments.select2('val',null);
             $('#date_txn').datepicker('setDate','today');
             showList(false);
             //$('#modal_journal_entry').modal('show');
