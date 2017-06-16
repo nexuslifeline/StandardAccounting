@@ -987,7 +987,9 @@ $(document).ready(function(){
 
         $('#btn_new').click(function(){
             _txnMode="new";
-            clearFields($('#div_receivable_fields'))
+            clearFields($('#div_receivable_fields'));
+            _cboCustomers.select2('val',null);
+            _cboDepartments.select2('val',null);
             $('#date_txn').datepicker('setDate','today');
             showList(false);
             //$('#modal_journal_entry').modal('show');
@@ -1239,9 +1241,10 @@ $(document).ready(function(){
                         $('#modal_new_customer').modal('hide');
                         var _customers=response.row_added[0];
                         $('#cbo_customers').append('<option value="'+_customers.customer_id+'" selected>'+_customers.customer_name+'</option>');
-                        $('#cbo_customers').select2('val',_customers.customer_id);
+
+                        _cboCustomers.select2('val',_customers.customer_id);
                         clearFields($('#modal_new_customer'));
-                        showList(true);
+                        //showList(true);
                         //$('#btn_create_customer').attr('disabled',false);
                     }
 
@@ -1351,8 +1354,10 @@ $(document).ready(function(){
     };
 
     var clearFields=function(f){
-        $('input,textarea,select',f).val('');
-        $(f).find('select').select2('val',null);
+        $('input,textarea',f).val('');
+        //$(f).find('select').select2('val',null);
+
+
         $(f).find('input:first').focus();
         $('#tbl_entries > tbody tr').slice(2).remove();
         $('#tbl_entries > tfoot tr').find(oTFSummary.dr).html('<b>0.00</b>');
