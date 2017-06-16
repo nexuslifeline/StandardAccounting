@@ -1215,7 +1215,7 @@ $(document).ready(function(){
             }else{
                 var obj_department=$('#cbo_departments').find('option[value="'+i+'"]');
                 _defCostType=obj_department.data('default-cost');
-                //_cboTaxType.select2('val',obj_supplier.data('tax-type')); //set tax type base on selected Supplier
+                // _cboTaxType.select2('val',obj_supplier.data('tax-type')); //set tax type base on selected Supplier
             }
 
 
@@ -1260,6 +1260,13 @@ $(document).ready(function(){
             //$('.toggle-fullscreen').click();
             $('#span_invoice_no').html('INV-XXXX');
             clearFields($('#frm_deliveries'));
+            $('#cbo_departments').select2('val', null);
+            $('#cbo_suppliers').select2('val', null);
+            $('#img_user').attr('src','assets/img/anonymous-icon.png');
+            $('#td_discount').html('0.00');
+            $('#td_before_tax').html('0.00');
+            $('#td_tax').html('0.00');
+            $('#td_after_tax').html('0.00');
             $('#tbl_items tbody').html('');
             $('#order_default').datepicker('setDate', 'today');
             $('#due_default').datepicker('setDate', 'today');
@@ -1416,7 +1423,7 @@ $(document).ready(function(){
 
                     var _department=response.row_added[0];
                     $('#cbo_departments').append('<option value="'+_department.department_id+'" data-tax-type="'+_department.department_id+'" selected>'+_department.department_name+'</option>');
-                    $('#cbo_departments').select2('val',_department.department_id);
+                    $('#cbo_departments').select2('val', _department.department_id);
                     $('#cbo_tax_type').select2('val',_department.tax_type_id);
 
                     clearFields($('#modal_new_department'));
@@ -1856,13 +1863,6 @@ $(document).ready(function(){
         $('#remarks').val('');
         $(f).find('input:first').focus();
         //$('#tbl_items > tbody').html('');
-        $('#cbo_departments').select2('val', null);
-        $('#cbo_suppliers').select2('val', null);
-        $('#img_user').attr('src','assets/img/anonymous-icon.png');
-        $('#td_discount').html('0.00');
-        $('#td_before_tax').html('0.00');
-        $('#td_tax').html('0.00');
-        $('#td_after_tax').html('0.00');
     };
 
 

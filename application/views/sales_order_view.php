@@ -2776,7 +2776,13 @@ $(document).ready(function(){
 
             clearFields($('#frm_sales_order'));
 
+            $('#tbl_items tbody').html('');
 
+            $('#cbo_departments').select2('val', null);
+
+            $('#cbo_department').select2('val', null);
+
+            $('#cbo_customers').select2('val', null);
 
             ///$('.sales_order_title').html('New Sales Order');
 
@@ -3527,16 +3533,6 @@ $(document).ready(function(){
         $('input,textarea,select',f).val('');
 
         $(f).find('input:first').focus();
-
-        //$('#tbl_items > tbody').html('');
-
-        $('#cbo_departments').select2('val', null);
-
-        $('#cbo_department').select2('val', null);
-
-        $('#cbo_customers').select2('val', null);
-
-        //$('#cbo_prodType').select2('val', 3);
 
         $('#img_user').attr('src','assets/img/anonymous-icon.png');
 
