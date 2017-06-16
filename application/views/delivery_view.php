@@ -1855,6 +1855,7 @@ $(document).ready(function(){
 
     var showSpinningProgress=function(e){
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+        $(e).toggleClass('disabled');
     };
 
     var clearFields=function(f){

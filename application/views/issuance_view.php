@@ -1228,6 +1228,7 @@ dt_si = $('#tbl_si_list').DataTable({
     };
     var showSpinningProgress=function(e){
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+        $(e).toggleClass('disabled');
     };
     var clearFields=function(f){
         var dDate = <?php echo json_encode(date('m/d/Y')); ?>;
