@@ -753,7 +753,7 @@ $(document).ready(function(){
                         </div>
 
                         <div class="modal-footer">
-                            <button id="btn_save" type="button" class="btn" style="background-color:#2ecc71;color:white;">Save</button>
+                            <button id="btn_save" type="button" class="btn btn-primary" style="background-color:#2ecc71;color:white;">Save</button>
                             <button id="btn_cancel" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                         </div>
                     </div><!---content---->
