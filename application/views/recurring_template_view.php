@@ -166,7 +166,7 @@
                                             </div><br>
                                             <div class="container-fluid group-box">
                                                 <div style="width: 100%;">
-                                                    <table id="tbl_entries" class="custom-design table-striped">
+                                                    <table id="tbl_entries" class="">
                                                         <thead class="">
                                                         <tr>
                                                             <th style="width: 30%;">Account</th>
@@ -231,7 +231,7 @@
 
                                                 <hr />
                                                 <label>Remarks :</label><br />
-                                                <textarea name="remarks" class="col-lg-12"></textarea>
+                                                <textarea name="remarks" class="form-control col-lg-12"></textarea>
 
                                             </form>
                                             </div>

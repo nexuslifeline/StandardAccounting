@@ -792,7 +792,7 @@
 
                             <label><strong>Remarks :</strong></label><br />
 
-                            <textarea name="remarks" class="form-control" placeholder="Remarks"></textarea>
+                            <textarea name="remarks" id="remarks" class="form-control" placeholder="Remarks"></textarea>
 
                         </div>
 
@@ -3545,6 +3545,8 @@ $(document).ready(function(){
         $('#td_tax').html('0.00');
 
         $('#td_after_tax').html('0.00');
+
+        $('#remarks').val('');
 
     };
 
