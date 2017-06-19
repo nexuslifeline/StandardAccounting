@@ -1,3 +1,22 @@
+<style>
+
+    .tab-container .nav.nav-tabs li a {
+        background: #414141 !important;
+        color: white !important;
+    }
+
+    .tab-container .nav.nav-tabs li a:hover {
+        background: #414141 !important;
+        color: white !important;
+    }
+
+    .tab-container .nav.nav-tabs li a:focus {
+        background: #414141 !important;
+        color: white !important;
+    }
+    
+</style>
+
 <center>
     <table width="100%" style="font-family: tahoma;">
         <tbody>
