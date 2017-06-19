@@ -263,7 +263,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button id="btn_save" class="btn btn-primary" name="btn_save">Save</button>
+                                <button id="btn_save" class="btn btn-primary" name="btn_save"><span></span>Save</button>
                                 <button id="btn_cancel" class="btn btn-default">Cancel</button>
                             </div>
                         </div>
@@ -583,6 +583,7 @@
 
         var showSpinningProgress=function(e){
             $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+            $(e).toggleClass('disabled');
         };
 
         var clearFields=function(frm){

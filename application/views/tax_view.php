@@ -104,7 +104,6 @@
                                                 <table id="tbl_tax" class="" cellspacing="0" width="100%">
                                                     <thead class="table-erp">
                                                     <tr>
-                                                        <th></th>
                                                         <th>Tax</th>
                                                         <th>Tax Rate</th>
                                                         <th>Description</th>
@@ -344,18 +343,11 @@
                 "bLengthChange":false,
                 "ajax" : "Tax/transaction/list",
                 "columns": [
+                    { targets:[0],data: "tax_type" },
+                    { targets:[1],data: "tax_rate" },
+                    { targets:[2],data: "description" },
                     {
-                        "targets": [0],
-                        "class":          "details-control",
-                        "orderable":      false,
-                        "data":           null,
-                        "defaultContent": ""
-                    },
-                    { targets:[1],data: "tax_type" },
-                    { targets:[2],data: "tax_rate" },
-                    { targets:[3],data: "description" },
-                    {
-                        targets:[4],
+                        targets:[3],
                         render: function (data, type, full, meta){
                             var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                             var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';

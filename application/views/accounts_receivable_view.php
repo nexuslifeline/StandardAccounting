@@ -273,7 +273,7 @@
 
 
                 <div class="panel-body">
-                <h2>Sales Journal</h2>
+                <b><i class="fa fa-bars"></i> Sales Journal</b><hr />
 
                     <div class="tab-container tab-top tab-primary">
                         <ul class="nav nav-tabs">

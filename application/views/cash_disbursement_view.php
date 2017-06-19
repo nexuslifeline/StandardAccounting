@@ -868,7 +868,7 @@
                 <button id="btn_create_new_supplier" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
                 <button id="btn_close_new_supplier" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
             </div>
-        </div><!---content---->
+        </div><!---content-->
     </div>
 </div><!---modal-->
 
@@ -886,7 +886,7 @@
                 <div class="row">
                         <div class="container-fluid">
                             <div class="col-xs-12">
-                                <select name="check_layout" class="form-control" id="cbo_layouts" style="">
+                                <select name="check_layout" class="form-control" id="cbo_layouts">
                                     <?php foreach($layouts as $layout){ ?>
                                         <option value="<?php echo $layout->check_layout_id; ?>"><?php echo $layout->check_layout; ?></option>
                                     <?php } ?>
@@ -903,7 +903,7 @@
                 <button id="btn_preview_check" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Preview Check</button>
                 <button id="btn_close_check" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
             </div>
-        </div><!---content---->
+        </div><!---content-->
     </div>
 </div><!---modal-->
 
@@ -1395,8 +1395,10 @@ $(document).ready(function(){
 
 
         $('#btn_preview_check').click(function(){
-
-            window.open('Templates/layout/print-check?id='+$('#cbo_layouts').val()+'&jid='+_selectedID);
+            if ($('#cbo_layouts').select2('val') != null || $('#cbo_layouts').select2('val') != undefined)
+                window.open('Templates/layout/print-check?id='+$('#cbo_layouts').val()+'&jid='+_selectedID);
+            else
+                showNotification({ title: 'Error', msg: 'Please select check layout!', stat: 'error' });
         });
 
 
