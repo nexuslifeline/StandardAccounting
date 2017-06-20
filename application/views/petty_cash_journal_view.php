@@ -85,6 +85,10 @@
                 z-index: 999999;
             }
 
+            .select2-container--default .select2-selection--single {
+                height: 34px;
+            }
+
         </style>
 
     </head>
@@ -244,6 +248,153 @@
                     </div>
                 </div><!---modal-->
 
+                <div id="modal_create_suppliers" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#2ecc71;">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                                <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"> </span>Supplier Information</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <form id="frm_supplier">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="col-md-12">
+                                                <div class="col-md-4" id="label">
+                                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Company Name :</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-users"></i>
+                                                        </span>
+                                                        <input type="text" name="supplier_name" class="form-control" placeholder="Supplier Name" data-error-msg="Supplier Name is required!" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="col-md-4" id="label">
+                                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Contact Person :</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-users"></i>
+                                                        </span>
+                                                        <input type="text" name="contact_name" class="form-control" placeholder="Contact Person" data-error-msg="Contact Person is required!" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="col-md-12">
+                                                <div class="col-md-4" id="label">
+                                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Address :</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-home"></i>
+                                                         </span>
+                                                         <textarea name="address" class="form-control" data-error-msg="Supplier address is required!" placeholder="Address" required ></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="col-md-12">
+                                                <div class="col-md-4" id="label">
+                                                     <label class="control-label boldlabel" style="text-align:right;">Email Address :</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-envelope-o"></i>
+                                                        </span>
+                                                        <input type="text" name="email_address" class="form-control" placeholder="Email Address">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="col-md-4" id="label">
+                                                     <label class="control-label boldlabel" style="text-align:right;">Contact No :</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-mobile"></i>
+                                                        </span>
+                                                        <input type="text" name="contact_no" id="contact_no" class="form-control" placeholder="Contact No">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="col-md-4" id="label">
+                                                     <label class="control-label boldlabel" style="text-align:right;">TIN # :</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-code"></i>
+                                                        </span>
+                                                        <input type="text" name="tin_no" class="form-control" placeholder="TIN #">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="col-md-4" id="label">
+                                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Tax :</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-code"></i>
+                                                        </span>
+                                                        <select name="tax_type_id" id="cbo_tax_type" data-error-msg="Tax type is required!" required="">
+                                                            <option value="">Please select tax type...</option>
+                                                            <?php foreach($tax_types as $tax_type){ ?>
+                                                                <option value="<?php echo $tax_type->tax_type_id; ?>" data-tax-rate="<?php echo $tax_type->tax_rate; ?>"><?php echo $tax_type->tax_type; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <label class="control-label boldlabel" style="text-align:left;padding-top:10px;"><i class="fa fa-user" aria-hidden="true" style="padding-right:10px;"></i>Supplier's Photo</label>
+                                                    <hr style="margin-top:0px !important;height:1px;background-color:black;">
+                                                </div>
+                                                <div style="width:100%;height:300px;border:2px solid #34495e;border-radius:5px;">
+                                                    <center>
+                                                        <img name="img_user" id="img_user" src="assets/img/anonymous-icon.png" height="140px;" width="140px;"></img>
+                                                    </center>
+                                                    <hr style="margin-top:0px !important;height:1px;background-color:black;">
+                                                    <center>
+                                                         <button type="button" id="btn_browse" style="width:150px;margin-bottom:5px;" class="btn btn-primary">Browse Photo</button>
+                                                         <button type="button" id="btn_remove_photo" style="width:150px;" class="btn btn-danger">Remove</button>
+                                                         <input type="file" name="file_upload[]" class="hidden">
+                                                    </center> 
+                                                </div>
+                                            </div>   
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button id="btn_save_supplier" type="button" class="btn btn-primary" style="background-color:#2ecc71;color:white;">Save</button>
+                                <button id="btn_cancel_supplier" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div><!---content-->
+                    </div>
+                </div><!---modal-->
+
                 <div id="modal_new_pcf" class="modal fade" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -260,12 +411,14 @@
                                                 <input type="text" name="ref_no" class="form-control" data-error-msg="Ref # is required" placeholder="Ref #" required>
                                                 <strong>* Supplier :</strong><br>
                                                 <select id="cbo_supplier" class="form-control" name="supplier_id" style="width: 100%;" data-error-msg="Supplier is required" required>
+                                                    <option value="create_supplier">[Create New Supplier]</option>
                                                     <?php foreach($suppliers as $supplier) { ?>
                                                         <option value="<?php echo $supplier->supplier_id; ?>"><?php echo $supplier->supplier_name; ?></option>
                                                     <?php } ?>
                                                 </select>
                                                 <strong>* Department :</strong><br>
                                                 <select id="cbo_department" class="form-control" name="department_id" style="width: 100%;" data-error-msg="Department is required" required>
+                                                    <option value="create_department">[Create New Department]</option>
                                                     <?php foreach($departments as $department) { ?>
                                                         <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
                                                     <?php } ?>
@@ -302,6 +455,45 @@
                         </div>
                     </div>
                 </div>
+
+            <div id="modal_new_department" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background: #2ecc71">
+                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+                             <h2 id="department_title" class="modal-title" style="color:white;">New Department</h2>
+                        </div>
+                        <div class="modal-body">
+                            <form id="frm_department" role="form" class="form-horizontal">
+                                <div class="row" style="margin: 1%;">
+                                    <div class="col-lg-12">
+                                        <div class="form-group" style="margin-bottom:0px;">
+                                            <label class="">Department Name * :</label>
+                                            <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" style="margin: 1%;">
+                                    <div class="col-lg-12">
+                                        <div class="form-group" style="margin-bottom:0px;">
+                                                <label class="">Department Description :</label>
+                                                <textarea name="department_desc" class="form-control" placeholder="Department Description"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btn_save_department" class="btn btn-primary">Save</button>
+                            <button id="btn_cancel_department" class="btn btn-default">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
                 <footer role="contentinfo">
                     <div class="clearfix">
@@ -343,6 +535,8 @@
         var _txnMode;
         var _as_of_date=$('#txt_date');
         var _cboDepartment;
+        var _cboSupplier;
+        var _cboTaxGroup;
 
         var initializeControls=function() {
             InitializeDataTable();
@@ -355,12 +549,16 @@
                 autoclose: true
             });
 
-            $('#cbo_supplier').select2({
+            _cboSupplier = $('#cbo_supplier').select2({
                 placeholder: "Please select Supplier"
             });
 
-            $('#cbo_department').select2({
+            _cboDepartment = $('#cbo_department').select2({
                 placeholder: "Please select Department"
+            });
+
+            _cboTaxGroup=$('#cbo_tax_type').select2({
+                allowClear: false
             });
 
             $('#cbo_department_filter').select2({
@@ -371,9 +569,9 @@
                 placeholder: "Please select Account"
             });
 
-            $('#cbo_supplier').select2('val',null);
+            _cboSupplier.select2('val',null);
             $('#cbo_department_filter').select2('val', $("#cbo_department_filter option:first").val());
-            $('#cbo_department').select2('val', null);
+            _cboDepartment.select2('val', null);
             $('#cbo_account').select2('val',null);
 
             $('.numeric').autoNumeric('init',{mDec:2});
@@ -502,6 +700,20 @@
         };
 
         var bindEventHandlers=function() {
+            _cboSupplier.on('select2:select', function(){
+                if (_cboSupplier.val() == 'create_supplier') {
+                    $('#modal_create_suppliers').modal('show');
+                    $('#modal_new_pcf').modal('toggle');
+                }
+            });
+
+            _cboDepartment.on('select2:select', function(){
+                if (_cboDepartment.val() == 'create_department') {
+                    $('#modal_new_department').modal('show');
+                    $('#modal_new_pcf').modal('toggle');
+                }
+            });
+
             $('#btn_new').on('click', function() {
                 validateUnreplenishedExpense().done(function(response){
                     var message = JSON.parse(response);
@@ -509,6 +721,9 @@
                     if (message.stat == "success") {
                         _txnMode="new"
                         clearFields($('#frm_petty_cash'));
+                        $('#cbo_account').select2('val',null);
+                        $('#cbo_department').select2('val', null);
+                        $('#cbo_supplier').select2('val',null);
                         $('#pcf_title').text('Post New Expense');
                         $('#txt_date_txn').val('<?php echo date('m/d/Y'); ?>');
                         $('#modal_new_pcf').modal('show');
@@ -524,11 +739,49 @@
                 recomputeTotals();
             });
 
+            $('#btn_browse').click(function(event){
+                event.preventDefault();
+                $('input[name="file_upload[]"]').click();
+            });
+
+            $('#btn_remove_photo').click(function(event){
+                event.preventDefault();
+                $('img[name="img_user"]').attr('src','assets/img/anonymous-icon.png');
+            });
+
+            $('input[name="file_upload[]"]').change(function(event){
+                var _files=event.target.files;
+                
+                var data=new FormData();
+                $.each(_files,function(key,value){
+                    data.append(key,value);
+                });
+                $.ajax({
+                    url : 'Suppliers/transaction/upload',
+                    type : "POST",
+                    data : data,
+                    cache : false,
+                    dataType : 'json',
+                    processData : false,
+                    contentType : false,
+                    success : function(response){
+                        
+                        $('img[name="img_user"]').attr('src',response.path);
+                    }
+                });
+            });
+
             $('#cbo_department_filter').change(function(){
                 dt.destroy();
                 dtReplenished.destroy();
                 InitializeDataTable();
                 recomputeTotals();
+            });
+
+            $('#btn_cancel_supplier').click(function(){
+                $('#modal_create_suppliers').modal('hide');
+                $('#modal_new_pcf').modal('show');
+                _cboSupplier.select2('val',null);
             });
 
             $('#btn_cancel').on('click', function() {
@@ -630,17 +883,73 @@
                 }
             });
 
+            $('#btn_save_supplier').click(function(){
+                if(validateRequiredFields($('#frm_supplier'))){
+                    createSupplier().done(function(response){
+                        showNotification(response);
+                        var _supplier = response.row_added[0];
+                        _cboSupplier.append('<option value="'+ _supplier.supplier_id +'">' + _supplier.supplier_name + '</option>');
+                        _cboSupplier.select2('val',_supplier.supplier_id);
+                        clearFields($('#frm_supplier'));
+                    }).always(function(){
+                        $('#modal_create_suppliers').modal('toggle');
+                        $('#modal_new_pcf').modal('toggle');
+                        showSpinningProgress($('#btn_save_supplier'));
+                    });
+                    return;
+                }
+            });
+
+            $('#btn_save_department').click(function(){
+                if(validateRequiredFields($('#frm_department'))){
+                    createDepartment().done(function(response){
+                        showNotification(response);
+                        var _department = response.row_added[0];
+                        _cboDepartment.append('<option value="'+ _department.department_id +'">' + _department.department_name + '</option>');
+                        _cboDepartment.select2('val',_department.department_id);
+                        clearFields($('#frm_department'));
+                    }).always(function(){
+                        $('#modal_new_department').modal('toggle');
+                        $('#modal_new_pcf').modal('toggle');
+                        showSpinningProgress($('#btn_save_department'));
+                    });
+                }
+            });
+
             $('#txtAmount').keypress(validateNumber);
         }();
 
+        var createDepartment=function(){
+            var _data=$('#frm_department').serializeArray();
+
+            return $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Departments/transaction/create",
+                "data":_data,
+                "beforeSend": showSpinningProgress($('#btn_save_department'))
+            });
+        };
+
+        var createSupplier=function() {
+            var _data=$('#frm_supplier').serializeArray();
+            _data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
+            return $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Suppliers/transaction/create",
+                "data":_data,
+                "beforeSend": showSpinningProgress($('#btn_save_supplier'))
+            });
+        };
+
         var createPettyCash=function(){
             var _data=$('#frm_petty_cash').serializeArray();
-            console.log(_data);
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
                 "url":"Petty_cash_journal/transaction/save",
-                "data":_data
+                "data":_data 
             });
         };
 
@@ -723,8 +1032,8 @@
                         $(this).focus();
                         stat=false;
                         return false;
-                    }
-
+                    
+}
                     }else{
                     if($(this).val()==""){
                         showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
@@ -758,9 +1067,6 @@
             $('input,textarea,select', frm).val('');
             $('#txtAmount').val('0.00');
             $('form').find('input:first').focus();
-            $('#cbo_account').select2('val',null);
-            $('#cbo_department').select2('val', null);
-            $('#cbo_supplier').select2('val',null);
         };
     })();
 

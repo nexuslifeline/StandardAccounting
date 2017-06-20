@@ -18,7 +18,8 @@ class General_journal extends CORE_Controller
                 'Journal_info_model',
                 'Journal_account_model',
                 'Departments_model',
-                'Accounting_period_model'
+                'Accounting_period_model',
+                'Tax_model'
             )
         );
 
@@ -33,6 +34,7 @@ class General_journal extends CORE_Controller
         $data['_side_bar_navigation'] = $this->load->view('template/elements/side_bar_navigation', '', TRUE);
         $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 
+        $data['tax_types']=$this->Tax_model->get_list(array('tax_types.is_deleted'=>FALSE));
         $data['customers']=$this->Customers_model->get_list('is_active=TRUE AND is_deleted=FALSE');
         $data['suppliers']=$this->Suppliers_model->get_list('is_active=TRUE AND is_deleted=FALSE');
         $data['departments']=$this->Departments_model->get_list('is_active=TRUE AND is_deleted=FALSE');

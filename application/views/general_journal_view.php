@@ -100,6 +100,10 @@
             width: 100% !important; 
         } 
 
+        body {
+            overflow-x: hidden;
+        }
+
     </style>
 
 </head>
@@ -217,15 +221,17 @@
 
                                         <label class="col-lg-2"> * Particular :</label>
                                         <div class="col-lg-10">
-                                            <select id="cbo_particulars" name="particular_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Customer is required." required>
+                                            <select id="cbo_particulars" name="particular_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Particular is required." required>
 
                                                 <optgroup label="Customers">
+                                                    <option value="create_customer">[Create New Customer]</option>
                                                     <?php foreach($customers as $customer){ ?>
                                                         <option value='C-<?php echo $customer->customer_id; ?>'><?php echo $customer->customer_name; ?></option>
                                                     <?php } ?>
                                                 </optgroup>
 
                                                 <optgroup label="Suppliers">
+                                                    <option value="create_supplier">[Create New Supplier]</option>
                                                     <?php foreach($suppliers as $supplier){ ?>
                                                         <option value='S-<?php echo $supplier->supplier_id; ?>'><?php echo $supplier->supplier_name; ?></option>
                                                     <?php } ?>
@@ -380,7 +386,7 @@
 <footer role="contentinfo">
     <div class="clearfix">
         <ul class="list-unstyled list-inline pull-left">
-            <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+            <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTION</h6></li>
         </ul>
         <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-gjerow-up"></i></button>
     </div>
@@ -436,8 +442,309 @@
     </div>
 </div><!---modal-->
 
+            <div id="modal_create_suppliers" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"><!--modal-->
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#2ecc71;">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                            <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"> </span>New Supplier Information</h4>
+                        </div>
 
+                        <div class="modal-body">
+                            <form id="frm_supplier">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Company Name :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-users"></i>
+                                                    </span>
+                                                    <input type="text" name="supplier_name" class="form-control" placeholder="Supplier Name" data-error-msg="Supplier Name is required!" required>
+                                                </div>
+                                            </div>
+                                        </div>
 
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Contact Person :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-users"></i>
+                                                    </span>
+                                                    <input type="text" name="contact_name" class="form-control" placeholder="Contact Person" data-error-msg="Contact Person is required!" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Address :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-home"></i>
+                                                     </span>
+                                                     <textarea name="address" class="form-control" data-error-msg="Supplier address is required!" placeholder="Address" required ></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;">Email Address :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-envelope-o"></i>
+                                                    </span>
+                                                    <input type="text" name="email_address" class="form-control" placeholder="Email Address">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;">Contact No :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-mobile"></i>
+                                                    </span>
+                                                    <input type="text" name="contact_no" id="contact_no" class="form-control" placeholder="Contact No">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;">TIN # :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-code"></i>
+                                                    </span>
+                                                    <input type="text" name="tin_no" class="form-control" placeholder="TIN #">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Tax :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-code"></i>
+                                                    </span>
+                                                    <select name="tax_type_id" id="cbo_tax_type" data-error-msg="Tax type is required!" required="">
+                                                        <option value="">Please select tax type...</option>
+                                                        <?php foreach($tax_types as $tax_type){ ?>
+                                                            <option value="<?php echo $tax_type->tax_type_id; ?>" data-tax-rate="<?php echo $tax_type->tax_rate; ?>"><?php echo $tax_type->tax_type; ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <label class="control-label boldlabel" style="text-align:left;padding-top:10px;"><i class="fa fa-user" aria-hidden="true" style="padding-right:10px;"></i>Supplier's Photo</label>
+                                                <hr style="margin-top:0px !important;height:1px;background-color:black;">
+                                            </div>
+                                            <div style="width:100%;height:300px;border:2px solid #34495e;border-radius:5px;">
+                                                <center>
+                                                    <img name="img_supplier" id="img_user" src="assets/img/anonymous-icon.png" height="140px;" width="140px;"></img>
+                                                </center>
+                                                <hr style="margin-top:0px !important;height:1px;background-color:black;">
+                                                <center>
+                                                     <button type="button" id="btn_browse_supplier_photo" style="width:150px;margin-bottom:5px;" class="btn btn-primary">Browse Photo</button>
+                                                     <button type="button" id="btn_remove_photo_supplier" style="width:150px;" class="btn btn-danger">Remove</button>
+                                                     <input type="file" name="file_supplier[]" class="hidden">
+                                                </center> 
+                                            </div>
+                                        </div>   
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button id="btn_save_supplier" type="button" class="btn btn-primary" style="background-color:#2ecc71;color:white;">Save</button>
+                            <button id="btn_cancel_supplier" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div><!---content---->
+                </div>
+            </div><!---modal-->
+
+            <div id="modal_create_customer" class="modal fade" tabindex="-1" role="dialog"  data-backdrop="static" data-keyboard="false"><!--modal-->
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#2ecc71;">
+                            <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+                            <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"> </span>New Customer Information</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <form id="frm_customer">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Customer Name :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-users"></i>
+                                                    </span>
+                                                    <input type="text" name="customer_name" class="form-control" placeholder="Customer Name" data-error-msg="Customer Name is required!" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"><font color="red"></font> Contact Person :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-users"></i>
+                                                    </span>
+                                                    <input type="text" name="contact_name" class="form-control" placeholder="Contact Person">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Address :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-home"></i>
+                                                     </span>
+                                                     <textarea name="address" class="form-control" data-error-msg="Supplier address is required!" placeholder="Address" required ></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"> Term :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-file-code-o"></i>
+                                                    </span>
+                                                    <input type="text" name="term" id="term" class="form-control" placeholder="Term in days">
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                                        <!-- <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;"> Credit Limit :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-file-code-o"></i>
+                                                    </span>
+                                                    <input type="text" name="credit_limit" id="credit_limit" class="form-control" placeholder="Credit Limit">
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;">Email Address :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-envelope-o"></i>
+                                                    </span>
+                                                    <input type="text" name="email_address" class="form-control" placeholder="Email Address">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;">Contact No :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-phone"></i>
+                                                    </span>
+                                                    <input type="text" name="contact_no" id="contact_no" class="form-control" placeholder="Contact No">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" id="label">
+                                                 <label class="control-label boldlabel" style="text-align:right;">Tin No :</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-file-code-o"></i>
+                                                    </span>
+                                                    <input type="text" name="tin_no" id="tin_no" class="form-control" placeholder="Tin No">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <label class="control-label boldlabel" style="text-align:left;padding-top:10px;"><i class="fa fa-user" aria-hidden="true" style="padding-right:10px;"></i>Customer's Photo</label>
+                                                <hr style="margin-top:0px !important;height:1px;background-color:black;">
+                                            </div>
+                                            <div style="width:100%;height:300px;border:2px solid #34495e;border-radius:5px;">
+                                                <center>
+                                                    <img name="img_customer" id="img_user" src="assets/img/anonymous-icon.png" height="140px;" width="140px;"></img>
+                                                </center>
+                                                <hr style="margin-top:0px !important;height:1px;background-color:black;">
+                                                <center>
+                                                     <button type="button" id="btn_browse_customer_photo" style="width:150px;margin-bottom:5px;" class="btn btn-primary">Browse Photo</button>
+                                                     <button type="button" id="btn_remove_photo_customer" style="width:150px;" class="btn btn-danger">Remove</button>
+                                                     <input type="file" name="file_upload[]" class="hidden">
+                                                </center> 
+                                            </div>
+                                        </div>   
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button id="btn_save_customer" type="button" class="btn" style="background-color:#2ecc71;color:white;">Save</button>
+                            <button id="btn_cancel_customer" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div><!---content---->
+                </div>
+            </div><!---modal-->
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog">
@@ -518,7 +825,7 @@
 <script>
 $(document).ready(function(){
     var _txnMode; var _cboParticulars; var _cboMethods; var _selectRowObj; var _selectedID; var _txnMode;
-    var dtReview; var _cboDepartments;
+    var dtReview; var _cboDepartments; var _option; var _optGroup;
 
 
     var oTBJournal={
@@ -626,6 +933,14 @@ $(document).ready(function(){
             $("div.toolbar").html(_btnNew);
         }();
 
+        _cboTaxGroup=$('#cbo_tax_type').select2({
+            allowClear: false
+        });
+
+        _cboTaxGroup.select2({
+            dropdownParent: $('#modal_create_suppliers')
+        });
+
         _cboDepartments=$('#cbo_departments').select2({
             placeholder: "Please select department.",
             allowClear: true
@@ -638,26 +953,89 @@ $(document).ready(function(){
         });
         _cboParticulars.select2('val',null);
 
-
-
-        // _cboMethods=$('#cbo_methods').select2({
-        //placeholder: "Please select method of payment.",
-        //allowClear: true
-        //});
-
-        //_cboMethods.select2('val',null);
-
-
-
-
-
-
     }();
 
 
 
     var bindEventHandlers=function(){
         var detailRows = [];
+
+        $('#btn_browse_customer_photo').click(function(event){
+            event.preventDefault();
+            $('input[name="file_upload[]"]').click();
+        });
+
+        $('input[name="file_upload[]"]').change(function(event){
+            var _files=event.target.files;
+            var data=new FormData();
+            $.each(_files,function(key,value){
+                data.append(key,value);
+            });
+
+            $.ajax({
+                url : 'Customers/transaction/upload',
+                type : "POST",
+                data : data,
+                cache : false,
+                dataType : 'json',
+                processData : false,
+                contentType : false,
+                success : function(response){
+                    //console.log(response);
+                    //alert(response.path);
+                    /*$('#div_img_loader').hide();
+                    $('#div_img_user').show();*/
+                    $('img[name="img_customer"]').attr('src',response.path);
+                }
+            });
+        });
+
+        $('input[name="file_supplier[]"]').change(function(event){
+            var _files=event.target.files;
+            
+            var data=new FormData();
+            $.each(_files,function(key,value){
+                data.append(key,value);
+            });
+            $.ajax({
+                url : 'Suppliers/transaction/upload',
+                type : "POST",
+                data : data,
+                cache : false,
+                dataType : 'json',
+                processData : false,
+                contentType : false,
+                success : function(response){
+                    
+                    $('img[name="img_supplier"]').attr('src',response.path);
+                }
+            });
+        });
+
+        $('#btn_remove_photo_customer').click(function(event){
+            event.preventDefault();
+            $('img[name="img_customer"]').attr('src','assets/img/anonymous-icon.png');
+        });
+
+        $('#btn_browse_supplier_photo').click(function(event){
+            event.preventDefault();
+            $('input[name="file_supplier[]"]').click();
+        });
+
+        $('#btn_remove_photo_supplier').click(function(event){
+            event.preventDefault();
+            $('img[name="img_supplier"]').attr('src','assets/img/anonymous-icon.png');
+        });
+
+        $('#btn_cancel_customer').click(function(){
+            _cboParticulars.select2('val',null);
+            $('#modal_new_customer').modal('hide');
+        });
+
+        $('#btn_cancel_supplier').click(function(){
+            _cboParticulars.select2('val',null);
+            $('#modal_create_suppliers').modal('hide');
+        });
 
         $('#tbl_accounts_receivable tbody').on( 'click', 'tr td.details-control', function () {
             var tr = $(this).closest('tr');
@@ -693,6 +1071,19 @@ $(document).ready(function(){
                 });
             }
         } );
+
+        _cboParticulars.on('select2:select',function(){
+            if (_cboParticulars.val() == 'create_customer') {
+                $('input,textarea,select',$('#frm_customer')).val('');
+                $('img').attr('src','assets/img/anonymous-icon.png');
+                $('#modal_create_customer').modal('show');
+            } else if (_cboParticulars.val() == 'create_supplier'){
+                clearFields($('#frm_supplier'));
+                $('img').attr('src','assets/img/anonymous-icon.png');
+                $('#modal_create_suppliers').modal('show');
+            }
+
+        });
 
         $('#tbl_recurring tbody').on('click', 'button[name="accept_rt"]', function() {
             _selectRowObj=$(this).closest('tr');
@@ -933,17 +1324,8 @@ $(document).ready(function(){
                 reInitializeDropDownAccounts($('#tbl_entries'));
                 reComputeTotals($('#tbl_entries'));
             });
-
-
-
-
             showList(false);
-
         });
-
-
-
-
 
         $('#tbl_entries').on('click','button.remove_account',function(){
             var oRow=$('#tbl_entries > tbody tr');
@@ -953,11 +1335,8 @@ $(document).ready(function(){
             }else{
                 showNotification({"title":"Error!","stat":"error","msg":"Sorry, you cannot remove all rows."});
             }
-
             reComputeTotals($('#tbl_entries'));
-
         });
-
 
         $('#btn_save').click(function(){
             var btn=$(this);
@@ -1006,25 +1385,42 @@ $(document).ready(function(){
 
         });
 
+        $('#btn_save_customer').click(function(){
+            if(validateRequiredFields($('#frm_customer'))){
+                createCustomer().done(function(response){
+                    showNotification(response);
+                    var _customer = response.row_added[0];
+                    _cboParticulars.select2().find('optgroup[label="Customers"]').append('<option value="'+ 'C-'+_customer.customer_id +'">'+ _customer.customer_name +'</option>');
+                    _cboParticulars.select2('val','C-'+_customer.customer_id);
+                    $('input,textarea,select',$('#frm_customer')).val('');
+                }).always(function(){
+                    $('#modal_create_customer').modal('toggle');
+                    showSpinningProgress($('#btn_save_supplier'));
+                });
+                return;
+            }
+        });
+
+        $('#btn_save_supplier').click(function(){
+            if(validateRequiredFields($('#frm_supplier'))){
+                createSupplier().done(function(response){
+                    showNotification(response);
+                    var _supplier = response.row_added[0];
+                    _cboParticulars.select2().find('optgroup[label="Suppliers"]').append('<option value="'+ 'S-'+_supplier.supplier_id +'">'+ _supplier.supplier_name +'</option>');
+                    _cboParticulars.select2('val','S-'+_supplier.supplier_id);
+                    clearFields($('#frm_supplier'));
+                }).always(function(){
+                    $('#modal_create_suppliers').modal('toggle');
+                    showSpinningProgress($('#btn_save_supplier'));
+                });
+                return;
+            }
+        });
 
         $('#btn_cancel').click(function(){
             showList(true);
         });
-
-
-
-
     }();
-
-
-
-
-
-
-
-
-
-
 
     //*********************************************************************8
     //              user defines
@@ -1040,6 +1436,31 @@ $(document).ready(function(){
             "data":_data,
             "beforeSend": showSpinningProgress($('#btn_save'))
 
+        });
+    };
+
+    var createCustomer=function(){
+        var _data=$('#frm_customer').serializeArray();
+        _data.push({name : "photo_path" ,value : $('img[name="img_customer"]').attr('src')});
+
+        return $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"Customers/transaction/create",
+            "data":_data,
+            "beforeSend": showSpinningProgress($('#btn_save'))
+        });
+    };
+
+    var createSupplier=function() {
+        var _data=$('#frm_supplier').serializeArray();
+        _data.push({name : "photo_path" ,value : $('img[name="img_supplier"]').attr('src')});
+        return $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"Suppliers/transaction/create",
+            "data":_data,
+            "beforeSend": showSpinningProgress($('#btn_save_supplier'))
         });
     };
 
@@ -1172,9 +1593,6 @@ $(document).ready(function(){
                     return false;
                 }
             }
-
-
-
         });
 
 

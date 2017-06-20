@@ -15,7 +15,8 @@
 					'Departments_model',
 					'Account_title_model',
 					'Account_integration_model',
-					'Batch_info_model'
+					'Batch_info_model',
+					'Tax_model'
 				)
 			);
 		}
@@ -31,6 +32,8 @@
 	        $data['suppliers']=$this->Suppliers_model->get_list(
 	        	'is_deleted=FALSE AND is_active=TRUE'
 	        );
+
+	        $data['tax_types']=$this->Tax_model->get_list(array('tax_types.is_deleted'=>FALSE));
 
 	        $data['departments']=$this->Departments_model->get_list(
 	        	'is_deleted=FALSE AND is_active=TRUE'

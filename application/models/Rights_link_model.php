@@ -65,7 +65,8 @@ class Rights_link_model extends CORE_Model{
                                           (48,'1','1-6','Petty Cash Journal'),
                                           (49,'9','9-13','Replenishment Report'),
                                           (50,'6','6-9','Backup Database'),
-                                          (51,'9','9-14','Book of Accounts')
+                                          (51,'9','9-14','Book of Accounts'),
+                                          (52,'9','9-15','Comparative Income')
                                           ON DUPLICATE KEY UPDATE
 
                                           rights_links.parent_code=VALUES(rights_links.parent_code),
