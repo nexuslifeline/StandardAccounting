@@ -696,7 +696,7 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
                             row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                         }
                     }).done(function(response){
-                        row.child( response ).show();
+                        row.child( response,'no-padding' ).show();
                         // Add to the 'open' array
                         if ( idx === -1 ) {
                             detailRows.push( tr.attr('id') );
