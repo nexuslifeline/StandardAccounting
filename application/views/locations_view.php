@@ -134,7 +134,7 @@
                                                         <div class="col-md-12">
                                                             <div class="input-group">
                                                                 <span class="input-group-addon">
-                                                                    <i class="fa fa-users"></i>
+                                                                    <i class="fa fa-map-marker  "></i>
                                                                 </span>
                                                                 <input type="text" name="location_name" class="form-control" placeholder="Location Name" data-error-msg="Location name is required!" required>
                                                             </div>
