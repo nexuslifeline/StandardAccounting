@@ -65,6 +65,20 @@
 
         th { border: 1px solid #525252!important; }
 
+        tr:nth-child(even) {
+            background: transparent!important;
+        }
+
+        tr:nth-child(even):hover {
+            background: transparent!important;
+            color: white!important;
+        }
+
+        tr:nth-child(odd):hover {
+            background: transparent!important;
+            color: white!important;
+        }
+
     </style>
 
 </head>
@@ -96,58 +110,58 @@
                                     <div class="row">
                                         <div class="container-fluid">
                                             <div class="col-xs-12 col-sm-2" style="padding-left: 0; padding-right: 0; margin-bottom: 10px;">
-                                                <button class="btn btn-primary btn-block"><span class="fa fa-file-o"></span>&nbsp;Print Report</button>
+                                                <button id="btn_print" class="btn btn-primary btn-block"><span class="fa fa-file-o"></span>&nbsp;Print Report</button>
                                             </div>
                                             <table width="100%" border="1">
                                                 <thead>
-                                                    <th></th>
+                                                    <th width="20%"></th>
                                                     <th><center>Previous Month <br>(<?php echo date("F Y", strtotime("first day of previous month"));  ?>)</center></th>
                                                     <th><center>Current Month <br>(<?php echo date("F Y");  ?>)</center></th>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td colspan="3"><strong>INCOME</strong></td>
+                                                        <td colspan="3" style="background: #5a5a5a;"><strong>INCOME</strong></td>
                                                     </tr>
                                                     <?php $sum_inc_prev=0; ?>
                                                     <?php $sum_inc_cur=0; ?>
                                                     <?php foreach($income_accounts as $income_account) { ?>
                                                     <tr>
-                                                        <td><?php echo $income_account->account_title; ?></td>
-                                                        <td align="right"><?php echo number_format($income_account->previous_balance,2); ?></td>
-                                                        <td align="right"><?php echo number_format($income_account->current_balance,2); ?></td>
-                                                        <?php $sum_inc_prev+=$income_account->previous_balance; ?>
-                                                        <?php $sum_inc_cur+=$income_account->current_balance; ?>
+                                                        <td style="text-transform: uppercase;"><?php echo $income_account->account_title; ?></td>
+                                                        <td align="right"><?php echo number_format($income_account->core_prev_balance,2); ?></td>
+                                                        <td align="right"><?php echo number_format($income_account->core_cur_balance,2); ?></td>
+                                                        <?php $sum_inc_prev+=$income_account->core_prev_balance; ?>
+                                                        <?php $sum_inc_cur+=$income_account->core_cur_balance; ?>
                                                     </tr>
                                                     <?php } ?>
                                                     <tr>
-                                                        <td></td>
+                                                        <td align="right">Total Income:</td>
                                                         <td align="right"><?php echo number_format($sum_inc_prev,2); ?></td>
                                                         <td align="right"><?php echo number_format($sum_inc_cur,2); ?></td>
                                                     </tr><br>
                                                     <tr>
-                                                        <td colspan="3"><strong>EXPENSES</strong></td>
+                                                        <td colspan="3" style="background: #5a5a5a;"><strong>EXPENSES</strong></td>
                                                     </tr>
                                                     
                                                     <?php $sum_exp_prev=0; ?>
                                                     <?php $sum_exp_cur=0; ?>
                                                     <?php foreach($expense_accounts as $expense_account) { ?>
                                                     <tr>
-                                                        <td><?php echo $expense_account->account_title; ?></td>
-                                                        <td align="right"><?php echo number_format($expense_account->previous_balance,2); ?></td>
-                                                        <td align="right"><?php echo number_format($expense_account->current_balance,2); ?></td>
+                                                        <td style="text-transform: uppercase;"><?php echo $expense_account->account_title; ?></td>
+                                                        <td align="right"><?php echo number_format($expense_account->core_prev_balance,2); ?></td>
+                                                        <td align="right"><?php echo number_format($expense_account->core_cur_balance,2); ?></td>
                                                         <?php
-                                                            $sum_exp_prev+=$expense_account->previous_balance;
-                                                            $sum_exp_cur+=$expense_account->current_balance;
+                                                            $sum_exp_prev+=$expense_account->core_prev_balance;
+                                                            $sum_exp_cur+=$expense_account->core_cur_balance;
                                                         ?>
                                                     </tr>
                                                     <?php } ?>
                                                     <tr>
-                                                        <td></td>
+                                                        <td align="right">Total Expenses:</td>
                                                         <td align="right"><?php echo number_format($sum_exp_prev,2); ?></td>
                                                         <td align="right"><?php echo number_format($sum_exp_cur,2); ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td align="right">Net Income :</td>
+                                                        <td align="right"><strong style="font-size: 16px;">Net Income :</strong></td>
                                                         <td align="right"><strong style="font-size: 16px;"><?php echo number_format($sum_inc_prev - $sum_exp_prev,2); ?></strong></td>
                                                         <td align="right"><strong style="font-size: 16px;"><?php echo number_format($sum_inc_cur - $sum_exp_cur,2); ?></strong></td>
                                                     </tr>
@@ -183,6 +197,10 @@
     $(document).ready(function(){
 
         var _btnPrint = $('#btn_print');
+
+        _btnPrint.on('click',function(){
+            window.open('Comparative_income/Report');
+        });
     })();
 </script>
 

@@ -57,6 +57,86 @@ class Journal_info_model extends CORE_Model{
             return $this->db->query($sql)->result();
     }
 
+    function get_cur_prev_balance($account_type_id,$prev_sDate,$prev_eDate,$cur_sDate,$cur_eDate) {
+        $sql="SELECT
+                core.*,
+                SUM(core.prev_balance) as core_prev_balance,
+                SUM(core.cur_balance) as core_cur_balance
+            FROM
+            (SELECT
+            *
+            FROM
+            (SELECT 
+            main.*,
+            main.account_balance as prev_balance,
+            0 as cur_balance,
+            att.account_title 
+            FROM
+            (SELECT 
+                ji.journal_id,
+                at.account_no,
+                at.grand_parent_id,
+                ac.account_type_id,
+                ac.account_class_id,
+                IF(
+                    ac.account_type_id=1 OR ac.account_type_id=5,
+                    SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                    SUM(ja.cr_amount)-SUM(ja.dr_amount)
+                )as account_balance
+            FROM journal_info as ji
+            INNER JOIN 
+            (journal_accounts as ja 
+            INNER JOIN
+            (account_titles as at
+            INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+            ON ja.account_id=at.account_id)
+            ON ji.journal_id=ja.journal_id
+            WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+            AND ac.account_type_id=$account_type_id
+            AND ji.date_txn BETWEEN '$prev_sDate' AND '$prev_eDate'
+
+            GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id) as tbl_prev
+
+            UNION ALL
+
+            SELECT 
+            main.*,
+            0 as prev_balance,
+            main.account_balance as cur_balance,
+            att.account_title 
+            FROM
+            (SELECT 
+                ji.journal_id,
+                at.account_no,
+                at.grand_parent_id,
+                ac.account_type_id,
+                ac.account_class_id,
+                IF(
+                    ac.account_type_id=1 OR ac.account_type_id=5,
+                    SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                    SUM(ja.cr_amount)-SUM(ja.dr_amount)
+                )as account_balance
+            FROM journal_info as ji
+            INNER JOIN 
+            (journal_accounts as ja 
+            INNER JOIN
+            (account_titles as at
+            INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+            ON ja.account_id=at.account_id)
+            ON ji.journal_id=ja.journal_id
+            WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+            AND ac.account_type_id=$account_type_id
+            AND ji.date_txn BETWEEN '$cur_sDate' AND '$cur_eDate'
+
+            GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id)
+            as core
+
+            GROUP BY core.grand_parent_id
+            ";
+
+            return $this->db->query($sql)->result();
+    }
+
     function get_account_subsidiary($account_id, $startDate, $endDate,$includeChild=0) {
         $this->db->query("SET @balance:=0.00;");
         $sql="SELECT m.*,
@@ -117,82 +197,6 @@ class Journal_info_model extends CORE_Model{
             return $this->db->query($sql)->result();
     }
 
-    function get_cur_prev_balance($type_id,$cur_start=null,$cur_end=null,$prev_start=null,$prev_end=null){
-        $sql="SELECT
-            cur_income.cur_account_title as account_title,
-            IFNULL(cur_income.cur_account_balance,0) as current_balance,
-            prev_income.prev_account_title,
-            IFNULL(prev_income.prev_account_balance,0) as previous_balance
-            FROM
-            (SELECT 
-            main.*,
-            att.account_title as cur_account_title
-            FROM
-            (SELECT 
-            ji.journal_id as cur_journal_id,
-            at.account_no as cur_account_no,
-            at.grand_parent_id as cur_grand_parent_id,
-            ac.account_type_id as cur_account_type_id,
-            ac.account_class_id as cur_account_class_id,
-            IF(
-                ac.account_type_id=1 OR ac.account_type_id=5,
-                SUM(ja.dr_amount)-SUM(ja.cr_amount),
-                SUM(ja.cr_amount)-SUM(ja.dr_amount)
-            )as cur_account_balance
-
-
-            FROM journal_info as ji
-
-            INNER JOIN (journal_accounts as ja INNER JOIN
-            (account_titles as at
-            INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
-            ON ja.account_id=at.account_id)
-            ON ji.journal_id=ja.journal_id
-
-            WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
-            AND ac.account_type_id=$type_id
-            AND ji.date_txn BETWEEN '$cur_start' AND '$cur_end'
-
-            GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.cur_grand_parent_id=att.account_id) as cur_income
-
-            LEFT JOIN 
-
-            (SELECT 
-            main.*,
-            att.account_title as prev_account_title
-            FROM
-            (SELECT 
-            ji.journal_id as prev_journal_id,
-            at.account_no as prev_account_no,
-            at.grand_parent_id as prev_grand_parent_id,
-            ac.account_type_id as prev_account_type_id,
-            ac.account_class_id as prev_account_class_id,
-            IF(
-                ac.account_type_id=1 OR ac.account_type_id=5,
-                SUM(ja.dr_amount)-SUM(ja.cr_amount),
-                SUM(ja.cr_amount)-SUM(ja.dr_amount)
-            )as prev_account_balance
-
-
-            FROM journal_info as ji
-
-            INNER JOIN (journal_accounts as ja INNER JOIN
-            (account_titles as at
-            INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
-            ON ja.account_id=at.account_id)
-            ON ji.journal_id=ja.journal_id
-
-            WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
-            AND ac.account_type_id=$type_id
-            AND ji.date_txn BETWEEN '$prev_start' AND '$prev_end'
-
-            GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.prev_grand_parent_id=att.account_id) as prev_income
-
-            ON cur_income.cur_grand_parent_id = prev_income.prev_grand_parent_id
-            ";
-
-        return $this->db->query($sql)->result();
-    }
 
     function get_account_balance($type_id,$depid=null,$start=null,$end=null){
         $sql="SELECT main.*,att.account_title FROM(SELECT ji.journal_id,

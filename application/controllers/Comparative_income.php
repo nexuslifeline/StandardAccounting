@@ -12,7 +12,8 @@
                 'Account_class_model',
                 'Journal_info_model',
                 'Journal_account_model',
-                'Departments_model'
+                'Departments_model',
+                'Company_model'
             	)
            	);
 		}
@@ -33,10 +34,28 @@
 
 	        $data['departments']=$this->Departments_model->get_list('is_deleted=FALSE');
 
-	        $data['income_accounts']=$this->Journal_info_model->get_cur_prev_balance(4,$cur_start_month,$cur_end_month,$prev_start_month,$prev_end_month);
-	        $data['expense_accounts']=$this->Journal_info_model->get_cur_prev_balance(5,$cur_start_month,$cur_end_month,$prev_start_month,$prev_end_month);
+	        $data['income_accounts']=$this->Journal_info_model->get_cur_prev_balance(4,$prev_start_month,$prev_end_month,$cur_start_month,$cur_end_month);
+	        $data['expense_accounts']=$this->Journal_info_model->get_cur_prev_balance(5,$prev_start_month,$prev_end_month,$cur_start_month,$cur_end_month);
 
 	        $this->load->view('comparative_income_view', $data);
+		}
+
+		function Report() {
+			$cur_start_month = date('Y-m-1');
+	        $cur_end_month = date('Y-m-t');
+
+	        $prev_start_month = date('Y-m-j', strtotime('first day of previous month'));
+	        $prev_end_month = date('Y-m-j', strtotime('last day of previous month'));
+
+	        $company_info=$this->Company_model->get_list();
+	        $data['company_info']=$company_info[0];
+
+	        $data['departments']=$this->Departments_model->get_list('is_deleted=FALSE');
+
+	        $data['income_accounts']=$this->Journal_info_model->get_cur_prev_balance(4,$prev_start_month,$prev_end_month,$cur_start_month,$cur_end_month);
+	        $data['expense_accounts']=$this->Journal_info_model->get_cur_prev_balance(5,$prev_start_month,$prev_end_month,$cur_start_month,$cur_end_month);
+
+	        $this->load->view('template/comparative_income_report',$data);
 		}
 	}
 ?>
