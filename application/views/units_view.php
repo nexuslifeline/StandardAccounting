@@ -197,7 +197,7 @@
                                     <div class="col-md-7">
                                         <div class="input-group">
                                             <span class="input-group-addon">
-                                                <i class="fa fa-users"></i>
+                                                <i class="fa fa-tag"></i>
                                             </span>
                                             <input type="text" name="unit_name" class="form-control" placeholder="Unit Name" data-error-msg="Unit name is required!" required>
                                         </div>
