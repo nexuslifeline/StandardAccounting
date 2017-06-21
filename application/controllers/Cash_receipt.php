@@ -83,6 +83,7 @@ class Cash_receipt extends CORE_Controller
                 $m_journal->check_date=date('Y-m-d',strtotime($this->input->post('check_date',TRUE)));
                 $m_journal->amount=$this->get_numeric_value($this->input->post('amount'));
                 $m_journal->or_no=$this->input->post('or_no');
+                $m_journal->check_no=$this->input->post('check_no');
 
 
                 //for audit details
@@ -159,6 +160,7 @@ class Cash_receipt extends CORE_Controller
                 $m_journal->check_date=date('Y-m-d',strtotime($this->input->post('check_date',TRUE)));
                 $m_journal->amount=$this->get_numeric_value($this->input->post('amount'));
                 $m_journal->or_no=$this->input->post('or_no');
+                $m_journal->check_no=$this->input->post('check_no');
 
                 //for audit details
                 $m_journal->set('date_modified','NOW()');
@@ -239,6 +241,7 @@ class Cash_receipt extends CORE_Controller
                 'journal_info.remarks',
                 'journal_info.customer_id',
                 'journal_info.or_no',
+                'journal_info.check_no',
                 'payment_methods.payment_method_id',
                 'journal_info.department_id',
                 'DATE_FORMAT(journal_info.check_date,"%m/%d/%Y")as check_date',

@@ -52,9 +52,6 @@
             border-color: #e84e40;
         }
 
-
-
-
         .toolbar{
             float: left;
         }
@@ -317,13 +314,22 @@
                                 </select>
                             </div>
 
-                            <div class="col-lg-4 col-lg-offset-2">
+                            <div class="col-lg-2 col-lg-offset-2">
                                 OR # :<br />
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-code"></i>
                                     </span>
                                     <input type="text" name="or_no" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                Check # :<br />
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-code"></i>
+                                    </span>
+                                    <input type="text" name="check_no" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -1058,7 +1064,6 @@ $(document).ready(function(){
                     }
                 });
             });
-
             $('#cbo_customers').select2('val',data.customer_id);
             $('#cbo_departments').select2('val',data.department_id);
             $('#cbo_payment_method').select2('val',data.payment_method_id);

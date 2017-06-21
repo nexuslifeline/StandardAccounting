@@ -116,7 +116,7 @@
 			                    		<div class="container-fluid group-box">
 			                    			<button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report
                                             </button>
-		                    				<table id="tbl_vat_relief" class="">
+		                    				<table id="tbl_vat_relief" class="" width="100%">
 		                    					<thead>
 		                    						<th>Supplier</th>
 		                    						<th>Invoice / OR #</th>

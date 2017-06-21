@@ -703,8 +703,9 @@ $(document).ready(function(){
                     if(response.stat=="success"){
                         $('#cbo_category').append('<option value="'+ response.row_added[0].category_id +'">'+ response.row_added[0].category_name +'</option>');
                         _cboCategory.select2('val',response.row_added[0].category_id);
-                        clearFields($('#frm_category'));
                         $('#btn_save_category').attr('disabled',false);
+                        $('#modal_new_category').modal('hide');
+                        clearFields($('#frm_category'));
                     }
                 }).always(function(){
                     showSpinningProgress($('#btn_save_category'));
