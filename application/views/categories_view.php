@@ -263,7 +263,7 @@
                                                     <div class="col-xs-12 col-md-8">
                                                         <div class="input-group">
                                                             <span class="input-group-addon">
-                                                                <i class="fa fa-users"></i>
+                                                                <i class="fa fa-tags"></i>
                                                             </span>
                                                             <input type="text" name="category_name" class="form-control" placeholder="Category Name" data-error-msg="category name is required!" required>
                                                         </div>
