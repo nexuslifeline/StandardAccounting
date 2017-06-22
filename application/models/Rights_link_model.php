@@ -59,14 +59,16 @@ class Rights_link_model extends CORE_Model{
                                           (42,'8','8-4','Purchase Invoice Report'),
                                           (43,'4','4-4','Locations Management'),
                                           (44,'10','10-1','Fixed Asset Management'),
-                                          (45,'9','9-9','Depreciation Expense'),
+                                          (45,'9','9-9','Annual Income Statement'),
                                           (46,'6','6-8','Recurring Template'),
                                           (47,'9','9-10','VAT Relief Report'),
                                           (48,'1','1-6','Petty Cash Journal'),
                                           (49,'9','9-13','Replenishment Report'),
                                           (50,'6','6-9','Backup Database'),
                                           (51,'9','9-14','Book of Accounts'),
-                                          (52,'9','9-15','Comparative Income')
+                                          (52,'9','9-15','Comparative Income'),
+                                          (53,'4','4-5','Bank Reference Management'),
+                                          (54,'10','10-2','Depreciation Expense Report')
                                           ON DUPLICATE KEY UPDATE
 
                                           rights_links.parent_code=VALUES(rights_links.parent_code),

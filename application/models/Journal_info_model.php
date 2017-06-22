@@ -57,6 +57,559 @@ class Journal_info_model extends CORE_Model{
             return $this->db->query($sql)->result();
     }
 
+
+    function get_annual_income_statement($account_type) {
+        $january=date('Y-01');
+        $february=date('Y-02');
+        $march=date('Y-03');
+        $april=date('Y-04');
+        $may=date('Y-05');
+        $june=date('Y-06');
+        $july=date('Y-07');
+        $august=date('Y-08');
+        $september=date('Y-09');
+        $october=date('Y-10');
+        $november=date('Y-11');
+        $december=date('Y-12');
+
+        $sql="SELECT
+            core.*,
+            SUM(core.jan_balance) as core_jan_balance,
+            SUM(core.feb_balance) as core_feb_balance,
+            SUM(core.mar_balance) as core_mar_balance,
+            SUM(core.apr_balance) as core_apr_balance,
+            SUM(core.may_balance) as core_may_balance,
+            SUM(core.jun_balance) as core_jun_balance,
+            SUM(core.jul_balance) as core_jul_balance,
+            SUM(core.aug_balance) as core_aug_balance,
+            SUM(core.sep_balance) as core_sep_balance,
+            SUM(core.oct_balance) as core_oct_balance,
+            SUM(core.nov_balance) as core_nov_balance,
+            SUM(core.dec_balance) as core_dec_balance
+        FROM
+        (SELECT
+        *
+        FROM
+        (SELECT 
+        main.*,
+        main.account_balance as jan_balance,
+        0 as feb_balance,
+        0 as mar_balance,
+        0 as apr_balance,
+        0 as may_balance,
+        0 as jun_balance,
+        0 as jul_balance,
+        0 as aug_balance,
+        0 as sep_balance,
+        0 as oct_balance,
+        0 as nov_balance,
+        0 as dec_balance,
+        att.account_title 
+        FROM
+        (SELECT 
+            ji.journal_id,
+            at.account_no,
+            at.grand_parent_id,
+            ac.account_type_id,
+            ac.account_class_id,
+            IF(
+                ac.account_type_id=1 OR ac.account_type_id=5,
+                SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                SUM(ja.cr_amount)-SUM(ja.dr_amount)
+            )as account_balance
+        FROM journal_info as ji
+        INNER JOIN 
+        (journal_accounts as ja 
+        INNER JOIN
+        (account_titles as at
+        INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+        ON ja.account_id=at.account_id)
+        ON ji.journal_id=ja.journal_id
+        WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+        AND ac.account_type_id=$account_type
+        AND ji.date_txn LIKE '%$january%'
+
+        GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id) as tbl_prev
+
+        UNION ALL
+
+        SELECT 
+        main.*,
+        0 as jan_balance,
+        main.account_balance as feb_balance,
+        0 as mar_balance,
+        0 as apr_balance,
+        0 as may_balance,
+        0 as jun_balance,
+        0 as jul_balance,
+        0 as aug_balance,
+        0 as sep_balance,
+        0 as oct_balance,
+        0 as nov_balance,
+        0 as dec_balance,
+        att.account_title 
+        FROM
+        (SELECT 
+            ji.journal_id,
+            at.account_no,
+            at.grand_parent_id,
+            ac.account_type_id,
+            ac.account_class_id,
+            IF(
+                ac.account_type_id=1 OR ac.account_type_id=5,
+                SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                SUM(ja.cr_amount)-SUM(ja.dr_amount)
+            )as account_balance
+        FROM journal_info as ji
+        INNER JOIN 
+        (journal_accounts as ja 
+        INNER JOIN
+        (account_titles as at
+        INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+        ON ja.account_id=at.account_id)
+        ON ji.journal_id=ja.journal_id
+        WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+        AND ac.account_type_id=$account_type
+        AND ji.date_txn LIKE '%$february%'
+
+        GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id
+
+        UNION ALL
+
+        SELECT 
+        main.*,
+        0 as jan_balance,
+        0 as feb_balance,
+        main.account_balance as mar_balance,
+        0 as apr_balance,
+        0 as may_balance,
+        0 as jun_balance,
+        0 as jul_balance,
+        0 as aug_balance,
+        0 as sep_balance,
+        0 as oct_balance,
+        0 as nov_balance,
+        0 as dec_balance,
+        att.account_title 
+        FROM
+        (SELECT 
+            ji.journal_id,
+            at.account_no,
+            at.grand_parent_id,
+            ac.account_type_id,
+            ac.account_class_id,
+            IF(
+                ac.account_type_id=1 OR ac.account_type_id=5,
+                SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                SUM(ja.cr_amount)-SUM(ja.dr_amount)
+            )as account_balance
+        FROM journal_info as ji
+        INNER JOIN 
+        (journal_accounts as ja 
+        INNER JOIN
+        (account_titles as at
+        INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+        ON ja.account_id=at.account_id)
+        ON ji.journal_id=ja.journal_id
+        WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+        AND ac.account_type_id=$account_type
+        AND ji.date_txn LIKE '%$march%'
+
+        GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id
+
+        UNION ALL
+
+        SELECT 
+        main.*,
+        0 as jan_balance,
+        0 as feb_balance,
+        0 as mar_balance,
+        main.account_balance as apr_balance,
+        0 as may_balance,
+        0 as jun_balance,
+        0 as jul_balance,
+        0 as aug_balance,
+        0 as sep_balance,
+        0 as oct_balance,
+        0 as nov_balance,
+        0 as dec_balance,
+        att.account_title 
+        FROM
+        (SELECT 
+            ji.journal_id,
+            at.account_no,
+            at.grand_parent_id,
+            ac.account_type_id,
+            ac.account_class_id,
+            IF(
+                ac.account_type_id=1 OR ac.account_type_id=5,
+                SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                SUM(ja.cr_amount)-SUM(ja.dr_amount)
+            )as account_balance
+        FROM journal_info as ji
+        INNER JOIN 
+        (journal_accounts as ja 
+        INNER JOIN
+        (account_titles as at
+        INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+        ON ja.account_id=at.account_id)
+        ON ji.journal_id=ja.journal_id
+        WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+        AND ac.account_type_id=$account_type
+        AND ji.date_txn LIKE '%$april%'
+
+        GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id
+
+        UNION ALL
+
+        SELECT 
+        main.*,
+        0 as jan_balance,
+        0 as feb_balance,
+        0 as mar_balance,
+        0 as apr_balance,
+        main.account_balance as may_balance,
+        0 as jun_balance,
+        0 as jul_balance,
+        0 as aug_balance,
+        0 as sep_balance,
+        0 as oct_balance,
+        0 as nov_balance,
+        0 as dec_balance,
+        att.account_title 
+        FROM
+        (SELECT 
+            ji.journal_id,
+            at.account_no,
+            at.grand_parent_id,
+            ac.account_type_id,
+            ac.account_class_id,
+            IF(
+                ac.account_type_id=1 OR ac.account_type_id=5,
+                SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                SUM(ja.cr_amount)-SUM(ja.dr_amount)
+            )as account_balance
+        FROM journal_info as ji
+        INNER JOIN 
+        (journal_accounts as ja 
+        INNER JOIN
+        (account_titles as at
+        INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+        ON ja.account_id=at.account_id)
+        ON ji.journal_id=ja.journal_id
+        WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+        AND ac.account_type_id=$account_type
+        AND ji.date_txn LIKE '%$may%'
+
+        GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id
+
+        UNION ALL
+
+        SELECT 
+        main.*,
+        0 as jan_balance,
+        0 as feb_balance,
+        0 as mar_balance,
+        0 as apr_balance,
+        0 as may_balance,
+        main.account_balance as jun_balance,
+        0 as jul_balance,
+        0 as aug_balance,
+        0 as sep_balance,
+        0 as oct_balance,
+        0 as nov_balance,
+        0 as dec_balance,
+        att.account_title 
+        FROM
+        (SELECT 
+            ji.journal_id,
+            at.account_no,
+            at.grand_parent_id,
+            ac.account_type_id,
+            ac.account_class_id,
+            IF(
+                ac.account_type_id=1 OR ac.account_type_id=5,
+                SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                SUM(ja.cr_amount)-SUM(ja.dr_amount)
+            )as account_balance
+        FROM journal_info as ji
+        INNER JOIN 
+        (journal_accounts as ja 
+        INNER JOIN
+        (account_titles as at
+        INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+        ON ja.account_id=at.account_id)
+        ON ji.journal_id=ja.journal_id
+        WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+        AND ac.account_type_id=$account_type
+        AND ji.date_txn LIKE '%$june%'
+
+        GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id
+
+        UNION ALL
+
+        SELECT 
+        main.*,
+        0 as jan_balance,
+        0 as feb_balance,
+        0 as mar_balance,
+        0 as apr_balance,
+        0 as may_balance,
+        0 as jun_balance,
+        main.account_balance as jul_balance,
+        0 as aug_balance,
+        0 as sep_balance,
+        0 as oct_balance,
+        0 as nov_balance,
+        0 as dec_balance,
+        att.account_title 
+        FROM
+        (SELECT 
+            ji.journal_id,
+            at.account_no,
+            at.grand_parent_id,
+            ac.account_type_id,
+            ac.account_class_id,
+            IF(
+                ac.account_type_id=1 OR ac.account_type_id=5,
+                SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                SUM(ja.cr_amount)-SUM(ja.dr_amount)
+            )as account_balance
+        FROM journal_info as ji
+        INNER JOIN 
+        (journal_accounts as ja 
+        INNER JOIN
+        (account_titles as at
+        INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+        ON ja.account_id=at.account_id)
+        ON ji.journal_id=ja.journal_id
+        WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+        AND ac.account_type_id=$account_type
+        AND ji.date_txn LIKE '%$july%'
+
+        GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id
+
+        UNION ALL
+
+        SELECT 
+        main.*,
+        0 as jan_balance,
+        0 as feb_balance,
+        0 as mar_balance,
+        0 as apr_balance,
+        0 as may_balance,
+        0 as jun_balance,
+        0 as jul_balance,
+        main.account_balance as aug_balance,
+        0 as sep_balance,
+        0 as oct_balance,
+        0 as nov_balance,
+        0 as dec_balance,
+        att.account_title 
+        FROM
+        (SELECT 
+            ji.journal_id,
+            at.account_no,
+            at.grand_parent_id,
+            ac.account_type_id,
+            ac.account_class_id,
+            IF(
+                ac.account_type_id=1 OR ac.account_type_id=5,
+                SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                SUM(ja.cr_amount)-SUM(ja.dr_amount)
+            )as account_balance
+        FROM journal_info as ji
+        INNER JOIN 
+        (journal_accounts as ja 
+        INNER JOIN
+        (account_titles as at
+        INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+        ON ja.account_id=at.account_id)
+        ON ji.journal_id=ja.journal_id
+        WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+        AND ac.account_type_id=$account_type
+        AND ji.date_txn LIKE '%$august%'
+
+        GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id
+
+        UNION ALL
+
+        SELECT 
+        main.*,
+        0 as jan_balance,
+        0 as feb_balance,
+        0 as mar_balance,
+        0 as apr_balance,
+        0 as may_balance,
+        0 as jun_balance,
+        0 as jul_balance,
+        0 as aug_balance,
+        main.account_balance as sep_balance,
+        0 as oct_balance,
+        0 as nov_balance,
+        0 as dec_balance,
+        att.account_title 
+        FROM
+        (SELECT 
+            ji.journal_id,
+            at.account_no,
+            at.grand_parent_id,
+            ac.account_type_id,
+            ac.account_class_id,
+            IF(
+                ac.account_type_id=1 OR ac.account_type_id=5,
+                SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                SUM(ja.cr_amount)-SUM(ja.dr_amount)
+            )as account_balance
+        FROM journal_info as ji
+        INNER JOIN 
+        (journal_accounts as ja 
+        INNER JOIN
+        (account_titles as at
+        INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+        ON ja.account_id=at.account_id)
+        ON ji.journal_id=ja.journal_id
+        WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+        AND ac.account_type_id=$account_type
+        AND ji.date_txn LIKE '%$september%'
+
+        GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id
+
+        UNION ALL
+
+        SELECT 
+        main.*,
+        0 as jan_balance,
+        0 as feb_balance,
+        0 as mar_balance,
+        0 as apr_balance,
+        0 as may_balance,
+        0 as jun_balance,
+        0 as jul_balance,
+        0 as aug_balance,
+        0 as sep_balance,
+        main.account_balance as oct_balance,
+        0 as nov_balance,
+        0 as dec_balance,
+        att.account_title 
+        FROM
+        (SELECT 
+            ji.journal_id,
+            at.account_no,
+            at.grand_parent_id,
+            ac.account_type_id,
+            ac.account_class_id,
+            IF(
+                ac.account_type_id=1 OR ac.account_type_id=5,
+                SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                SUM(ja.cr_amount)-SUM(ja.dr_amount)
+            )as account_balance
+        FROM journal_info as ji
+        INNER JOIN 
+        (journal_accounts as ja 
+        INNER JOIN
+        (account_titles as at
+        INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+        ON ja.account_id=at.account_id)
+        ON ji.journal_id=ja.journal_id
+        WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+        AND ac.account_type_id=$account_type
+        AND ji.date_txn LIKE '%$october%'
+
+        GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id
+
+        UNION ALL
+
+        SELECT 
+        main.*,
+        0 as jan_balance,
+        0 as feb_balance,
+        0 as mar_balance,
+        0 as apr_balance,
+        0 as may_balance,
+        0 as jun_balance,
+        0 as jul_balance,
+        0 as aug_balance,
+        0 as sep_balance,
+        0 as oct_balance,
+        main.account_balance as nov_balance,
+        0 as dec_balance,
+        att.account_title 
+        FROM
+        (SELECT 
+            ji.journal_id,
+            at.account_no,
+            at.grand_parent_id,
+            ac.account_type_id,
+            ac.account_class_id,
+            IF(
+                ac.account_type_id=1 OR ac.account_type_id=5,
+                SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                SUM(ja.cr_amount)-SUM(ja.dr_amount)
+            )as account_balance
+        FROM journal_info as ji
+        INNER JOIN 
+        (journal_accounts as ja 
+        INNER JOIN
+        (account_titles as at
+        INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+        ON ja.account_id=at.account_id)
+        ON ji.journal_id=ja.journal_id
+        WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+        AND ac.account_type_id=$account_type
+        AND ji.date_txn LIKE '%$november%'
+
+        GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id
+
+        UNION ALL
+
+        SELECT 
+        main.*,
+        0 as jan_balance,
+        0 as feb_balance,
+        0 as mar_balance,
+        0 as apr_balance,
+        0 as may_balance,
+        0 as jun_balance,
+        0 as jul_balance,
+        0 as aug_balance,
+        0 as sep_balance,
+        0 as oct_balance,
+        0 as nov_balance,
+        main.account_balance as dec_balance,
+        att.account_title 
+        FROM
+        (SELECT 
+            ji.journal_id,
+            at.account_no,
+            at.grand_parent_id,
+            ac.account_type_id,
+            ac.account_class_id,
+            IF(
+                ac.account_type_id=1 OR ac.account_type_id=5,
+                SUM(ja.dr_amount)-SUM(ja.cr_amount),
+                SUM(ja.cr_amount)-SUM(ja.dr_amount)
+            )as account_balance
+        FROM journal_info as ji
+        INNER JOIN 
+        (journal_accounts as ja 
+        INNER JOIN
+        (account_titles as at
+        INNER JOIN account_classes as ac ON at.account_class_id=ac.account_class_id)
+        ON ja.account_id=at.account_id)
+        ON ji.journal_id=ja.journal_id
+        WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+        AND ac.account_type_id=$account_type
+        AND ji.date_txn LIKE '%$december%'
+
+        GROUP BY at.grand_parent_id)as main LEFT JOIN account_titles as att ON main.grand_parent_id=att.account_id)
+        as core
+
+        GROUP BY core.grand_parent_id";
+
+        return $this->db->query($sql)->result();
+    }
+
     function get_cur_prev_balance($account_type_id,$prev_sDate,$prev_eDate,$cur_sDate,$cur_eDate) {
         $sql="SELECT
                 core.*,

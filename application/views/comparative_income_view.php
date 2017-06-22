@@ -114,13 +114,13 @@
                                             </div>
                                             <table width="100%" border="1">
                                                 <thead>
-                                                    <th width="20%"></th>
-                                                    <th><center>Previous Month <br>(<?php echo date("F Y", strtotime("first day of previous month"));  ?>)</center></th>
-                                                    <th><center>Current Month <br>(<?php echo date("F Y");  ?>)</center></th>
+                                                    <th style="background: #0960a5!important; text-align: center;" width="20%">Account Description</th>
+                                                    <th style="background: #074d85!important;"><center>PREVIOUS MONTH <br>(<?php echo date("F Y", strtotime("first day of previous month"));  ?>)</center></th>
+                                                    <th style="background: #074d85!important;"><center>CURRENT MONTH <br>(<?php echo date("F Y");  ?>)</center></th>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td colspan="3" style="background: #5a5a5a;"><strong>INCOME</strong></td>
+                                                        <td colspan="3" style="background: #36474f; text-align: center;"><strong>- INCOME - </strong></td>
                                                     </tr>
                                                     <?php $sum_inc_prev=0; ?>
                                                     <?php $sum_inc_cur=0; ?>
@@ -139,7 +139,7 @@
                                                         <td align="right"><?php echo number_format($sum_inc_cur,2); ?></td>
                                                     </tr><br>
                                                     <tr>
-                                                        <td colspan="3" style="background: #5a5a5a;"><strong>EXPENSES</strong></td>
+                                                        <td colspan="3" style="background: #36474f; text-align: center;"><strong>- EXPENSES -</strong></td>
                                                     </tr>
                                                     
                                                     <?php $sum_exp_prev=0; ?>
