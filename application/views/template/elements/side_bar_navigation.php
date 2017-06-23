@@ -87,6 +87,12 @@
                             </ul>
                         </li>
 
+                        <li class="<?php echo (in_array('11',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-credit-card"></i><span>Bank Reconciliation</span></a>
+                            <ul class="acc-menu">
+                                <li class="<?php echo (in_array('11-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Bank_reconciliation">Bank Reconciliation</a></li>
+                            </ul>
+                        </li>
+
                         <li class="<?php echo (in_array('10',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-bag"></i><span>Assets Management</span></a>
                             <ul class="acc-menu">
                                 <li class="<?php echo (in_array('10-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Fixed_asset_management">Fixed Asset Management</a></li>

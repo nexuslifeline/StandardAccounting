@@ -68,7 +68,8 @@ class Rights_link_model extends CORE_Model{
                                           (51,'9','9-14','Book of Accounts'),
                                           (52,'9','9-15','Comparative Income'),
                                           (53,'4','4-5','Bank Reference Management'),
-                                          (54,'10','10-2','Depreciation Expense Report')
+                                          (54,'10','10-2','Depreciation Expense Report'),
+                                          (55,'11','11-1','Bank Reconciliation')
                                           ON DUPLICATE KEY UPDATE
 
                                           rights_links.parent_code=VALUES(rights_links.parent_code),

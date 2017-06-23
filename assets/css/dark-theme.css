@@ -6,7 +6,7 @@
 .input-group-addon {
     background-color: #1f1f1f!important;
     color: #ffad33!important;
-    border: 2px solid #ffad33!important;
+    border: 1px solid #ffad33!important;
 }
 
 b {
@@ -142,6 +142,13 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
     border: 1px solid #ffad33!important;
 }
 
+.btn-primary:focus,
+.btn-success:focus {
+    color: white;
+    background: #ffad33!important;
+    border: 1px solid #ffad33!important;
+}
+
 .btn-warning {
     background: #ff9800!important;
     border:none!important;
@@ -160,7 +167,7 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
 .select2-search input {
     color: white;
     font-size: 18px;
-    border-width: 2px!important;
+    border-width: 1px!important;
     background: black!important;
 }
 
@@ -169,7 +176,7 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
     background-color: #1f1f1f !important;
     color: white !important;
     font-size: 15px;
-    border-width: 2px!important;
+    border-width: 1px!important;
     border-radius: 0!important;
 }
 
@@ -194,21 +201,21 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
 
 .select2-results {
     color: white !important;
-    border-width: 2px!important;
+    border-width: 1px!important;
     background: #303030!important;
 }
 
 .form-control:not(.general-search) {
     color: white;
     font-size: 15px;
-    border-width: 2px!important;
+    border-width: 1px!important;
     border-radius: 0!important;
     background: #1f1f1f!important;
 }
 
 .form-control:not(.general-search):focus {
     transition: .2s;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bolder!important;
     color: black;
     background-color: #ffd65c!important;

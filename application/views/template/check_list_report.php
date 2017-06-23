@@ -49,7 +49,7 @@
             <tbody>
                 <?php foreach($checks as $check){ ?>
                 <tr>
-                    <td><?php echo $check->bank; ?></td>
+                    <td><?php echo $check->bank_name; ?></td>
                     <td><?php echo $check->check_no; ?></td>
                     <td align="right"><?php echo number_format($check->amount,2); ?></td>
                     <td><?php echo $check->ref_no; ?></td>

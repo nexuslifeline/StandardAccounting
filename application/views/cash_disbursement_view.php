@@ -354,12 +354,12 @@
                     </div>
                     <div class="col-lg-4 col-lg-offset-2">
                         Bank :<br />
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-credit-card"></i>
-                            </span>
-                            <input type="text" name="bank" class="form-control">
-                        </div>
+                        <select id="cbo_bank" class="form-control" name="bank_id">
+                            <option value="create_bank">[Create New Bank]</option>
+                            <?php foreach($bank_refs as $bank) { ?>
+                                <option value="<?php echo $bank->bank_id; ?>"><?php echo $bank->bank_name; ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                 </div>
 
@@ -633,8 +633,8 @@
                 Filter by Bank * :<br />
                 <select id="cbo_banks" class="form-control">
                     <option value="0">All Banks</option>
-                    <?php foreach($banks as $bank){ ?>
-                        <option value='<?php echo $bank->bank; ?>'><?php echo $bank->bank; ?></option>
+                    <?php foreach($bank_refs as $bank){ ?>
+                        <option value='<?php echo $bank->bank_id; ?>'><?php echo $bank->bank_name; ?></option>
                     <?php } ?>
                 </select>
 
@@ -910,7 +910,63 @@
 
 
 
+<div id="modal_bank" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="bank_title" class="modal-title" style="color: white;">New Bank</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frm_bank" role="form" class="form-horizontal row-border">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><strong>* Bank Code :</strong></label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-code"></i>
+                                </span>
+                                <input type="text" name="bank_code" class="form-control" placeholder="Bank Code" data-error-msg="Bank Code is required!" required>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><strong>* Bank :</strong></label>
+                        <div class="col-md-8">
+                            <div class="input-group col-md-12">
+                                <input type="text" name="bank_name" class="form-control" placeholder="Bank" data-error-msg="Bank is required!" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><strong>* Account Number :</strong></label>
+                        <div class="col-md-8">
+                            <div class="input-group col-md-12">
+                                <input type="text" name="account_number" class="form-control" placeholder="Account Number" data-error-msg="Account Number is required!" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><strong>* Account Type :</strong></label>
+                        <div class="col-md-8">
+                            <select name="account_type" class="form-control" id="cbo_account_type" data-error-msg="Account Type is required!" placeholder="Account Type" required>
+                                <option value="" disabled selected>Select Account Type</option>
+                                <option value="1">Current Account</option>
+                                <option value="2">Savings Account</option>
+                            </select>
+                        </div>
+                    </div><br/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_save_bank" class="btn btn-primary">Save</button>
+                <button id="btn_cancel_bank" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <?php echo $_switcher_settings; ?>
@@ -941,7 +997,7 @@
 
 <script>
 $(document).ready(function(){
-    var _txnMode; var _cboSuppliers; var _cboMethods; var _selectRowObj; var _selectedID; var _txnMode, _cboBranches, _cboPaymentMethod;
+    var _txnMode; var _cboSuppliers; var _cboMethods; var _selectRowObj; var _selectedID; var _txnMode, _cboBranches, _cboPaymentMethod, _cboBanks, _cboAccountType;
     var dtReview; var cbo_refType; var _cboLayouts; var dtRecurring; var dtCheckList; var _attribute; var _cboTax;
 
 
@@ -1156,6 +1212,16 @@ $(document).ready(function(){
 
         }();
 
+        _cboAccountType=$('#cbo_account_type').select2({
+            placeholder: "Please Select Account Type",
+            allowClear:true
+        });
+
+        _cboBanks=$('#cbo_bank').select2({
+            placeholder: "Please Select Bank",
+            allowClear:true
+        });
+
         _cboTax=$('#cbo_tax_group').select2({
             placeholder: "Please Select Tax type",
             allowClear:true
@@ -1183,8 +1249,10 @@ $(document).ready(function(){
             placeholder: "Please select check layout.",
             allowClear: true
         });
+        _cboAccountType.select2('val',null);
         _cboLayouts.select2('val',null);
         _cboTax.select2('val',null);
+        _cboBanks.select2('val',null);
 
 
         cbo_refType=$('#cbo_refType').select2({
@@ -1204,6 +1272,18 @@ $(document).ready(function(){
 
     var bindEventHandlers=function(){
         var detailRows = [];
+
+        _cboBanks.on('select2:select',function(){
+            if (_cboBanks.select2('val') == 'create_bank'){
+                $('#modal_bank').modal('show');
+                _cboBanks.select2('val',null);
+            }
+        });
+
+        $('#btn_cancel_bank').click(function(){
+            $('#modal_bank').modal('hide');
+            clearFields($('#frm_bank'));
+        });
 
         $('#tbl_cash_disbursement_list tbody').on( 'click', 'tr td.details-control', function () {
             var tr = $(this).closest('tr');
@@ -1577,6 +1657,7 @@ $(document).ready(function(){
             $('#cbo_suppliers').select2('val',data.supplier_id);
             $('#cbo_branch').select2('val',data.department_id);
             $('#cbo_refType').select2('val',data.ref_type);
+            $('#cbo_bank').select2('val',data.bank_id);
 
             $.ajax({
                 url: 'Cash_disbursement/transaction/get-entries?id=' + data.journal_id,
@@ -1681,6 +1762,23 @@ $(document).ready(function(){
             showList(true);
         });
 
+        $('#btn_save_bank').click(function(){
+            if(validateRequiredFields($('#frm_bank'))){
+                createBank().done(function(response){
+                    showNotification(response);
+                    var _bank = response.row_added[0];
+
+                    $('#cbo_bank').append('<option value="'+_bank.bank_id+'">'+_bank.bank_name+'</option>');
+                    _cboBanks.select2('val',_bank.bank_id);
+                    
+                    clearFields($('#frm_bank'));
+                }).always(function(){
+                    showSpinningProgress($('#btn_save_bank'));
+                });
+                $('#modal_bank').modal('hide');
+            }
+        });
+
 
         $('#btn_create_new_supplier').click(function(){
 
@@ -1757,6 +1855,18 @@ $(document).ready(function(){
     //*********************************************************************8
     //              user defines
 
+    var createBank=function(){
+        var _data=$('#frm_bank').serializeArray();
+
+        return $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"Bank/transaction/create",
+            "data":_data,
+            "beforeSend": showSpinningProgress($('#btn_save_bank'))
+        });
+    };
+
     var createSupplier=function() {
         var _data=$('#frm_suppliers_new').serializeArray();
         _data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
@@ -1817,7 +1927,7 @@ $(document).ready(function(){
     };
 
     var clearFields=function(f){
-        $('input,textarea',f).val('');
+        $('input,textarea,select',f).val('');
         $(f).find('select').select2('val',null);
 
 

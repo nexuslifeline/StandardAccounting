@@ -25,7 +25,8 @@ class Cash_disbursement extends CORE_Controller
                 'Accounting_period_model',
                 'Journal_template_info_model',
                 'Journal_template_entry_model',
-                'Company_model'
+                'Company_model',
+                'Bank_model'
             )
         );
 
@@ -39,6 +40,7 @@ class Cash_disbursement extends CORE_Controller
         $data['_side_bar_navigation'] = $this->load->view('template/elements/side_bar_navigation', '', TRUE);
         $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 
+        $data['bank_refs']=$this->Bank_model->get_list('is_deleted=FALSE AND is_active=TRUE');
         $data['suppliers']=$this->Suppliers_model->get_list('is_deleted = FALSE');
         $data['departments']=$this->Departments_model->get_list('is_deleted = FALSE');
         $data['accounts']=$this->Account_title_model->get_list('is_deleted = FALSE');
@@ -68,18 +70,20 @@ class Cash_disbursement extends CORE_Controller
                 $end=date('Y-m-d',strtotime($this->input->get('end')));
 
                 $data['checks']=$m_journal->get_list(
-                    "journal_info.is_active=1 AND journal_info.is_deleted=0 AND journal_info.payment_method_id=2 AND journal_info.date_txn BETWEEN '".$start."' AND '".$end."'".($bank=="0"?"":" AND bank='".$bank."'"),
+                    "journal_info.is_active=1 AND journal_info.is_deleted=0 AND journal_info.payment_method_id=2 AND journal_info.date_txn BETWEEN '".$start."' AND '".$end."'".($bank=="0"?"":" AND b.bank_id='".$bank."'"),
 
                     array(
                         'journal_info.*',
-                        's.supplier_name'
+                        's.supplier_name',
+                        'b.*'
                     ),
 
                     array(
-                        array('suppliers as s','s.supplier_id=journal_info.supplier_id','left')
+                        array('suppliers as s','s.supplier_id=journal_info.supplier_id','left'),
+                        array('bank as b','b.bank_id=journal_info.bank_id','left')
                     ),
 
-                    'bank,check_no'
+                    'b.bank_name,check_no'
 
                 );
 
@@ -174,7 +178,8 @@ class Cash_disbursement extends CORE_Controller
                 $m_journal->book_type='CDJ';
                 $m_journal->department_id=$this->input->post('department_id');
                 $m_journal->payment_method_id=$this->input->post('payment_method');
-                $m_journal->bank=$this->input->post('bank');
+                // $m_journal->bank=$this->input->post('bank');
+                $m_journal->bank_id=$this->input->post('bank_id');
                 $m_journal->check_no=$this->input->post('check_no');
                 $m_journal->check_date=date('Y-m-d',strtotime($this->input->post('check_date',TRUE)));
                 $m_journal->ref_type=$this->input->post('ref_type');
@@ -255,7 +260,8 @@ class Cash_disbursement extends CORE_Controller
                 $m_journal->book_type='CDJ';
                 $m_journal->department_id=$this->input->post('department_id');
                 $m_journal->payment_method_id=$this->input->post('payment_method');
-                $m_journal->bank=$this->input->post('bank');
+                // $m_journal->bank=$this->input->post('bank');
+                $m_journal->bank_id=$this->input->post('bank_id');
                 $m_journal->check_no=$this->input->post('check_no');
                 $m_journal->check_date=date('Y-m-d',strtotime($this->input->post('check_date',TRUE)));
                 $m_journal->ref_type=$this->input->post('ref_type');
@@ -341,6 +347,7 @@ class Cash_disbursement extends CORE_Controller
                 'journal_info.is_active',
                 'journal_info.remarks',
                 'journal_info.department_id',
+                'journal_info.bank_id',
                 'journal_info.supplier_id',
                 'journal_info.customer_id',
                 'journal_info.payment_method_id',
