@@ -409,7 +409,7 @@
                     },
                     { targets:[1],data: "product_code" },
                     { targets:[2],data: "product_desc" },
-                    { targets:[3],data: "category_name" },
+                    { targets:[3],data: "cash_amount" },
                     { targets:[4],data: "unit_name" },
                     {
                         targets:[5],

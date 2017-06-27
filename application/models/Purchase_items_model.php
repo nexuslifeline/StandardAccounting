@@ -60,6 +60,100 @@ class Purchase_items_model extends CORE_Model {
 
     }
 
+    function get_list_open_purchase(){
+       $sql="  SELECT o.* FROM
+
+        (SELECT n.*
+
+
+        FROM
+        (SELECT main.*,p.product_code,p.product_desc FROM
+
+        (SELECT
+        m.purchase_order_id,
+        m.po_no,m.product_id,
+        m.date_created,
+        MAX(m.date_delivered) as last_date_delivered,
+        m.PoQty as PoQtyTotal, 
+        (m.PoQty-(SUM(m.PoQty)-SUM(m.DrQty))) as PoQtyDelivered,
+        (SUM(m.PoQty)-SUM(m.DrQty))as PoQtyBalance
+
+
+        FROM
+
+        (SELECT po.purchase_order_id,po.date_created,'' as date_delivered,po.po_no,poi.product_id,SUM(poi.po_qty) as PoQty,0 as DrQty,
+        poi.po_price,poi.po_discount,poi.po_tax_rate FROM purchase_order as po
+        INNER JOIN purchase_order_items as poi ON po.purchase_order_id=poi.purchase_order_id
+        
+        WHERE po.is_active=TRUE AND po.is_deleted=FALSE
+        GROUP BY po.po_no,poi.product_id
+
+        UNION ALL
+
+        SELECT po.purchase_order_id,po.date_created,max(di.date_delivered),po.po_no,dii.product_id,0 as PoQty,SUM(dii.dr_qty) as DrQty,
+        0 as po_price,0 as po_discount,0 as po_tax_rate FROM (delivery_invoice as di
+        INNER JOIN purchase_order as po ON di.purchase_order_id=po.purchase_order_id)
+        INNER JOIN delivery_invoice_items as dii ON di.dr_invoice_id=dii.dr_invoice_id
+        WHERE di.is_active=TRUE AND di.is_deleted=FALSE
+        GROUP BY po.po_no,dii.product_id)as
+
+        m GROUP BY m.po_no,m.product_id HAVING PoQtyBalance>0)as main
+
+        LEFT JOIN products as p ON main.product_id=p.product_id)as n) as o
+
+        
+        ";
+
+        return $this->db->query($sql)->result();
+
+
+
+
+    }
+
+    function get_po_no_of_open_purchase(){
+        $sql="SELECT o.* FROM
+            (SELECT n.*
+            FROM
+            (SELECT 
+            DISTINCT main.po_no
+            FROM
+
+            (SELECT
+            m.purchase_order_id,
+            m.po_no,
+            (SUM(m.PoQty)-SUM(m.DrQty))as PoQtyBalance
+            
+            FROM
+            
+            (SELECT po.purchase_order_id,po.po_no,poi.product_id,SUM(poi.po_qty) as PoQty,0 as DrQty
+            FROM purchase_order as po
+            INNER JOIN purchase_order_items as poi ON po.purchase_order_id=poi.purchase_order_id
+            WHERE po.is_active=TRUE AND po.is_deleted=FALSE
+            GROUP BY po.po_no,poi.product_id
+
+            UNION ALL
+
+            SELECT po.purchase_order_id,po.po_no,dii.product_id,0 as PoQty,SUM(dii.dr_qty) as DrQty
+            FROM (delivery_invoice as di
+            INNER JOIN purchase_order as po ON di.purchase_order_id=po.purchase_order_id)
+            INNER JOIN delivery_invoice_items as dii ON di.dr_invoice_id=dii.dr_invoice_id
+            WHERE di.is_active=TRUE AND di.is_deleted=FALSE
+            GROUP BY po.po_no,dii.product_id)as
+
+            m GROUP BY m.po_no,m.product_id HAVING PoQtyBalance>0)as main
+
+           )as n) as o
+            ";
+
+        return $this->db->query($sql)->result();
+
+
+
+
+
+    }
+
 
 
 

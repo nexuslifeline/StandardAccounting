@@ -75,6 +75,7 @@
         }
         .select2-container{
             min-width: 100%;
+            z-index: 4000;
         }
         @keyframes spin {
             from { transform: scale(1) rotate(0deg); }
@@ -329,7 +330,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-code"></i>
                                     </span>
-                                    <input type="text" name="check_no" class="form-control">
+                                    <input type="text" name="check_no" id="check_no" class="form-control" data-error-msg="Check no. is required">
                                 </div>
                             </div>
                         </div>
@@ -352,7 +353,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </span>
-                                    <input type="text" name="check_date" id="check_date" class="date-picker form-control">
+                                    <input type="text" name="check_date" id="check_date" class="date-picker form-control" data-error-msg="Check date is required" value="<?php echo date("m/d/Y"); ?>">
                                 </div>
                             </div>
 
@@ -364,6 +365,17 @@
                                     </span>
                                     <input type="text" name="amount" class="form-control numeric">
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                Bank *: <br />
+                                    <select name="bank"  id="cbo_banks"  data-error-msg="Bank is required.">
+                                        <option value="0">[ Create New Bank ]</option>
+                                        <?php  foreach ($banks as $bank ) { ?>
+                                        <option value="<?php echo $bank->bank_id; ?>"><?php echo $bank->bank_name; ?></option>
+                                        <?php      }  ?>
+                                    </select>
                             </div>
                         </div>
 
@@ -666,6 +678,63 @@
 </div><!---modal-->
 
 
+<div id="modal_bank" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 id="bank_title" class="modal-title" style="color: white;"> Add New Bank</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="frm_bank" role="form" class="form-horizontal row-border">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"><strong>* Bank Code :</strong></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-code"></i>
+                                            </span>
+                                            <input type="text" name="bank_code" class="form-control" placeholder="Bank Code" data-error-msg="Bank Code is required!" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"><strong>* Bank :</strong></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group col-md-12">
+                                            <input type="text" name="bank_name" class="form-control" placeholder="Bank" data-error-msg="Bank is required!" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"><strong>* Account Number :</strong></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group col-md-12">
+                                            <input type="text" name="account_number" class="form-control" placeholder="Account Number" data-error-msg="Account Number is required!" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"><strong>* Account Type :</strong></label>
+                                    <div class="col-md-8">
+                                        <select name="account_type" class="form-control" id="account_type" data-error-msg="Account Type is required!" placeholder="Account Type" required>
+                                            <option value="" disabled selected>Select Account Type</option>
+                                            <option value="1">Current Account</option>
+                                            <option value="2">Savings Account</option>
+                                        </select>
+                                    </div>
+                                </div><br/>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btn_save_bank" class="btn btn-primary">Save</button>
+                            <button id="btn_cancel_bank" class="btn btn-default">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -706,7 +775,7 @@
 <script>
 $(document).ready(function(){
     var _txnMode; var _cboCustomers; var _cboMethods; var _selectRowObj; var _selectedID; var _txnMode;
-    var dtReview; var _cbo_paymentMethod; var _cbo_departments; var dt;
+    var dtReview; var _cbo_paymentMethod; var _cbo_departments; var dt; var _cbo_banks; var _cbo_accounttype;
 
 
     var oTBJournal={
@@ -811,7 +880,8 @@ $(document).ready(function(){
         $('#landline').keypress(validateNumber);
 
         $('#cbo_particular').select2();
-
+        $('#cbo_banks').select2();
+        $('#account_type').select2();
         reInitializeNumeric();
         reInitializeDropDownAccounts($('#tbl_entries'),false);
 
@@ -824,6 +894,7 @@ $(document).ready(function(){
             autoclose: true
 
         });
+
 
 
         var createToolBarButton=function() {
@@ -851,6 +922,18 @@ $(document).ready(function(){
             allowClear: true
         });
         _cbo_departments.select2('val',null);
+
+        _cbo_banks=$('#cbo_banks').select2({
+            placeholder: "Please select a bank.",
+            allowClear: true
+        });
+        _cbo_banks.select2('val',null);
+
+        _cbo_accounttype=$('#account_type').select2({
+            placeholder: "Please select account type.",
+            allowClear: true
+        });
+        _cbo_accounttype.select2('val',null);
         // _cboMethods=$('#cbo_methods').select2({
         //placeholder: "Please select method of payment.",
         //allowClear: true
@@ -972,11 +1055,14 @@ $(document).ready(function(){
 
             reInitializeDropDownAccounts($('#tbl_entries'),false);
             $('#date_txn').datepicker('setDate','today');
+            $('#check_date').datepicker('setDate','today');
 
 
             $('#cbo_customers').select2('val',null);
             $('#cbo_departments').select2('val',null);
             $('#cbo_payment_method').select2('val',null);
+            $('#cbo_banks').select2('val',null);
+            $('#account_type').select2('val',null);
 
             clearFields($('#frm_journal'));
             showList(false);
@@ -1067,6 +1153,7 @@ $(document).ready(function(){
             $('#cbo_customers').select2('val',data.customer_id);
             $('#cbo_departments').select2('val',data.department_id);
             $('#cbo_payment_method').select2('val',data.payment_method_id);
+            $('#cbo_banks').select2('val',data.bank_id);
 
             $.ajax({
                 url: 'Cash_receipt/transaction/get-entries?id=' + data.journal_id,
@@ -1101,6 +1188,41 @@ $(document).ready(function(){
 
         });
 
+        _cbo_banks.on("select2:select", function (e) {
+            var i=$(this).select2('val');
+            if(i==0){ //new customer
+                _cbo_banks.select2('val',null)
+                $('#modal_bank').modal('show');
+                clearFields($('#modal_bank').find('form'));
+            }
+
+        });
+
+       
+        _cbo_paymentMethod.on("select2:select", function (e) {
+            var selectbank = $('#cbo_banks');
+            var checkno = $('#check_no');
+            var checkdate = $('#check_date');
+            var i=$(this).select2('val');
+            if(i==2){ //new customer
+                selectbank.attr('required', true);
+                checkno.attr('required', true);
+                checkdate.attr('required', true);
+                checkno.attr('disabled', false);
+                checkdate.attr('disabled', false);
+                $('#check_date').datepicker('setDate','today');
+            }else{
+                selectbank.attr('required', false);
+                checkno.attr('required', false);
+                checkdate.attr('required', false);
+                checkno.attr('disabled', true);
+                checkdate.attr('disabled', true);
+                checkno.val('');
+                checkdate.val('');
+
+            }
+
+        });
 
 
         $('#tbl_entries').on('click','button.remove_account',function(){
@@ -1152,11 +1274,14 @@ $(document).ready(function(){
 
         });
 
+        $('#btn_cancel_bank').click(function(){
+             
+            $('#modal_bank').modal('hide');
+        });
 
         $('#btn_cancel').click(function(){
             showList(true);
         });
-
 
         $('#btn_create_customer').click(function(){
 
@@ -1176,6 +1301,28 @@ $(document).ready(function(){
                 });
             }
         });
+
+
+        $('#btn_save_bank').click(function(){
+
+            var btn=$(this);
+
+            if(validateRequiredFields($('#frm_bank'))){
+                var data=$('#frm_bank').serializeArray();
+                createBank().done(function(response){
+                    showNotification(response);
+                    $('#modal_bank').modal('hide');
+                    var _banks=response.row_added[0];
+                    $('#cbo_banks').append('<option value="'+_banks.bank_id+'" selected>'+_banks.bank_name+'</option>');
+                    $('#cbo_banks').select2('val',_banks.bank_id);
+                    clearFields($('#modal_bank').find('form'));
+                    $('#account_type').select2('val',null);
+                }).always(function(){
+                    showSpinningProgress(btn);
+                });
+            }
+        });
+
 
         $('#btn_browse').click(function(event){
             event.preventDefault();
@@ -1271,7 +1418,7 @@ $(document).ready(function(){
 
     var clearFields=function(f){
 
-        $('input,textarea',f).val('');
+        $('input:not(.date-picker),textarea',f).val('');
 
 
         $(f).find('input:first').focus();
@@ -1407,6 +1554,18 @@ $(document).ready(function(){
         }
 
         return stat;
+    };
+
+    var createBank=function(){
+        var _data=$('#frm_bank').serializeArray();
+
+        return $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"Bank/transaction/create",
+            "data":_data,
+            "beforeSend": showSpinningProgress($('#btn_save_bank'))
+        });
     };
 
 

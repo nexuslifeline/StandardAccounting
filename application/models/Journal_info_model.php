@@ -862,6 +862,68 @@ class Journal_info_model extends CORE_Model{
 
 
 
+        function get_voucher_registry($startDate,$endDate) {
+        $sql="SELECT
+
+
+            
+            SUM(ji.amount) AS summmary,
+            ji.*,
+            s.*
+
+            FROM
+            `journal_info` AS ji
+            LEFT JOIN suppliers AS s ON s.`supplier_id`=ji.`supplier_id`
+            WHERE ji.is_deleted=FALSE AND ji.is_active=TRUE
+            AND ji.date_txn BETWEEN '$startDate' AND '$endDate'
+            AND ji.book_type = 'CDJ' GROUP BY ji.journal_id
+          ";
+
+            return $this->db->query($sql)->result();
+    }
+
+
+    function get_voucher_registry_total($startDate,$endDate) {
+        $sql="SELECT
+        
+            ROUND(SUM(amount), 2) as summary
+            FROM
+            journal_info
+             WHERE journal_info.is_deleted=FALSE AND journal_info.is_active=TRUE
+             AND journal_info.date_txn BETWEEN '$startDate' AND '$endDate'
+             AND journal_info.book_type = 'CDJ' 
+
+          ";
+
+            return $this->db->query($sql)->result();
+    }
+
+        function get_check_registry($startDate,$endDate,$bank) {
+        $sql="SELECT
+
+
+            
+            SUM(ji.amount) AS summmary,
+            ji.*,
+            s.*,
+            bank.bank_id,
+            bank.bank_name
+
+            FROM
+            `journal_info` AS ji
+            LEFT JOIN suppliers AS s ON s.`supplier_id`=ji.`supplier_id`
+            LEFT JOIN bank ON bank.bank_id = ji.bank_id 
+            WHERE ji.is_deleted=FALSE AND ji.is_active=TRUE
+            AND ji.bank_id = '$bank'
+            AND ji.date_txn BETWEEN '$startDate' AND '$endDate' AND payment_method_id = 2
+            AND ji.book_type = 'CDJ' GROUP BY ji.journal_id
+          ";
+
+            return $this->db->query($sql)->result();
+    }
+
+
+
 
 }
 
