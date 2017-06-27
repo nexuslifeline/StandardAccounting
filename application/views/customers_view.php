@@ -266,10 +266,8 @@
                             /*$('#div_img_loader').hide();
                             $('#div_img_user').show();*/
                             $('img[name="img_user"]').attr('src',response.path);
-
                         }
                     });
-
                 });
 
                 $('#btn_cancel').click(function(){

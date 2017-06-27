@@ -1232,7 +1232,6 @@ $(document).ready(function(){
             });
         });
         $('#tbl_sales_invoice tbody').on('click','button[name="edit_info"]',function(){
-            ///alert("ddd");
             _txnMode="edit";
             $('.sales_invoice_title').html('Edit Sales Invoice');
             _selectRowObj=$(this).closest('tr');

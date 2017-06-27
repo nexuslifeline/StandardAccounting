@@ -49,19 +49,20 @@
             color: white;
             font-weight: bolder;
             background: transparent;
-            border-top: 2px solid orange;
+            border-top: 1px solid orange;
             border-bottom: none;
         }
 
         .nav-tabs > li > a {
             border: 1px solid white;
-            border-top-width: 2px;
+            border-top-width: 1px;
+            border-radius: 0;
             color: white;
         }
 
         .nav-tabs > li > a:hover {
             border: 1px solid white;
-            border-top: 2px solid #2196f3; 
+            border-top: 1px solid #2196f3; 
             background: transparent;
         }
 

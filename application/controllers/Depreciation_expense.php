@@ -51,7 +51,7 @@
 
 					$data['depreciation_expenses']=$m_fixed_asset->get_depreciation_expense($month, $year);
 
-					$this->load->view('template\depreciation_expense_report',$data);
+					$this->load->view('template/depreciation_expense_report',$data);
 				break;
 			}
 		}

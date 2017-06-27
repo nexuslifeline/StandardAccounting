@@ -23,7 +23,7 @@
 	<link href="assets/css/ample-login/style.css" rel="stylesheet">
 	<!-- color CSS -->
 	<link href="assets/css/ample-login/colors/default.css" id="theme"  rel="stylesheet">
-
+ 
     <style>
 	    .ui-pnotify-title {
 	    	color: white !important;
