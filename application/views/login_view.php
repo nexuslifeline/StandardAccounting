@@ -38,7 +38,7 @@
 	    }
 
 	    .new-login-register .lg-info-panel .inner-panel {
-    	    background: rgba(0, 0, 0, 0.8);
+    	    background: rgba(0, 0, 0, 0.7);
 	    }
 
 	    .new-login-register .lg-info-panel {
