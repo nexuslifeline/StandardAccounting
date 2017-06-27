@@ -143,7 +143,9 @@ div.dataTables_paginate li.first > a, div.dataTables_paginate li.next > a {
 }
 
 .btn-primary:focus,
-.btn-success:focus {
+.btn-success:focus,
+.btn-primary:active,
+.btn-success:active {
     color: white;
     background: #ffad33!important;
     border: 1px solid #ffad33!important;

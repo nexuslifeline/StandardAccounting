@@ -12,6 +12,32 @@ class Journal_info_model extends CORE_Model{
         parent::__construct();
     }
 
+    function get_bank_recon($bank_id,$sDate,$eDate) 
+    {
+        $sql="SELECT 
+                t.*
+            FROM
+                (SELECT 
+                    ji.*,
+                    IF(ji.supplier_id = 0,c.customer_name,s.supplier_name) as particular,
+                    department_name
+                FROM
+                    journal_info as ji
+                LEFT JOIN suppliers AS s ON s.supplier_id = ji.supplier_id
+                LEFT JOIN customers AS c ON c.customer_id = ji.customer_id
+                LEFT JOIN departments AS d ON d.department_id = ji.department_id
+                WHERE
+                    ji.is_deleted = FALSE
+                    AND ji.is_active = TRUE
+                    AND ji.payment_method_id=2
+                    AND ji.bank_id = $bank_id
+                    AND ji.date_txn BETWEEN '$sDate' AND '$eDate') AS t
+                WHERE
+                t.book_type = 'CDJ' OR t.book_type = 'CRJ'";
+
+            return $this->db->query($sql)->result();
+    }
+
     function get_supplier_subsidiary($supplier_id, $account_id, $startDate, $endDate) {
         $this->db->query("SET @balance:=0.00;");
         $sql="SELECT m.*,

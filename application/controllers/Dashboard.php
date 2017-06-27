@@ -26,6 +26,8 @@ class Dashboard extends CORE_Controller {
         $data['_side_bar_navigation']=$this->load->view('template/elements/side_bar_navigation','',TRUE);
         $data['_top_navigation']=$this->load->view('template/elements/top_navigation','',TRUE);
 
+        $data['title']="Dashboard";
+
         $data['company_info']=$this->Company_model->get_list(array('company_info'));
         
         $m_journal=$this->Journal_account_model;

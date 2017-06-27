@@ -17,142 +17,89 @@
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/style-blessed3ef7a.css"> -->
-
+	<!-- animation CSS -->
+	<link href="assets/css/ample-login/animate.css" rel="stylesheet">
+	<!-- Custom CSS -->
+	<link href="assets/css/ample-login/style.css" rel="stylesheet">
+	<!-- color CSS -->
+	<link href="assets/css/ample-login/colors/default.css" id="theme"  rel="stylesheet">
 
     <style>
 	    .ui-pnotify-title {
 	    	color: white !important;
 	    }
 
-	    .input-group-addon {
-	    	border: 1px solid #aaa!important;
-	    	border-right: none!important;
-	    	background: transparent!important;
-	    	color: white;
+	    body {
+	    	font-family: 
 	    }
 
-	    .login-background {
-	    	background: rgba(145,45,45,1);
-			background: -moz-linear-gradient(left, rgba(145,45,45,1) 0%, rgba(2,5,0,1) 100%);
-			background: -webkit-gradient(left top, right top, color-stop(0%, rgba(145,45,45,1)), color-stop(100%, rgba(2,5,0,1)));
-			background: -webkit-linear-gradient(left, rgba(145,45,45,1) 0%, rgba(2,5,0,1) 100%);
-			background: -o-linear-gradient(left, rgba(145,45,45,1) 0%, rgba(2,5,0,1) 100%);
-			background: -ms-linear-gradient(left, rgba(145,45,45,1) 0%, rgba(2,5,0,1) 100%);
-			background: linear-gradient(to right, rgba(145,45,45,1) 0%, rgba(2,5,0,1) 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#912d2d', endColorstr='#020500', GradientType=1 );
+	    .new-login-register .lg-info-panel .lg-content {
+	    	margin-top: 35%;
 	    }
 
-	    .form-control {
-	    	border-radius: 0;
-	    	background: transparent;
-	    	color: white;
+	    .new-login-register .lg-info-panel .inner-panel {
+    	    background: rgba(0, 0, 0, 0.8);
 	    }
 
-	    .form-control:focus {
-	    	color: #28353b;
-	    	background: #e9eef0;
+	    .new-login-register .lg-info-panel {
+	    	background: url('assets/img/login.jpg') no-repeat center center / cover !important;
 	    }
 
-	    #login {
-	    	border-radius: 20px;
-			-webkit-box-shadow: 0px 0px 140px 0px rgba(255,255,255,1);
-			-moz-box-shadow: 0px 0px 140px 0px rgba(255,255,255,1);
-			box-shadow: 0px 0px 140px 0px rgba(255,255,255,1);
+	    hr {
+	    	border-top: 1px solid #eaeaea;
 	    }
-
     </style>
 
     </head>
 
 <body class="focused-form animated-content login-background">
-        
-        
-<div class="container" id="login-form">
-	<a href="Login" class="login-logo"></a>
-		<div class="row">
-			<div class="hidden-xs hidden-sm col-md-8">
-				<span class="text-center" style="position: absolute; top: 10000%; left: 11%; font-size: 40px; font-family: 'Segoe UI', sans-serif; color: white; font-weight: 200;"><img src="<?php echo base_url($company->logo_path); ?>" style="max-width: 150px;max-height: 100px;"><br><b><i>J</i>CORE</b> ACCOUNTING SYSTEM
-				<br>
-					<span style="padding-right:15px;">
-						<?php foreach($company_info as $company_info){ ?>
-	                        <?php echo $company_info->company_name; ?>
-	                    <?php } ?>
-                    </span>
-				</span>
-			</div>
-			<div class="col-md-4">
-				<div style="border:none; margin-top: 15%;">
-					<div id="login">
-						<div class="panel-body">
-							<!-- <h2>Login Form</h2> -->
-							<div class="col-xs-12 text-center" style="margin-bottom: 20px;">
-								<H4 style="color: white;"><strong>SIGN IN</strong> <span style="font-weight: 200;">TO YOUR ACCOUNT</span></H4>
-							</div>
-							<form action="#" class="form-horizontal" id="validate-form">
-								<div class="form-group mb-md" id="userdiv">
-			                        <div class="col-xs-12">
-			                        	<div class="input-group">
-			                        		<div class="input-group-addon">
-			                        			<i class="fa fa-user"></i>
-			                        		</div>
-			                        		<input name="user_name" id="user" type="text" class="form-control " placeholder="Username" data-parsley-minlength="20" placeholder="At least 6 characters" required>
-			                        	</div>
-										
-			                        </div>
-								</div>
-
-								<div class="form-group mb-md" id="passdiv">
-			                        <div class="col-xs-12">
-			                        	<div class="input-group">
-			                        		<div class="input-group-addon">
-			                        			<i class="fa fa-key"></i>
-			                        		</div>
-										<input name="user_pword" id="pass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-										</div>
-			                        </div>
-								</div>
-
-								<div class="row">
-									<div class="col-xs-12 col-sm-6 hidden " style="margin-bottom: 10px;">
-										<button id="btn_register" class="btn btn-info btn-block">Register</button>
-									</div>
-									<div class="col-sm-offset-6"></div>								
-									<div class="col-xs-12 col-sm-12">
-										<button id="btn_login" class="btn btn-primary btn-block btn-custom-jk" data-style="expand-left" data-spinner-color="white" data-size="s" style="margin-bottom: 50px;">
-										<span class=""></span> Login
-										</button>
-									</div>
-								</div>
-								<!-- <div class="form-group mb-n">
-									<div class="col-xs-12">
-										<a href="#" class="pull-left">Forgot password?</a>
-										<div class="checkbox-inline icheck pull-right p-n">
-											<label for="">
-												<input type="checkbox"></input>
-												Remember me
-											</label>
-										</div>
-									</div>
-								</div> -->
-							</form>
+<section id="wrapper" class="new-login-register">
+      <div class="lg-info-panel">
+          <div class="inner-panel">
+              <div class="lg-content">
+              	  <img style="height: 80px; width: 120px;" src="<?php echo $company->logo_path; ?>">
+                  <hr><h1 style="font-family: 'Rubik', sans-serif!important; color: white;"><b>JCORE</b> STANDARD ACCOUNTING</h1><hr>
+                  <h3 style="color: #03a9f4;"><?php echo $company_info[0]->company_name; ?></h3>
+                  <span style="position: absolute; bottom: -3%; right: 1%;"><p>powered by <img src="assets/img/jdev-logo2.png" height="30" width="70"></p></span>
+              </div>
+          </div>
+      </div>
+      <div class="new-login-box">
+                <div class="white-box">
+                    <h3 class="box-title m-b-0">Sign In</h3>
+                    <small>Please Enter your details below</small>
+                  	<form action="#" class="form-horizontal" id="validate-form" style="margin-top: 15%;">
+						<div class="form-group mb-md" id="userdiv">
+	                        <div class="col-xs-12">
+	                        	<label>USERNAME</label>
+                        		<input name="user_name" id="user" type="text" class="form-control " style="border-radius: 0;" placeholder="Username" data-parsley-minlength="20" placeholder="At least 6 characters" required>
+	                        </div>
 						</div>
-					</div>
-				</div>
-				<div class="clearfix">
-					
-				</div>
-				
-				<span style="font-size: 12px; color: white; font-weight: 200; position: absolute; top: 130%; left: 60%;">Powered by : <img src="assets/img/jdev-logo-white.png" height="30" width="70"></span>
-<!--
-				<div class="text-center">
-					<a href="#" class="btn btn-label btn-social btn-facebook mb-md"><i class="ti ti-facebook"></i>Connect with Facebook</a>
-					<a href="#" class="btn btn-label btn-social btn-twitter mb-md"><i class="ti ti-twitter"></i>Connect with Twitter</a>
-				</div>
 
--->
-			</div>
-		</div>
-</div>
+						<div class="form-group mb-md" id="passdiv">
+	                        <div class="col-xs-12">
+	                       		<label>PASSWORD</label>
+								<input name="user_pword" id="pass" type="password" class="form-control" style="border-radius: 0;" id="exampleInputPassword1" placeholder="Password">
+	                        </div>
+						</div>
+
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 hidden " style="margin-bottom: 10px;">
+								<button id="btn_register" class="btn btn-info btn-block">Register</button>
+							</div>
+							<div class="col-sm-offset-6"></div>								
+							<div class="col-xs-12 col-sm-12">
+								<button id="btn_login" class="btn btn-primary btn-block btn-custom-jk" data-style="expand-left" data-spinner-color="white" data-size="s" style="margin-bottom: 50px;">
+								<span class=""></span> Login
+								</button>
+							</div>
+						</div>
+					</form>
+                </div>
+      </div>            
+  
+  
+</section>
 
 <?php echo $_def_js_files; ?>
 
@@ -218,64 +165,6 @@
                     type:  obj.stat
                 });
             };
-
-	        $('#user').focus(function()
-			{ 
-				$(this).attr('placeholder','');
-				$(this).animate({
-				    height: '40px',
-				    'font-size': '18px'
-				  }, 100, function() {
-				    // Animation complete.
-				  });
-			}).blur(function()
-			{
-				$(this).attr('placeholder','Username');
-				$(this).animate({
-				    height: '32px',
-				    'font-size': '14px'
-				  }, 100, function() {
-				    // Animation complete.
-				  });	
-			});
-
-			$('#pass').focus(function()
-			{ 
-				$(this).attr('placeholder','');
-				$(this).animate({
-				    height: '40px',
-				    'font-size': '18px'
-				  }, 100, function() {
-				    // Animation complete.
-				  });
-			}).blur(function()
-			{
-				$(this).attr('placeholder','Password');
-				$(this).animate({
-				    height: '32px',
-				    'font-size': '14px',
-				  }, 100, function() {
-				    // Animation complete.
-				  });	
-			});
-
-			$('#btn_login').focus(function()
-			{ 
-				$(this).animate({
-				    height: '60px',
-				    'font-size': '18px'
-				  }, 100, function() {
-				    // Animation complete.
-				  });
-			}).blur(function()
-			{
-				$(this).animate({
-				    height: '33px',
-				    'font-size': '14px',
-				  }, 100, function() {
-				    // Animation complete.
-				  });	
-			});
         });
     </script>
 
