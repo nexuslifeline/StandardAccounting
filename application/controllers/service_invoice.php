@@ -242,6 +242,36 @@ class Service_invoice extends CORE_Controller
 
                 break;
 
+            // ******************* Service Invoices for review in Service Journal *************************
+
+            case 'service-for-review' :
+
+            $m_invoice=$this->Service_invoice_model;
+            $response['data']=$m_invoice->get_list(
+
+                    array(
+                        'service_invoice.is_active'=>TRUE,
+                        'service_invoice.is_deleted'=>FALSE,
+                        'service_invoice.is_journal_posted'=>FALSE
+                    ),
+
+                    array(
+                        'service_invoice.service_invoice_id',
+                        'service_invoice.service_invoice_no',
+                        'service_invoice.remarks',
+                        'DATE_FORMAT(service_invoice.date_invoice,"%m/%d/%Y") as date_invoice',
+                        'customers.customer_name'
+                    ), 
+                    array(
+                        array('customers','customers.customer_id=service_invoice.customer_id','left')
+                    ),
+
+                     'service_invoice.service_invoice_id DESC'
+
+                );
+            echo json_encode($response);
+            break;
+
             
         }
 

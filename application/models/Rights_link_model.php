@@ -74,7 +74,12 @@ class Rights_link_model extends CORE_Model{
                                           (58,'12','12-2','Check Registry Report'),
                                           (59,'12','12-3','Collection List Report'),
                                           (60,'12','12-4','Open Purchase Report'),
-                                          (61,'12','12-5','Open Sales Report')
+                                          (61,'12','12-5','Open Sales Report'),
+                                          (62,'1','1-6','Service Journal'),
+                                          (63,'5','5-5','Services'),
+                                          (64,'4','4-6','Service Unit Management'),
+                                          (65,'3','3-4','Service Invoice')
+
                                       
                                           ON DUPLICATE KEY UPDATE
 

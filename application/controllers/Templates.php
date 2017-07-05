@@ -60,6 +60,10 @@ class Templates extends CORE_Controller {
 
         $this->load->model('Check_layout_model');
 
+        $this->load->model('Service_invoice_model');
+
+        $this->load->model('Service_invoice_item_model');
+
         $this->load->library('M_pdf');
     }
 
@@ -938,6 +942,89 @@ class Templates extends CORE_Controller {
 
                 break;
 
+            case 'journal-ar-services':
+                $m_journal_info=$this->Journal_info_model;
+                $m_company=$this->Company_model;
+                $journal_id=$this->input->get('id',TRUE);
+                $type=$this->input->get('type',TRUE);
+
+                $journal_info=$m_journal_info->get_list(
+                    $journal_id,
+
+                    array(
+                        'journal_info.*',
+                        'customers.customer_name',
+                        'customers.address',
+                        'customers.email_address',
+                        'customers.contact_no'
+                    ),
+
+                    array(
+                        array('customers','customers.customer_id=journal_info.customer_id','left')
+                    )
+
+                );
+
+                $company_info = $m_company->get_list();
+
+                $data['company_info']=$company_info[0];
+
+                $data['journal_info']=$journal_info[0];
+
+                $m_journal_accounts=$this->Journal_account_model;
+                $data['journal_accounts']=$m_journal_accounts->get_list(
+
+                    array(
+                        'journal_accounts.journal_id'=>$journal_id
+                    ),
+
+                    array(
+                        'journal_accounts.*',
+                        'account_titles.account_no',
+                        'account_titles.account_title'
+                    ),
+
+                    array(
+                        array('account_titles','account_titles.account_id=journal_accounts.account_id','left')
+                    )
+
+                );
+
+
+                //show only inside grid with menu button
+                if($type=='fullview'||$type==null){
+                    echo $this->load->view('template/sales_journal_entries_content',$data,TRUE);
+                    echo $this->load->view('template/sales_journal_entries_content_menus',$data,TRUE);
+                }
+
+                //download pdf
+                if($type=='pdf'){
+                    $file_name=$journal_info[0]->txn_no;
+                    $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                    $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
+                    $content=$this->load->view('template/sales_journal_entries_content',$data,TRUE); //load the template
+                    $pdf->setFooter('{PAGENO}');
+                    $pdf->WriteHTML($content);
+                    //download it.
+                    $pdf->Output($pdfFilePath,"D");
+
+                }
+
+                //preview on browser
+                if($type=='preview'){
+                    $file_name=$journal_info[0]->txn_no;
+                    $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                    $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
+                    $content=$this->load->view('template/sales_journal_entries_content',$data,TRUE); //load the template
+                    $pdf->setFooter('{PAGENO}');
+                    $pdf->WriteHTML($content);
+                    //download it.
+                    $pdf->Output();
+                }
+
+                break;
+
+
             case 'journal-crj':
                 $m_journal_info=$this->Journal_info_model;
                 $m_company_info=$this->Company_model;
@@ -1021,6 +1108,7 @@ class Templates extends CORE_Controller {
                 }
 
                 break;
+
 
             case 'journal-gje':
                 $m_journal_info=$this->Journal_info_model;
@@ -1209,6 +1297,122 @@ class Templates extends CORE_Controller {
 
 
                 break;
+
+         case 'services-journal-for-review':
+
+                $service_invoice_id = $this->input->get('id',TRUE);
+                $m_service_invoice=$this->Service_invoice_model;
+                $m_service_invoice_items=$this->Service_invoice_item_model;
+                $m_accounts=$this->Account_title_model;
+                $m_customers=$this->Customers_model;
+                $m_departments=$this->Departments_model;
+
+                $service_info=$m_service_invoice->get_list(
+                    array(
+                        'service_invoice.is_deleted'=>FALSE,
+                        'service_invoice.is_active'=>TRUE,
+                        'service_invoice.service_invoice_id'=>$service_invoice_id
+
+
+                        ),
+
+                    array(
+                        'service_invoice.service_invoice_id',
+                        'service_invoice.service_invoice_no',
+                        'service_invoice.customer_id',
+                        'service_invoice.department_id',
+                        'service_invoice.salesperson_id',
+                        'DATE_FORMAT(service_invoice.date_invoice,"%m/%d/%Y")as date_invoice',
+                        'DATE_FORMAT(service_invoice.date_created,"%m/%d/%Y %r")as date_created',
+                        'service_invoice.posted_by_user',
+                        'service_invoice.date_due',
+                        'service_invoice.remarks',
+                        'customers.customer_name',
+                        'customers.address',
+                        'customers.email_address',
+                        'customers.contact_no',
+                        'CONCAT_WS(" ",user_accounts.user_fname,user_accounts.user_lname)as posted_by'
+
+                        ),
+
+
+                        array(
+                            array('customers', 'customers.customer_id=service_invoice.customer_id','left'),
+                            array('user_accounts','user_accounts.user_id=service_invoice.posted_by_user','left')
+
+                            )
+
+
+                        
+                );
+
+                $data['service_invoice']=$service_info[0];
+
+                $data['departments']=$m_departments->get_list(
+                    array('is_active'=> TRUE, 
+                          'is_deleted'=>FALSE
+                        ),
+                    array(
+                        'departments.department_id',
+                        'departments.department_name'
+                        )
+                );
+
+                $data['customers']=$m_customers->get_list(
+                    array('is_active'=>TRUE,
+                          'is_deleted'=> FALSE
+                        ),
+                    array(
+                        'customers.customer_id',
+                        'customers.customer_name'
+                        )
+                );
+
+                $data['accounts']=$m_accounts->get_list(
+                    array(
+                        'account_titles.is_active'=>TRUE,
+                        'account_titles.is_deleted'=>FALSE
+                    )
+                );
+
+                $data['entries']=$m_service_invoice->get_journal_entries($service_invoice_id);
+
+                $data['items']=$m_service_invoice_items->get_list(
+                    array('service_invoice_items.service_invoice_id'=>$service_invoice_id),
+                    array(
+                        'service_invoice_items.*',
+                        'services.service_desc',
+                        'service_unit.service_unit_id',
+                        'service_unit.service_unit_name'
+                        ),
+                    array(
+                        array('services','services.service_id=service_invoice_items.service_id','left'),
+                        array('service_unit','service_unit.service_unit_id=service_invoice_items.service_unit','left')
+                        )
+                    );
+
+                
+                //validate if customer is not deleted
+                $valid_customer=$m_customers->get_list(
+                    array(
+                        'customer_id'=>$service_info[0]->customer_id,
+                        'is_active'=>TRUE,
+                        'is_deleted'=>FALSE
+                    )
+                );
+                $data['valid_particular']=(count($valid_customer)>0);          
+
+                  echo $this->load->view('template/service_journal_for_review',$data,TRUE); //details of the journal
+
+
+                break;
+
+
+
+
+
+
+
 
             case 'ar-journal-for-review':
                 $sales_invoice_id=$this->input->get('id',TRUE);

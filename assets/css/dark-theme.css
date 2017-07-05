@@ -609,6 +609,25 @@ table#tbl_accounts_receivable tbody tr.no-padding:nth-child(even) {
 }
 
 
+
+
+/*  tbl_service_journal- service_journal_view*/
+
+.row_child_tbl_service_journal:hover {
+    background: transparent !important;
+    color: white !important;
+}
+
+table#tbl_service_journal tbody tr.no-padding:nth-child(odd) {
+    background-color: transparent !important;
+    color: white !important;
+}
+table#tbl_service_journal tbody tr.no-padding:nth-child(even) {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+
 /* tbl_accounts_receivable - cash_disbursement */
 
 .row_child_tbl_cash_disbursement_list:hover {
