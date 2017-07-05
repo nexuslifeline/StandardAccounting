@@ -24,7 +24,7 @@
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 	        $data['title'] = 'Voucher Registry Report';
 
-	        $this->load->view('Voucher_registry_report_view',$data);
+	        $this->load->view('voucher_registry_report_view',$data);
 		}
 
 		function transaction($txn=null) {
