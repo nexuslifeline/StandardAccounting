@@ -324,10 +324,10 @@
                                                        <label class="col-md-2 col-md-offset-1 control-label"><strong>Photo :</strong></label>
                                                        <div class="col-md-5">
                                                            <div class="input-group">
-                                                               <div class="" style="border:1px solid black;height: 250px;width: 250px;vertical-align: middle;overflow: hidden;">
+                                                               <div class="" style="border:1px solid black;height: 230px;width: 210px;vertical-align: middle;margin-bottom: 20px;">
 
                                                                    <div id="div_img_user" style="position:relative;">
-                                                                       <img name="img_user" src="assets/img/anonymous-icon.png" style=" width: 250px; "/>
+                                                                       <img name="img_user" src="assets/img/anonymous-icon.png" style="padding-bottom: 50px; height: 277px; width: 207px;"/>
                                                                        <input type="file" name="file_upload[]" class="hidden">
                                                                    </div>
 

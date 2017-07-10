@@ -579,34 +579,18 @@ $(document).ready(function(){
                             _attribute='class="fa fa-check-circle" style="color:green;"';
                         }else{
                             _attribute='class="fa fa-times-circle" style="color:red;"';
-                            // $('.btn_cancel_or').attr('disabled','disabled'); -> This causes conflict on all buttons in targets:[8] for they all have a class of btn_cancel_or
+                            $('.btn_cancel_or').attr('disabled','disabled');
                         }
                         return '<center><i '+_attribute+'></i></center>';
                     }
                 },
-                // {
-                //     targets:[8],data: null,
-                //     render: function (data, type, full, meta){
-                //         return '<center><button type="button" class="btn btn-default btn_cancel_or"><i class="fa fa-times-circle"></i></button></center>';
-                //     }
-
-                // }
-
                 {
-                    targets:[8],data: "is_active",
+                    targets:[8],data: null,
                     render: function (data, type, full, meta){
-                        if(data=="1"){
-                           return '<center><button type="button" class="btn btn-default btn_cancel_or"><i class="fa fa-times-circle"></i></button></center>';
-                        }else{
-                            return '<center><button type="button" class="btn btn-default btn_cancel_or" disabled><i class="fa fa-times-circle"></i></button></center>';
-                           
-                        }
-    
+                        return '<center><button type="button" class="btn btn-default btn_cancel_or"><i class="fa fa-times-circle"></i></button></center>';
                     }
+
                 }
-
-
-
             ],
             "createdRow": function ( row, data, index ) {
                 $('td:eq(6)',row).attr('align','right');

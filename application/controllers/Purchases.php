@@ -153,7 +153,7 @@ class Purchases extends CORE_Controller
                     //$where_filter=null,$select_list=null,$join_array=null,$order_by=null,$group_by=null,$auto_select_escape=TRUE,$custom_where_filter=null
                     $response['data']= $m_purchases->get_list(
 
-                        'purchase_order.is_deleted=FALSE AND purchase_order.is_active=TRUE AND purchase_order.approval_id=1 AND (purchase_order.order_status_id=1 OR purchase_order.order_status_id=3)',
+                        'purchase_order.is_deleted=FALSE AND purchase_order.is_active=TRUE AND (purchase_order.order_status_id=1 OR purchase_order.order_status_id=3)',
 
                         array(
                             'purchase_order.*',
