@@ -30,6 +30,7 @@ class Journal_info_model extends CORE_Model{
                     ji.is_deleted = FALSE
                     AND ji.is_active = TRUE
                     AND ji.payment_method_id=2
+                    AND ji.is_reconciled = 0
                     AND ji.bank_id = $bank_id
                     AND ji.date_txn BETWEEN '$sDate' AND '$eDate') AS t
                 WHERE

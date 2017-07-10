@@ -25,17 +25,7 @@
 	        $data['_side_bar_navigation'] = $this->load->view('template/elements/side_bar_navigation', '', TRUE);
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 	        $data['title'] = 'Check Registry Report';
-	        $data['banks'] = $this->Bank_model->get_list(
-	        	array('bank.is_active'=>TRUE, 'bank.is_deleted'=>FALSE),
-	
-	        	"Bank.bank_id,
-	        	Bank.bank_name
-
-	        	"
-
-	        	);
-
-
+	        $data['banks'] = $this->Bank_model->get_list('bank.is_active=TRUE AND bank.is_deleted=FALSE');
 
 	        $this->load->view('check_registry_report_view',$data);
 		}
