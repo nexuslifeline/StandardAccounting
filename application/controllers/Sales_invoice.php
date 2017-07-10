@@ -482,6 +482,27 @@ class Sales_invoice extends CORE_Controller
                 }
                 //end update product on_hand after invoice is deleted...
 
+                $so_info=$m_invoice->get_list($sales_invoice_id,'sales_invoice.sales_order_id');// get purchase order first
+
+                if(count($so_info)>0){
+                    $sales_order_id=$so_info[0]->sales_order_id;// pass to variable
+                    $m_so=$this->Sales_order_model;
+                    $m_so->order_status_id=$this->get_so_status(
+                        $sales_order_id);
+                    $m_so->modify($sales_order_id);
+
+
+
+                }
+
+
+
+
+
+
+
+
+
                 $response['title']='Success!';
                 $response['stat']='success';
                 $response['msg']='Record successfully deleted.';
