@@ -19,7 +19,7 @@
 
                 <td width="50%" align="right" style="border: 0px !important;">
                     <p>Sales Order No.</p><br />
-                    <h4 class="text-navy" style="color:#FFF;"><?php echo $sales_order->so_no; ?></h4><br />
+                    <h4 class="text-navy" ><?php echo $sales_order->so_no; ?></h4><br />
                 </td>
             </tr>
         </table>

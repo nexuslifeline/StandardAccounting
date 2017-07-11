@@ -28,7 +28,7 @@
     <!--<link href="assets/dropdown-enhance/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">-->
 
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
+         <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
 
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   <!-- Custom Checkboxes / iCheck -->
@@ -54,8 +54,20 @@
         #tbl_purchases td:nth-child(n+5){
             text-align: right;
         }
+tr:hover {
+    transition: .4s;
+    background: transparent!important;
+    color: white!important;
+}
 
 
+
+tr:nth-child(odd) {
+    background-color: transparent!important;
+}
+tr:nth-child(even) {
+    background-color: transparent!important;
+}
     </style>
 
 </head>

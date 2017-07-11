@@ -23,7 +23,7 @@
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
+         <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
 
     <!--<link href="assets/dropdown-enhance/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">-->
 
@@ -46,7 +46,14 @@
         #tbl_expenses td:nth-child(n+2){
             text-align: right;
         }
-
+        tr:nth-child(odd) {
+            background-color: transparent!important;
+            color:white!important;
+        }
+        tr:nth-child(even) {
+            background-color: transparent!important;
+             color:white!important;
+        }
 
     </style>
 
@@ -77,7 +84,7 @@
                                         <div class="panel-group panel-default" id="accordionA">
 
 
-                                            <div class="panel panel-default" style="border-radius: 0px;border: 1px solid lightgrey;min-height: 800px;">
+                                            <div class="panel panel-default" style="border-radius: 0px;border: 1px solid lightgrey;min-height: 800px;background-color: transparent!important;">
                                                 <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Schedule of Expense</b></div></a>
 
 

@@ -352,6 +352,8 @@ $(document).ready(function(){
 
         $('#btn_new').click(function(){
             _txnMode="new";
+            clearFields();
+            _cboAccountType.select2('val','');
             $('#bank_title').text('New Bank');
             $('#modal_bank').modal('show');
             //showList(false);
@@ -373,6 +375,7 @@ $(document).ready(function(){
             });
             $('#bank_title').text('Edit Unit');
             $('#modal_bank').modal('show');
+            _cboAccountType.select2('val',data.account_type);
             //showList(false);
         });
 

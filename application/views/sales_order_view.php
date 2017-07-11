@@ -1376,7 +1376,7 @@
 
                                     <div class="col-xs-12 col-md-8">
 
-                                        <select name="department_id" id="cbo_department" class="form-control" data-error-msg="Department is required!">
+                                        <select name="department_id" id="cbo_department" class="form-control" data-error-msg="Department is required!" required>
 
                                             <option value="0">[ Create New Department ]</option>
 
@@ -3165,7 +3165,7 @@ $(document).ready(function(){
             if(validateRequiredFields($('#frm_customer'))){
 
                 var data=$('#frm_customer').serializeArray();
-
+                data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
 
 
                 $.ajax({

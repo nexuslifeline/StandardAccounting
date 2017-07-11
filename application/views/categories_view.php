@@ -22,6 +22,7 @@
 
         <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
+         <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
 
         <style>
             html{
@@ -74,7 +75,7 @@
                 background-color: rgba(64, 64, 64, .5)!important;
             }
 
-            tr:nth-child(even) {
+/*            tr:nth-child(even) {
                 background-color: rgba(64, 64, 64, .3)!important;
             }
 
@@ -88,7 +89,7 @@
                 padding:10px;
                 border: 1px solid #afafaf;
             }
-
+*/
             table {
                 color: white;
             }

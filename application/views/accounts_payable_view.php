@@ -1212,7 +1212,7 @@
 
                 if(validateRequiredFields($('#frm_suppliers_new'))){
                     var data=$('#frm_suppliers_new').serializeArray();
-
+                    data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
                     $.ajax({
                         "dataType":"json",
                         "type":"POST",
@@ -1294,6 +1294,7 @@
 
         var createSupplier=function() {
             var _data=$('#frm_suppliers_new').serializeArray();
+
             _data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
             return $.ajax({
                 "dataType":"json",
