@@ -32,6 +32,11 @@
             border-top: 3px solid #404040;
         }
     </style>
+    <script type="text/javascript">
+        (function(){
+            window.print();
+        })();
+    </script>
 </head>
 <body>
 	<table width="100%">
@@ -48,13 +53,13 @@
     <div class="">
         <h3 class="report-header"><strong>SUPPLIER SUBSIDIARY REPORT</strong></h3>
     </div>
-     <table width="100%" border="1" cellspacing="-1">
+     <table width="100%" border="1" cellspacing="0" cellspacing="-1">
         <tr>
         	<td style="padding: 4px;" width="50%"><strong>Supplier: </strong><?php echo $subsidiary_info->supplier_name; ?></td>
         	<td style="padding: 4px;" width="50%"><strong>Account: </strong><?php echo $subsidiary_info->account_title; ?></td>
         </tr>
     </table><br>
-    <table width="100%" border="1" cellspacing="-1">
+    <table width="100%" border="1" cellspacing="0">
     	<thead>
             <tr>
                 <th style="border: 1px solid black;text-align: center;height: 30px;padding: 6px;">Txn Date</th>

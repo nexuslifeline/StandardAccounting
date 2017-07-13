@@ -1894,8 +1894,18 @@ class Templates extends CORE_Controller {
                 $company_info=$m_company_info->get_list();
 
                 $data['company_info']=$company_info[0];
-                $data['subsidiary_info']=$journal_info[0];
-                $data['supplier_subsidiary']=$m_journal_info->get_supplier_subsidiary($supplier_Id,$account_Id,$start_Date,$end_Date);
+                if (isset($journal_info[0])) 
+                {
+
+                    $data['supplier_subsidiary']=$m_journal_info->get_supplier_subsidiary($supplier_Id,$account_Id,$start_Date,$end_Date);
+                    $data['company_info']=$company_info[0];
+                    $data['subsidiary_info']=$journal_info[0];
+                    $this->load->view('template/supplier_subsidiary_report',$data);
+                } else {
+                    echo '<center style="font-family: Arial, sans-serif;"><h1 style="color:#2196f3">Information</h1><hr><h3>No record associated to this supplier.</h3></center>';
+                }
+               
+                    
 
                 
                 /*if ($type == 'preview' || $type == null) {
