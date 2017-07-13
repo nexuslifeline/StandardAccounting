@@ -232,7 +232,11 @@
 
         }
 
-
+    tr:hover {
+        transition: .4s;
+        background: transparent!important; 
+        color: white!important;
+    }
 
         .numeric{
 

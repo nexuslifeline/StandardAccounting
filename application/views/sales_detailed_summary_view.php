@@ -64,6 +64,40 @@
             text-align: right;
             font-weight: bolder;
         }
+        .tab-warning.tab-container.tab-left > .nav-tabs > li.active > a {
+        border-left-color: #ffc107;
+        background-color: #414141!important;
+        color: white;
+        border-right: none;
+        }
+
+        .tab-warning.tab-container.tab-left > .nav-tabs > li > a {
+        border-left-color: #ffc107;
+        background-color: #414141!important;
+        color: white;
+        border-right: 1px solid white;
+        }
+
+
+
+.tab-primary.tab-container > .nav-tabs > li.active > a {
+    border-top-color: #03a9f4;
+    background-color: #414141!important;
+    color: white;
+    border-bottom: none;
+
+}
+
+.tab-primary.tab-container > .nav-tabs > li > a {
+      
+       background-color: transparent!important;
+        color: white;
+
+
+    }
+
+
+
     </style>
 
 </head>

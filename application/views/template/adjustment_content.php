@@ -1,7 +1,49 @@
+<head>  <title>Item Adjustment</title></head>
+<body>
+      <style type="text/css">
+      .nohover{
 
+          pointer-events: none;
+      }
+          
+      .bottom-only{
+      border:none!important;
+      }
+           body {
+            font-family: 'Calibri',sans-serif;
+            font-size: 12px;
+        }
 
-<div>
-    <center><table width="95%" cellpadding="5" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;font-size: 11;" border="0">
+        .align-right {
+            text-align: right;
+        }
+
+        .align-left {
+            text-align: left;
+        }
+
+        .align-center {
+            text-align: center;
+        }
+
+        .report-header {
+            font-weight: bolder;
+        }
+       
+
+      </style>
+<table width="100%" class="nohover" >
+        <tr>
+            <td  class="bottom-only" width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
+            <td class="bottom-only" width="90%" class="align-center">
+                <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
+                <p><?php echo $company_info->company_address; ?></p>
+                <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p>
+            </td>
+        </tr>
+    </table><hr>
+<div>    
+    <center><table width="95%" cellpadding="5" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;font-size: 11;" border="0" class="nohover">
             <tr>
                 <td width="45%" valign="top" style="border-collapse: collapse!important;border-spacing: 0!important;font-family: tahoma;font-size: 11; border :0px solid #525252!important;">
                     <span>Department :</span><br />
@@ -32,14 +74,14 @@
     <br /><br />
 
     <center>
-        <table width="95%" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;font-size: 11;background-color: transparent!important;" border="0">
+        <table width="95%" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;font-size: 11;background-color: transparent!important;" class="nohover" >
             <thead style="background-color: transparent!important ;">
             <tr style="background-color: transparent!important ;">
-                <th width="50%" style="border-bottom: 2px solid gray;text-align: left;height: 30px;padding: 6px;">Item</th>
-                <th width="12%" style="border-bottom: 2px solid gray;text-align: right;height: 30px;padding: 6px;">Qty</th>
-                <th width="12%" style="border-bottom: 2px solid gray;text-align: center;height: 30px;padding: 6px;">UM</th>
-                <th width="12%" style="border-bottom: 2px solid gray;text-align: right;height: 30px;padding: 6px;">Price</th>
-                <th width="12%" style="border-bottom: 2px solid gray;text-align: right;height: 30px;padding: 6px;">Total</th>
+                <th width="50%" style="text-align: left;height: 30px;padding: 6px;border-bottom: 1px solid gray;" >Item</th>
+                <th width="12%" style="text-align: right;height: 30px;padding: 6px;border-bottom: 1px solid gray;">Qty</th>
+                <th width="12%" style="text-align: center;height: 30px;padding: 6px;border-bottom: 1px solid gray;">UM</th>
+                <th width="12%" style="text-align: right;height: 30px;padding: 6px;border-bottom: 1px solid gray;">Price</th>
+                <th width="12%" style="text-align: right;height: 30px;padding: 6px;border-bottom: 1px solid gray;">Total</th>
             </tr>
             </thead>
             <tbody style="border-collapse:collapse">
@@ -82,7 +124,7 @@
 </div>
 
 <style>
-    tr {
+/*    tr {
         border: none!important;
     }
 
@@ -95,7 +137,7 @@
         transition: .4s;
         background: #414141 !important;
         color: white;
-    }
+    }*/
 
     tr:hover .btn {
         border-color: #494949!important;

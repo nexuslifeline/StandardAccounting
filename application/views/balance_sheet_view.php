@@ -135,7 +135,7 @@
 
                                                     <button id="btn_print" class="btn btn-green" style="text-transform: none;"><i class="fa fa-print"></i> Print Report</button>
 
-                                                    <button id="btn_export" class="btn btn-success disabled" style="text-transform: none;"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
+<!--                                                     <button id="btn_export" class="btn btn-success disabled" style="text-transform: none;"><i class="fa fa-file-excel-o"></i> Export to Excel</button> -->
 
                                                     <button class="btn btn-red" data-dismiss="modal" style="text-transform: none;">Close</button>
                                                 </div>

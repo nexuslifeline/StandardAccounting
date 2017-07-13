@@ -32,13 +32,11 @@
             border-top: 3px solid #404040;
         }
 
-        tr {
-            border: none!important;
-        }
+
 
         tr:nth-child(even){
-            background: #414141 !important;
-            border: none!important;
+/*            background: #414141 !important;*/
+           /* border: none!important;*/
         }
 
         tr:hover {
@@ -93,7 +91,7 @@
             <td style="padding: 4px;"><?php echo number_format($journal_info->amount,2); ?></td>
         </tr>
     </table><br>
-    <table width="100%" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;" border="0">
+    <table width="100%" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;" >
             <thead>
             <tr>
                 <td style="border: 1px solid black;text-align: center;padding: 6px;" colspan="5"><strong>ENTRIES</strong></td>

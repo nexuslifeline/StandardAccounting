@@ -20,7 +20,7 @@
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
+    <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
 
@@ -32,7 +32,9 @@
             zoom: 80%;
         }
 
-
+        h4{
+            color:white;
+        }
         .toolbar{
             float: left;
         }
@@ -73,6 +75,34 @@
             to { -webkit-transform: rotate(360deg); }
         }
 
+.tab-primary.tab-container > .nav-tabs > li.active > a {
+background:#1f1f1f!important;color: white !important;border-top: 0.5px solid #ffd65c!important;
+}
+
+.tab-primary.tab-container > .nav-tabs > li > a {
+background: #616161 !important;color: white !important;border-top: 0.5px solid white
+}
+
+.table-striped > tbody > tr:nth-child(odd) {
+    background-color: transparent!important;
+    color:white;
+}
+.table-striped > tbody > tr:nth-child(even) {
+ background-color: transparent!important;
+ color:white;
+}
+
+div.dataTables_info {
+    padding-top: 8px;
+    color: white;}
+
+    
+.tab-container .tab-content {
+    border-radius: 0 2px 2px 2px;
+    border: 1px solid #e0e0e0;
+    padding: 16px;
+    background-color: #212121!important;
+}
 
 
         /*table{
@@ -315,7 +345,7 @@
 
                 <div class="tab-pane" id="sched_expense_setting" style="min-height: 300px;">
                     <br />
-                    Please specify the group of each account :<br />
+                   <h8 style="color: white;"> Please specify the group of each account :</h8><br />
                     <table class="custom-design table-striped">
                         <thead>
                             <tr>
@@ -361,7 +391,7 @@
 
                             <table id="tbl_account_year" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
-                                    <tr>
+                                    <tr style="color:white;">
                                         <td width="40%">Accounting Period</td>
                                         <td width="15%">Date/Time Closed</td>
                                         <td width="15%">Closed by</td>

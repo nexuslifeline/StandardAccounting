@@ -1,11 +1,13 @@
+<head>  <title>Issuance Report</title></head>
+<body>
 <style>
 
     #issuance td {
-        border: 0px !important;
+  
     }
 
     #report_header td {
-        border: 0px !important;
+     
     }
 
     #issuance tr {
@@ -13,24 +15,38 @@
     }
 
     #report_footer th {
-        background: #303030 !important;
-    }
+/*        background: #303030 !important;
+*/    }
+.report{
 
+border-bottom: 1px solid gray;
+
+border-right: none;
+border-left:none;
+border-top:none;
+
+}
+    td{
+
+    }
     tr {
-        border: none!important;
+/*        border: none!important;*/
     }
 
     tr:nth-child(even){
-        background: #414141 !important;
-        border: none!important;
+/*        background: #414141 !important;*/
+/*        border: none!important;*/
     }
 
     tr:hover {
         transition: .4s;
-        background: #414141 !important;
+/*        background: #414141 !important;*/
         color: white;
     }
 
+    th{
+        background-color: transparent!important;
+    }
     tr:hover .btn {
         border-color: #494949!important;
         border-radius: 0!important;
@@ -39,17 +55,46 @@
         box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
     }
 
-</style>
+       body {
+        font-family: 'Calibri',sans-serif;
+        font-size: 12px;
+    }
+
+    .align-right {
+        text-align: right;
+    }
+
+    .align-left {
+        text-align: left;
+    }
+
+    .align-center {
+        text-align: center;
+    }
+
+    .report-header {
+        font-weight: bolder;
+    }
+   
+          
+      </style>
 
 <div style="width:100%">
-<h3 style="text-align:center;margin:0px;padding:0px;font-weight:bold;font-family:tahoma;"><?php echo $company_info->company_name; ?></h3>
-<p style="text-align:center;margin:0px;padding:0px;font-family:tahoma;"><?php echo $company_info->company_address; ?></p>
-<p style="text-align:center;margin:0px;padding:0px;font-family:tahoma;">Contact # <?php echo $company_info->mobile_no.' '.$company_info->landline; ?></p>
+<table width="100%">
+        <tr>
+            <td width="10%" style="border:none!important;"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
+            <td width="90%" style="border:none!important;" class="align-center">
+                <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
+                <p><?php echo $company_info->company_address; ?></p>
+                <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p>
+            </td>
+        </tr>
+    </table><hr>
 <table style="font-family:tahoma;" id="report_header">
     <tbody>
         <tr>
-            <td style="width:85%;font-size:21px;font-weight:bold;">ISSUANCE REPORT</td>
-            <td style="width:15%;font-size:21px;font-weight:bold;"><?php echo $issuance_info->slip_no; ?></td>
+            <td style="width:85%;font-size:18px;font-weight:bold;border:none!important;">ISSUANCE REPORT</td>
+            <td style="width:15%;font-size:18px;font-weight:bold;border:none!important;"><?php echo $issuance_info->slip_no; ?></td>
         </tr>
     </tbody>
 </table>
@@ -58,29 +103,29 @@
     </thead>
     <tbody>
         <tr>
-            <td style="width:20%;font-weight:bold;">Name of Customer: </td>
-            <td style="border-bottom:1px solid black;width:30%;"> <?php echo $issuance_info->customer_name; ?></td>
-            <td style="width:10%;"></td>
-            <td style="text-align:right;font-weight:bold;">Date:</td>
-            <td style="border-bottom:1px solid black;width:20%;text-align:center;"><?php echo  date_format(new DateTime($issuance_info->date_issued),"m/d/Y"); ?></td>
+            <td style="width:20%;font-weight:bold;border:none!important;">Name of Customer: </td>
+            <td style="width:30%;" class="report"> <?php echo $issuance_info->customer_name; ?></td>
+            <td style="width:10%;border:none!important;"></td>
+            <td style="text-align:right;font-weight:bold;border:none!important;">Date:</td>
+            <td style="width:20%;text-align:center;" class="report"><?php echo  date_format(new DateTime($issuance_info->date_issued),"m/d/Y"); ?></td>
         </tr>
         <tr>
-            <td style="width:20%;font-weight:bold;">Address: </td>
-            <td style="border-bottom:1px solid black;width:30%;"> <?php echo $issuance_info->address; ?></td>
-            <td style="width:10%;"></td>
-            <td style="text-align:right;font-weight:bold;">Terms:</td>
-            <td style="border-bottom:1px solid black;width:20%;text-align:center;"> <?php echo $issuance_info->terms; ?></td>
+            <td style="width:20%;font-weight:bold;border:none!important;">Address: </td>
+            <td style="width:30%;" class="report"> <?php echo $issuance_info->address; ?></td>
+            <td style="width:10%;border: none!important;"></td>
+            <td style="text-align:right;font-weight:bold;border:none!important;">Terms:</td>
+            <td style="width:20%;text-align:center;" class="report"> <?php echo $issuance_info->terms; ?></td>
         </tr>
     </tbody>
 </table><br>
-<table width="100%" style="font-family:tahoma;" cellspacing="0">
+<table width="100%" style="font-family:tahoma;" cellspacing="0" >
     <thead>
-        <tr>
-            <th style="width:35%;text-align:left;border:1px solid #7c7c7c;">Description</th>
-            <th style="width:10%;text-align:center;border:1px solid #7c7c7c;">Quantity</th>
-            <th style="width:15%;text-align:center;border:1px solid #7c7c7c;">Pack. Size</th>
-            <th style="width:20%;text-align:center;border:1px solid #7c7c7c;">Unit Price</th>
-            <th style="width:20%;text-align:center;border:1px solid #7c7c7c;">Amount</th>
+        <tr >
+            <th style="width:35%;text-align:left;border-bottom: 1px solid gray;">Description</th>
+            <th style="width:10%;text-align:center;border-bottom: 1px solid gray;">Quantity</th>
+            <th style="width:15%;text-align:center;border-bottom: 1px solid gray;">Pack. Size</th>
+            <th style="width:20%;text-align:center;border-bottom: 1px solid gray;">Unit Price</th>
+            <th style="width:20%;text-align:center;border-bottom: 1px solid gray;">Amount</th>
         </tr>
     </thead>
     <tbody>
@@ -90,35 +135,44 @@
             $grandtotal+=$item->issue_line_total_price;
              ?>
                 <tr>
-                    <td style=" border: 1px solid #7c7c7c;"><?php echo $item->product_desc; ?></td>
-                    <td style="text-align:center; border: 1px solid #7c7c7c;"><?php echo number_format($item->issue_qty,0); ?></td>
-                    <td style="text-align:center; border: 1px solid #7c7c7c;"></td>
-                    <td style="text-align:center; border: 1px solid #7c7c7c;"><?php echo number_format($item->issue_price,2); ?></td>
-                    <td style="text-align:center; border: 1px solid #7c7c7c;"><?php echo number_format($item->issue_line_total_price,2); ?></td>
+                    <td style="border-bottom: 1px solid gray;"><?php echo $item->product_desc; ?></td>
+                    <td style="text-align:center; border-bottom: 1px solid gray;"><?php echo number_format($item->issue_qty,0); ?></td>
+                    <td style="text-align:center; border-bottom: 1px solid gray;"></td>
+                    <td style="text-align:center;border-bottom: 1px solid gray;"><?php echo number_format($item->issue_price,2); ?></td>
+                    <td style="text-align:center;border-bottom: 1px solid gray;"><?php echo number_format($item->issue_line_total_price,2); ?></td>
                 </tr>
             <?php } ?>
             <tr>
-                <td colspan="4" style="text-align:right;font-weight:bold; border: 1px solid #7c7c7c;">Grand Total</td>
-                <td style="text-align:center;font-weight:bold;color:#2ecc71; border: 1px solid #7c7c7c;"><?php echo number_format($grandtotal,2); ?></td>
+            <td colspan="3"></td>
+                <td  style="text-align:left;font-weight:bold;  border-bottom: 1px solid gray;">Grand Total</td>
+                <td style="text-align:center;font-weight:bold; border-bottom: 1px solid gray;"><?php echo number_format($grandtotal,2); ?></td>
             </tr>
     </tbody>
 </table>
-<hr></hr>
-<table id="report_footer">
+<br><br><br>
+<table id="report_footer" style="width: 100%;">
     <tbody>
-        <tr>
+<!--         <tr >
             <th style="width:35%;text-align:center;"><br></th>
             <th style="width:10%;text-align:center;"></th>
             <th style="width:10%;text-align:center;"></th>
             <th style="width:22%;text-align:center;"></th>
             <th style="width:23%;text-align:center;"></th>
         </tr>
-        <tr>
+        <tr style="background-color: transparent!important;">
             <th style="width:35%;text-align:center;border-top:1px solid black;">Authorized Signature</th>
             <th style="width:10%;text-align:center;"></th>
             <th style="width:10%;text-align:center;"></th>
             <th style="width:22%;text-align:center;"></th>
             <th style="width:23%;text-align:center;border-top:1px solid black;">Customer's Signature</th>
+        </tr> -->
+        <tr>
+        <td style="border:none!important;">
+            <th style="width: 10%;"></th><th style="width:30%;text-align:center;border-top:1px solid black;">Authorized Signature</th><th style="width: 10%;"></th>
+        </td>
+        <td style="border:none!important;">
+        <th style="width: 10%;"></th><th style="width:30%;text-align:center;border-top:1px solid black;">Customer's Signature</th><th style="width: 10%;"></th>
+        </td>
         </tr>
     </tbody>
 </table>

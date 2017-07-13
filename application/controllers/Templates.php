@@ -445,9 +445,9 @@ class Templates extends CORE_Controller {
                 }
 
                 //show only inside grid without menu button
-                if($type=='contentview'){
-                    echo $this->load->view('template/sales_invoice_content_standard',$data,TRUE);
-                }
+                // if($type=='contentview'){
+                //     echo $this->load->view('template/sales_invoice_content_standard',$data,TRUE);
+                // }
 
                 if($type=='dr'){
                     echo $this->load->view('template/sales_invoice_content_dr',$data,TRUE);
@@ -472,12 +472,13 @@ class Templates extends CORE_Controller {
                 }
 
                 //preview on browser
-                if($type=='preview'){
+                if($type=='contentview'){
                     $file_name=$info[0]->slip_no;
                     $pdfFilePath = $file_name.".pdf"; //generate filename base on id
                     $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
-                    $content=$this->load->view('template/sales_invoice_content_pdf',$data,TRUE); //load the template
-                    //$pdf->setFooter('{PAGENO}');
+                    $content=$this->load->view('template/sales_invoice_content_standard',$data,TRUE); //load the template
+                    $pdf->setFooter('{PAGENO}');
+                    
                     $pdf->WriteHTML($content);
                     //download it.
                     $pdf->Output();
@@ -488,6 +489,9 @@ class Templates extends CORE_Controller {
 
             //****************************************************
             case 'sales-order': //sales order
+            $m_company_info=$this->Company_model;
+                $company_info=$m_company_info->get_list();
+                $data['company_info']=$company_info[0];
                 $m_sales_order=$this->Sales_order_model;
                 $m_sales_order_items=$this->Sales_order_item_model;
                 $type=$this->input->get('type',TRUE);

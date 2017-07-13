@@ -1,9 +1,9 @@
-<table id="main" style="font-family: 'Roboto', sans-serif; color: #FFF;">
+<table id="main" style="font-family: 'Roboto', sans-serif; color: black;">
 	<tr>
-		<td style="border: 0px !important;background: #303030 !important;"><h3>Customer Name : <?php echo $customers; ?></h3></td>
+		<td style="border: 0px !important;background:transparent !important;"><h3>Customer Name : <?php echo $customers; ?></h3></td>
 	</tr>
 	<tr>
-		<td style="border: 0px !important;background: #303030 !important;"><h3>Date : <?php echo $tempfrom." To ".$tempto; ?></h3></td>
+		<td style="border: 0px !important;background: transparent !important;"><h3>Date : <?php echo $tempfrom." To ".$tempto; ?></h3></td>
 	</tr>
 </table>
 

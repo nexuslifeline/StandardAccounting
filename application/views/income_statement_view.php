@@ -126,7 +126,7 @@
 
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    Start Date : <br />
+                                                    End Date : <br />
                                                     <div class="input-group" style="z-index: 99999">
 
                                                         <input type="text" name="date_end" id="dt_end_date" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>"  placeholder="Start Date" data-error-msg="Start date is required!" required>
@@ -147,7 +147,7 @@
                                         <div class="modal-footer">
                                             <div class="col-xs-12">
                                                 <a id="btn_print" href="#" target="_blank" class="btn btn-green" style="text-transform:none;font-family: tahoma;" ><i class="fa fa-print"></i> Print </a>
-                                                <a href="Templates/layout/income-statement?type=&type=pdf" class="btn btn-primary" style="text-transform:none;font-family: tahoma;" ><i class="fa fa-file-pdf-o"></i> Download as PDF </a>
+<!--                                                 <a href="Templates/layout/income-statement?type=&type=pdf" class="btn btn-primary" style="text-transform:none;font-family: tahoma;" ><i class="fa fa-file-pdf-o"></i> Download as PDF </a> -->
                                                 <button class="btn btn-red" data-dismiss="modal" style="text-transform: capitalize;">Close</button>
                                             </div>
 

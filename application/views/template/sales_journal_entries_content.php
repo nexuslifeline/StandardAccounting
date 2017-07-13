@@ -33,12 +33,12 @@
         }
 
         tr {
-            border: none!important;
+/*            border: none!important;*/
         }
 
         tr:nth-child(even){
-            background: #414141 !important;
-            border: none!important;
+/*            background: #414141 !important;
+            border: none!important;*/
         }
 
         tr:hover {

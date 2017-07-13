@@ -1,11 +1,36 @@
+<head>  <title>Purchase Invoice</title></head>
+<body>
 <style>
+        body {
+            font-family: 'Calibri',sans-serif;
+            font-size: 12px;
+        }
+              .bottom-only{
+      border:none!important;
+      }
+
+        .align-right {
+            text-align: right;
+        }
+
+        .align-left {
+            text-align: left;
+        }
+
+        .align-center {
+            text-align: center;
+        }
+
+        .report-header {
+            font-weight: bolder;
+        }
     tr {
-        border: none!important;
+/*        border: none!important;*/
     }
 
     tr:nth-child(even){
-        background: #414141 !important;
-        border: none!important;
+   /*     background: #414141 !important;*/
+ /*       border: none!important;*/
     }
 
     tr:hover {
@@ -24,6 +49,17 @@
 </style>
 
 <div>
+
+    <table width="100%">
+        <tr class="row_child_tbl_sales_order">
+            <td class="bottom-only" width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px;  text-align: left;"></td>
+            <td  class="bottom-only" width="90%" class="align-center">
+                <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
+                <p><?php echo $company_info->company_address; ?></p>
+                <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p>
+            </td>
+        </tr>
+    </table><hr>
     <center><table width="95%" cellpadding="5" style="font-family: tahoma;font-size: 11;">
             <tr>
                 <td width="45%" valign="top" style="border: none;">
@@ -67,7 +103,7 @@
     <br /><br />
 
     <center>
-        <table width="95%" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;font-size: 11">
+        <table width="95%" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;font-size: 11" >
             <thead>
             <tr>
                 <th width="50%" style="border-bottom: 2px solid gray;text-align: left;height: 30px;padding: 6px;">Item</th>
@@ -108,7 +144,7 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align: right;height: 30px;padding: 6px;"></td>
-                <td colspan="2" style="border-bottom:1px solid gray;text-align: left;height: 30px;padding: 6px;"><strong>Total after Tax : </strong></td>
+                <td colspan="2" style="border-bottom: 1px solid gray;text-align: left;height: 30px;padding: 6px;"><strong>Total after Tax : </strong></td>
                 <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;"><strong><?php echo number_format($delivery_info->total_after_tax,2); ?></strong></td>
             </tr>
             </tfoot>

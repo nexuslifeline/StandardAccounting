@@ -44,7 +44,7 @@
       <div class="lg-info-panel">
           <div class="inner-panel">
               <div class="lg-content">
-              	  <img style="height: 80px; width: 120px;" src="<?php echo $company->logo_path; ?>">
+              	  <img style="height: 100px; width: 100px;" src="<?php echo $company->logo_path; ?>">
                   <hr><h1 style="font-family: 'Rubik', sans-serif!important; color: white;"><b>JCORE</b> STANDARD ACCOUNTING</h1><hr>
                   <h3 style="color: #03a9f4;"><?php echo $company_info[0]->company_name; ?></h3>
                   <span style="position: absolute; bottom: -3%; right: 1%;"><p>powered by <img src="assets/img/jdev-logo2.png" height="30" width="70"></p></span>

@@ -1,4 +1,7 @@
-<style type="text/css" media="print">
+<head>
+    <title>Purchase Order</title>
+    </head>
+    <body><style type="text/css" media="print">
   @page { size: portrait; }
 </style>
 

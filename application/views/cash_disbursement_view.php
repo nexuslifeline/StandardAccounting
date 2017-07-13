@@ -409,7 +409,7 @@
 
                     <div class="col-lg-4 col-lg-offset-2">
                         Amount * :<br />
-                        <input class="form-control text-center numeric" id="cash_amount" type="text" maxlength="12" value="0.00" name="amount">
+                        <input class="form-control text-center numeric" id="cash_amount" type="text" maxlength="12" value="0.00" name="amount" required data-error-msg="Amount is Required!">
                     </div>
                 </div>
 
@@ -457,7 +457,7 @@
                             <td>
                                 <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
                                     <?php $i=0; foreach($accounts as $account){ ?>
-                                        <option value='<?php echo $account->account_id; ?>' <?php echo ($i==0?'':''); ?>><?php echo $account->account_title; ?></option>
+                                        <option value='<?php echo $account->account_id; ?>' <?php echo ($i==0?'':''); ?> > <?php echo $account->account_title; ?> </option>
                                         <?php $i++; } ?>
                                 </select>
                             </td>
@@ -1538,7 +1538,7 @@ $(document).ready(function(){
             $('#div_no_check').hide();
             var _currentDate=<?php echo json_encode(date("m/d/Y")); ?>;
 
-            reInitializeDropDownAccounts($('#tbl_entries'),false);
+            reInitializeDropDownAccounts($('#tbl_entries'),true);
             clearFields($('#frm_journal'));
 
             $('#cbo_branch').select2('val',null);

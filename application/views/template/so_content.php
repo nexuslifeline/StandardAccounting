@@ -1,5 +1,40 @@
+     
+     <head>  <title>Sales Order </title></head>
+<body> <style type="text/css">
+           body {
+            font-family: 'Calibri',sans-serif;
+            font-size: 12px;
+        }
 
+        .align-right {
+            text-align: right;
+        }
+
+        .align-left {
+            text-align: left;
+        }
+
+        .align-center {
+            text-align: center;
+        }
+
+        .report-header {
+            font-weight: bolder;
+        }
+       
+</style>
 <div>
+<table width="100%">
+        <tr>
+            <td width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
+            <td width="90%" class="align-center">
+                <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
+                <p><?php echo $company_info->company_address; ?></p>
+                <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p>
+            </td>
+        </tr>
+    </table><hr>
+
     <center>
         <table width="95%" cellpadding="5" style="font-family: tahoma;font-size: 11;">
             <tr class="row_child_tbl_so_list">

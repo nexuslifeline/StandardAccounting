@@ -68,7 +68,10 @@ class Rights_link_model extends CORE_Model{
                                           (58,'12','12-2','Check Registry Report'),
                                           (59,'12','12-3','Collection List Report'),
                                           (60,'12','12-4','Open Purchase Report'),
-                                          (61,'12','12-5','Open Sales Report')
+                                          (61,'12','12-5','Open Sales Report'),
+                                          (62,'9','9-11','Schedule of Expense'),
+                                          (63,'9','9-15','AR Reports')  
+
                                           ON DUPLICATE KEY UPDATE
                                           rights_links.parent_code=VALUES(rights_links.parent_code),
                                           rights_links.link_code=VALUES(rights_links.link_code),
