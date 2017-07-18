@@ -34,6 +34,12 @@
             padding-right: 3px;
             height: 20px;
         }
+        @media print {
+      @page { margin: 0; }
+      body { margin: 1.0cm; }
+}
+
+
     </style>
 
     <!-- <script>
@@ -60,6 +66,16 @@
 <body>
 
 <div style="">
+    <table width="100%" style="border:none!important;">
+        <tr style="border:none!important;">
+            <td width="20%" style="border:none!important;"><img src="<?php echo base_url($company_info->logo_path); ?>" style="height: 90px; width: 120px; text-align: left;border:none!important;"></td>
+            <td width="80%" class="align-center" style="border:none!important;">
+                <span class="report-header"><strong><?php echo $company_info->company_name; ?></strong></span><br>
+                <span><?php echo $company_info->company_address; ?></span><br>
+                <span><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></span>
+            </td>
+        </tr>
+    </table><hr>
 
     <h3 style="margin-bottom: 0px;">Inventory Report - <?php echo $department; ?></h3>
     <i>As of <?php echo $date; ?></i>

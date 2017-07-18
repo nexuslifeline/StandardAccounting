@@ -13,6 +13,10 @@
 		.report-header {
 			font-size: 22px;
 		}
+		@media print {
+      @page { margin: 0; }
+      body { margin: 1.0cm; }
+}
 	</style>
 	<script>
 		(function(){
@@ -23,7 +27,7 @@
 <body>
 	<table width="100%">
         <tr>
-            <td width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
+            <td width="10%"><img src="<?php echo base_url($company_info->logo_path); ?>" style="height: 90px; width: 120px; text-align: left;"></td>
             <td width="90%" class="align-center">
                 <span class="report-header"><strong><?php echo $company_info->company_name; ?></strong></span><br>
                 <span><?php echo $company_info->company_address; ?></span><br>

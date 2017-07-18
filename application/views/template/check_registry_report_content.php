@@ -25,6 +25,11 @@
         @page {
   size: portrait;
 }
+@media print {
+      @page { margin: 0; }
+      body { margin: 1.0cm; }
+}
+
 	</style>
             <script>
         (function(){
@@ -58,7 +63,7 @@
             </div>
         </div><br>
         <div>
-            <strong>Bank:</strong> <?php echo $report_info[0]->bank_name;; ?>
+            <strong>Bank:</strong> <?php echo (isset($report_info[0]->bank_name)) ? $report_info[0]->bank_name : ''; ?>
         </div>
   
     <table width="100%" style=" border: 1px solid black;"  cellspacing="0" >
@@ -88,9 +93,9 @@
 
     </tbody>
     <tr>
-<?php 
+<?php   $total=0;
 foreach ($report_info as $info) {
-   $total=0;
+ 
    $sum = $info->amount;
    $total += $sum;
     # code...

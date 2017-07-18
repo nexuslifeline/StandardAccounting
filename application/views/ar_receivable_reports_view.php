@@ -66,7 +66,9 @@
             from { -webkit-transform: rotate(0deg); }
             to { -webkit-transform: rotate(360deg); }
         }
-
+ table{
+    color: white!important;
+ }
     </style>
 
 </head>

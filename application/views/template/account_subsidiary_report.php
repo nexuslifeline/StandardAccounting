@@ -43,13 +43,16 @@
             padding: 0 !important;
             margin: 0 !important;
         }
-
+        @media print {
+      @page { margin: 0; }
+      body { margin: 1.0cm; }
+}
     </style>
 </head>
 <body>
 	<table width="100%">
         <tr>
-            <td width="5%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
+            <td width="5%"><img src="<?php echo base_url($company_info->logo_path); ?>" style="height: 90px; width: 120px; text-align: left;"></td>
             <td width="95%" class="align-center"><center>
                 <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
                 <p><?php echo $company_info->company_address; ?></p>

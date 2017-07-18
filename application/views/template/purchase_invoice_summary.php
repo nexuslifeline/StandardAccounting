@@ -31,6 +31,10 @@
         hr {
             border-top: 1px solid #404040;
         }
+        @media print {
+      @page { margin: 0; }
+      body { margin: 1.0cm; }
+}
     </style>
     <script type="text/javascript">
     	(function(){
@@ -44,7 +48,7 @@
 <body>
 	<table width="100%">
         <tr>
-            <td width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
+            <td width="10%"><img src="<?php echo base_url($company_info->logo_path); ?>" style="height: 90px; width: 120px; text-align: left;"></td>
             <td width="90%" class="align-center">
                 <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
                 <p><?php echo $company_info->company_address; ?></p>

@@ -117,7 +117,7 @@
                                 <li class="<?php echo (in_array('9-12',$this->session->user_rights)?'':'hidden'); ?>"><a href="Cogs">Cost of Goods</a></li>
                                 <li class="<?php echo (in_array('9-13',$this->session->user_rights)?'':'hidden'); ?>"><a href="Replenishment_report">Replenishment Report</a></li>
                                 <li class="<?php echo (in_array('9-14',$this->session->user_rights)?'':'hidden'); ?>"><a href="TAccount">T-Accounts</a></li>
-                                <li class="<?php echo (in_array('9-15',$this->session->user_rights)?'':'hidden'); ?>"><a href="Ar_receivable">AR Reports</a></li>
+                                <li class="<?php echo (in_array('9-15',$this->session->user_rights)?'':'hidden'); ?>"><a href="AR_Receivable">AR Reports</a></li>
                             </ul>
                         </li>
                         <li class="<?php echo (in_array('8',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-pie-chart"></i><span>Sales & Purchasing</span></a>

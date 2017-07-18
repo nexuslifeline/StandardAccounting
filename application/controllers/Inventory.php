@@ -11,6 +11,7 @@ class Inventory extends CORE_Controller
             array
             (
                 'Departments_model',
+                'Company_model',
                 'Products_model'
             )
         );
@@ -52,6 +53,10 @@ class Inventory extends CORE_Controller
                 $data['products'] = $m_products->get_product_list_inventory($date,$depid);
                 $data['date'] = date('m/d/Y',strtotime($date));
                 $data['department'] =$info[0]->department_name;
+
+                $m_company_info=$this->Company_model;
+                $company_info=$m_company_info->get_list();
+                $data['company_info']=$company_info[0];
                 $this->load->view('template/batch_inventory_report',$data);
                 break;
         }

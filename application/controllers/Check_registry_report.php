@@ -53,11 +53,28 @@
 					$company_info=$m_company->get_list();
 					$data['company_info']=$company_info[0];
 
-					$report_info=$m_journal_info->get_check_registry($startDate,$endDate,$bank);
+					$data['report_info']=$m_journal_info->get_check_registry($startDate,$endDate,$bank);
 					$data['start']=$startDate;
 					$data['end']=$endDate;
-					$data['report_info']=$report_info;
+					
 					$this->load->view('template/check_registry_report_content',$data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				break;
 			}
 		}

@@ -263,7 +263,7 @@
                         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
 
                             <table id="tbl_check_list" class="" cellspacing="0" width="100%">
-                                <thead style="display:none;">
+                                <thead style="display:none;background-color:#161616!important;">
                                 <tr>
                                     <th>Bank</th>
                                     <th>Check #</th>
@@ -1165,16 +1165,16 @@ $(document).ready(function(){
                 api.column(0, {page:'current'} ).data().each( function ( group, i ) {
                     if ( last!== group ) {
                         $(rows).eq( i ).before(
-                            '<tr class="group" style="background-color: #7add58;"><td colspan="8" align="left"><b style="text-transform: capitalize;font-size: 15px;color:white;"><i class="fa fa-bars"></i> '+group+'</b></td></tr>' +
-                            '<tr class="group">'+
-                                    '<td><b>Check #</b></td>'+
-                            '<td><b>Amount</b></td>'+
-                                    '<td><b>Check Date</b></td>'+
-                                    '<td><b>Voucher #</b></td>'+
-                                    '<td><b>Particular</b></td>'+
-                                    '<td><b>Remarks</b></td>'+
-                                    '<td align="center"><b>Issued</b></td>'+
-                                    '<td><center>Action</center></td>'+
+                            // '<tr class="group" style="background-color:#161616!important"><td colspan="8" align="left"><b style="text-transform: capitalize;font-size: 15px;color:white;"><i class="fa fa-bars"></i> '+group+'</b></td></tr>' +
+                            '<tr class="group" style="background-color:#161616!important;color:white!important;">'+
+                                    '<td><bstyle="color:white!important;" >Check #</b></td>'+
+                            '<td><b style="color:white!important;">Amount</b></td>'+
+                                    '<td><b style="color:white!important;">Check Date</b></td>'+
+                                    '<td><b style="color:white!important;">Voucher #</b></td>'+
+                                    '<td><b style="color:white!important;">Particular</b></td>'+
+                                    '<td><b style="color:white!important;">Remarks</b></td>'+
+                                    '<td align="center"><b style="color:white!important;">Issued</b></td>'+
+                                    '<td ><center><b style="color:white!important;">Action</b></center></td>'+
                             '</tr>'
                         );
 

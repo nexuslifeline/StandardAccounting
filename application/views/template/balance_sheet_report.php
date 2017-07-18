@@ -27,13 +27,16 @@
             font-family: 'Times New Roman', serif;
 
         }
+  @media print {
+  @page { margin: 0; }
+  body { margin: 1.0cm; }
 
     </style>
 </head>
 <body>
     <table width="100%">
         <tr>
-            <td width="20%" valign="top"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
+            <td width="20%" valign="top"><img src="<?php echo base_url($company_info->logo_path); ?>" style="height: 100px; width: 100px; text-align: left;"></td>
             <td width="80%" class="align-center">
                 <span style="font-size: 12pt;font-weight: bolder;"><strong><?php echo $company_info->company_name; ?></strong></span><br />
                 <span style="font-size: 8pt;"><?php echo $company_info->company_address; ?></span><br />

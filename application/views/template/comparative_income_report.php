@@ -31,7 +31,10 @@
         hr {
             border-top: 1px solid #404040;
         }
-
+        @media print {
+              @page { margin: 0; }
+              body { margin: 1.0cm; }
+        }
         @media print {
 			body {-webkit-print-color-adjust: exact;}
 		}

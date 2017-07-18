@@ -13,6 +13,11 @@
 		.report-header {
 			font-size: 22px;
 		}
+		@media print {
+      @page { margin: 0; }
+      body { margin: 1.0cm; }
+}
+
 	</style>
 	<script>
 		(function(){

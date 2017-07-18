@@ -104,7 +104,7 @@ tr:nth-child(even){background-color:none !important;}
 		                    				<div class="col-xs-12 col-md-6">
 		                    					<strong>Start Date * : </strong><br>
 		                    					<div class="input-group">
-			                    					<input id="startDate" type="text" class="date-picker form-control" name="date_from" value="<?php echo date("m/d/Y"); ?>">
+			                    					<input id="startDate" type="text" class="date-picker form-control" name="date_from" value="01/01/<?php echo date("Y"); ?>">
 			                    					<div class="input-group-addon">
 			                    						<i class="fa fa-calendar"></i>
 			                    					</div>

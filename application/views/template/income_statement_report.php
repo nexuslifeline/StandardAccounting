@@ -11,7 +11,10 @@
             font-family: 'Times New Roman', serif;
 
         }
-
+        @media print {
+      @page { margin: 0; }
+      body { margin: 1.0cm; }
+  }
     </style>
 </head>
 <body>
