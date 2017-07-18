@@ -1,4 +1,3 @@
-
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -474,7 +473,7 @@ class Templates extends CORE_Controller {
 
                 //preview on browser
                 if($type=='contentview'){
-                    $file_name=$info[0]->slip_no;
+                    $file_name=$info[0]->sales_inv_no;
                     $pdfFilePath = $file_name.".pdf"; //generate filename base on id
                     $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
                     $content=$this->load->view('template/sales_invoice_content_standard',$data,TRUE); //load the template

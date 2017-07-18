@@ -117,7 +117,7 @@
                                             <td><?php echo $item_invoice->sales_inv_no; ?></td>
                                             <td><?php echo $item_invoice->date_invoice; ?></td>
                                             <td style="text-align: right;"><?php echo number_format($item_invoice->amount,2); ?></td>
-                                            <td><?php echo $item_invoice->Remarks; ?></td>
+                                            <td><?php echo $item_invoice->remarks; ?></td>
                                             
                                         </tr>
                                     <?php 
