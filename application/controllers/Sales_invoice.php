@@ -20,6 +20,7 @@ class Sales_invoice extends CORE_Controller
         $this->load->model('Company_model');
         $this->load->model('Salesperson_model');
 
+
     }
 
     public function index() {
@@ -461,7 +462,23 @@ class Sales_invoice extends CORE_Controller
                 $m_invoice=$this->Sales_invoice_model;
                 $m_invoice_items=$this->Sales_invoice_item_model;
                 $m_products=$this->Products_model;
+                $m_sales_invoice_count = $this->Customers_model;
                 $sales_invoice_id=$this->input->post('sales_invoice_id',TRUE);
+
+                if(count($m_sales_invoice_count->get_sales_invoice_count($sales_invoice_id))>0)
+                {
+                    $response['title'] = 'Cannot delete!';
+                    $response['stat'] = 'notice';
+                    $response['msg'] = 'This Invoice still has an active transaction in Collection Entry.';
+
+                    echo json_encode($response);
+                    exit;
+                }
+
+
+
+
+
 
                 //mark Items as deleted
                 $m_invoice->set('date_deleted','NOW()'); //treat NOW() as function and not string

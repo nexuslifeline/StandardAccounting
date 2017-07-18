@@ -1,3 +1,4 @@
+
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -682,8 +683,14 @@ class Templates extends CORE_Controller {
                 );
 
                 $data['recent_payment']=(count($recent_payment)>0?$recent_payment:'');
+
+                $data['invoice']=$m_customers->get_customer_invoice($customer_id);
+                $data['payment']=$m_customers->get_customer_payment($customer_id);
+
+
                 //shows when Expand Icon is click on Customer Management
                 $content=$this->load->view('template/customer_expandable_details',$data,TRUE);
+
                 echo $content;
 
                 break;
