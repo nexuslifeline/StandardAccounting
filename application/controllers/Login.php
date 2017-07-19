@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CORE_Controller {
-
+    public $token_id;
     function __construct()
     {
         parent::__construct('');
@@ -26,6 +26,7 @@ class Login extends CORE_Controller {
         $this->load->model('Asset_property_status_model');
         $this->load->model('Company_model');
         $this->load->model('Suppliers_model');
+        $this->load->model('Ticket_model');
     }
 
 
@@ -188,7 +189,7 @@ class Login extends CORE_Controller {
                     $users=$this->Users_model;
                     $result=$users->authenticate_user($uname,$pword);
 
-                    if($result->num_rows()>0){//valid username and pword
+                    if($result->num_rows()>0) {//valid username and pword
                         $m_rights=$this->User_group_right_model;
                         $rights=$m_rights->get_list(
                             array(
@@ -206,6 +207,9 @@ class Login extends CORE_Controller {
                         }
 
                         //set session data here and response data
+
+                        $tktToken = $this->Users_model->generateToken($result->row()->user_id);
+
                         $this->session->set_userdata(
                             array(
                                 'user_id'=>$result->row()->user_id,
@@ -215,21 +219,26 @@ class Login extends CORE_Controller {
                                 'user_photo'=>$result->row()->photo_path,
                                 'user_rights'=>$user_rights,
                                 'parent_rights'=>$parent_links,
-                                'logged_in'=>1
+                                'logged_in'=>1,
+                                'token_id'=>$tktToken
+
                             )
                         );
 
                         $m_users=$this->Users_model;
                         $m_users->is_online=1;
+                        $m_users->token_id = $tktToken;
                         $m_users->modify($result->row()->user_id);
+
+                        $token_id = $tktToken;
 
                         $response['title']='Success';
                         $response['stat']='success';
                         $response['msg']='User successfully authenticated.';
-
                         echo json_encode($response);
+                    }
 
-                    }else{ //not valid
+                    else{ //not valid
 
                         $response['title']='Cannot authenticate user!';
                         $response['stat']='error';

@@ -79,11 +79,12 @@
         </tr>
         <tr>
             <td style="padding: 4px;" width="50%"><strong>CHECK # :</strong><?php echo $journal_info->check_no; ?></td>
-            <td style="padding: 4px;" width="50%"><strong>CHECK DATE :</strong> <?php echo date_format(new DateTime($journal_info->check_date),"m/d/Y"); ?></td>
+            <td style="padding: 4px;" width="50%"><strong>CHECK DATE :</strong> <?php echo $journal_info->check_date; ?></td>
         </tr>
+
         <tr>
             <td style="padding: 4px;" width="50%"><strong>TXN # :</strong> <?php echo $journal_info->txn_no; ?></td>
-            <td style="padding: 4px;" width="50%"><strong>AMOUNT :</strong> <?php echo number_format($journal_info->amount,2); ?></td>
+            <td style="padding: 4px;" width="50%"><strong>AMOUNT :</strong> <?php echo date("m/d/Y", strtotime($journal_info->amount,2)); ?></td>
         </tr>        
         <tr>
             <td style="padding: 4px;" colspan="2"><strong>PARTICULAR :</strong></td>
