@@ -24,6 +24,7 @@
 		}
 
 		public function index() {
+			$this->Users_model->validate();
 	        $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
 	        $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
 	        $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
@@ -37,8 +38,10 @@
 
             $ap_account=$this->Account_integration_model->get_list();
             $data['ap_account']=$ap_account[0]->payable_account_id;
-
-	        $this->load->view('supplier_subsidiary_view',$data);
+        (in_array('9-7',$this->session->user_rights)? 
+        $this->load->view('supplier_subsidiary_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn=null){

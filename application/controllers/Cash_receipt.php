@@ -19,6 +19,7 @@ class Cash_receipt extends CORE_Controller
                 'Departments_model',
                 'Receivable_payment_model',
                 'Bank_model',
+                'Users_model',
                 'Accounting_period_model'
             )
         );
@@ -26,7 +27,7 @@ class Cash_receipt extends CORE_Controller
     }
 
     public function index() {
-
+        $this->Users_model->validate();
         //default resources of the active view
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
@@ -41,9 +42,11 @@ class Cash_receipt extends CORE_Controller
         $data['banks']=$this->Bank_model->get_list('is_deleted=0');
 
         $data['title'] = 'Cash Receipt';
-        $this->load->view('cash_receipt_journal_view', $data);
+        (in_array('1-5',$this->session->user_rights)? 
+        $this->load->view('cash_receipt_journal_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
-
 
     public function transaction($txn=null){
         switch($txn){

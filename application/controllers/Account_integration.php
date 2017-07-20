@@ -16,6 +16,7 @@ class Account_integration extends CORE_Controller
                 'Accounting_period_model',
                 'Journal_info_model',
                 'Sales_invoice_model',
+                'Users_model',
                 'Sched_expense_integration'
             )
 
@@ -23,6 +24,7 @@ class Account_integration extends CORE_Controller
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', TRUE);
@@ -51,8 +53,10 @@ class Account_integration extends CORE_Controller
             ),
             'account_title,account_no'
         );
-
-        $this->load->view('account_integration_view', $data);
+        (in_array('6-3',$this->session->user_rights)? 
+        $this->load->view('account_integration_view', $data)
+        :redirect(base_url('dashboard')));
+        
 
     }
 

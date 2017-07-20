@@ -8,17 +8,21 @@ class Categories extends CORE_Controller
         parent::__construct('');
         $this->validate_session();
         $this->load->model('Categories_model');
+        $this->load->model('Users_model');
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', TRUE);
         $data['_side_bar_navigation'] = $this->load->view('template/elements/side_bar_navigation', '', TRUE);
         $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
         $data['title'] = 'Category Management';
-
-        $this->load->view('categories_view', $data);
+        (in_array('4-2',$this->session->user_rights)? 
+        $this->load->view('categories_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
     function transaction($txn = null) {

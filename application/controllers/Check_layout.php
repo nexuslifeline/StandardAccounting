@@ -8,19 +8,23 @@ class Check_layout extends CORE_Controller
         parent::__construct('');
         $this->validate_session();
         $this->load->model(array(
+            'Users_model',
             'Check_layout_model'
         ));
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
         $data['_side_bar_navigation'] = $this->load->view('template/elements/side_bar_navigation', '', true);
         $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', true);
         $data['title'] = 'Check Layout';
-
-        $this->load->view('check_layout_view', $data);
+        (in_array('6-7',$this->session->user_rights)? 
+        $this->load->view('check_layout_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
 

@@ -122,7 +122,7 @@ unpaid.total_after_tax,
 IFNULL(paid.payment_amount,0) as payment_amount,
 IFNULL(unpaid.total_after_tax - paid.payment_amount,0) AS total,
 
-(CASE WHEN unpaid.total_after_tax = paid.payment_amount THEN 'paid' ELSE 'unpaid' END) AS Remarks
+(CASE WHEN unpaid.total_after_tax = paid.payment_amount THEN 'paid' ELSE 'unpaid' END) AS remarks
 FROM
 (SELECT
 sales_invoice_id,

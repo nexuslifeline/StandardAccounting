@@ -9,6 +9,7 @@ class AR_Reports extends CORE_Controller {
         $this->load->model('AR_Receivable_model');
 		$this->load->model('Customers_model');
         $this->load->library('M_pdf');
+        $this->load->model('Users_model');
     }
 
     public function index() {

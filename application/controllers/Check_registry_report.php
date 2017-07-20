@@ -12,13 +12,15 @@
 					'Journal_info_model',
 					'Receivable_payment_model',
 					'Company_model',
+					'Users_model',
 					'Bank_model'
 				)
 			);
 		}
 
 		public function index()
-		{
+		{	
+			$this->Users_model->validate();
 			$data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
 	        $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
 	        $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', TRUE);
@@ -26,8 +28,10 @@
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 	        $data['title'] = 'Check Registry Report';
 	        $data['banks'] = $this->Bank_model->get_list('bank.is_active=TRUE AND bank.is_deleted=FALSE');
-
-	        $this->load->view('check_registry_report_view',$data);
+        (in_array('12-2',$this->session->user_rights)? 
+        $this->load->view('check_registry_report_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn=null) {

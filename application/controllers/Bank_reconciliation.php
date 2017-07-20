@@ -14,6 +14,7 @@
 					'Journal_info_model',
 					'Account_title_model',
 					'Bank_reconciliation_model',
+					'Users_model',
 					'Bank_reconciliation_details_model'
 				)
 			);
@@ -21,6 +22,7 @@
 
 		public function index()
 		{
+			$this->Users_model->validate();
 			$data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
 	        $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
 	        $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
@@ -29,8 +31,10 @@
 	        $data['banks']=$this->Bank_model->get_list('is_active=TRUE AND is_deleted=FALSE');
 	        $data['account_titles']=$this->Account_title_model->get_list('is_active=TRUE AND is_deleted=FALSE');
 	        $data['title'] = 'Bank Reconciliation';
-
-	        $this->load->view('bank_reconciliation_view', $data);
+	        (in_array('11-1',$this->session->user_rights)? 
+	        $this->load->view('bank_reconciliation_view', $data)
+	        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn) 

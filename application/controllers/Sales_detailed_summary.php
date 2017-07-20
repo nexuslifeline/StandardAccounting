@@ -9,12 +9,14 @@ class Sales_detailed_summary extends CORE_Controller {
         $this->load->model(array(
             'Sales_invoice_model',
             'Company_model',
+            'Users_model',
             'Customers_model'
         ));
 
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files']=$this->load->view('template/assets/css_files','',TRUE);
         $data['_def_js_files']=$this->load->view('template/assets/js_files','',TRUE);
         $data['_switcher_settings']=$this->load->view('template/elements/switcher','',TRUE);
@@ -24,7 +26,11 @@ class Sales_detailed_summary extends CORE_Controller {
         $data['customers']=$this->Customers_model->get_customer_list_for_sales_report();
 
         $data['title']='Sales Report';
-        $this->load->view('sales_detailed_summary_view',$data);
+        
+
+        (in_array('8-1',$this->session->user_rights)? 
+        $this->load->view('sales_detailed_summary_view',$data)
+        :redirect(base_url('dashboard')));
     }
 
 

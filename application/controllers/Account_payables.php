@@ -19,6 +19,7 @@ class Account_payables extends CORE_Controller
                 'Tax_types_model',
                 'Delivery_invoice_model',
                 'Departments_model',
+                'Users_model',
                 'Accounting_period_model'
             )
         );
@@ -26,7 +27,7 @@ class Account_payables extends CORE_Controller
     }
 
     public function index() {
-
+        $this->Users_model->validate();
         //default resources of the active view
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
@@ -41,9 +42,11 @@ class Account_payables extends CORE_Controller
         $data['tax_types']=$this->Tax_types_model->get_list('is_deleted=FALSE');
 
         $data['title'] = 'Accounts Payable';
-        $this->load->view('accounts_payable_view', $data);
 
-
+        (in_array('1-3',$this->session->user_rights)? 
+        $this->load->view('accounts_payable_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
 

@@ -17,12 +17,14 @@ class Trial_balance extends CORE_Controller
                 'Account_class_model',
                 'Account_title_model',
                 'Departments_model',
+                'Users_model',
                 'Company_model'
             )
         );
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
@@ -32,8 +34,10 @@ class Trial_balance extends CORE_Controller
 
         $data['departments']=$this->Departments_model->get_list(array('is_deleted'=>FALSE,'is_active'=>TRUE));
         $data['title']="Trial Balance Report";
-        $this->load->view('trial_balance_view',$data);
-
+        
+        (in_array('9-3',$this->session->user_rights)? 
+        $this->load->view('trial_balance_view',$data)
+        :redirect(base_url('dashboard')));
     }
 
 

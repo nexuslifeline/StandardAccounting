@@ -16,11 +16,12 @@ class Deliveries extends CORE_Controller
         $this->load->model('Purchases_model');
         $this->load->model('Departments_model');
         $this->load->model('Refproduct_model');
+        $this->load->model('Users_model');
 
     }
 
     public function index() {
-
+        $this->Users_model->validate();
         //default resources of the active view
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
@@ -75,8 +76,10 @@ class Deliveries extends CORE_Controller
         );
 
         $data['title'] = 'Delivery Invoice';
-        $this->load->view('delivery_view', $data);
-
+        
+        (in_array('2-2',$this->session->user_rights)? 
+        $this->load->view('delivery_view', $data)
+        :redirect(base_url('dashboard')));
 
     }
 

@@ -87,15 +87,6 @@
 	                    <li><a href="Voucher_registry_report">Voucher Registry Report</a></li>
 	                </ol>
 
-
-
-
-
-
-
-
-
-
 	                <div class="container-fluid">
 	                    <div class="panel panel-default">
 	                    	<div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Voucher Registry Report </b></div>

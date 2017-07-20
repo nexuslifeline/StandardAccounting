@@ -9,9 +9,11 @@ class Tax extends CORE_Controller {
         $this->load->model('Suppliers_model');
         $this->load->model('Supplier_photos_model');
         $this->load->model('Tax_types_model');
+        $this->load->model('Users_model');
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files']=$this->load->view('template/assets/css_files','',TRUE);
         $data['_def_js_files']=$this->load->view('template/assets/js_files','',TRUE);
         $data['_switcher_settings']=$this->load->view('template/elements/switcher','',TRUE);
@@ -19,7 +21,10 @@ class Tax extends CORE_Controller {
         $data['_top_navigation']=$this->load->view('template/elements/top_navigation','',TRUE);
         $data['title']='Tax Management';
         $data['tax_type']=$this->Tax_types_model->get_list();
-        $this->load->view('tax_view',$data);
+        (in_array('6-1',$this->session->user_rights)? 
+        $this->load->view('tax_view',$data)
+        :redirect(base_url('dashboard')));
+        
     }
 
 

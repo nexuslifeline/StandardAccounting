@@ -26,7 +26,7 @@ class Login extends CORE_Controller {
         $this->load->model('Asset_property_status_model');
         $this->load->model('Company_model');
         $this->load->model('Suppliers_model');
-        $this->load->model('Ticket_model');
+
     }
 
 
@@ -268,8 +268,5 @@ class Login extends CORE_Controller {
 
 
     }
-
-
-
 
 }

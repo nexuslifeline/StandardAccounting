@@ -26,6 +26,7 @@ class Cash_disbursement extends CORE_Controller
                 'Journal_template_info_model',
                 'Journal_template_entry_model',
                 'Company_model',
+                'Users_model',
                 'Bank_model'
             )
         );
@@ -33,6 +34,7 @@ class Cash_disbursement extends CORE_Controller
     }
 
     public function index() {
+        $this->Users_model->validate();
         //default resources of the active view
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
@@ -51,7 +53,10 @@ class Cash_disbursement extends CORE_Controller
         $data['banks']=$this->Journal_info_model->get_list('is_active=1 AND is_deleted=0 AND payment_method_id=2',null,null,null,'bank');
 
         $data['title'] = 'Disbursement Journal';
-        $this->load->view('cash_disbursement_view', $data);
+        (in_array('1-2',$this->session->user_rights)? 
+        $this->load->view('cash_disbursement_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
 

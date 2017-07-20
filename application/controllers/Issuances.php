@@ -12,8 +12,10 @@ class Issuances extends CORE_Controller
         $this->load->model('Products_model');
         //$this->load->model('Customers_model');
         $this->load->model('Refproduct_model');
+        $this->load->model('Users_model');
     }
     public function index() {
+        $this->Users_model->validate();
         //default resources of the active view
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
@@ -56,7 +58,10 @@ class Issuances extends CORE_Controller
             )
         );
         $data['title'] = 'Issuance';
-        $this->load->view('issuance_view', $data);
+        (in_array('2-4',$this->session->user_rights)? 
+        $this->load->view('issuance_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
     function transaction($txn = null,$id_filter=null) {
         switch ($txn){

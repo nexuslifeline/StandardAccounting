@@ -12,21 +12,25 @@
 				array(
 					'Delivery_invoice_model',
 					'Suppliers_model',
+					'Users_model',
 					'Company_model'
 				)
 			);
 		}
 
 		public function index()
-		{
+		{	
+			$this->Users_model->validate();
 		 	$data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
 	        $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
 	        $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
 	        $data['_side_bar_navigation'] = $this->load->view('template/elements/side_bar_navigation', '', true);
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', true);
 	        $data['title'] = 'Purchase Invoice Report';
-
-	        $this->load->view('purchase_invoice_report_view',$data);
+        (in_array('8-4',$this->session->user_rights)? 
+        $this->load->view('purchase_invoice_report_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn=null){

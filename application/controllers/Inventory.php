@@ -12,12 +12,14 @@ class Inventory extends CORE_Controller
             (
                 'Departments_model',
                 'Company_model',
+                'Users_model',
                 'Products_model'
             )
         );
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
@@ -26,8 +28,10 @@ class Inventory extends CORE_Controller
         $data['title'] = 'Inventory Report';
 
         $data['departments']=$this->Departments_model->get_list(array('is_deleted'=>FALSE,'is_active'=>TRUE));
-        $this->load->view('inventory_report_view',$data);
-
+        
+        (in_array('8-2',$this->session->user_rights)? 
+        $this->load->view('inventory_report_view',$data)
+        :redirect(base_url('dashboard')));
     }
 
 

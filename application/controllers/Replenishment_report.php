@@ -11,20 +11,24 @@
 			$this->load->model(
 				array(
 					'Journal_info_model',
+					'Users_model',
 					'Company_model'
 				)
 			);
 		}
 
 		public function index() {
+			$this->Users_model->validate();
 			$data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
 	        $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
 	        $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
 	        $data['_side_bar_navigation'] = $this->load->view('template/elements/side_bar_navigation', '', true);
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', true);
 	        $data['title'] = 'Replenishment Report';
-
-	        $this->load->view('replenishment_report_view',$data);
+        (in_array('9-13',$this->session->user_rights)? 
+        $this->load->view('replenishment_report_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn=null){

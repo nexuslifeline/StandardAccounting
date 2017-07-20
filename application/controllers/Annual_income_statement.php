@@ -13,13 +13,14 @@
 	                'Journal_info_model',
 	                'Journal_account_model',
 	                'Departments_model',
+	                'Users_model',
 	                'Company_model'
             	)
 			);
 		}
 
 		public function index()
-		{
+		{	$this->Users_model->validate();
 			$data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
 	        $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
 	        $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
@@ -29,8 +30,10 @@
 
 	        $data['income_accounts']=$this->Journal_info_model->get_annual_income_statement(4);
 	        $data['expense_accounts']=$this->Journal_info_model->get_annual_income_statement(5);
-
-	        $this->load->view('annual_income_statement_view',$data);
+        (in_array('9-9',$this->session->user_rights)? 
+        $this->load->view('annual_income_statement_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function Report() 

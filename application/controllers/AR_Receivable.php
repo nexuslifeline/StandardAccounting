@@ -7,9 +7,11 @@ class AR_Receivable extends CORE_Controller {
         $this->validate_session();
         $this->load->model('AR_Receivable_model');
 		$this->load->model('Customers_model');
+        $this->load->model('Users_model');
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', TRUE);
@@ -17,8 +19,10 @@ class AR_Receivable extends CORE_Controller {
         $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 		$data['customers']=$this->Customers_model->get_list(array('is_deleted'=>FALSE,'is_active'=>TRUE));
         $data['title'] = 'A/R Receivable Reports';
-
-        $this->load->view('ar_receivable_reports_view', $data);
+        (in_array('9-15',$this->session->user_rights)? 
+        $this->load->view('ar_receivable_reports_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
     function transaction($txn = null) {

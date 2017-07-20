@@ -54,12 +54,12 @@
                         </li>
                         <li class="<?php echo (in_array('4',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-view-list-alt"></i><span>References</span></a>
                             <ul class="acc-menu">
-                                <li  class="<?php echo (in_array('4-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_classes">Account Classification</a></li>
-                                <li  class="<?php echo (in_array('4-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="categories">Category Management</a></li>
-                                <li  class="<?php echo (in_array('4-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="departments">Department Management</a></li>
-                                <li  class="<?php echo (in_array('4-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="units">Unit Management</a></li>
-                                <li  class="<?php echo (in_array('4-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Locations">Locations Management</a></li>
-                                <li  class="<?php echo (in_array('4-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="Bank">Bank Management</a></li>
+                                <li  class="<?php echo (in_array('4-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_classes">Account Classification</a></li>
+                                <li  class="<?php echo (in_array('4-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="categories">Category Management</a></li>
+                                <li  class="<?php echo (in_array('4-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="departments">Department Management</a></li>
+                                <li  class="<?php echo (in_array('4-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="units">Unit Management</a></li>
+                                <li  class="<?php echo (in_array('4-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="Locations">Locations Management</a></li>
+                                <li  class="<?php echo (in_array('4-6',$this->session->user_rights)?'':'hidden'); ?>"><a href="Bank">Bank Management</a></li>
                                 <!-- <li  class="<?php //echo (in_array('4-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Refproducts">Product Types</a></li> -->
                                 <!--<li><a href="brands">Brand Management</a></li>
                                 <li><a href="discounts">Discount Management</a></li>
@@ -105,7 +105,7 @@
                                 <li class="<?php echo (in_array('9-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Balance_sheet">Balance Sheet</a></li>
                                 <li class="<?php echo (in_array('9-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Income_statement">Income Statement</a></li>
                                 <li class="<?php echo (in_array('9-9',$this->session->user_rights)?'':'hidden'); ?>"><a href="Annual_income_statement">Annual Income Report</a></li>
-                                <li class="<?php echo (in_array('9-15',$this->session->user_rights)?'':'hidden'); ?>"><a href="Comparative_income">Comparative Income Report</a></li>
+                                <li class="<?php echo (in_array('9-16',$this->session->user_rights)?'':'hidden'); ?>"><a href="Comparative_income">Comparative Income Report</a></li>
                                 <li class="<?php echo (in_array('9-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Trial_balance">Trial Balance</a></li>
                                 <li class="<?php echo (in_array('9-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_receivable_schedule">AR Schedule</a></li>
                                 <li class="<?php echo (in_array('9-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_payable_schedule">AP Schedule</a></li>
@@ -132,8 +132,8 @@
                                 <li class="<?php echo (in_array('12-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Voucher_registry_report">Voucher Registry Report</a></li>
                                 <li class="<?php echo (in_array('12-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Check_registry_report">Check Registry Report</a></li>
                                 <li class="<?php echo (in_array('12-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Collection_list_report">Collection List Report</a></li>
-                                <li class="<?php echo (in_array('12-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Open_purchase">Open Purchases</a></li>
-                                <li class="<?php echo (in_array('12-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Open_sales">Open Sales</a></li>
+                                <li class="<?php echo (in_array('12-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Open_purchase">Open Purchases</a></li>
+                                <li class="<?php echo (in_array('12-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="Open_sales">Open Sales</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -15,10 +15,12 @@ class Customers extends CORE_Controller {
         $this->load->model('Sales_order_model');
         $this->load->model('Sales_invoice_model');
         $this->load->model('Receivable_payment_model');
+        $this->load->model('Users_model');
     }
  
     public function index()
     {
+        $this->Users_model->validate();
         $data['_def_css_files']=$this->load->view('template/assets/css_files','',TRUE);
         $data['_def_js_files']=$this->load->view('template/assets/js_files','',TRUE);
         $data['_switcher_settings']=$this->load->view('template/elements/switcher','',TRUE);
@@ -28,8 +30,10 @@ class Customers extends CORE_Controller {
 
         $data['departments'] = $this->Departments_model->get_list(array('departments.is_deleted'=>FALSE));
         $data['refcustomertype'] = $this->RefCustomerType_model->get_list(array('refcustomertype.is_deleted'=>FALSE));
-
-        $this->load->view('customers_view',$data);
+        (in_array('5-3',$this->session->user_rights)? 
+        $this->load->view('customers_view',$data)
+        :redirect(base_url('dashboard')));
+        
     }
 
 

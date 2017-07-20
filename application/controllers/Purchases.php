@@ -17,12 +17,13 @@ class Purchases extends CORE_Controller
         $this->load->model('Refproduct_model');
         $this->load->model('Departments_model');
         $this->load->library('email');
+        $this->load->model('Users_model');
 
 
     }
 
     public function index() {
-
+        $this->Users_model->validate();
         //default resources of the active view
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
@@ -79,7 +80,10 @@ class Purchases extends CORE_Controller
             );
 
         $data['title'] = 'Purchase Order';
-        $this->load->view('po_view', $data);
+        (in_array('2-1',$this->session->user_rights)? 
+        $this->load->view('po_view', $data)
+        :redirect(base_url('dashboard')));
+        
 
 
     }

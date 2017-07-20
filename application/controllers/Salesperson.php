@@ -8,9 +8,11 @@ class Salesperson extends CORE_Controller {
         $this->validate_session();
         $this->load->model('Salesperson_model');
         $this->load->model('Departments_model');
+        $this->load->model('Users_model');
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files']=$this->load->view('template/assets/css_files','',TRUE);
         $data['_def_js_files']=$this->load->view('template/assets/js_files','',TRUE);
         $data['_switcher_settings']=$this->load->view('template/elements/switcher','',TRUE);
@@ -18,8 +20,10 @@ class Salesperson extends CORE_Controller {
         $data['_top_navigation']=$this->load->view('template/elements/top_navigation','',TRUE);
         $data['title']='Salesperson Management';
         $data['departments']=$this->Departments_model->get_list(array('departments.is_deleted'=>FALSE));
-
-        $this->load->view('salesperson_view',$data);
+        (in_array('5-4',$this->session->user_rights)? 
+        $this->load->view('salesperson_view',$data)
+        :redirect(base_url('dashboard')));
+        
     }
 
 

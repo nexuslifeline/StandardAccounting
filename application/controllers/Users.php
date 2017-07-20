@@ -9,10 +9,13 @@ class Users extends CORE_Controller
         $this->validate_session();
         $this->load->model('Users_model');
         $this->load->model('User_groups_model');
+        $this->load->model('Company_model');
+
+
     }
 
     public function index() {
-
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', TRUE);
@@ -21,7 +24,12 @@ class Users extends CORE_Controller
         $data['user_groups']=$this->User_groups_model->get_list(array('is_deleted'=>0));
         $data['title'] = 'User Account Management';
 
-        $this->load->view('users_view', $data);
+        (in_array('6-5',$this->session->user_rights)? 
+            $this->load->view('users_view', $data)
+            :redirect(base_url('dashboard')));
+
+
+
     }
 
     function transaction($txn = null) {
@@ -33,8 +41,30 @@ class Users extends CORE_Controller
                 echo json_encode($response);
                 break;
             case 'create':
+                $m_company=$this->Company_model;
+                $company=$m_company->get_list('company_id=1');
+
+                $businesstype= $company[0]->business_type;
+
+                if ($businesstype == 1){ $limit = 6; }
+                if ($businesstype == 2){ $limit = 11; }
+                if ($businesstype == 3){ $limit = 16; }
+
+        
                 $m_users=$this->Users_model;
+                if(count($m_users->get_user_list()) >= $limit){
+
+                    $response['title']='Error!';
+                    $response['stat']='error';
+                    $response['msg']='Limit reached.';
+                    echo json_encode($response);
+                    exit;
+                }
+
                 $user_name=$this->input->post('user_name',TRUE);
+
+
+
 
                 if(count($m_users->get_list(array(
                     'user_accounts.user_name'=>$user_name

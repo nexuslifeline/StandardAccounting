@@ -12,9 +12,11 @@ class Suppliers extends CORE_Controller {
         $this->load->model('Journal_info_model');
         $this->load->model('Delivery_invoice_model');
         $this->load->model('Payable_payment_model');
+        $this->load->model('Users_model');
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files']=$this->load->view('template/assets/css_files','',TRUE);
         $data['_def_js_files']=$this->load->view('template/assets/js_files','',TRUE);
         $data['_switcher_settings']=$this->load->view('template/elements/switcher','',TRUE);
@@ -25,7 +27,10 @@ class Suppliers extends CORE_Controller {
 
 
         $data['tax_types']=$this->Tax_model->get_list(array('tax_types.is_deleted'=>FALSE));
-        $this->load->view('suppliers_view',$data);
+        (in_array('5-2',$this->session->user_rights)? 
+        $this->load->view('suppliers_view',$data)
+        :redirect(base_url('dashboard')));
+        
     }
 
 

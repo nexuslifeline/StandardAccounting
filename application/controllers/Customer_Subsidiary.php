@@ -24,6 +24,7 @@
 		}
 
 		public function index() {
+			$this->Users_model->validate();
 	        $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
 	        $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
 	        $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
@@ -38,7 +39,11 @@
 	        $data['account_titles'] = $this->Account_title_model->get_list('account_titles.is_deleted=FALSE AND account_titles.is_active=TRUE',null,null,'account_title');
             $ar_account=$m_integration->get_list();
             $data['ar_account']=$ar_account[0]->receivable_account_id;
-	        $this->load->view('customer_subsidiary_view',$data);
+	        
+
+        (in_array('9-6',$this->session->user_rights)? 
+        $this->load->view('customer_subsidiary_view',$data)
+        :redirect(base_url('dashboard')));
 		}
 
 		function transaction($txn=null){

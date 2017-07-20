@@ -19,6 +19,7 @@ class Accounts_receivable extends CORE_Controller
                 'Tax_types_model',
                 'Sales_invoice_model',
                 'Departments_model',
+                'Users_model',
                 'Accounting_period_model'
             )
         );
@@ -26,7 +27,7 @@ class Accounts_receivable extends CORE_Controller
     }
 
     public function index() {
-
+        $this->Users_model->validate();
         //default resources of the active view
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
@@ -40,7 +41,10 @@ class Accounts_receivable extends CORE_Controller
         $data['methods']=$this->Payment_method_model->get_list('is_active=TRUE AND is_deleted=FALSE');
 
         $data['title'] = 'Accounts Receivable';
-        $this->load->view('accounts_receivable_view', $data);
+        (in_array('1-4',$this->session->user_rights)? 
+        $this->load->view('accounts_receivable_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
 

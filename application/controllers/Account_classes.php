@@ -9,9 +9,11 @@ class Account_classes extends CORE_Controller
         $this->validate_session();
         $this->load->model('Account_class_model');
         $this->load->model('Account_type_model');
+        $this->load->model('Users_model');
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
@@ -20,8 +22,11 @@ class Account_classes extends CORE_Controller
         $data['title'] = 'Account Classification Management';
 
         $data['account_types']=$this->Account_type_model->get_list('');
+        (in_array('4-1',$this->session->user_rights)? 
+        $this->load->view('account_classes_view', $data)
+        :redirect(base_url('dashboard')));
+        
 
-        $this->load->view('account_classes_view', $data);
     }
 
     function transaction($txn = null) {

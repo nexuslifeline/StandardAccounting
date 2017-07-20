@@ -9,10 +9,11 @@ class Company extends CORE_Controller
         $this->validate_session();
         $this->load->model('Company_model');
         $this->load->model('Tax_model');
+        $this->load->model('Users_model');
     }
 
     public function index() {
-
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', TRUE);
@@ -24,8 +25,10 @@ class Company extends CORE_Controller
 
         $company=$this->Company_model->get_list();
         $data['company']=$company[0];
-
-        $this->load->view('company_view', $data);
+        (in_array('6-6',$this->session->user_rights)? 
+        $this->load->view('company_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
     function transaction($txn = null) {
@@ -49,6 +52,7 @@ class Company extends CORE_Controller
                 $m_company->tax_type_id=$this->input->post('tax_type_id',TRUE);
                 $m_company->rdo_no=$this->input->post('rdo_no',TRUE);
                 $m_company->nature_of_business=$this->input->post('nature_of_business',TRUE);
+                $m_company->business_type=$this->input->post('business_type',TRUE);
                 $m_company->save();
 
                 $response['title']='Success!';

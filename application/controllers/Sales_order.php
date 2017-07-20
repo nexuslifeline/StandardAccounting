@@ -16,11 +16,12 @@ class Sales_order extends CORE_Controller
         $this->load->model('Customers_model');
         $this->load->model('Products_model');
         $this->load->model('Refproduct_model');
+        $this->load->model('Users_model');
 
     }
 
     public function index() {
-
+        $this->Users_model->validate();
         //default resources of the active view
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
@@ -78,8 +79,10 @@ class Sales_order extends CORE_Controller
         );
 
         $data['title'] = 'Sales Order';
-        $this->load->view('sales_order_view', $data);
-
+        
+        (in_array('3-1',$this->session->user_rights)? 
+        $this->load->view('sales_order_view', $data)
+        :redirect(base_url('dashboard')));
 
     }
 

@@ -26,9 +26,11 @@ class Products extends CORE_Controller
         $this->load->model('Issuance_item_model');
         $this->load->model('Delivery_invoice_model');
         $this->load->model('Delivery_invoice_item_model');
+        $this->load->model('Users_model');
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', TRUE);
@@ -50,8 +52,10 @@ class Products extends CORE_Controller
         $data['item_types'] = $this->Item_type_model->get_list(array('item_types.is_deleted'=>FALSE));
         $data['accounts'] = $this->Account_title_model->get_list(null,'account_id,account_title');
         $data['tax_types']=$this->Tax_model->get_list(array('tax_types.is_deleted'=>FALSE));
-
-        $this->load->view('products_view', $data);
+        (in_array('5-1',$this->session->user_rights)? 
+        $this->load->view('products_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
     function transaction($txn = null) {

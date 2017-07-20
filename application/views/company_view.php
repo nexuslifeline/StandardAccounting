@@ -252,6 +252,17 @@
                                                    </div>
 
                                                    <div class="form-group">
+                                                       <label class="col-md-3 control-label"><strong> *Business Type :</strong></label>
+                                                       <div class="col-md-7">
+                                                           <select name="" id="business_type" data-error-msg="Tax Type is required." required>
+                                                              <option value="1" <?php echo (1==$company->business_type?'selected':''); ?> >Sole Proprietorship</option>
+                                                              <option value="2" <?php echo (2==$company->business_type?'selected':''); ?>>Partnership</option>
+                                                              <option  value="3" <?php echo (3==$company->business_type?'selected':''); ?> >Corporation</option>
+
+                                                           </select>
+                                                       </div>
+                                                   </div>
+                                                   <div class="form-group">
                                                        <label class="col-md-2 col-md-offset-1 control-label"><strong>Logo :</strong></label>
                                                        <div class="col-md-5">
                                                            <div class="input-group">
@@ -446,7 +457,7 @@
 
 <script>
     $(document).ready(function(){
-        var dt; var _txnMode; var _selectedID; var _selectRowObj; var _company_info;
+        var dt; var _txnMode; var _selectedID; var _selectRowObj; var _company_info; var _businesstype
 
 
 
@@ -457,6 +468,11 @@
 
             _company_info=$("#tax_group").select2({
                 placeholder: "Please select Tax type",
+                allowClear: true
+            });
+
+            _businesstype=$("#business_type").select2({
+                placeholder: "Please select business type",
                 allowClear: true
             });
 
@@ -665,6 +681,7 @@
             var _data=$('#frm_company').serializeArray();
             _data.push({name : "photo_path" ,value : $('img[name="img_company"]').attr('src')});
             _data.push({name : "tax_type_id" ,value : $('#tax_group').select2('val')});
+            _data.push({name : "business_type" ,value : $('#business_type').select2('val')});
 
             return $.ajax({
                 "dataType":"json",

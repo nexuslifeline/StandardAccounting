@@ -19,6 +19,7 @@ class General_journal extends CORE_Controller
                 'Journal_account_model',
                 'Departments_model',
                 'Accounting_period_model',
+                'Users_model',
                 'Tax_model'
             )
         );
@@ -26,7 +27,7 @@ class General_journal extends CORE_Controller
     }
 
     public function index() {
-
+        $this->Users_model->validate();
         //default resources of the active view
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
@@ -42,7 +43,10 @@ class General_journal extends CORE_Controller
         $data['methods']=$this->Payment_method_model->get_list('is_active=TRUE AND is_deleted=FALSE');
 
         $data['title'] = 'General Journal';
-        $this->load->view('general_journal_view', $data);
+        (in_array('1-1',$this->session->user_rights)? 
+        $this->load->view('general_journal_view', $data)
+        :redirect(base_url('dashboard')));
+        
 
 
     }

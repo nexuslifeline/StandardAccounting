@@ -13,13 +13,13 @@ class Open_sales extends CORE_Controller
         $this->load->model('Sales_order_model');
         $this->load->model('Sales_order_item_model');
         $this->load->model('Products_model');
-
+        $this->load->model('Users_model');
         $this->load->model('Company_model');
 
     }
 
     public function index() {
-
+        $this->Users_model->validate();
         //default resources of the active view
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
@@ -29,8 +29,10 @@ class Open_sales extends CORE_Controller
 
 
         $data['title'] = 'Open Sales';
-        $this->load->view('open_sales_view', $data);
-
+        
+        (in_array('12-5',$this->session->user_rights)? 
+        $this->load->view('open_sales_view', $data)
+        :redirect(base_url('dashboard')));
 
     }
 

@@ -16,12 +16,14 @@
 					'Account_title_model',
 					'Account_integration_model',
 					'Batch_info_model',
+					'Users_model',
 					'Tax_model'
 				)
 			);
 		}
 
 		public function index() {
+			$this->Users_model->validate();
 			$data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
 	        $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
 	        $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
@@ -49,8 +51,10 @@
 	        		array('account_classes as ac','ac.account_class_id=account_titles.account_class_id','left')
 	        	)
 	        );
-
-	        $this->load->view('petty_cash_journal_view',$data);
+        (in_array('1-6',$this->session->user_rights)? 
+        $this->load->view('petty_cash_journal_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn) {

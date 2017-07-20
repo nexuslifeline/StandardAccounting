@@ -13,12 +13,14 @@ class Cogs extends CORE_Controller
             'Products_model',
             'Delivery_invoice_model',
             'Delivery_invoice_item_model',
+            'Users_model',
             'Company_model'
         ));
 
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
@@ -27,8 +29,10 @@ class Cogs extends CORE_Controller
 
         $data['title'] = 'Cost of Good Sold Report';
         $data['departments']=$this->Departments_model->get_list('is_deleted=0');
-
-        $this->load->view('cost_of_good_sold_view', $data);
+        (in_array('9-12',$this->session->user_rights)? 
+        $this->load->view('cost_of_good_sold_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
 

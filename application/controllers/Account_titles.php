@@ -12,9 +12,11 @@ class Account_titles extends CORE_Controller
         $this->load->model('Account_class_model');
         $this->load->model('Journal_info_model');
         $this->load->model('Journal_account_model');
+        $this->load->model('Users_model');
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', TRUE);
@@ -28,8 +30,10 @@ class Account_titles extends CORE_Controller
         $data['types']=$this->Account_type_model->get_list(null,null,null,'account_types.account_type');
         $data['parents']=$this->Account_title_model->get_list(array('account_titles.is_active'=>TRUE,'account_titles.is_deleted'=>FALSE),null,null,'account_titles.account_title ASC');
         $data['accounts']=$this->get_account_hierarchy();
-
-        $this->load->view('account_titles_view', $data);
+        (in_array('6-2',$this->session->user_rights)? 
+        $this->load->view('account_titles_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
 

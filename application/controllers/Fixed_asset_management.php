@@ -13,6 +13,7 @@
 					'Categories_model',
 					'Asset_property_status_model',
 					'Fixed_asset_management_model',
+					'Users_model',
 					'Departments_model'
 				)
 			);
@@ -20,6 +21,7 @@
 
 		public function index()
 		{
+			$this->Users_model->validate();
 			$data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
 	        $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
 	        $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
@@ -31,8 +33,10 @@
 	        $data['categories']=$this->Categories_model->get_category_list();
 	        $data['asset_properties']=$this->Asset_property_status_model->get_list('is_deleted=FALSE');
 	        $data['departments']=$this->Departments_model->get_list('is_deleted=FALSE AND is_active=TRUE');
-
-	        $this->load->view('fixed_asset_management_view',$data);
+	        (in_array('10-1',$this->session->user_rights)? 
+	        $this->load->view('fixed_asset_management_view',$data)
+	        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn=null) {

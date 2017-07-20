@@ -13,6 +13,7 @@ class Balance_sheet extends CORE_Controller
                 'Journal_account_model',
                 'Departments_model',
                 'Accounting_period_model',
+                'Users_model',
                 'Company_model'
             )
         );
@@ -21,6 +22,7 @@ class Balance_sheet extends CORE_Controller
     }
 
     public function index() {
+        $this->Users_model->validate();
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
@@ -31,8 +33,10 @@ class Balance_sheet extends CORE_Controller
         $data['departments']=$this->Departments_model->get_list('is_deleted=FALSE');
 
 
-
-        $this->load->view('balance_sheet_view', $data);
+        (in_array('9-1',$this->session->user_rights)? 
+        $this->load->view('balance_sheet_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
 

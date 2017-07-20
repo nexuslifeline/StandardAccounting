@@ -9,6 +9,7 @@
 
 			$this->load->model(
 				array(
+					'Users_model',
 					'Fixed_asset_management_model'
 				)
 			);
@@ -16,6 +17,7 @@
 
 		public function index()
 		{
+			$this->Users_model->validate();
 			$data['_def_css_files'] = $this->load->view('template/assets/css_files', '', true);
 	        $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', true);
 	        $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', true);
@@ -26,8 +28,10 @@
 	        $data['starting_year']=date('Y', strtotime('-100 year'));
 	        $data['ending_year']=date('Y', strtotime('+10 year'));
 	        $data['current_year']=date('Y');
-
-	        $this->load->view('depreciation_expense_view',$data);
+	        (in_array('10-2',$this->session->user_rights)? 
+	        $this->load->view('depreciation_expense_view',$data)
+	        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn=null){
