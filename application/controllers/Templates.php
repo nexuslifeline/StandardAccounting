@@ -619,6 +619,10 @@ class Templates extends CORE_Controller {
 
                 $data['recent_payment']=(count($recent_payment)>0?$recent_payment:'');
                 //shows when Expand Icon is click on Supplier Management
+
+
+                $data['invoice']=$m_suppliers->get_list_supplier_invoice($supplier_id);
+                $data['payment']= $m_suppliers->get_supplier_payment($supplier_id);
                 $content=$this->load->view('template/supplier_expandable_details',$data,TRUE);
                 echo $content;
 

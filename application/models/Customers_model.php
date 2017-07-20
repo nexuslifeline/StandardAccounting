@@ -157,44 +157,44 @@ ON paid.sales_invoice_id = unpaid.sales_invoice_id ) as report
 function get_customer_payment($customer_id){
 
     $sql="SELECT 
-receipt_no,
-date_paid,
-sales_inv_no,
-total_paid_amount,
-check_no
- FROM
+        receipt_no,
+        date_paid,
+        sales_inv_no,
+        total_paid_amount,
+        check_no
+         FROM
 
-(SELECT 
-receipt_no,
-date_paid,
-sales_invoice_id,
-total_paid_amount,
-check_no,
-is_active,
-is_deleted
-FROM receivable_payments as rp
+        (SELECT 
+        receipt_no,
+        date_paid,
+        sales_invoice_id,
+        total_paid_amount,
+        check_no,
+        is_active,
+        is_deleted
+        FROM receivable_payments as rp
 
-LEFT JOIN 
+        LEFT JOIN 
 
-(SELECT 
-sales_invoice_id,
-payment_id
-FROM
-receivable_payments_list
-GROUP BY payment_id) as paid
-ON rp.payment_id = paid.payment_id ) AS report
+        (SELECT 
+        sales_invoice_id,
+        payment_id
+        FROM
+        receivable_payments_list
+        GROUP BY payment_id) as paid
+        ON rp.payment_id = paid.payment_id ) AS report
 
 
-LEFT JOIN 
+        LEFT JOIN 
 
-(SELECT sales_invoice_id,sales_inv_no,customer_id FROM sales_invoice
-WHERE is_active = TRUE AND is_deleted = FALSE) AS si
+        (SELECT sales_invoice_id,sales_inv_no,customer_id FROM sales_invoice
+        WHERE is_active = TRUE AND is_deleted = FALSE) AS si
 
-ON si.sales_invoice_id = report.sales_invoice_id 
+        ON si.sales_invoice_id = report.sales_invoice_id 
 
-WHERE report.is_active = TRUE AND report.is_deleted = FALSE AND si.customer_id = $customer_id
+        WHERE report.is_active = TRUE AND report.is_deleted = FALSE AND si.customer_id = $customer_id
 
-";
+        ";
 
         return $this->db->query($sql)->result();
 

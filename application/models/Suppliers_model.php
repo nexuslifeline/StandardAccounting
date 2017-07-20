@@ -111,6 +111,81 @@ class Suppliers_model extends CORE_Model {
     }
 
 
+    function get_list_supplier_invoice($supplier_id){
+      $sql="
+      SELECT
+      unpaid.dr_invoice_no, 
+      unpaid.total_after_tax,
+      paid.total_paid,
+      unpaid.invoice_date,
+
+      (CASE WHEN unpaid.total_after_tax = paid.total_paid THEN 'paid' ELSE 'unpaid' END ) AS remarks
+      FROM
+
+      (SELECT 
+      dr_invoice_id, 
+      date_delivered as invoice_date,
+      dr_invoice_no,
+      total_after_tax
+      FROM delivery_invoice 
+      WHERE is_active=TRUE AND is_deleted=FALSE and supplier_id = $supplier_id) AS unpaid
+
+      LEFT JOIN
+
+      (SELECT
+      dr_invoice_id,
+      SUM(payment_amount) as total_paid
+      FROM payable_payments_list
+      LEFT JOIN payable_payments ON payable_payments.payment_id= payable_payments_list.payment_id
+      WHERE is_active=TRUE AND is_deleted=FALSE AND supplier_id = $supplier_id
+      GROUP BY dr_invoice_id) AS paid
+
+      ON paid.dr_invoice_id = unpaid.dr_invoice_id";
+
+      return $this->db->query($sql)->result();
+    }
+
+
+    function get_supplier_payment($supplier_id){
+
+$sql="SELECT
+      unpaid.dr_invoice_no, 
+      paid.receipt_no,
+      unpaid.invoice_date,
+      paid.total_paid,
+      paid.date_paid,
+      paid.check_no
+      FROM
+
+      (SELECT 
+      dr_invoice_id, 
+      date_delivered as invoice_date,
+      dr_invoice_no,
+      total_after_tax
+      FROM delivery_invoice 
+      WHERE is_active=TRUE AND is_deleted=FALSE and supplier_id = $supplier_id) AS unpaid
+
+      LEFT JOIN
+
+      (SELECT
+      dr_invoice_id,
+      receipt_no,
+      date_paid,
+      check_no,
+      SUM(payment_amount) as total_paid
+      FROM payable_payments_list
+      LEFT JOIN payable_payments ON payable_payments.payment_id= payable_payments_list.payment_id
+      WHERE is_active=TRUE AND is_deleted=FALSE AND supplier_id = $supplier_id
+      GROUP BY dr_invoice_id) AS paid
+
+      ON paid.dr_invoice_id = unpaid.dr_invoice_id
+      having paid.total_paid > 0";
+      return $this->db->query($sql)->result();
+
+
+    }
+
+
 
 }
 ?>

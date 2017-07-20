@@ -7,10 +7,12 @@
 
                 <div class="tab-container tab-top tab-default" style="height: auto;border-left: 0px!important;">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#supplier_info" data-toggle="tab" class="tab-label"><i class="fa fa-users"></i> Information</a></li>
+                        <li class="active"><a href="#supplier_info<?php echo $supplier_info->supplier_id; ?>" data-toggle="tab" class="tab-label"><i class="fa fa-users"></i> Information</a></li>
+                         <li class=""><a href="#supplier_invoice<?php echo $supplier_info->supplier_id; ?>" data-toggle="tab" class="tab-label"><i class="fa fa-users"></i> Invoices</a></li>
+                         <li class=""><a href="#supplier_payment<?php echo $supplier_info->supplier_id; ?>" data-toggle="tab" class="tab-label"><i class="fa fa-users"></i> Payments</a></li>
                     </ul>
                     <div class="tab-content" style="height: auto;">
-                        <div class="tab-pane active" id="supplier_info" style="min-height: 300px;">
+                        <div class="tab-pane active" id="supplier_info<?php echo $supplier_info->supplier_id; ?>" style="min-height: 300px;">
 
 
                             <div class="row">
@@ -74,12 +76,102 @@
                                         <?php } ?>
                                         </tbody>
                                     </table>
+
+
                                 </div>
                             </div>
 
 
                             
 
+                        </div>
+                        <div class="tab-pane" id="supplier_invoice<?php echo $supplier_info->supplier_id; ?>" style="min-height: 300px;">
+
+
+                            <div class="row">
+
+                                <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Purchase Invoice of <?php echo $supplier_info->supplier_name; ?></b> </span>
+                                <hr />
+                                <div class="col-lg-12 table-responsive">
+                                    <table id="tbl_po_<?php echo $supplier_info->supplier_id; ?>" class="" cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Invoice #</th>
+                                            <th>Date</th>
+                                            <th style="text-align: right;">Amount</th>
+                                            <th>Remarks</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php 
+                                        $total = 0;
+                                        foreach($invoice as $item){ ?>
+                                            <tr>
+                                                <td><?php echo $item->dr_invoice_no; ?></td>
+                                                <td><?php echo $item->invoice_date; ?></td>
+                                                <td style="text-align: right;"><?php echo number_format($item->total_after_tax,2); ?></td>
+                                                <td><?php echo $item->remarks; ?></td>
+                                                <?php $total += $item->total_after_tax; ?>
+                                            </tr>
+                                        <?php } ?>
+                                    <tr>
+                                    <td colspan="2" style="text-align: right;">Total Paid Amount</td>
+                                    <td style="text-align: right;"><?php echo number_format($total,2); ?></td>
+                                    <td></td>
+                                    </tr>
+
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane" id="supplier_payment<?php echo $supplier_info->supplier_id; ?>" style="min-height: 300px;">
+
+
+                            <div class="row">
+
+                                <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Payments of <?php echo $supplier_info->supplier_name; ?></b> </span>
+                                <hr />
+                                <div class="col-lg-12 table-responsive">
+                                    <table id="tbl_po_<?php echo $supplier_info->supplier_id; ?>" class="" cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Invoice #</th>
+                                            <th>Receipt #</th>
+                                            <th>Date Paid</th>
+                                            <th style="text-align: right;">Amount</th>
+                                            <th>Check #</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php 
+                                        $total = 0;
+                                        foreach($payment as $item){ ?>
+                                            <tr>
+                                                <td><?php echo $item->dr_invoice_no; ?></td>
+                                                <td><?php echo $item->receipt_no; ?></td>
+                                                <td><?php echo $item->date_paid; ?></td>
+                                                <td style="text-align: right;"><?php echo number_format($item->total_paid,2); ?></td>
+                                                <td><?php echo $item->check_no; ?></td>
+                                                <?php $total += $item->total_paid; ?>
+                                            </tr>
+                                        <?php } ?>
+                                    <tr>
+                                    <td colspan="3" style="text-align: right;">Total Paid Amount</td>
+                                    <td style="text-align: right;"><?php echo number_format($total,2); ?></td>
+                                    <td></td>
+                                    </tr>
+
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+                            </div>
                         </div>
 
                     </div>
