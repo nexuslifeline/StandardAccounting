@@ -230,6 +230,52 @@ class Sales_invoice_model extends CORE_Model
               GROUP BY sii.product_id";
          return $this->db->query($sql)->result();
     }
+
+    function list_with_count($filter_id){
+    $sql="SELECT
+        si.sales_invoice_id,
+        si.sales_inv_no,
+        si.remarks, 
+        si.date_created,
+        si.customer_id,
+        si.inv_type,
+        si.is_journal_posted,
+        DATE_FORMAT(si.date_invoice,'%m/%d/%Y') as date_invoice,
+        DATE_FORMAT(si.date_due,'%m/%d/%Y') as date_due,
+
+        si.salesperson_id,
+        si.address,
+
+        departments.department_id,
+        departments.department_name,
+        customers.customer_name,
+        sales_order.so_no,
+
+
+        IFNULL(count.count,0) as count
+        FROM sales_invoice AS si
+
+        LEFT JOIN
+
+        (SELECT
+        rp.payment_id,
+        rpl.sales_invoice_id,
+        count(sales_invoice_id) AS count
+        FROM receivable_payments_list AS rpl
+        LEFT JOIN receivable_payments AS rp ON rp.payment_id = rpl.payment_id
+        WHERE rp.is_active= TRUE AND rp.is_deleted = FALSE
+        group by rpl.sales_invoice_id) AS count
+
+        ON count.sales_invoice_id = si.sales_invoice_id
+        LEFT JOIN departments ON departments.department_id=si.department_id
+        LEFT JOIN customers  ON customers.customer_id=si.customer_id
+        LEFT JOIN sales_order ON sales_order.sales_order_id=si.sales_order_id
+
+
+        WHERE si.is_active= TRUE AND si.is_deleted =  FALSE";
+
+         return $this->db->query($sql)->result();
+    } 
 }
 
 

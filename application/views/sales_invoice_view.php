@@ -761,7 +761,7 @@ $(document).ready(function(){
         dt=$('#tbl_sales_invoice').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
-            "ajax" : "Sales_invoice/transaction/list",
+            "ajax" : "Sales_invoice/transaction/list_with_count",
             "language": {
                 "searchPlaceholder":"Search Invoice"
             },
@@ -1232,6 +1232,20 @@ $(document).ready(function(){
             });
         });
         $('#tbl_sales_invoice tbody').on('click','button[name="edit_info"]',function(){
+            _selectRowObj=$(this).closest('tr');
+            var data=dt.row(_selectRowObj).data();
+            _selectedID=data.sales_invoice_id;
+            _count=data.count;
+            _is_journal_posted=data.is_journal_posted;
+            if(_is_journal_posted > 0){
+                showNotification({title:"<b style='color:white;'> Error!</b>",stat:"error",msg:"Cannot Edit: Invoice is already Posted in Sales Journal."});
+            }
+            else if(_count > 0){
+                showNotification({title:"<b style='color:white;'> Error!</b> ",stat:"error",msg:"Cannot Edit: Invoice is already in use in Collection Entry."});
+            }
+            else
+            {
+
             _txnMode="edit";
             $('.sales_invoice_title').html('Edit Sales Invoice');
             _selectRowObj=$(this).closest('tr');
@@ -1286,13 +1300,29 @@ $(document).ready(function(){
                 }
             });
             showList(false);
+        }
         });
         $('#tbl_sales_invoice tbody').on('click','button[name="remove_info"]',function(){
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.sales_invoice_id;
+            _count=data.count;
+            _is_journal_posted=data.is_journal_posted;
+            if(_is_journal_posted > 0){
+                showNotification({title:"<b style='color:white;'> Error!</b> ",stat:"error",msg:"Cannot Delete: Invoice is already Posted in Sales Journal."});
+            }
+            else if(_count > 0){
+                showNotification({title:"<b style='color:white;'> Error!</b> ",stat:"error",msg:"Cannot Edit: Invoice is already in use in Collection Entry."});
+            }
+            else
+            {
+
+            _selectRowObj=$(this).closest('tr');
+            var data=dt.row(_selectRowObj).data();
+            _selectedID=data.sales_invoice_id;
             //alert(_selectedID);
             $('#modal_confirmation').modal('show');
+        }
         });
         //track every changes on numeric fields
         $('#tbl_items tbody').on('keyup','input.numeric',function(){

@@ -156,6 +156,12 @@ class Sales_invoice extends CORE_Controller
                 echo json_encode($response);
                 break;
 
+            case 'list_with_count':  //this returns JSON of Issuance to be rendered on Datatable
+                $m_invoice=$this->Sales_invoice_model;
+                $response['data']=$this->response_rows_count($id_filter);
+                echo json_encode($response);
+                break;
+
             ////****************************************items/products of selected Items***********************************************
             case 'items': //items on the specific PO, loads when edit button is called
                 $m_items=$this->Sales_invoice_item_model;
@@ -638,6 +644,10 @@ class Sales_invoice extends CORE_Controller
             ),
             'sales_invoice.sales_invoice_id DESC'
         );
+    }
+
+    function response_rows_count($filter_value){
+        return $this->Sales_invoice_model->list_with_count($filter_value);
     }
 
 

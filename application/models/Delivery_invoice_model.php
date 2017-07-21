@@ -129,6 +129,52 @@ class Delivery_invoice_model extends CORE_Model {
             return $this->db->query($sql)->result();
     }
 
+
+    function delivery_list_count($id_filter){
+        $sql="
+        SELECT di.*,
+        suppliers.supplier_name,
+        tax_types.tax_type,
+        purchase_order.po_no,
+        DATE_FORMAT(di.date_due,'%m/%d/%Y')as date_due,
+        DATE_FORMAT(di.date_delivered,'%m/%d/%Y')as date_delivered,
+
+        CONCAT_WS(' ',CAST(di.terms as CHAR(250)) ,di.duration) as term_description,
+        IFNULL(count.count,0) as count
+        FROM
+        delivery_invoice as di
+         
+        LEFT JOIN 
+        (SELECT 
+        pp.payment_id,
+        pp.is_active AS payment_active,
+        pp.is_deleted AS payment_deleted,
+        pl.dr_invoice_id, 
+
+        count(dr_invoice_id) as count
+        FROM payable_payments_list AS pl
+        LEFT JOIN payable_payments AS pp 
+        ON pp.payment_id = pl.payment_id
+
+        WHERE is_active = TRUE AND is_deleted=FALSE
+        group by pl.dr_invoice_id) as count
+
+        ON count.dr_invoice_id = di.dr_invoice_id
+
+        LEFT JOIN suppliers ON suppliers.supplier_id = di.supplier_id
+        LEFT JOIN tax_types ON tax_types.tax_type_id=di.tax_type_id
+        LEFT JOIN purchase_order ON purchase_order.purchase_order_id=di.purchase_order_id 
+
+
+        WHERE
+        di.is_active = TRUE AND di.is_deleted=FALSE 
+
+        ".($id_filter==null?"":" AND di.dr_invoice_id=$id_filter")."
+        ";
+        return $this->db->query($sql)->result();
+
+    }
+
 }
 
 

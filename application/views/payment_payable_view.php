@@ -755,6 +755,17 @@ $(document).ready(function(){
 
         $('#btn_save').click(function(){
 
+            total = getFloat($('#td_total_payment').text());
+            if (total == 0){
+                showNotification({
+                    "title": "Invalid!",
+                    "stat" : "error",
+                    "msg" : "Sorry, total payment amount should not be zero."
+                });
+
+
+            } else{
+          
             if(validateRequiredFields($('#frm_payments'))){
                 if(_txnMode=="new"){
                     postPurchaseInvoicePayment().done(function(response){
@@ -771,7 +782,7 @@ $(document).ready(function(){
                 }
 
             }
-
+            }
         });
 
 
@@ -850,6 +861,7 @@ $(document).ready(function(){
         var _data=$('#frm_payments,#frm_payment_items').serializeArray();
         _data.push({name:"total_paid_amount",value:getFloat($('#td_total_payment').text())});
         _data.push({name:"remarks",value:$('textarea[name="remarks"]').val()});
+
 
         return $.ajax({
             "dataType":"json",

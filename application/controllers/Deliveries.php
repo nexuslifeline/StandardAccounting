@@ -85,6 +85,17 @@ class Deliveries extends CORE_Controller
 
     function transaction($txn = null,$id_filter=null) {
         switch ($txn){
+
+            case'delivery_list_count':  //this returns JSON of Purchase Order to be rendered on Datatable with validation of count in invoice
+            $m_delivery=$this->Delivery_invoice_model;
+            $response['data']=$m_delivery->delivery_list_count($id_filter);
+
+            echo json_encode($response);
+
+            break;
+
+
+
             case 'list':  //this returns JSON of Purchase Order to be rendered on Datatable
 
                 $response['data']=$this->response_rows(
@@ -457,24 +468,32 @@ class Deliveries extends CORE_Controller
 
 //**************************************user defined*************************************************
     function response_rows($filter_value,$order_by=null){
-        return $this->Delivery_invoice_model->get_list(
-            $filter_value,
-            array(
-                'delivery_invoice.*',
-                'DATE_FORMAT(delivery_invoice.date_due,"%m/%d/%Y")as date_due',
-                'DATE_FORMAT(delivery_invoice.date_delivered,"%m/%d/%Y")as date_delivered',
-                'CONCAT_WS(" ",CAST(delivery_invoice.terms AS CHAR),delivery_invoice.duration)as term_description',
-                'suppliers.supplier_name',
-                'tax_types.tax_type',
-                'purchase_order.po_no'
-            ),
-            array(
-                array('suppliers','suppliers.supplier_id=delivery_invoice.supplier_id','left'),
-                array('tax_types','tax_types.tax_type_id=delivery_invoice.tax_type_id','left'),
-                array('purchase_order','purchase_order.purchase_order_id=delivery_invoice.purchase_order_id','left')
-            ),
-            $order_by
-        );
+        // 07/21/2017 OLD response rows without count from invoices
+
+        // return $this->Delivery_invoice_model->get_list(
+        //     $filter_value,
+        //     array(
+        //         'delivery_invoice.*',
+        //         'DATE_FORMAT(delivery_invoice.date_due,"%m/%d/%Y")as date_due',
+        //         'DATE_FORMAT(delivery_invoice.date_delivered,"%m/%d/%Y")as date_delivered',
+        //         'CONCAT_WS(" ",CAST(delivery_invoice.terms AS CHAR),delivery_invoice.duration)as term_description',
+        //         'suppliers.supplier_name',
+        //         'tax_types.tax_type',
+        //         'purchase_order.po_no'
+        //     ),
+        //     array(
+        //         array('suppliers','suppliers.supplier_id=delivery_invoice.supplier_id','left'),
+        //         array('tax_types','tax_types.tax_type_id=delivery_invoice.tax_type_id','left'),
+        //         array('purchase_order','purchase_order.purchase_order_id=delivery_invoice.purchase_order_id','left')
+        //     ),
+        //     $order_by
+        // ); 
+
+
+         // 07/21/2017 NEW response rows with count from invoices for validation
+         return $this->Delivery_invoice_model->delivery_list_count($filter_value);
+
+
     }
 
 
