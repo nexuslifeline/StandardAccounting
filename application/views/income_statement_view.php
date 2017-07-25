@@ -204,18 +204,19 @@
             placeholder: "Please select department.",
             allowClear: true
         });
-        _cboDepartments.select2('val',1);
+        // _cboDepartments.select2('val',1);
 
         $('#btn_print').click(function(){
-            $(this).attr('href',"Templates/layout/income-statement?type=&type=preview&start="+$('#dt_start_date').val()+"&end="+$('#dt_end_date').val()+"&depid="+_cboDepartments.select2('val'));
+         $(this).attr('href',"Templates/layout/income-statement?type=&type=preview&start="+$('#dt_start_date').val()+"&end="+$('#dt_end_date').val()+"&depid="+_cboDepartments.select2('val'));
             //window.open($(this).attr('href')+"?start="+$('#dt_start_date').val()+"&end="+$('#dt_end_date').val()+"&depid="+_cboDepartments.select2('val'));
+
         });
 
 
 
-        _btnPrint.on('click', function(){
-            $('#modal_balance').modal('show');
-        });
+        // _btnPrint.on('click', function(){
+        //     $('#modal_balance').modal('show');
+        // });
 
         _modal_filter.modal('show');
     })();

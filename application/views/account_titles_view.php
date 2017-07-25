@@ -348,7 +348,7 @@ $(document).ready(function(){
             "columns": [
                 {
                     "targets": [0],
-                    "class":          "details-control",
+                    "class":          "",
                     "orderable":      false,
                     "data":           null,
                     "defaultContent": ""

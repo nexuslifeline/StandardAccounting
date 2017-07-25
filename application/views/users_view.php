@@ -74,7 +74,11 @@
         h2 {
           color: #FFF;
         }
+        td.child{
 
+
+          border: none!important;
+        }
 
 
         /*table{
@@ -884,25 +888,25 @@
                     '</thead>' +
                     '<tbody>' +
                     '<tr>' +
-                    '<td width="20%">Name : </td><td width="50%"><b>'+ d.user_name+'</b></td>' +
-                    '<td rowspan="5" valign="top"><div class="avatar">'+
+                    '<td width="20%" class="child">Name : </td><td width="50%"  class="child"><b>'+ d.user_name+'</b></td>' +
+                    '<td rowspan="5" valign="top"  class="child"><div class="avatar"  class="child">'+
                     '<img src="'+ d.photo_path+'" class="img-circle" style="margin-top:0px;height: 100px;width: 100px;">'+
                     '</div></td>' +
                     '</tr>' +
                     '<tr>' +
-                    '<td>Address : </td><td><b>'+ d.user_address+'</b></td>' +
+                    '<td  class="child">Address : </td><td  class="child"><b>'+ d.user_address+'</b></td>' +
                     '</tr>' +
                     '<tr>' +
-                    '<td>Email : </td><td>'+ d.user_email+'</td>' +
+                    '<td  class="child">Email : </td><td  class="child">'+ d.user_email+'</td>' +
                     '</tr>' +
                     '<tr>' +
-                    '<td>Mobile Nos. : </td><td>'+ d.user_mobile+'</td>' +
+                    '<td class="child">Mobile Nos. : </td><td  class="child">'+ d.user_mobile+'</td>' +
                     '</tr>' +
                     '<tr>' +
-                    '<td>Landline. : </td><td>'+ d.user_telephone+'</td>' +
+                    '<td  class="child">Landline. : </td><td  class="child">'+ d.user_telephone+'</td>' +
                     '</tr>' +
                     '<tr>' +
-                    '<td>Active : </td><td><i class="fa fa-check"></i></td>' +
+                    '<td  class="child">Active : </td><td  class="child"><i class="fa fa-check"></i></td>' +
                     '</tr>' +
                     '</tbody></table><br />';
         };

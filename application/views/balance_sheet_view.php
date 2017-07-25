@@ -196,8 +196,24 @@
         _cboDepartments.select2('val',1);
 
         $('#btn_print').click(function(){
-            window.open("Balance_sheet/transaction/bs?date="+$('#dt_as_of_date').val()+"&depid="+_cboDepartments.select2('val'));
+            if (_cboDepartments.select2('val') == null){
+            showNotification({ title: 'Error', msg: 'Please select a department!', stat: 'error' });
+            } else{
+        window.open("Balance_sheet/transaction/bs?date="+$('#dt_as_of_date').val()+"&depid="+_cboDepartments.select2('val'));
+
+            }
+
+            
         });
+
+        var showNotification=function(obj){
+        PNotify.removeAll(); //remove all notifications
+        new PNotify({
+            title:  obj.title,
+            text:  obj.msg,
+            type:  obj.stat
+        });
+    };
 
 
 
@@ -207,6 +223,9 @@
 
         _modal_filter.modal('show');
     })();
+
+
+
 </script>
 
 <script src="assets/plugins/spinner/dist/spin.min.js"></script>

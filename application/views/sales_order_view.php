@@ -3505,11 +3505,8 @@ $(document).ready(function(){
         PNotify.removeAll(); //remove all notifications
 
         new PNotify({
-
             title:  obj.title,
-
             text:  obj.msg,
-
             type:  obj.stat
 
         });
