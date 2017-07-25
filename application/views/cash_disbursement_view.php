@@ -189,18 +189,19 @@
 <div class="row">
 <div class="col-md-12">
 
-<div id="div_payable_list">
+<div id="div_payable_list" style="background-color: #303030!important;">
 
-    <div class="panel-group panel-default" id="accordionA">
+    <div class="panel-group panel-default" id="accordionA" style="background-color: #303030!important;">
 
 
-        <div class="panel panel-default" style="border-radius:6px;">
-            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Review Expense (Pending)</b></div></a>
+        <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;">
+            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo" style="background-color: #303030!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;">Review Expense <small> | Pending</small></h1></a>
 
             <div id="collapseTwo" class="collapse in">
                 <div class="panel-body">
 
-                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
+                    <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
                         <table id="tbl_expense_for_review" class="" cellspacing="0" width="100%">
                             <thead class="">
                             <tr>
@@ -226,12 +227,19 @@
 
 
 
-        <div class="panel panel-default" style="border-radius:6px;">
-              <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Cash Disbursement Journal</b></div></a>
+        <div class="panel panel-default"  style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;">
+           <!--    <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Cash Disbursement Journal</b></div></a> -->
+
+
+                <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne" style="background-color: #303030!important;">
+              <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;">Cash Disbursement <small> | Journal</small></h1>
+              </a>
+
+
                 <div id="collapseOne" class="collapse in">
                     <div class="panel-body" style="min-height: 400px;">
 
-                        <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
+                        <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
                             <table id="tbl_cash_disbursement_list" class="" cellspacing="0" width="100%">
                                 <thead class="">
                                 <tr>
@@ -255,12 +263,19 @@
                 </div>
         </div>
 
-        <div class="panel panel-default" style="border-radius:6px;">
-            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Check Summary</b></div></a>
+        <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;">
+<!--             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Check Summary</b></div></a> -->
+            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne">
+             <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;">Check <small > | Summary</small></h1>
+            </a>
+           
+
+
+
                 <div id="collapseOne" class="collapse in">
                     <div class="panel-body" style="min-height: 400px;">
 
-                        <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
+                        <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
 
                             <table id="tbl_check_list" class="" cellspacing="0" width="100%">
                                 <thead style="display:none;background-color:#161616!important;">
@@ -294,14 +309,20 @@
 <div class="row">
 <div class="col-lg-12">
 
-    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;padding: 1%;margin: 1%;background: #303030 !important;color: white !important;">
+<!--     <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;padding: 1%;margin: 1%;background: #303030 !important;color: white !important;"> -->
+  <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;padding:0% 1% 0% 1%;color:white!important;">
 
-        <b><i class="fa fa-bars"></i> Cash Disbursement Journal</b><hr />
+
+        <h1 style="padding-left: 5px;color:white!important;background-color: #303030!important;">Cach Disbursement Journal <small class="title-heading"> |</small></h1>
+        <!-- <b><i class="fa fa-bars"></i> Cash Disbursement Journal</b><hr /> -->
+        <br>
         <button id="btn_browse_recurring" class="btn btn-primary" style="margin-bottom: 15px; text-transform: capitalize;"><i class="fa fa-folder-open-o"></i> Browse Recurring Template</button>
         <form id="frm_journal" role="form" class="form-horizontal">
 
-            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
-
+            <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+            <hr />
+                <span><strong><i class="fa fa-bars"></i> Info</strong></span>
+                <br><br>
                 <div class="row">
                     <div class="col-lg-3">
                         Txn # * :<br />
@@ -418,9 +439,11 @@
 
             <br />
 
-            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+            <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+             <hr />
                 <span><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
-                <hr />
+                <br><br>
+               
 
                 <div style="width: 100%;">
                     <table id="tbl_entries" class="">
@@ -492,34 +515,29 @@
 
             </div>
 
-
-
-            <br />
+            <hr/>
             <div class="row">
                 <div class="col-lg-12">
                     <label>Remarks :</label><br />
                     <textarea name="remarks" class="form-control"></textarea>
                 </div>
             </div>
-            <br /><br />
-
-
         </form>
         <div id="div_check">
             <input type="checkbox" name="chk_save">&nbsp;&nbsp;<label for="chk_save"><strong>Save as Template</strong></label>
         </div>
         <div id="div_no_check">
-            <br>
-            <br>
         </div>
-
-        <br />
+      <br>
         <div class="row">
             <div class="col-sm-12">
+
                 <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Save Changes</button>
                 <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"">Cancel</button>
+
             </div>
         </div>
+        <br>
     </div>
 
     <table id="table_hidden" class="hidden">
@@ -577,10 +595,12 @@
 
 <div id="modal_recurring" class="modal fade" role="dialog">
     <div class="modal-dialog" style="width: 70%;">
-        <div class="modal-content">
+<!--         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" style="color: white;"><i class="fa fa-folder-open-o"></i>  Browse Recurring Templates</h4>
-            </div>
+            </div> -->
+            <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"><i class="fa fa-folder-open-o"></i> Recurring Templates <small> | Browse</small></h1>
             <div class="modal-body">
                 <table id="tbl_recurring" class="" width="100%">
                     <thead>
@@ -602,7 +622,7 @@
 
 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-sm">
-        <div class="modal-content"><!---content--->
+        <div class="modal-content">
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Cancellation</h4>
@@ -617,7 +637,7 @@
                 <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Yes</button>
                 <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">No</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
 </div><!---modal-->
 
@@ -669,12 +689,14 @@
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header ">
+       <!--  <div class="modal-content"> -->
+<!--             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
 
-            </div>
+            </div> -->
+            <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Department <small> | New</small></h1>
 
             <div class="modal-body" style="padding: 2%;">
                 <form id="frm_department_new">
@@ -714,13 +736,14 @@
 
 <div id="modal_new_supplier" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#2ecc71;">
-                <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+ <!--        <div class="modal-content">
+            <div class="modal-header" style="background-color:#2ecc71;"> -->
+<!--                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:#ecf0f1 !important;"><span id="modal_mode"> </span>New Supplier</h4>
 
-            </div>
-
+            </div> -->
+                <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Supplier <small> | New</small></h1>
             <div class="modal-body" style="overflow:hidden;">
                 <form id="frm_suppliers_new">
                     <div class="row">
@@ -912,10 +935,12 @@
 
 <div id="modal_bank" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog">
-        <div class="modal-content">
+<!--         <div class="modal-content">
             <div class="modal-header">
                 <h4 id="bank_title" class="modal-title" style="color: white;">New Bank</h4>
-            </div>
+            </div> -->
+                            <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Bank <small> | New</small></h1>
             <div class="modal-body">
                 <form id="frm_bank" role="form" class="form-horizontal row-border">
                     <div class="form-group">
@@ -1549,7 +1574,7 @@ $(document).ready(function(){
             //set defaults
             _cboPaymentMethod.select2('val',1);//set cash as default
             $('input[name="date_txn"]').val(_currentDate);
-
+            $('.title-heading').text(' | Create');
             showList(false);
 
         });
@@ -1636,7 +1661,7 @@ $(document).ready(function(){
 
         $('#tbl_cash_disbursement_list').on('click','button[name="edit_info"]',function(){
             _txnMode="edit";
-
+            $('.title-heading').text(' | Edit');
             $('#div_check').hide();
             $('#div_no_check').show();
 

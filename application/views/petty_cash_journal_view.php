@@ -116,10 +116,11 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div id="div_pcf_list">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
+                                                <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;">
+                                                <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;">Petty Cash<small> | Journal</small></h1>
+                                                    <!-- <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Petty Cash Journal</b>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="panel-body table-responsive">
                                                         <div style="margin-bottom: 15px;">
                                                             <div class="col-xs-12 col-md-3" style="margin-bottom: 10px;">
@@ -180,10 +181,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
+                                                <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;">
+<!--                                                     <div class="panel-heading" >
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Petty Cash (Replenished)</b>
-                                                    </div>
+                                                    </div> -->
+                                                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Petty Cash <small> | Replenished</small></h1>
                                                     <div class="panel-body">
                                                         <table id="tbl_replenished" class="" cellspacing="0" width="100%">
                                                             <thead class="thead-bg">

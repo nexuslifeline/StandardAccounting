@@ -134,14 +134,16 @@
 
 <div id="div_payable_list">
 
-    <div class="panel panel-default" style="background: #303030 !important;">
+    <div class="panel panel-default" style="background: #303030 !important;border-top:5px solid #ffad33!important;">
 
 
-        <div class="panel panel-default">
-                <div class="panel-heading">
+  <h1 style="padding-left: 20px;color:white;"> General Journal <small> | Book</small></h1>
+<!--                 <div class="panel-heading">
                     <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; General Journal </b>
-                </div>
+
+                </div> -->
                 <div class="panel-body table-responsive">
+      
                     <table id="tbl_accounts_receivable" class="" cellspacing="0" width="100%">
                         <thead class="">
                         <tr>
@@ -162,7 +164,7 @@
 
 
                 </div>
-            </div>
+    
         </div>
 
     </div>
@@ -174,23 +176,20 @@
 
 
 <div id="div_payable_fields" style="display: none;">
-
-
-    <div class="row">
         <div class="col-lg-12">
-
-            <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;padding: 1%;margin: 1%;background: #303030;">
+            <div class="panel panel-default" style="padding: 0% 1% 1% 1% ;background: #303030;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 5px;color:white;">General Journal <small class="title-heading"> | Book</small></h1>
                 <!-- <div class="panel-heading">
                     <h2>General Journal</h2>
                     <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body, .panel-footer"}'></div>
                 </div> -->
-                            <b style="color: white;"><i class="fa fa-bars"></i> General Journal</b><hr />
+                            <br>
                             <button id="btn_browse_recurring" class="btn btn-primary" style="margin-bottom: 10px; text-transform: capitalize;"><i class="fa fa-folder-open-o"></i> Browse Recurring Template</button>
-                            
                                 <form id="frm_journal" role="form" class="form-horizontal">
-                                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+                                    <div style="padding: 0% 1% 0% 1%;border-radius: 5px;">
+                                     <hr />
                                         <span style="color: white;"><strong><i class="fa fa-bars"></i> Info</strong></span>
-                                        <hr />
+                                       <br><br>
 
                                         <label class="col-lg-2"> * Txn # :</label>
                                         <div class="col-lg-4">
@@ -250,13 +249,14 @@
                                                         <option value='<?php echo $department->department_id; ?>'><?php echo $department->department_name; ?></option>
                                                     <?php } ?>
                                             </select>
-                                        </div><br /><br />
+                                        </div><br />
 
-                                    </div><br />
+                                    </div>
 
-                                <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+                                <div style="padding: 1%;border-radius: 5px;">
+                                <hr />
                                     <span style="color: white;"><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
-                                    <hr />
+                                    <br><br/>
 
                                     <div style="width: 100%;table-layout:fixed;">
                                         <table id="tbl_entries" class="">
@@ -309,7 +309,7 @@
 
                                             <tfoot>
                                             <tr>
-                                                <td colspan="2" align="right"><strong>Total</strong></td>
+                                                <td colspan="2" align="right" style="color:white;"><strong>Total</strong></td>
                                                 <td align="right"><strong>0.00</strong></td>
                                                 <td align="right"><strong>0.00</strong></td>
                                                 <td></td>
@@ -334,8 +334,8 @@
                                     <br>
                                     <br>
                                 </div>
+                                
                                 <hr />
-
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Save Changes</button>
@@ -365,7 +365,7 @@
 
             </div>
         </div>
-    </div>
+
 
 
 
@@ -398,10 +398,12 @@
 
 <div id="modal_recurring" class="modal fade" role="dialog">
     <div class="modal-dialog" style="width: 70%;">
-        <div class="modal-content">
+<!--         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" style="color: white;"><i class="fa fa-folder-open-o"></i>  Browse Recurring Templates</h4>
-            </div>
+            </div> -->
+                <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"><i class="fa fa-folder-open-o"></i> Recurring Templates <small> | Browse</small></h1>
             <div class="modal-body">
                 <table id="tbl_recurring" class="" width="100%">
                     <thead>
@@ -444,11 +446,14 @@
 
             <div id="modal_create_suppliers" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"><!--modal-->
                 <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color:#2ecc71;">
+                  
+                        <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Supplier Information <small> | New</small></h1>
+
+            <!--             <div class="modal-header" style="background-color:#2ecc71;">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"> </span>New Supplier Information</h4>
-                        </div>
+                        </div> -->
 
                         <div class="modal-body">
                             <form id="frm_supplier">
@@ -591,11 +596,12 @@
 
             <div id="modal_create_customer" class="modal fade" tabindex="-1" role="dialog"  data-backdrop="static" data-keyboard="false"><!--modal-->
                 <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color:#2ecc71;">
+                    <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Customer Information <small> | New</small></h1>
+<!--                         <div class="modal-header" style="background-color:#2ecc71;">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"> </span>New Customer Information</h4>
-                        </div>
+                        </div> -->
 
                         <div class="modal-body">
                             <form id="frm_customer">
@@ -749,12 +755,15 @@
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog">
         <div class="modal-content"><!---content-->
-            <div class="modal-header ">
+<!--             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
 
-            </div>
+            </div> -->
+            
 
+                <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Department <small> | New</small></h1>
             <div class="modal-body" style="padding: 2%;">
                 <form id="frm_department_new">
 
@@ -1179,6 +1188,7 @@ $(document).ready(function(){
             $('#div_no_check').hide();
             _cboDepartments.select2('val',null);
             $('#date_txn').datepicker('setDate','today');
+            $('.title-heading').text(' | Create');
             showList(false);
             //$('#modal_journal_entry').modal('show');
         });
@@ -1288,6 +1298,7 @@ $(document).ready(function(){
         $('#tbl_accounts_receivable').on('click','button[name="edit_info"]',function(){
             _txnMode="edit";
 
+            $('.title-heading').text(' | Edit');
             $('#div_check').hide();
             $('#div_no_check').show();
 

@@ -192,12 +192,17 @@
 
     <div class="panel-group panel-default" id="accordionA">
 
-        <div class="panel panel-default" style="border-radius:6px;">
-            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="font-size: 12pt;color:white;"><i class="fa fa-bars"></i> Review Collection (Pending)</b></div></a>
+        <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;">
+            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo">
+<!--             <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;">
+            <b style="font-size: 12pt;color:white;"><i class="fa fa-bars"></i> Review Collection (Pending)</b>
+            </div> -->
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Review Collection<small> | Pending</small></h1>
+            </a>
             <div id="collapseTwo" class="collapse in">
                 <div class="panel-body">
 
-                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
+                    <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
                         <table id="tbl_collection_for_review" class="" cellspacing="0" width="100%">
                             <thead class="">
                             <tr>
@@ -221,12 +226,15 @@
             </div>
         </div>
 
-        <div class="panel panel-default" style="border-radius:6px;">
-            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="font-family:tahoma;font-size: 12pt;color:white;"><i class="fa fa-bars"></i> Cash Receipt Journal (History)</b></div></a>
+        <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;">
+            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne">
+           <!--  <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="font-family:tahoma;font-size: 12pt;color:white;"><i class="fa fa-bars"></i> Cash Receipt Journal (History)</b></div> -->
+           <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Cash Receipt Journal<small> | History</small></h1>
+            </a>
             <div id="collapseOne" class="collapse in">
                 <div class="panel-body" style="min-height: 400px;">
 
-                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 4%;">
+                    <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 4%;">
                         <table id="tbl_accounts_receivable" class="" cellspacing="0" width="100%">
                             <thead class="">
                             <tr>
@@ -263,18 +271,18 @@
 
 <div class="row">
 <div class="col-sm-12">
-    <div class="panel panel-default" style="border: 3px solid #2196f3; margin: 20px;border-radius: 6px;">
-
+    <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;"">
+        <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Cash Receipt Journal<small class="title-heading"> |</small></h1>
 
             <div class="panel-body" style="min-height: 400px;">
 
 
-                <b><i class="fa fa-bars"></i> Cash Receipt Journal</b><hr />
-                <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
+                <!-- <b><i class="fa fa-bars"></i> Cash Receipt Journal</b><hr /> -->
 
-
+                <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
                     <form id="frm_journal" role="form" class="form-horizontal">
-
+                        <hr />
+                        <span><strong><i class="fa fa-bars"></i> Info</strong></span><br><br>
                         <div class="row">
                             <div class="col-lg-3">
                                 Txn # * :<br />
@@ -383,8 +391,9 @@
 
 
                         <br /><br />
-                        <span><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
                         <hr />
+                        <span><strong><i class="fa fa-bars"></i> Journal Entries</strong></span><br><br>
+                        
                         <div style="width: 100%;">
                             <table id="tbl_entries" class="">
                                 <thead class="">
@@ -450,11 +459,11 @@
                         <hr />
                         <label>Remarks :</label><br />
                         <textarea name="remarks" class="form-control col-lg-12"></textarea>
-
+                        <br>
                     </form>
 
-                    <br /><br /><hr />
-
+                    <br /><hr />
+                    <br>
                     <div class="row">
                         <div class="col-sm-12">
                             <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Save Changes</button>
@@ -548,12 +557,14 @@
 
 <div id="modal_new_customer" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+<!--         <div class="modal-content">
             <div class="modal-header" style="background-color:#2ecc71;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"> </span>New Customer</h4>
 
-            </div>
+            </div> -->
+            <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Customer Information <small> | New</small></h1>
 
             <div class="modal-body">
                 <form id="frm_customer">
@@ -680,10 +691,12 @@
 
 <div id="modal_bank" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                   <!--  <div class="modal-content">
                         <div class="modal-header">
                             <h4 id="bank_title" class="modal-title" style="color: white;"> Add New Bank</h4>
-                        </div>
+                        </div> -->
+                        <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Bank <small> | New</small></h1>
                         <div class="modal-body">
                             <form id="frm_bank" role="form" class="form-horizontal row-border">
                                 <div class="form-group">
@@ -1052,7 +1065,7 @@ $(document).ready(function(){
 
         $('#btn_new').click(function(){
             _txnMode="new";
-
+            $('.title-heading').text(' | Create');
             reInitializeDropDownAccounts($('#tbl_entries'),false);
             $('#date_txn').datepicker('setDate','today');
             $('#check_date').datepicker('setDate','today');
@@ -1129,7 +1142,7 @@ $(document).ready(function(){
 
         $('#tbl_accounts_receivable').on('click','button[name="edit_info"]',function(){
             _txnMode="edit";
-
+            $('.title-heading').text(' | Edit');
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.journal_id;

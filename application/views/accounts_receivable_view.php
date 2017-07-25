@@ -194,15 +194,16 @@
 
     <div class="panel-group panel-default" id="accordionA">
 
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;">
             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo">
-                <div class="panel-heading">
+<!--                 <div class="panel-heading">
                     <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Review Sales Journal (Pending)</b>
-                </div>
+                </div> -->
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;">Review Sales Journal <small> | Pending</small></h1>
             </a>
             <div id="" class="">
                 <div class="panel-body">
-                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
+                    <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
                     <table id="tbl_sales_review" class="" cellspacing="0" width="100%">
                         <thead class="">
                         <tr>
@@ -222,14 +223,15 @@
             </div>
         </div>
 
-        <div class="panel panel-default" style="border-radius:6px;">
+        <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;">
             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne">
-                <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;">
+<!--                 <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;">
                     <b style="font-size: 11pt;color:white;"><i class="fa fa-bars"></i> Sales / AR Journal</b>
-                </div>
+                </div> -->
+                <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;">Sales<small> | Journal</small></h1>
             </a>
                 <div class="panel-body" style="min-height: 400px;">
-                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
+                    <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
                     <table id="tbl_accounts_receivable" class="" cellspacing="0" width="100%">
                         <thead class="">
                         <tr>
@@ -265,29 +267,19 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <div class="panel panel-default" style="border-top: 3px solid #2196f3;">
+            <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;">
                 <!-- <div class="panel-heading">
                     <h2>Sales Journal</h2>
                     <div class="panel-ctrls" data-actions-container=""></div>
                 </div> -->
-
-
+<h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;">Sales Journal <small class="title-heading"> |</small></h1>
                 <div class="panel-body">
-                <b><i class="fa fa-bars"></i> Sales Journal</b><hr />
-
+              <!--   <b><i class="fa fa-bars"></i> Sales Journal</b><hr /> -->
                     <div class="tab-container tab-top tab-primary">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#supplier_info" data-toggle="tab" style="background: #414141 !important;color: white !important;border-top: 1px solid white;"><i class="fa fa-bars"></i> Transaction</a></li>
-
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="supplier_info" style="min-height: 300px;">
-
-
                                 <form id="frm_journal" role="form" class="form-horizontal">
-
-                                    <span><strong><i class="fa fa-bars"></i>  Info</strong></span>
                                     <hr />
+                                    <span><strong><i class="fa fa-bars"></i>  Info</strong></span>
+                                    <br><br>
 
                                     <label class="col-lg-2"> * Txn # :</label>
                                     <div class="col-lg-4">
@@ -342,11 +334,10 @@
                                             <?php } ?>
                                         </select>
                                     </div>
-
-
-                                    <br /><br />
-                                    <span><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
+                                    <br /><br>
                                     <hr />
+                                    <span><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
+                                    <br /><br>
 
                                     <div style="width: 100%;">
                                         <table id="tbl_entries" class="">
@@ -418,24 +409,14 @@
                                 </form>
 
                                 <br /><br /><hr />
-
+                            
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Save Changes</button>
                                         <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"">Cancel</button>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
                     </div>
-
-
-
-
-
-
-
-
                 </div>
 
 
@@ -485,7 +466,7 @@
 <footer role="contentinfo">
     <div class="clearfix">
         <ul class="list-unstyled list-inline pull-left">
-            <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+            <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTION</h6></li>
         </ul>
         <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
     </div>
@@ -523,13 +504,14 @@
 
 <div id="modal_new_customer" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+<!--         <div class="modal-content">
             <div class="modal-header" style="background-color:#2ecc71;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"> </span>New Customer</h4>
 
-            </div>
-
+            </div> -->
+            <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Department <small> | New</small></h1>
             <div class="modal-body">
                 <form id="frm_customer">
                     <div class="row">
@@ -654,15 +636,16 @@
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
-        <div class="modal-content">
+<!--         <div class="modal-content">
 
             <div class="modal-header ">
 
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
 
-            </div>
-
+            </div> -->
+             <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Department <small> | New</small></h1>
             <div class="modal-body">
                 <form id="frm_department_new">
                     <div class="row">
@@ -987,6 +970,7 @@ $(document).ready(function(){
 
         $('#btn_new').click(function(){
             _txnMode="new";
+            $('.title-heading').text(' | Create');
             clearFields($('#div_receivable_fields'));
             _cboCustomers.select2('val',null);
             _cboDepartments.select2('val',null);
@@ -1107,7 +1091,7 @@ $(document).ready(function(){
 
         $('#tbl_accounts_receivable').on('click','button[name="edit_info"]',function(){
             _txnMode="edit";
-
+            $('.title-heading').text(' | Edit');
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.journal_id;

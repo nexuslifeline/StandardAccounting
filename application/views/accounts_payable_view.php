@@ -170,15 +170,16 @@
 
                     <div class="panel-group panel-default" id="accordionA">
 
-                        <div class="panel panel-default">
+                        <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;">
                             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo">
-                                <div class="panel-heading">
+<!--                                 <div class="panel-heading">
                                     <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Accounts Payable (Pending)</b>
-                                </div>
+                                </div> -->
+                                <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;">Accounts Payable <small> | Pending</small></h1>
                             </a>
                             <div id="" class="">
                                 <div class="panel-body">
-                                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
+                                    <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 0%;">
                                     <table id="tbl_purchase_review" class="" cellspacing="0" width="100%">
                                         <thead class="">
                                         <tr>
@@ -199,14 +200,15 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-default" style="border-radius:6px;">
+                        <div class="panel panel-default" style="background-color: #303030!important;border-top:5px solid #ffad33!important;border-radius: 6px;">
                             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne">
-                                <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;">
+<!--                                 <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;">
                                     <b style="font-size: 12pt;color:white;"><i class="fa fa-bars"></i> Accounts Payable Journal</b>
-                                </div>
+                                </div> -->
+                                <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;">Accounts Payable<small> | Journal</small></h1>
                             </a>    
                                 <div class="panel-body" style="min-height: 400px;">
-                                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
+                                    <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 0%;">
                                         <table id="tbl_account_payables" class="" cellspacing="0" width="100%">
                                             <thead class="">
                                             <tr>
@@ -241,15 +243,16 @@
                             <div class="row">
                             <div class="col-lg-12">
 
-                                <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;padding: 1%;margin: 1%;background: #303030 !important;">
+                                <div class="panel panel-default" style="border-radius: 8px;padding: 0% 1% 0% 1%;margin: 0% 1% 0% 1%;background: #303030 !important;border-top:5px solid #ffad33!important;">
 
-                                    <b style="color: white;"><i class="fa fa-bars"></i> Accounts Payable</b><hr />
-
+                                    <!-- <b style="color: white;"><i class="fa fa-bars"></i> Accounts Payable</b><hr /> -->
+                                <h1 style="padding-left: 5px;color:white!important;background-color: #303030!important;">Accounts Payable <small class="title-heading"> |</small></h1>
 
                                                         <form id="frm_journal" role="form" class="form-horizontal">
-                                                            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
-                                                            <span style="color: white;"><strong><i class="fa fa-bars"></i> Info</strong></span>
+                                                            <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                                                             <hr />
+                                                            <span style="color: white;"><strong><i class="fa fa-bars"></i> Info</strong></span><br><br>
+                                                            
 
                                                             <label class="col-lg-2"> * Txn # :</label>
                                                             <div class="col-lg-4">
@@ -298,9 +301,10 @@
 
                                                             <br /><br />
                                                             </div><br>
-                                                            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
-                                                            <span style="color: white;"><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
+                                                            <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                                                             <hr />
+                                                            <span style="color: white;"><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
+                                                            <br><br>
 
                                                             <div style="width: 100%;">
                                                                 <table id="tbl_entries" class="">
@@ -372,14 +376,18 @@
 
                                                         </form>
 
-                                                        <br /><br /><hr />
-
+                                                       
+                                                        <hr />
+                                                        <br>
                                                         <div class="row">
                                                             <div class="col-sm-12">
+                                                            <br>
                                                                 <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Save Changes</button>
                                                                 <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"">Cancel</button>
+                                                                <br><br>
                                                             </div>
                                                         </div>
+
 
 
 
@@ -468,12 +476,14 @@
 
 <div id="modal_new_supplier" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+    <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Supplier <small> | New</small></h1>
+<!--         <div class="modal-content">
            <div class="modal-header" style="background-color:#2ecc71;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:#ecf0f1 !important;"><span id="modal_mode"> </span>New Supplier</h4>
 
-            </div>
+            </div> -->
 
             <div class="modal-body" style="overflow:hidden;">
                 <form id="frm_suppliers_new">
@@ -636,12 +646,14 @@
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
-        <div class="modal-content">
+<!--         <div class="modal-content">
             <div class="modal-header ">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: #FFF;">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
-            </div>
-
+            </div> -->
+            
+<div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Department <small> | New</small></h1>
             <div class="modal-body">
                 <form id="frm_department_new">
                     <div class="row">
@@ -676,6 +688,7 @@
             <div class="modal-footer">
                 <button id="btn_create_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
                 <button id="btn_close_close_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
+
             </div>
         </div><!---content---->
     </div>
@@ -976,6 +989,7 @@
 
             $('#btn_new').click(function(){
                 _txnMode="new";
+                $('.title-heading').text(' | Create');
                 clearFields($('#div_payable_fields'));
                 $('#cbo_departments').select2('val',null);
                 $('#cbo_suppliers').select2('val',null);
@@ -1096,7 +1110,7 @@
 
             $('#tbl_account_payables').on('click','button[name="edit_info"]',function(){
                 _txnMode="edit";
-
+                $('.title-heading').text(' | Edit');
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
                 _selectedID=data.journal_id;
