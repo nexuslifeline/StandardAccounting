@@ -163,10 +163,11 @@
 
 
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="panel panel-default"  style="padding: 0% 1% 1% 1% ;background: #303030;border-top:5px solid #ffad33!important;">
+<!--         <div class="panel-heading">
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Payment History</b>
-        </div>
+        </div> -->
+         <h1 style="padding-left: 5px;color:white;">Payment <small> | History</small></h1>
         <div class="panel-body table-responsive">
 
             <table id="tbl_payments" class="" cellspacing="0" width="100%">
@@ -203,7 +204,8 @@
 
 <div id="div_payment_fields" style="display: none;">
 
-    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;">
+    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;border-top:5px solid #ffad33!important; background: #303030;">
+     <h1 style="padding-left: 20px;color:white;">Payment <small class="title-heading"> |</small></h1>
 
         <div class="panel-body">
         <div>
@@ -447,14 +449,15 @@
 
 
 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content"><!---content--->
+    <div class="modal-dialog modal-md">
+<!--         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirmation</h4>
 
-            </div>
-
+            </div> -->
+<div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Cancel <small> | Confirmation</small></h1>
             <div class="modal-body">
                 <p id="modal-body-message">Are you sure you want to cancel this transaction ?</p>
             </div>
@@ -463,7 +466,7 @@
                 <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Yes</button>
                 <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">No</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
 
 
@@ -694,6 +697,7 @@ $(document).ready(function(){
 
         $('#btn_new').click(function(){
             _txnMode="new";
+            $('.title-heading').text("| New");
             //$('.toggle-fullscreen').click();
             clearFields($('#frm_payments'));
             _cboSuppliers.select2('val',null);

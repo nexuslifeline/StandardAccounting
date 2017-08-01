@@ -160,10 +160,12 @@
 
 
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="panel panel-default" style="padding: 0% 1% 1% 1% ;background: #303030;border-top:5px solid #ffad33!important;">
+<!--         <div class="panel-heading">
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Adjustment</b>
-        </div>
+        </div> -->
+
+         <h1 style="padding-left: 5px;color:white;">Adjustments <small> | Record</small></h1>
         <div class="panel-body table-responsive">
 
             <table id="tbl_issuances" class="" cellspacing="0" width="100%">
@@ -196,20 +198,21 @@
 
 
 <div id="div_user_fields" style="display: none;">
-    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;">
+<!--     <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;"> -->
+        <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;background: #303030 !important;border-top:5px solid #ffad33!important;">
+     <h1 style="padding-left: 20px;color:white;">Adjustment <small class="title-heading"> |</small></h1>
+
+
     <!-- <div class="panel-heading">
         <h2>Item Adjustment</h2>
         <div class="panel-ctrls" data-actions-container=""></div>
     </div> -->
 
     <div class="panel-body">
-
         <div class="row" style="padding: 1%;margin-top: 0%;font-family: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif">
             <form id="frm_adjustments" role="form" class="form-horizontal">
-
-
-                <h4 style="margin-bottom: 6px;"><b>ADJ # : <span id="span_invoice_no">ADJ-YYYYMMDD-XXX</span></b></h4>
-                <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+               <!--  <h4 style="margin-bottom: 6px;"><b>ADJ # : <span id="span_invoice_no">ADJ-YYYYMMDD-XXX</span></b></h4> -->
+                <div style="border: 0px solid #a0a4a5;padding: 0%;border-radius: 5px;">
 
                     <div class="row">
                         <div class="col-sm-4">
@@ -401,14 +404,15 @@
 
 
 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content"><!---content--->
+    <div class="modal-dialog modal-md">
+   <!--      <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
 
-            </div>
-
+            </div> -->
+        <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Delete <small> | Confirmation</small></h1>
             <div class="modal-body">
                 <p id="modal-body-message">Are you sure ?</p>
             </div>
@@ -417,7 +421,7 @@
                 <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Yes</button>
                 <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">No</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
 </div><!---modal-->
 
@@ -427,12 +431,14 @@
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
-        <div class="modal-content"><!---content--->
+<!--         <div class="modal-content">
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>New Department</h4>
 
-            </div>
+            </div> -->
+            <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Department <small> | New</small></h1>
 
             <div class="modal-body">
                 <form id="frm_department_new">
@@ -461,7 +467,7 @@
                 <button id="btn_create_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
                 <button id="btn_close_close_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
 </div><!---modal-->
 
@@ -845,6 +851,7 @@ $(document).ready(function(){
 
         $('#btn_new').click(function(){
             _txnMode="new";
+             $('.title-heading').text("|  ADJ-YYYYMMDD-XXX");
             //$('.toggle-fullscreen').click();
             _cboAdjustments.select2('val',null);
             _cboDepartments.select2('val',null);
@@ -873,10 +880,11 @@ $(document).ready(function(){
         $('#tbl_issuances tbody').on('click','button[name="edit_info"]',function(){
             ///alert("ddd");
             _txnMode="edit";
+
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.adjustment_id;
-
+            $('.title-heading').text('| ' + data.adjustment_code);
 
 
             $('input,textarea').each(function(){

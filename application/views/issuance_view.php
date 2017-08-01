@@ -102,10 +102,11 @@ echo $_side_bar_navigation;
 <div class="row">
 <div class="col-md-12">
 <div id="div_user_list">
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="panel panel-default"  style="padding: 0% 1% 1% 1% ;background: #303030;border-top:5px solid #ffad33!important;">
+     <h1 style="padding-left: 5px;color:white;">Issuances <small> | Records</small></h1>
+<!--         <div class="panel-heading">
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Issuance</b>
-        </div>
+        </div> -->
         <div class="panel-body table-responsive">
             <table id="tbl_issuances" class="" cellspacing="0" width="100%">
                 <thead class="">
@@ -125,11 +126,12 @@ echo $_side_bar_navigation;
     </div>
 </div>
 <div id="div_user_fields" style="display: none;">
-<div class="panel panel-default">
-<div class="panel-heading">
+    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;background: #303030 !important;border-top:5px solid #ffad33!important;">
+     <h1 style="padding-left: 20px;color:white;">Issuances <small class="title-heading"> |</small></h1>
+<!-- <div class="panel-heading">
     <h2 id="item_issuance_title"><i class="fa fa-bars"></i>Item Issuance</h2>
     <div class="panel-ctrls" data-actions-container=""></div>
-</div>
+</div> -->
 <div class="panel-body">
 <!-- <h2 id="item_issuance_title"></h2> -->
 <div class="row">
@@ -138,9 +140,11 @@ echo $_side_bar_navigation;
             <strong><a id="btn_receive_si" href="#" style="text-decoration: none; color: white;">Create from Sales Invoice</a></strong>
         </div>-->    
         <form id="frm_issuances" role="form" class="form-horizontal">
-            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+            <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                 <div class="row">
+                <hr> <br>
                     <div class="col-xs-12 col-lg-4">
+
                         * Slip # : <br />
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -201,9 +205,10 @@ echo $_side_bar_navigation;
     </div>
 </div>
     <br />
-    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+    <div style="border: 0px solid #a0a4a5;padding: 0%;border-radius: 5px;">
         <div class="row">
             <div class="container-fluid">
+            <hr>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <br />
                     <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
@@ -271,7 +276,9 @@ echo $_side_bar_navigation;
                         </div>
                     </form>
                     <div class="row">
+
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <hr><br>
                             <label control-label><strong>Remarks :</strong></label>
                             <div class="col-lg-12" style="padding: 0%;">
                                 <textarea name="remarks" id="remarks" class="form-control" placeholder="Remarks"></textarea>
@@ -365,12 +372,14 @@ echo $_side_bar_navigation;
     </div>
 </div>
 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content"><!---content--->
+    <div class="modal-dialog modal-md">
+    <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Delete <small> | Confirmation</small></h1>
+<!--         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;><span id="modal_mode"> </span>Confirm Deletion</h4>
-            </div>
+            </div> -->
             <div class="modal-body">
                 <p id="modal-body-message">Are you sure ?</p>
             </div>
@@ -378,7 +387,7 @@ echo $_side_bar_navigation;
                 <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Yes</button>
                 <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">No</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
 </div><!---modal-->
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
@@ -975,6 +984,7 @@ dt_si = $('#tbl_si_list').DataTable({
         $('#btn_new').click(function(){
             _txnMode="new";
             $('#item_issuance_title').html('Record Item to Issue');
+              $('.title-heading').text("| New Record");
             //$('.toggle-fullscreen').click();
             clearFields($('#frm_issuances'));
             showList(false);
@@ -991,6 +1001,7 @@ dt_si = $('#tbl_si_list').DataTable({
         $('#tbl_issuances tbody').on('click','button[name="edit_info"]',function(){
             ///alert("ddd");
             _txnMode="edit";
+            $('.title-heading').text("| Edit Record");
             $('#item_issuance_title').html('Edit Item to issue');
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();

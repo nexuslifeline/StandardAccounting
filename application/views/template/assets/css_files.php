@@ -16,6 +16,11 @@
 
 
 <style>
+
+    hr{
+        margin-top: 1px!important;
+       margin-bottom: 1px!important;
+    }
     table.custom-design{
         width: 100%;
     }

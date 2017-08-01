@@ -202,11 +202,12 @@
 <div class="col-md-12">
 
 <div id="div_delivery_list">
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="panel panel-default" style="padding: 0% 1% 1% 1% ;background: #303030;border-top:5px solid #ffad33!important;" >
+<!--         <div class="panel-heading">
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Purchase Invoice</b>
-        </div>
-        <div class="panel-body table-responsive">
+        </div> -->
+         <h1 style="padding-left: 5px;color:white;">Purchase Invoice<small> | Invoices</small></h1>
+        <div class="panel-body table-responsive" >
 
             <table id="tbl_delivery_invoice" class="" cellspacing="0" width="100%">
                 <thead>
@@ -231,11 +232,12 @@
 
 
 <div id="div_delivery_fields" style="display: none;">
-<div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;">
+<!-- <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;"> -->
 <!-- <div class="panel-heading">
     <h2>Purchase Invoice</h2>
 </div> -->
-
+    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;background: #303030 !important;border-top:5px solid #ffad33!important;">
+     <h1 style="padding-left: 20px;color:white;">Purchase Invoice <small class="title-heading"> | </small></h1>
 
     <div class="col-xs-12 col-md-4" style="display: none;">
         <div class="btn btn-green"><strong> <a id="btn_receive_po" href="#" style="color: white; text-decoration: none;">Receive from Purchase Order</a> </strong></div>
@@ -249,7 +251,7 @@
 <div class="row ">
     <div class="container-fluid">
     <form id="frm_deliveries" role="form" class="form-horizontal">
-        <h4 style="margin-bottom: 6px;"><b>Invoice # : <span id="span_invoice_no">INV-XXXX</span></b></h4>
+     <!--    <h4 style="margin-bottom: 6px;"><b>Invoice # : <span id="span_invoice_no">INV-XXXX</span></b></h4> -->
 
 
         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
@@ -530,13 +532,14 @@
 
 <div id="modal_po_list" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog" style="width: 80%;">
-        <div class="modal-content"><!---content--->
+<!--         <div class="modal-content">
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Purchase Order</h4>
 
-            </div>
-
+            </div> -->
+              <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Purchase Order <small> | Receive</small></h1>
             <div class="modal-body">
                 <table id="tbl_po_list" class="" cellspacing="0" width="100%">
                     <thead class="">
@@ -562,17 +565,19 @@
 
                 <button type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: none;font-family: Tahoma, Georgia, Serif;">Cancel</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
 </div><!---modal-->
 
 <div id="modal_new_department" class="modal fade" role="dialog">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+        <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Department <small> | New</small></h1>
+<!--         <div class="modal-content">
             <div class="modal-header" style="background: #2ecc71">
                  <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                  <h2 id="department_title" class="modal-title" style="color:white;">New Department</h2>
-            </div>
+            </div> -->
             <div class="modal-body">
                 <form id="frm_department" role="form" class="form-horizontal">
                     <div class="row" style="margin: 1%;">
@@ -638,12 +643,14 @@
 
 <div id="modal_new_supplier" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+        <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Supplier <small> | New</small></h1>
+<!--         <div class="modal-content">
             <div class="modal-header" style="background-color:#2ecc71;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:#ecf0f1 !important;"><span id="modal_mode"> </span>New Supplier</h4>
 
-            </div>
+            </div> -->
 
             <div class="modal-body" style="overflow:hidden;">
                 
@@ -1259,6 +1266,7 @@ $(document).ready(function(){
             _txnMode="new";
             //$('.toggle-fullscreen').click();
             $('#span_invoice_no').html('INV-XXXX');
+              $('.title-heading').text("| INV-XXXX");
             clearFields($('#frm_deliveries'));
             $('#cbo_departments').select2('val', null);
             $('#cbo_suppliers').select2('val', null);
@@ -1479,7 +1487,7 @@ $(document).ready(function(){
                 _selectedID=data.dr_invoice_id;
 
                 $('#span_invoice_no').html(data.dr_invoice_no);
-
+                $('.title-heading').text("| " + data.dr_invoice_no);
                 $('textarea[name="remarks"]').val(data.remarks);
                 $('#cbo_suppliers').select2('val',data.supplier_id);
                 $('#cbo_departments').select2('val',data.department_id);

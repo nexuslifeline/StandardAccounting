@@ -177,10 +177,11 @@
 <div class="row">
 <div class="col-md-12">
 <div id="div_user_list">
-    <div class="panel panel-default">
+    <div class="panel panel-default" style="padding: 0% 1% 1% 1% ;background: #303030;border-top:5px solid #ffad33!important;">
 
-        <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Purchase Order</b></div></a>
-
+        <!-- <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Purchase Order</b></div></a>
+ -->
+ <h1 style="padding-left: 5px;color:white;">Purchase Order <small> | Purchases</small></h1>
 
         <div class="panel-body table-responsive">
 
@@ -206,15 +207,18 @@
 </div>
 
 <div id="div_user_fields" style="display: none;">
-    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;background: #303030 !important;">
+    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;background: #303030 !important;border-top:5px solid #ffad33!important;">
+     <h1 style="padding-left: 20px;color:white;">Purchase Order <small class="title-heading"> |</small></h1>
 
     <div class="panel-body"  style="padding-bottom: 0%;padding-top: 0%;">
 
         <div class="row" style="padding: 1%;margin-top: 0%;font-family: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif">
         <form id="frm_purchases" role="form" class="form-horizontal">
-            <h4 style="margin-bottom: 6px;"><b>PO # : <span id="span_po_no">PO-XXXX</span></b></h4>
-            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+            <!-- <h4 style="margin-bottom: 6px;"><b>PO # : <span id="span_po_no">PO-XXXX</span></b></h4> -->
+            
+            <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                 <div class="row">
+                <hr /><br>
                     <div class="col-sm-5" >
                         Department * : <br />
                         <select name="department" id="cbo_departments"  data-error-msg="Department is required." required>
@@ -287,13 +291,9 @@
             </div>
 
         </form>
-
     </div>
-
-
-
-    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;"><br />
-
+    <div style="border: 0px solid #a0a4a5;padding: 1%;border-radius: 5px;"><br />
+<hr /><br>
         <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
         <div id="custom-templates">
             <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
@@ -349,11 +349,12 @@
 
     </div>
 
-
-
     <br />
+   
+
     <div class="row ">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+         <hr /><br>
             <label control-label><strong>Remarks :</strong></label>
             <div class="col-lg-12" style="padding: 0%;">
                 <textarea name="remarks" class="form-control" placeholder="Remarks"></textarea>
@@ -456,13 +457,14 @@
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
-        <div class="modal-content">
+<!--         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>
 
-            </div>
-
+            </div> -->
+            <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Department <small> | New</small></h1>
 
             <div class="modal-body">
 
@@ -504,13 +506,14 @@
 
 <div id="modal_new_supplier" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+<!--         <div class="modal-content">
             <div class="modal-header" style="background-color:#2ecc71;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:#ecf0f1 !important;"><span id="modal_mode"> </span>New Supplier</h4>
 
-            </div>
-
+            </div> -->
+        <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+                    <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Supplier <small> | New</small></h1>
             <div class="modal-body" style="overflow:hidden;">
                 <form id="frm_suppliers_new">
                     <div class="row">
@@ -1074,6 +1077,7 @@ $(document).ready(function(){
         $('#btn_new').click(function(){
             _txnMode="new";
             $('#span_po_no').html("PO-XXXX");
+            $('.title-heading').text("| PO-XXXX");
 
             //$('.toggle-fullscreen').click();
             clearFields($('#frm_purchases'));
@@ -1139,7 +1143,7 @@ $(document).ready(function(){
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.purchase_order_id;
-
+            $('.title-heading').text('| ' + data.po_no);
             $('#span_po_no').html(data.po_no);
 
             if(getFloat(data.order_status_id)>1){

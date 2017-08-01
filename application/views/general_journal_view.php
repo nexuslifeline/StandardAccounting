@@ -754,7 +754,7 @@
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog">
-        <div class="modal-content"><!---content-->
+        <!-- <div class="modal-content"> --><!---content-->
 <!--             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>New Department</h4>

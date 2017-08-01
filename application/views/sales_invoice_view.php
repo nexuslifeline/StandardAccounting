@@ -143,10 +143,11 @@
 <div class="row">
 <div class="col-md-12">
 <div id="div_sales_invoice_list">
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="panel panel-default"  style="padding: 0% 1% 1% 1% ;background: #303030;border-top:5px solid #ffad33!important;">
+     <h1 style="padding-left: 5px;color:white;">Sales Invoice <small> | Invoices</small></h1>
+<!--         <div class="panel-heading">
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Sales Invoice</b>
-        </div>
+        </div> -->
         <div class="panel-body table-responsive">
             <table id="tbl_sales_invoice" cellspacing="0" width="100%" style="">
                 <thead class="">
@@ -169,7 +170,8 @@
     </div>
 </div>
 <div id="div_sales_invoice_fields" style="display: none;">
-    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;">
+    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;background: #303030 !important;border-top:5px solid #ffad33!important;">
+     <h1 style="padding-left: 20px;color:white;">Sales Invoice <small class="title-heading"> |</small></h1>
         <div class="pull-right">
             <h4 class="sales_invoice_title" style="margin-top: 0%;"></h4>
             <div class="btn btn-green" style="margin-left: 10px;">
@@ -179,7 +181,7 @@
         <div class="panel-body" style="padding-bottom: 0%;padding-top: 0%;">
         <div class="row" style="padding: 1%;margin-top: 0%;font-family: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif">
             <form id="frm_sales_invoice" role="form" class="form-horizontal">
-                <h4 style="margin-bottom: 6px;"><b>Invoice # : <span id="span_invoice_no">INV-XXXX</span></b></h4>
+               <!--  <h4 style="margin-bottom: 6px;"><b>Invoice # : <span id="span_invoice_no">INV-XXXX</span></b></h4> -->
                 <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                     <div class="row">
                         <div class="col-sm-4">
@@ -373,12 +375,14 @@
 </div> <!-- #page-content -->
 </div>
 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content"><!---content--->
+    <div class="modal-dialog modal-md">
+                  <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Delete <small> | Confirmation</small></h1>
+<!--         <div class="modal-content">
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
-            </div>
+            </div> -->
             <div class="modal-body">
                 <p id="modal-body-message">Are you sure you want to delete?</p>
             </div>
@@ -386,16 +390,18 @@
                 <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Yes</button>
                 <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">No</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
 </div><!---modal-->
 <div id="modal_so_list" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog" style="width: 80%;">
-        <div class="modal-content">
+                  <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Sales Order <small></small></h1>
+<!--         <div class="modal-content">
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h2 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Sales Order</h2>
-            </div>
+            </div> -->
             <div class="modal-body">
                 <table id="tbl_so_list" cellspacing="0" width="100%">
                     <thead class="">
@@ -439,11 +445,14 @@
 </div>
 <div id="modal_new_customer" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+<!--         <div class="modal-content">
             <div class="modal-header" style="background-color:#2ecc71;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"> </span>New Customer</h4>
             </div>
+ -->
+        <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Customer <small> | New</small></h1>
             <div class="modal-body">
                 <form id="frm_customer_new">
                     <div class="row">
@@ -558,11 +567,13 @@
 </div><!---modal-->
 <div id="modal_new_salesperson" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md">
-        <div class="modal-content">
+                  <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Salesperson <small> | New</small></h1>
+   <!--      <div class="modal-content">
             <div class="modal-header" style="background-color:#2ecc71;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 id="salesperson_title" class="modal-title" style="color: #ecf0f1;"><span id="modal_mode"></span></h4>
-            </div>
+            </div> -->
             <div class="modal-body">
                 <div class="row">
                     <form id="frm_salesperson" role="form">
@@ -641,10 +652,12 @@
 </div>
 <div id="modal_new_department" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
-        <div class="modal-content">
+<!--         <div class="modal-content">
             <div class="modal-header" style="background: #2ecc71">
                  <h2 id="department_title" class="modal-title" style="color:white;">Create New Department</h2>
-            </div>
+            </div> -->
+              <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Department <small> | New</small></h1>
             <div class="modal-body">
                 <form id="frm_department_new" role="form" class="form-horizontal">
                     <div class="row" style="margin: 1%;">
@@ -1152,6 +1165,7 @@ $(document).ready(function(){
             _txnMode="new";
             clearFields($('#div_sales_invoice_fields'));
             $('#span_invoice_no').html('INV-XXXX');
+            $('.title-heading').text("| INV-XXXX");
             showList(false);
 
             $('#tbl_items > tbody').html('');
@@ -1252,6 +1266,7 @@ $(document).ready(function(){
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.sales_invoice_id;
             $('#span_invoice_no').html(data.sales_inv_no);
+            $('.title-heading').text("| " + data.sales_inv_no);
             $('input,textarea').each(function(){
                 var _elem=$(this);
                 $.each(data,function(name,value){

@@ -448,14 +448,14 @@
 
 
 
-    <div class="panel panel-default" style="border: 4px solid #2980b9;">
+    <div class="panel panel-default"  style="padding: 0% 1% 1% 1% ;background: #303030;border-top:5px solid #ffad33!important;">
+ <h1 style="padding-left: 5px;color:white;">Sales Order <small> |  Sales</small></h1>
 
-
-
+<!-- 
         <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Sales Order</b></div></a>
 
 
-
+ -->
         <div class="panel-body table-responsive" >
 
 
@@ -510,8 +510,8 @@
 
 <div id="div_user_fields" style="display: none;">
 
-    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;">
-
+    <div class="panel panel-default"  style="padding: 0% 1% 1% 1% ;background: #303030;border-top:5px solid #ffad33!important;">
+             <h1 style="padding-left: 20px;color:white;">Sales Order <small class="title-heading"> |</small></h1>
 <!-- <div class="panel-heading">
 
     <h2>Sales Order</h2>
@@ -532,7 +532,7 @@
 
 
 
-            <h4 style="margin-bottom: 6px;"><b>SO # : <span id="span_so_no">SO-XXXX</span></b></h4>
+          <!--   <h4 style="margin-bottom: 6px;"><b>SO # : <span id="span_so_no">SO-XXXX</span></b></h4> -->
 
             <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
 
@@ -964,9 +964,9 @@
 
 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
 
-    <div class="modal-dialog modal-sm">
-
-        <div class="modal-content"><!---content--->
+    <div class="modal-dialog modal-md">
+<!-- 
+        <div class="modal-content">
 
             <div class="modal-header">
 
@@ -976,9 +976,10 @@
 
 
 
-            </div>
+            </div> -->
 
-
+        <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Delete <small> | Confirmation</small></h1>
 
             <div class="modal-body">
 
@@ -996,7 +997,7 @@
 
             </div>
 
-        </div><!---content---->
+        </div>
 
     </div>
 
@@ -1012,7 +1013,7 @@
 
     <div class="modal-dialog modal-lg">
 
-        <div class="modal-content">
+<!--         <div class="modal-content">
 
             <div class="modal-header" style="background-color:#2ecc71;">
 
@@ -1020,11 +1021,9 @@
 
                 <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"> </span>New Customer</h4>
 
-
-
-            </div>
-
-
+ -->
+             <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Customer <small> | New</small></h1>
 
             <div class="modal-body">
 
@@ -1273,7 +1272,7 @@
 <div id="modal_new_salesperson" class="modal fade" tabindex="-1" role="dialog">
 
     <div class="modal-dialog modal-md">
-
+<!-- 
         <div class="modal-content">
 
             <div class="modal-header" style="background-color:#2ecc71;">
@@ -1282,7 +1281,10 @@
 
                 <h4 id="salesperson_title" class="modal-title" style="color: #ecf0f1;"><span id="modal_mode"></span></h4>
 
-            </div>
+            </div> -->
+                        <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Salesperson <small> | New</small></h1>
+
 
             <div class="modal-body">
 
@@ -1444,7 +1446,7 @@
 
     <div class="modal-dialog modal-md">
 
-        <div class="modal-content">
+<!--         <div class="modal-content">
 
             <div class="modal-header ">
 
@@ -1454,8 +1456,10 @@
 
 
 
-            </div>
+            </div> -->
 
+        <div class="modal-content" style="background-color: #303030!important;border-top:5px solid #ffad33!important;">
+            <h1 style="padding-left: 20px;color:white!important;background-color: #303030!important;"> Department <small> | New</small></h1>
 
 
             <div class="modal-body">
@@ -2787,6 +2791,8 @@ $(document).ready(function(){
             $('#cbo_department').select2('val', null);
 
             $('#cbo_customers').select2('val', null);
+            
+            $('.title-heading').text("| SO-XXXX");
 
             ///$('.sales_order_title').html('New Sales Order');
 
@@ -2810,7 +2816,7 @@ $(document).ready(function(){
 
             _selectedID=data.sales_order_id;
 
-
+            $('.title-heading').text("| " + data.so_no);
 
             $('textarea[name="remarks"]').val(data.remarks);
 
